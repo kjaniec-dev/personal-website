@@ -1,0 +1,57 @@
+---
+title: 'Setup Keycloak for development purposes'
+date: 2024-11-19T20:00:00Z
+lastmod: '2024-11-19'
+tags: ['keycloak', 'oidc', 'oauth', 'docker','development']
+draft: false
+summary: 'Simple and fast keycloak setup for development'
+layout: PostSimple
+---
+
+## Keycloak docker-compose
+
+Just paste code below to file and name it `docker-compose.yml`
+
+```yaml
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - '8000:8080'
+    command:
+      - start-dev
+```
+
+Run command `docker compose up -d` and open in the browser url `http://localhost:8000`. Login to the keycloak with user and password - in a file both are `admin`.
+
+## Keycloak internal setup
+
+1) Create the realm
+![dropdown menu to create the realm](/static/images/new_realm.png)
+Fill the name and click create.
+
+2) Create the client
+Click `clients` in a sidebar and click `Create client`. Fill the `Client ID`, which is very important and commonly used in oauth libraries.
+![create client settings](/static/images/create_oidc_client.png) This settings I would leave that way, because the most popular and used everywhere is code flow which is in `standard flow` checkbox.
+Next you should determine your URIs. For Angular it can look like this:
+![create client - login settings](/static/images/login_settings_oidc_client.png)
+3) Create the user
+There's nothing complicated here, just fill the inputs.
+4) Create a password for the user
+In the `Credentials` tab you are able to set the password for your user.
+
+That's it! You are good to go with a development :)
+
+
+
+
+
+
+
+
+
+
+
