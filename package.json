@@ -23,10 +23,18 @@
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.2",
     "hast-util-from-html-isomorphic": "^2.0.0",
+<<<<<<< HEAD
     "image-size": "2.0.1",
     "next": "15.2.4",
     "next-contentlayer2": "0.5.5",
     "next-themes": "^0.4.6",
+=======
+    "image-size": "1.0.0",
+    "mapbox-gl": "^3.8.0",
+    "next": "15.1.4",
+    "next-contentlayer2": "0.5.4",
+    "next-themes": "^0.3.0",
+>>>>>>> 0082a80 (Restored my website from previous repository to newest template)
     "pliny": "0.4.1",
     "postcss": "^8.4.24",
     "react": "19.0.0",
