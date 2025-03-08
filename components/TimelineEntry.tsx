@@ -15,14 +15,14 @@ const TimelineEntry = ({
   <div className="flex md:contents">
     <div className="relative col-start-1 col-end-3 mr-10 md:mx-auto">
       <div className="flex h-full w-6 items-center justify-center">
-        <div className="pointer-events-none h-full w-1 bg-primary-500 dark:bg-primary-400"></div>
+        <div className="bg-primary-500 dark:bg-primary-400 pointer-events-none h-full w-1"></div>
       </div>
-      <div className="absolute top-1/4 h-6 w-6 rounded-full bg-primary-500 text-center shadow dark:bg-primary-400">
+      <div className="bg-primary-500 dark:bg-primary-400 absolute top-1/4 h-6 w-6 rounded-full text-center shadow">
         <i className="fas fa-check-circle text-white"></i>
       </div>
     </div>
     <div className="animate-move col-start-3 col-end-12 mr-auto w-full rounded-xl p-4">
-      <h3 className="mb-1 text-lg font-semibold text-primary-500 dark:text-primary-400">
+      <h3 className="text-primary-500 dark:text-primary-400 mb-1 text-lg font-semibold">
         {entry.primaryText}
       </h3>
       <p className="text-justify leading-tight text-gray-900 dark:text-gray-100">
@@ -31,7 +31,7 @@ const TimelineEntry = ({
       {entry.tags && (
         <p className="my-2 flex flex-wrap gap-2">
           {entry.tags.map((tag, index) => (
-            <span key={index} className="text-xs text-primary-500 dark:text-primary-400">
+            <span key={index} className="text-primary-500 dark:text-primary-400 text-xs">
               #{tag}
             </span>
           ))}

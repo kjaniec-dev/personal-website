@@ -27,10 +27,12 @@ export default function AuthorLayout({ children, content }: Props) {
                 alt="avatar"
                 width={192}
                 height={192}
-                className="h-48 w-48 rounded-full"
+                className="border-primary-500 dark:border-primary-400 h-48 w-48 rounded-full border-4 border-solid"
               />
             )}
-            <h3 className="pt-4 pb-2 text-2xl leading-8 font-bold tracking-tight">{name}</h3>
+            <h3 className="pt-4 pb-2 text-center text-2xl leading-8 font-bold tracking-tight">
+              {name}
+            </h3>
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
             <div className="text-gray-500 dark:text-gray-400">{company}</div>
             <div className="flex space-x-3 pt-6">

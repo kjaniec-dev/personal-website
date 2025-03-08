@@ -25,8 +25,6 @@ export default function Page() {
         <MDXLayoutRenderer code={author.body.code} />
       </AuthorLayout>
 
-      {/*<Map />*/}
-
       <SectionLayout title={'Experience'}>
         <div className="container mt-8">
           <div className="flex grid-cols-12 flex-col text-gray-50 md:grid">

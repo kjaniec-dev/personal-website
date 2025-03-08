@@ -23,7 +23,7 @@ const Skill = ({ percent, name }) => (
             cy="18"
             r="16"
             fill="none"
-            className="stroke-current text-primary-500 dark:text-primary-400"
+            className="text-primary-500 dark:text-primary-400 stroke-current"
             strokeWidth="2"
             strokeDasharray="100"
             strokeDashoffset={`${100 - percent}`}

@@ -7,7 +7,7 @@ interface ExperienceSectionEntry {
 
 const experienceData: ExperienceSectionEntry[] = [
   {
-    primaryText: 'AMB Software IT Services Sp. z o.o',
+    primaryText: 'AMB Software IT Services Sp. z o.o / REWE Digital Poland Sp. z o.o.',
     secondaryText: '2024 - Present',
     tags: [
       'Java',
