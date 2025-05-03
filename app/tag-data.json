@@ -1,17 +1,17 @@
 {
+  "next-js": 1,
+  "tailwind": 1,
+  "jamstack": 1,
   "keycloak": 1,
   "oidc": 1,
   "oauth": 1,
   "docker": 1,
   "development": 2,
-  "windows": 1,
-  "linux": 1,
   "node-js": 1,
   "flutter": 1,
   "dart": 1,
   "mqtt": 1,
   "arduino": 1,
-  "next-js": 1,
-  "tailwind": 1,
-  "jamstack": 1
+  "windows": 1,
+  "linux": 1
 }
