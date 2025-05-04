@@ -17,7 +17,7 @@ const TimelineEntry = ({
       <div className="flex h-full w-6 items-center justify-center">
         <div className="bg-primary-500 dark:bg-primary-400 pointer-events-none h-full w-1"></div>
       </div>
-      <div className="bg-primary-500 dark:bg-primary-400 absolute top-1/4 h-6 w-6 rounded-full text-center shadow">
+      <div className="bg-primary-500 dark:bg-primary-400 absolute top-4.5 h-6 w-6 rounded-full text-center shadow">
         <i className="fas fa-check-circle text-white"></i>
       </div>
     </div>

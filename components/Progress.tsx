@@ -1,7 +1,9 @@
 const Skill = ({ percent, name }) => (
-  <div className="flex flex-grow flex-col content-stretch items-center justify-center">
-    <p className="my-2 text-center text-2xl font-bold text-gray-800 dark:text-white">{name}</p>
-    <div className="relative h-24 w-24">
+  <div className="flex flex-1 flex-col content-center items-center justify-center">
+    <p className="my-2 text-center text-2xl font-bold text-nowrap text-gray-800 dark:text-white">
+      {name}
+    </p>
+    <div className="relative h-24 w-24 flex-grow">
       <svg
         className="h-full w-full"
         width="36"
