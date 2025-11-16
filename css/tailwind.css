@@ -164,10 +164,22 @@
   }
 
   a:focus-visible,
-  button:focus-visible {
-    outline: 2px solid;
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--color-primary-500);
+    outline-offset: 2px;
     border-radius: var(--radius-sm);
-    outline-color: var(--color-primary-500);
+  }
+
+  /* Ensure focus ring is visible on dark backgrounds */
+  .dark a:focus-visible,
+  .dark button:focus-visible,
+  .dark input:focus-visible,
+  .dark select:focus-visible,
+  .dark textarea:focus-visible {
+    outline-color: var(--color-primary-400);
   }
 
   /* Smooth scrolling for the entire page */

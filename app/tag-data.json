@@ -1,6 +1,6 @@
 {
-  "next-js": 1,
-  "tailwind": 1,
+  "next-js": 2,
+  "tailwind": 2,
   "jamstack": 1,
   "keycloak": 1,
   "oidc": 1,
@@ -12,6 +12,9 @@
   "dart": 1,
   "mqtt": 1,
   "arduino": 1,
+  "design": 1,
+  "css": 1,
+  "frontend": 1,
   "windows": 1,
   "linux": 1
 }

@@ -1,21 +1,25 @@
 import 'css/tailwind.css'
-import 'pliny/search/algolia.css'
 import 'remark-github-blockquote-alert/alert.css'
 
 import { Space_Grotesk } from 'next/font/google'
-import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { SearchProvider, SearchConfig } from 'pliny/search'
+import { AnalyticsConfig } from 'pliny/analytics'
+import { SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
+import SearchProviderWrapper from '@/components/SearchProviderWrapper'
+import AnalyticsWrapper from '@/components/AnalyticsWrapper'
+import WebVitalsReporter from '@/components/WebVitals'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-space-grotesk',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 export const metadata: Metadata = {
@@ -30,7 +34,14 @@ export const metadata: Metadata = {
     description: siteMetadata.description,
     url: './',
     siteName: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
+    images: [
+      {
+        url: siteMetadata.socialBanner,
+        width: 1200,
+        height: 630,
+        alt: siteMetadata.title,
+      },
+    ],
     locale: 'en_US',
     type: 'website',
   },
@@ -90,25 +101,40 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
         color="#5bbad5"
       />
+      {/* Resource hints for performance */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       <body className="relative min-h-screen bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-        {/* Decorative background elements */}
+        {/* Skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="bg-primary-500 absolute top-0 left-0 z-50 -translate-y-full transform px-4 py-3 text-white transition-transform duration-200 focus:translate-y-0"
+        >
+          Skip to main content
+        </a>
+
+        {/* Decorative background elements - optimized with will-change for GPU acceleration */}
         <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="bg-primary-500/5 dark:bg-primary-400/5 absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full blur-3xl" />
-          <div className="bg-accent-cyan/5 absolute top-1/2 -left-1/4 h-96 w-96 rounded-full blur-3xl" />
-          <div className="bg-accent-pink/5 dark:bg-accent-pink/3 absolute right-1/3 -bottom-1/4 h-96 w-96 rounded-full blur-3xl" />
+          <div className="bg-primary-500/5 dark:bg-primary-400/5 absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full blur-2xl will-change-transform" />
+          <div className="bg-accent-cyan/5 absolute top-1/2 -left-1/4 h-96 w-96 rounded-full blur-2xl will-change-transform" />
+          <div className="bg-accent-pink/5 dark:bg-accent-pink/3 absolute right-1/3 -bottom-1/4 h-96 w-96 rounded-full blur-2xl will-change-transform" />
         </div>
 
         <ThemeProviders>
-          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+          <AnalyticsWrapper analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+          <WebVitalsReporter />
           <SectionContainer>
-            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+            <SearchProviderWrapper searchConfig={siteMetadata.search as SearchConfig}>
               <Header />
-              <main className="mb-auto">{children}</main>
-            </SearchProvider>
+              <main id="main-content" className="mb-auto">
+                {children}
+              </main>
+            </SearchProviderWrapper>
             <Footer />
           </SectionContainer>
         </ThemeProviders>
