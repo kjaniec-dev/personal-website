@@ -4,13 +4,13 @@ date: 2024-11-19T20:00:00Z
 lastmod: '2024-11-19'
 tags: ['keycloak', 'oidc', 'oauth', 'docker','development']
 draft: false
-summary: 'Simple and fast keycloak setup for development'
+summary: 'Simple and fast Keycloak setup for development'
 layout: PostSimple
 ---
 
 ## Keycloak docker-compose
 
-Just paste code below to file and name it `docker-compose.yml`
+Just paste the code below into a file and name it `docker-compose.yml`
 
 ```yaml
 services:
@@ -25,33 +25,22 @@ services:
       - start-dev
 ```
 
-Run command `docker compose up -d` and open in the browser url `http://localhost:8000`. Login to the keycloak with user and password - in a file both are `admin`.
+Run the command `docker compose up -d` and open the URL `http://localhost:8000` in your browser. Log in to Keycloak with the username and password - in the file, both are `admin`.
 
 ## Keycloak internal setup
 
 1) Create the realm
 ![dropdown menu to create the realm](/static/images/new_realm.png)
-Fill the name and click create.
+Fill in the name and click create.
 
 2) Create the client
-Click `clients` in a sidebar and click `Create client`. Fill the `Client ID`, which is very important and commonly used in oauth libraries.
-![create client settings](/static/images/create_oidc_client.png) This settings I would leave that way, because the most popular and used everywhere is code flow which is in `standard flow` checkbox.
-Next you should determine your URIs. For Angular it can look like this:
+Click `clients` in the sidebar and click `Create client`. Fill in the `Client ID`, which is very important and commonly used in OAuth libraries.
+![create client settings](/static/images/create_oidc_client.png) I would leave these settings as they are, because the most popular and widely used flow is the code flow, which is enabled by the `standard flow` checkbox.
+Next, you should determine your URIs. For Angular, it can look like this:
 ![create client - login settings](/static/images/login_settings_oidc_client.png)
 3) Create the user
-There's nothing complicated here, just fill the inputs.
+There's nothing complicated here, just fill in the inputs.
 4) Create a password for the user
-In the `Credentials` tab you are able to set the password for your user.
+In the `Credentials` tab, you can set the password for your user.
 
-That's it! You are good to go with a development :)
-
-
-
-
-
-
-
-
-
-
-
+That's it! You're good to go with development :)
