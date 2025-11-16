@@ -107,13 +107,14 @@ export default function Footer() {
             <span className="font-medium">{siteMetadata.author}</span>
             <span className="text-gray-300 dark:text-gray-600">•</span>
             <span>© {new Date().getFullYear()}</span>
+            <span className="text-gray-300 dark:text-gray-600">•</span>
+            <Link
+              href="/"
+              className="animated-underline hover:text-primary-500 dark:hover:text-primary-400 font-medium text-gray-600 dark:text-gray-300"
+            >
+              {siteMetadata.title}
+            </Link>
           </div>
-          <Link
-            href="/"
-            className="animated-underline hover:text-primary-500 dark:hover:text-primary-400 font-medium text-gray-600 dark:text-gray-300"
-          >
-            {siteMetadata.title}
-          </Link>
         </div>
 
         {/* Credits */}

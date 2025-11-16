@@ -27,7 +27,7 @@ export default function Page() {
 
       <SectionLayout title={'Experience'}>
         <div className="container mt-8">
-          <div className="flex flex-col text-gray-50 md:grid">
+          <div className="flex grid-cols-12 flex-col text-gray-50 md:grid">
             {experienceData.map((experienceDataEntry, index) => (
               <TimelineEntry key={`experience-entry-${index}`} entry={experienceDataEntry} />
             ))}
