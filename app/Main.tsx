@@ -58,7 +58,7 @@ export default function Home({ posts }) {
 
         <div className="space-y-8 pt-12 pb-16 md:pt-16 md:pb-20">
           <div className="animate-fade-in space-y-4">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl pb-2">
               <span className="block text-gray-900 dark:text-gray-100">Hi, I'm</span>
               <span className="gradient-text block">{siteMetadata.author}</span>
             </h1>
@@ -96,7 +96,7 @@ export default function Home({ posts }) {
       </div>
 
       {/* Latest Posts Section */}
-      <div className="space-y-8">
+      <div className="mt-12 space-y-8 md:mt-16">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
             Latest Posts
