@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'kjaniec.dev blog',
   author: 'Krzysztof Janiec',
   headerTitle: 'kjaniec.dev',
-  description: `Welcome to my personal site! Here are the list of my latest posts. I can assure you it would be more :)`,
+  description: `Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.`,
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://kjaniec.dev',
