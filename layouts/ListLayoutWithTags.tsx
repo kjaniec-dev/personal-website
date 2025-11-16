@@ -176,7 +176,6 @@ export default function ListLayoutWithTags({
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags } = post
                 return (
-
                   <article
                     key={path}
                     className="group hover:border-primary-200 dark:hover:border-primary-800 rounded-xl border border-gray-200/60 bg-white/60 p-6 transition-all hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60"
@@ -211,7 +210,9 @@ export default function ListLayoutWithTags({
                       </h2>
 
                       <div className="flex flex-wrap gap-2">
-                        {tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                        {tags?.map((tag) => (
+                          <Tag key={tag} text={tag} />
+                        ))}
                       </div>
 
                       <p className="line-clamp-3 text-gray-600 dark:text-gray-400">{summary}</p>

@@ -18,7 +18,7 @@ const TimelineEntry = ({
       <div className="flex h-full w-6 items-center justify-center">
         <div className="from-primary-500 to-accent-cyan dark:from-primary-400 dark:to-accent-cyan pointer-events-none h-full w-0.5 bg-gradient-to-b"></div>
       </div>
-      <div className="from-primary-500 to-accent-cyan shadow-primary-500/25 absolute top-4 left-0 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br ring-4 shadow-lg ring-white dark:ring-gray-950">
+      <div className="from-primary-500 to-accent-cyan shadow-primary-500/25 absolute top-4 left-0 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br shadow-lg ring-4 ring-white dark:ring-gray-950">
         <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
           <path
             fillRule="evenodd"
