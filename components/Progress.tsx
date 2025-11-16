@@ -1,43 +1,58 @@
 const Skill = ({ percent, name }) => (
-  <div className="flex flex-1 flex-col content-center items-center justify-center">
-    <p className="my-2 text-center text-2xl font-bold text-nowrap text-gray-800 dark:text-white">
-      {name}
-    </p>
-    <div className="relative h-24 w-24 flex-grow">
+  <div className="group flex flex-col items-center justify-center">
+    <div className="relative h-28 w-28">
+      {/* Background glow effect */}
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-500/20 to-accent-cyan/20 opacity-0 blur-xl transition-opacity group-hover:opacity-100" />
+
       <svg
-        className="h-full w-full"
-        width="36"
-        height="36"
+        className="h-full w-full -rotate-90 transform"
         viewBox="0 0 36 36"
         xmlns="http://www.w3.org/2000/svg"
       >
+        {/* Background circle */}
         <circle
           cx="18"
           cy="18"
           r="16"
           fill="none"
-          className="stroke-current text-gray-200 dark:text-gray-700"
-          strokeWidth="2"
+          className="stroke-gray-200 dark:stroke-gray-700"
+          strokeWidth="2.5"
         />
-        <g className="origin-center -rotate-90 transform animate-spin">
-          <circle
-            cx="18"
-            cy="18"
-            r="16"
-            fill="none"
-            className="text-primary-500 dark:text-primary-400 stroke-current"
-            strokeWidth="2"
-            strokeDasharray="100"
-            strokeDashoffset={`${100 - percent}`}
-          />
-        </g>
+        {/* Progress circle with gradient */}
+        <circle
+          cx="18"
+          cy="18"
+          r="16"
+          fill="none"
+          stroke="url(#gradient)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeDasharray="100"
+          strokeDashoffset={`${100 - percent}`}
+          className="transition-all duration-1000 ease-out"
+          style={{
+            animation: 'progressAnimation 1.5s ease-out forwards',
+          }}
+        />
+        {/* Gradient definition */}
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="var(--color-primary-500)" />
+            <stop offset="100%" stopColor="var(--color-accent-cyan)" />
+          </linearGradient>
+        </defs>
       </svg>
-      <div className="absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-        <span className="text-center text-2xl font-bold text-gray-900 dark:text-gray-100">
-          {percent}%
-        </span>
+
+      {/* Percentage text */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-xl font-bold text-gray-900 dark:text-gray-100">{percent}%</span>
       </div>
     </div>
+
+    {/* Skill name */}
+    <p className="mt-3 text-center text-sm font-semibold text-gray-700 dark:text-gray-300">
+      {name}
+    </p>
   </div>
 )
 

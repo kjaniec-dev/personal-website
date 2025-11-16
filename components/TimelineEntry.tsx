@@ -12,38 +12,58 @@ const TimelineEntry = ({
     link?: { href: string; text: string }
   }
 }) => (
-  <div className="flex md:contents">
+  <div className="group flex md:contents">
+    {/* Timeline line and dot */}
     <div className="relative col-start-1 col-end-3 mr-10 md:mx-auto">
       <div className="flex h-full w-6 items-center justify-center">
-        <div className="bg-primary-500 dark:bg-primary-400 pointer-events-none h-full w-1"></div>
+        <div className="pointer-events-none h-full w-0.5 bg-gradient-to-b from-primary-500 to-accent-cyan dark:from-primary-400 dark:to-accent-cyan"></div>
       </div>
-      <div className="bg-primary-500 dark:bg-primary-400 absolute top-4.5 h-6 w-6 rounded-full text-center shadow">
-        <i className="fas fa-check-circle text-white"></i>
+      <div className="absolute top-4 left-0 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-accent-cyan shadow-lg shadow-primary-500/25 ring-4 ring-white dark:ring-gray-950">
+        <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            fillRule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+            clipRule="evenodd"
+          />
+        </svg>
       </div>
     </div>
-    <div className="animate-move col-start-3 col-end-12 mr-auto w-full rounded-xl p-4">
-      <h3 className="text-primary-500 dark:text-primary-400 mb-1 text-lg font-semibold">
+
+    {/* Content */}
+    <div className="col-start-3 col-end-12 mr-auto mb-8 w-full rounded-xl border border-gray-200/60 bg-white/60 p-5 shadow-sm backdrop-blur-sm transition-all hover:border-primary-200 hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60 dark:hover:border-primary-800">
+      <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-gray-100">
         {entry.primaryText}
       </h3>
-      <p className="text-justify leading-tight text-gray-900 dark:text-gray-100">
-        {entry.secondaryText}
-      </p>
+      <p className="mb-3 leading-relaxed text-gray-600 dark:text-gray-400">{entry.secondaryText}</p>
+
       {entry.tags && (
-        <p className="my-2 flex flex-wrap gap-2">
+        <div className="mb-3 flex flex-wrap gap-2">
           {entry.tags.map((tag, index) => (
-            <span key={index} className="text-primary-500 dark:text-primary-400 text-xs">
+            <span
+              key={index}
+              className="inline-flex items-center rounded-md bg-primary-50 px-2 py-0.5 text-xs font-medium text-primary-700 dark:bg-primary-950/50 dark:text-primary-300"
+            >
               #{tag}
             </span>
           ))}
-        </p>
+        </div>
       )}
+
       {entry.link && (
         <Link
           href={entry.link.href}
-          className="text-gray-600 underline hover:text-gray-900 dark:text-gray-100 hover:dark:text-gray-200"
+          className="animated-underline inline-flex items-center text-sm font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
           aria-label={`Link to project ${entry.primaryText}`}
         >
           {entry.link.text}
+          <svg className="ml-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            />
+          </svg>
         </Link>
       )}
       {children}
