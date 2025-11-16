@@ -2,7 +2,7 @@ const Skill = ({ percent, name }) => (
   <div className="group flex flex-col items-center justify-center">
     <div className="relative h-28 w-28">
       {/* Background glow effect */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-500/20 to-accent-cyan/20 opacity-0 blur-xl transition-opacity group-hover:opacity-100" />
+      <div className="from-primary-500/20 to-accent-cyan/20 absolute inset-0 rounded-full bg-gradient-to-br opacity-0 blur-xl transition-opacity group-hover:opacity-100" />
 
       <svg
         className="h-full w-full -rotate-90 transform"

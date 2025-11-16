@@ -13,8 +13,8 @@ export default function Home({ posts }) {
       <div className="relative overflow-hidden">
         {/* Background decoration */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary-500/10 blur-3xl dark:bg-primary-400/5" />
-          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-accent-cyan/10 blur-3xl dark:bg-accent-cyan/5" />
+          <div className="bg-primary-500/10 dark:bg-primary-400/5 absolute -top-40 -right-40 h-80 w-80 rounded-full blur-3xl" />
+          <div className="bg-accent-cyan/10 dark:bg-accent-cyan/5 absolute -bottom-40 -left-40 h-80 w-80 rounded-full blur-3xl" />
         </div>
 
         <div className="space-y-8 pt-12 pb-16 md:pt-16 md:pb-20">
@@ -23,7 +23,7 @@ export default function Home({ posts }) {
               <span className="block text-gray-900 dark:text-gray-100">Hi, I'm</span>
               <span className="gradient-text block">{siteMetadata.author}</span>
             </h1>
-            <p className="max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300 md:text-xl">
+            <p className="max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl dark:text-gray-300">
               {siteMetadata.description}
             </p>
           </div>
@@ -34,15 +34,10 @@ export default function Home({ posts }) {
           >
             <Link
               href="/about"
-              className="glow-button inline-flex items-center rounded-lg bg-primary-500 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:bg-primary-600 hover:shadow-xl dark:bg-primary-600 dark:hover:bg-primary-500"
+              className="glow-button bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-500 inline-flex items-center rounded-lg px-6 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl"
             >
               About Me
-              <svg
-                className="ml-2 h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -53,7 +48,7 @@ export default function Home({ posts }) {
             </Link>
             <Link
               href="/projects"
-              className="inline-flex items-center rounded-lg border-2 border-gray-300 bg-transparent px-6 py-3 font-semibold text-gray-900 transition-all hover:border-primary-500 hover:text-primary-500 dark:border-gray-600 dark:text-gray-100 dark:hover:border-primary-400 dark:hover:text-primary-400"
+              className="hover:border-primary-500 hover:text-primary-500 dark:hover:border-primary-400 dark:hover:text-primary-400 inline-flex items-center rounded-lg border-2 border-gray-300 bg-transparent px-6 py-3 font-semibold text-gray-900 transition-all dark:border-gray-600 dark:text-gray-100"
             >
               View Projects
             </Link>
@@ -78,9 +73,7 @@ export default function Home({ posts }) {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {!posts.length && (
-            <p className="text-gray-500 dark:text-gray-400">No posts found.</p>
-          )}
+          {!posts.length && <p className="text-gray-500 dark:text-gray-400">No posts found.</p>}
           {posts.slice(0, MAX_DISPLAY).map((post, index) => {
             const { slug, date, title, summary, tags } = post
             return (
@@ -93,12 +86,17 @@ export default function Home({ posts }) {
                 }}
               >
                 {/* Gradient border on hover */}
-                <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-primary-500/0 via-primary-500/0 to-accent-cyan/0 opacity-0 blur-sm transition-opacity group-hover:opacity-100 group-hover:from-primary-500/20 group-hover:to-accent-cyan/20" />
+                <div className="from-primary-500/0 via-primary-500/0 to-accent-cyan/0 group-hover:from-primary-500/20 group-hover:to-accent-cyan/20 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r opacity-0 blur-sm transition-opacity group-hover:opacity-100" />
 
                 <div className="space-y-3">
                   <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
                     <time dateTime={date} className="flex items-center gap-1">
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -110,10 +108,10 @@ export default function Home({ posts }) {
                     </time>
                   </div>
 
-                  <h3 className="text-xl font-bold leading-tight tracking-tight">
+                  <h3 className="text-xl leading-tight font-bold tracking-tight">
                     <Link
                       href={`/blog/${slug}`}
-                      className="text-gray-900 transition-colors hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
+                      className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-900 transition-colors dark:text-gray-100"
                     >
                       {title}
                     </Link>
@@ -129,7 +127,7 @@ export default function Home({ posts }) {
 
                   <Link
                     href={`/blog/${slug}`}
-                    className="animated-underline inline-flex items-center font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    className="animated-underline text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 inline-flex items-center font-medium"
                     aria-label={`Read more: "${title}"`}
                   >
                     Read more

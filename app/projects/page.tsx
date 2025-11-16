@@ -13,8 +13,8 @@ export default function Projects() {
             <span className="gradient-text">Projects</span>
           </h1>
           <p className="max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-            A collection of projects I've worked on. Each project represents different challenges and
-            learning experiences.
+            A collection of projects I've worked on. Each project represents different challenges
+            and learning experiences.
           </p>
         </div>
 

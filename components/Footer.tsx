@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="relative mt-20">
       {/* Decorative gradient line */}
-      <div className="mx-auto mb-8 h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-primary-500/50 to-transparent" />
+      <div className="via-primary-500/50 mx-auto mb-8 h-px w-full max-w-2xl bg-gradient-to-r from-transparent to-transparent" />
 
       <div className="flex flex-col items-center space-y-6">
         {/* Social Icons */}
@@ -16,7 +16,7 @@ export default function Footer() {
               kind="mail"
               href={`mailto:${siteMetadata.email}`}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.github && (
@@ -24,7 +24,7 @@ export default function Footer() {
               kind="github"
               href={siteMetadata.github}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.linkedin && (
@@ -32,7 +32,7 @@ export default function Footer() {
               kind="linkedin"
               href={siteMetadata.linkedin}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.twitter && (
@@ -40,7 +40,7 @@ export default function Footer() {
               kind="twitter"
               href={siteMetadata.twitter}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.x && (
@@ -48,7 +48,7 @@ export default function Footer() {
               kind="x"
               href={siteMetadata.x}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.facebook && (
@@ -56,7 +56,7 @@ export default function Footer() {
               kind="facebook"
               href={siteMetadata.facebook}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.youtube && (
@@ -64,7 +64,7 @@ export default function Footer() {
               kind="youtube"
               href={siteMetadata.youtube}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.bluesky && (
@@ -72,7 +72,7 @@ export default function Footer() {
               kind="bluesky"
               href={siteMetadata.bluesky}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.instagram && (
@@ -80,7 +80,7 @@ export default function Footer() {
               kind="instagram"
               href={siteMetadata.instagram}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.threads && (
@@ -88,7 +88,7 @@ export default function Footer() {
               kind="threads"
               href={siteMetadata.threads}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
           {siteMetadata.medium && (
@@ -96,7 +96,7 @@ export default function Footer() {
               kind="medium"
               href={siteMetadata.medium}
               size={5}
-              className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
             />
           )}
         </div>
@@ -110,7 +110,7 @@ export default function Footer() {
           </div>
           <Link
             href="/"
-            className="animated-underline font-medium text-gray-600 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-400"
+            className="animated-underline hover:text-primary-500 dark:hover:text-primary-400 font-medium text-gray-600 dark:text-gray-300"
           >
             {siteMetadata.title}
           </Link>

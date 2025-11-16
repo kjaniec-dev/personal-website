@@ -13,7 +13,7 @@ export default function SectionLayout({ children, title }: Props) {
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
           {title}
         </h2>
-        <div className="h-px flex-1 bg-gradient-to-r from-primary-500/50 to-transparent" />
+        <div className="from-primary-500/50 h-px flex-1 bg-gradient-to-r to-transparent" />
       </div>
       <SectionContainer>{children}</SectionContainer>
     </div>

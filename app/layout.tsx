@@ -97,9 +97,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="relative min-h-screen bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         {/* Decorative background elements */}
         <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full bg-primary-500/5 blur-3xl dark:bg-primary-400/5" />
-          <div className="absolute top-1/2 -left-1/4 h-96 w-96 rounded-full bg-accent-cyan/5 blur-3xl" />
-          <div className="absolute -bottom-1/4 right-1/3 h-96 w-96 rounded-full bg-accent-pink/5 blur-3xl dark:bg-accent-pink/3" />
+          <div className="bg-primary-500/5 dark:bg-primary-400/5 absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full blur-3xl" />
+          <div className="bg-accent-cyan/5 absolute top-1/2 -left-1/4 h-96 w-96 rounded-full blur-3xl" />
+          <div className="bg-accent-pink/5 dark:bg-accent-pink/3 absolute right-1/3 -bottom-1/4 h-96 w-96 rounded-full blur-3xl" />
         </div>
 
         <ThemeProviders>

@@ -27,14 +27,14 @@ export default function AuthorLayout({ children, content }: Props) {
         {/* Profile Card */}
         <div className="relative overflow-hidden rounded-3xl border border-gray-200/60 bg-white/80 p-8 shadow-xl backdrop-blur-sm dark:border-gray-700/60 dark:bg-gray-900/80">
           {/* Decorative gradient */}
-          <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-gradient-to-br from-primary-500/20 to-accent-cyan/20 blur-3xl" />
+          <div className="from-primary-500/20 to-accent-cyan/20 absolute -top-24 -right-24 h-48 w-48 rounded-full bg-gradient-to-br blur-3xl" />
 
           <div className="relative items-center gap-8 space-y-8 xl:flex xl:space-y-0">
             {/* Avatar */}
             <div className="flex flex-shrink-0 justify-center">
               {avatar && (
                 <div className="group relative">
-                  <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-primary-500 to-accent-cyan opacity-75 blur transition-all group-hover:opacity-100" />
+                  <div className="from-primary-500 to-accent-cyan absolute -inset-1 rounded-full bg-gradient-to-r opacity-75 blur transition-all group-hover:opacity-100" />
                   <Image
                     src={avatar}
                     alt="avatar"
@@ -51,7 +51,7 @@ export default function AuthorLayout({ children, content }: Props) {
               <h2 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
                 {name}
               </h2>
-              <p className="mb-1 text-lg font-medium text-primary-500 dark:text-primary-400">
+              <p className="text-primary-500 dark:text-primary-400 mb-1 text-lg font-medium">
                 {occupation}
               </p>
               <p className="mb-6 text-gray-600 dark:text-gray-400">{company}</p>
@@ -63,7 +63,7 @@ export default function AuthorLayout({ children, content }: Props) {
                     kind="mail"
                     href={`mailto:${email}`}
                     size={5}
-                    className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+                    className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
                   />
                 )}
                 {github && (
@@ -71,7 +71,7 @@ export default function AuthorLayout({ children, content }: Props) {
                     kind="github"
                     href={github}
                     size={5}
-                    className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+                    className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
                   />
                 )}
                 {linkedin && (
@@ -79,7 +79,7 @@ export default function AuthorLayout({ children, content }: Props) {
                     kind="linkedin"
                     href={linkedin}
                     size={5}
-                    className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+                    className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
                   />
                 )}
                 {twitter && (
@@ -87,7 +87,7 @@ export default function AuthorLayout({ children, content }: Props) {
                     kind="x"
                     href={twitter}
                     size={5}
-                    className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+                    className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
                   />
                 )}
                 {bluesky && (
@@ -95,7 +95,7 @@ export default function AuthorLayout({ children, content }: Props) {
                     kind="bluesky"
                     href={bluesky}
                     size={5}
-                    className="text-gray-500 transition-all hover:-translate-y-1 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+                    className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
                   />
                 )}
               </div>

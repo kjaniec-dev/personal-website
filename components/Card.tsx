@@ -6,10 +6,10 @@ const Card = ({ title, description, imgSrc, href }) => (
     <div
       className={`${
         imgSrc && 'h-full'
-      } hover-lift group relative overflow-hidden rounded-2xl border border-gray-200/60 bg-white/80 shadow-sm backdrop-blur-sm transition-all hover:border-primary-300 hover:shadow-lg dark:border-gray-700/60 dark:bg-gray-900/80 dark:hover:border-primary-700`}
+      } hover-lift group hover:border-primary-300 dark:hover:border-primary-700 relative overflow-hidden rounded-2xl border border-gray-200/60 bg-white/80 shadow-sm backdrop-blur-sm transition-all hover:shadow-lg dark:border-gray-700/60 dark:bg-gray-900/80`}
     >
       {/* Gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-accent-cyan/0 opacity-0 transition-opacity group-hover:from-primary-500/5 group-hover:to-accent-cyan/5 group-hover:opacity-100 dark:group-hover:from-primary-500/10 dark:group-hover:to-accent-cyan/10" />
+      <div className="from-primary-500/0 to-accent-cyan/0 group-hover:from-primary-500/5 group-hover:to-accent-cyan/5 dark:group-hover:from-primary-500/10 dark:group-hover:to-accent-cyan/10 absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity group-hover:opacity-100" />
 
       {imgSrc &&
         (href ? (
@@ -36,12 +36,12 @@ const Card = ({ title, description, imgSrc, href }) => (
           </div>
         ))}
       <div className="relative p-6">
-        <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
+        <h2 className="mb-3 text-2xl leading-8 font-bold tracking-tight">
           {href ? (
             <Link
               href={href}
               aria-label={`Link to ${title}`}
-              className="transition-colors hover:text-primary-500 dark:hover:text-primary-400"
+              className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
             >
               {title}
             </Link>
@@ -53,7 +53,7 @@ const Card = ({ title, description, imgSrc, href }) => (
         {href && (
           <Link
             href={href}
-            className="animated-underline inline-flex items-center font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            className="animated-underline text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 inline-flex items-center font-medium"
             aria-label={`Link to ${title}`}
           >
             Learn more
