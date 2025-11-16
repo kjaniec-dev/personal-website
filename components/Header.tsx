@@ -49,7 +49,7 @@ const Header = () => {
               </Link>
             ))}
         </nav>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-3">
           <SearchButton />
           <ThemeSwitch />
         </div>
