@@ -11460,7 +11460,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sharp@npm:^0.34.3":
+"sharp@npm:^0.34.3, sharp@npm:^0.34.5":
   version: 0.34.5
   resolution: "sharp@npm:0.34.5"
   dependencies:
@@ -12119,6 +12119,7 @@ __metadata:
     remark-github-blockquote-alert: ^1.2.1
     remark-math: ^6.0.0
     search-insights: ^2.17.3
+    sharp: ^0.34.5
     tailwindcss: ^4.1.17
     typescript: ^5.9.3
     unist-util-visit: ^5.0.0

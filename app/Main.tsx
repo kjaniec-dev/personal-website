@@ -50,10 +50,10 @@ export default function Home({ posts }) {
       />
       {/* Hero Section */}
       <div className="relative overflow-hidden px-4 sm:px-6 lg:px-8">
-        {/* Background decoration */}
+        {/* Background decoration - optimized with will-change */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="bg-primary-500/10 dark:bg-primary-400/5 absolute -top-40 -right-40 h-80 w-80 rounded-full blur-3xl" />
-          <div className="bg-accent-cyan/10 dark:bg-accent-cyan/5 absolute -bottom-40 -left-40 h-80 w-80 rounded-full blur-3xl" />
+          <div className="bg-primary-500/10 dark:bg-primary-400/5 absolute -top-40 -right-40 h-80 w-80 rounded-full blur-2xl will-change-transform" />
+          <div className="bg-accent-cyan/10 dark:bg-accent-cyan/5 absolute -bottom-40 -left-40 h-80 w-80 rounded-full blur-2xl will-change-transform" />
         </div>
 
         <div className="space-y-8 pt-12 pb-16 md:pt-16 md:pb-20">

@@ -25,6 +25,7 @@ const Header = () => {
               height={48}
               src={'/static/images/logo.svg'}
               alt={`${siteMetadata.headerTitle} logo`}
+              priority
             />
           </div>
           {typeof siteMetadata.headerTitle === 'string' ? (
