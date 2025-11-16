@@ -10,7 +10,7 @@ export default function Home({ posts }) {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden px-4 sm:px-6 lg:px-8">
         {/* Background decoration */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="bg-primary-500/10 dark:bg-primary-400/5 absolute -top-40 -right-40 h-80 w-80 rounded-full blur-3xl" />
