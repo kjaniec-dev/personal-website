@@ -186,6 +186,7 @@ export default function ListLayoutWithTags({
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags } = post
                 return (
+
                   <article
                     key={path}
                     className="group rounded-xl border border-gray-200/60 bg-white/60 p-6 transition-all hover:border-primary-200 hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60 dark:hover:border-primary-800"
