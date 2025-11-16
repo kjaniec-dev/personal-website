@@ -46,6 +46,9 @@ export async function generateMetadata(props: {
   const ogImages = imageList.map((img) => {
     return {
       url: img && img.includes('http') ? img : siteMetadata.siteUrl + img,
+      width: 1200,
+      height: 630,
+      alt: post.title,
     }
   })
 
@@ -68,7 +71,7 @@ export async function generateMetadata(props: {
       card: 'summary_large_image',
       title: post.title,
       description: post.summary,
-      images: imageList,
+      images: ogImages,
     },
   }
 }
@@ -104,6 +107,32 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
     }
   })
 
+  // BreadcrumbList schema for better SEO
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteMetadata.siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: `${siteMetadata.siteUrl}/blog`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `${siteMetadata.siteUrl}/blog/${slug}`,
+      },
+    ],
+  }
+
   const Layout = layouts[post.layout || defaultLayout]
 
   return (
@@ -111,6 +140,10 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Layout content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
         <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />

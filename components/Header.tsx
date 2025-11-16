@@ -1,6 +1,7 @@
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
+import NavLink from './NavLink'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
@@ -14,8 +15,8 @@ const Header = () => {
   }
 
   return (
-    <header className={headerClass}>
-      <Link href="/" aria-label={siteMetadata.headerTitle}>
+    <header className={headerClass} role="banner">
+      <Link href="/" aria-label={`${siteMetadata.headerTitle} - Home`}>
         <div className="flex items-center justify-between transition-transform hover:scale-105">
           <div className="mr-3">
             <Image
@@ -23,7 +24,7 @@ const Header = () => {
               width={48}
               height={48}
               src={'/static/images/logo.svg'}
-              alt={'Logo'}
+              alt={`${siteMetadata.headerTitle} logo`}
             />
           </div>
           {typeof siteMetadata.headerTitle === 'string' ? (
@@ -36,17 +37,14 @@ const Header = () => {
         </div>
       </Link>
       <div className="flex items-center gap-2 leading-5 sm:gap-4">
-        <nav className="no-scrollbar hidden max-w-40 items-center gap-1 overflow-x-auto sm:flex md:max-w-72 lg:max-w-96">
+        <nav
+          className="no-scrollbar hidden max-w-40 items-center gap-1 overflow-x-auto sm:flex md:max-w-72 lg:max-w-96"
+          aria-label="Main navigation"
+        >
           {headerNavLinks
             .filter((link) => link.href !== '/')
             .map((link) => (
-              <Link
-                key={link.title}
-                href={link.href}
-                className="animated-underline hover:text-primary-500 dark:hover:text-primary-400 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-              >
-                {link.title}
-              </Link>
+              <NavLink key={link.title} href={link.href} title={link.title} />
             ))}
         </nav>
         <div className="flex items-center gap-3">
