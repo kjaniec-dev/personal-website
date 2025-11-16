@@ -60,7 +60,7 @@ export default function Home({ posts }) {
           <div className="animate-fade-in space-y-4">
             <h1 className="pb-2 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               <span className="block text-gray-900 dark:text-gray-100">Hi, I'm</span>
-              <span className="gradient-text block">{siteMetadata.author}</span>
+              <span className="gradient-text block leading-tight">{siteMetadata.author}</span>
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl dark:text-gray-300">
               {siteMetadata.description}
