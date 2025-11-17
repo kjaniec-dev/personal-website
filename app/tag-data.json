@@ -16,5 +16,13 @@
   "css": 1,
   "frontend": 1,
   "windows": 1,
-  "linux": 1
+  "linux": 1,
+  "nextjs": 1,
+  "typescript": 1,
+  "tailwind-css": 1,
+  "mdx": 1,
+  "react": 1,
+  "websocket": 1,
+  "real-time": 1,
+  "agile": 1
 }

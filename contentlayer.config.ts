@@ -25,6 +25,7 @@ import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import prettier from 'prettier'
+import projectsData from './data/projectsData'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -60,10 +61,12 @@ const computedFields: ComputedFields = {
 }
 
 /**
- * Count the occurrences of all tags across blog posts and write to json file
+ * Count the occurrences of all tags across blog posts and projects, then write to json file
  */
 async function createTagCount(allBlogs) {
   const tagCount: Record<string, number> = {}
+
+  // Count blog post tags
   allBlogs.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
@@ -76,6 +79,21 @@ async function createTagCount(allBlogs) {
       })
     }
   })
+
+  // Count project tags
+  projectsData.forEach((project) => {
+    if (project.tags) {
+      project.tags.forEach((tag) => {
+        const formattedTag = slug(tag)
+        if (formattedTag in tagCount) {
+          tagCount[formattedTag] += 1
+        } else {
+          tagCount[formattedTag] = 1
+        }
+      })
+    }
+  })
+
   const formatted = await prettier.format(JSON.stringify(tagCount, null, 2), { parser: 'json' })
   writeFileSync('./app/tag-data.json', formatted)
 }
