@@ -1972,7 +1972,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:3.2.0":
+"@eslint/eslintrc@npm:3.2.0, @eslint/eslintrc@npm:^3.2.0":
   version: 3.2.0
   resolution: "@eslint/eslintrc@npm:3.2.0"
   dependencies:
@@ -1986,23 +1986,6 @@ __metadata:
     minimatch: ^3.1.2
     strip-json-comments: ^3.1.1
   checksum: c898e4d12f4c9a79a61ee3c91e38eea5627a04e021cb749191e8537445858bfe32f810eca0cb2dc9902b8ad8b65ca07ef7221dc4bad52afe60cbbf50ec56c236
-  languageName: node
-  linkType: hard
-
-"@eslint/eslintrc@npm:^3.2.0":
-  version: 3.3.1
-  resolution: "@eslint/eslintrc@npm:3.3.1"
-  dependencies:
-    ajv: ^6.12.4
-    debug: ^4.3.2
-    espree: ^10.0.1
-    globals: ^14.0.0
-    ignore: ^5.2.0
-    import-fresh: ^3.2.1
-    js-yaml: ^4.1.0
-    minimatch: ^3.1.2
-    strip-json-comments: ^3.1.1
-  checksum: 8241f998f0857abf5a615072273b90b1244d75c1c45d217c6a8eb444c6e12bbb5506b4879c14fb262eb72b7d8e3d2f0542da2db1a7f414a12496ebb790fb4d62
   languageName: node
   linkType: hard
 
@@ -10650,7 +10633,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark@npm:15.0.0":
+"remark@npm:15.0.0, remark@npm:^15.0.0":
   version: 15.0.0
   resolution: "remark@npm:15.0.0"
   dependencies:
@@ -10659,18 +10642,6 @@ __metadata:
     remark-stringify: ^11.0.0
     unified: ^11.0.0
   checksum: 566f72c06a3cc9c3f8dd6e837de650c3eac4f48536323ea70e6dda4cd566ab1be4466749ccb9a16dd1cf3dad71619245d2e487bbe7fab766a16452a0ddbe4fb4
-  languageName: node
-  linkType: hard
-
-"remark@npm:^15.0.0":
-  version: 15.0.1
-  resolution: "remark@npm:15.0.1"
-  dependencies:
-    "@types/mdast": ^4.0.0
-    remark-parse: ^11.0.0
-    remark-stringify: ^11.0.0
-    unified: ^11.0.0
-  checksum: ac7edb7f9b70c22964bbc6c5d1c038dd10e1a43ccf436fbdb55fb8c89d54f1b77190b89386063ba410fbdd086fde9dca81ef470fc8358eed1ff76a9741ae3dcc
   languageName: node
   linkType: hard
 
