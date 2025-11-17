@@ -49,3 +49,4 @@ yarn-error.log*
 # IDE
 .idea
 tsconfig.tsbuildinfo
+package-lock.json
