@@ -1,5 +1,6 @@
 import Image from './Image'
 import Link from './Link'
+import { slug } from 'github-slugger'
 
 interface CardProps {
   title: string
@@ -66,12 +67,13 @@ const Card = ({ title, description, imgSrc, href, repoHref, tags = [] }: CardPro
         {tags && tags.length > 0 && (
           <div className="mb-4 flex flex-wrap gap-2">
             {tags.map((tag) => (
-              <span
+              <Link
                 key={tag}
-                className="bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300 rounded-full px-3 py-1 text-xs font-medium"
+                href={`/tags/${slug(tag)}`}
+                className="bg-primary-100 text-primary-700 hover:bg-primary-200 dark:bg-primary-900/30 dark:text-primary-300 dark:hover:bg-primary-900/50 rounded-full px-3 py-1 text-xs font-medium transition-colors"
               >
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
         )}
