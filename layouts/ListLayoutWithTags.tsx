@@ -9,6 +9,16 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import tagData from 'app/tag-data.json'
+import Card from '@/components/Card'
+
+interface Project {
+  title: string
+  description: string
+  href?: string
+  repoHref?: string
+  imgSrc?: string
+  tags?: string[]
+}
 
 interface PaginationProps {
   totalPages: number
@@ -19,6 +29,7 @@ interface ListLayoutProps {
   title: string
   initialDisplayPosts?: CoreContent<Blog>[]
   pagination?: PaginationProps
+  projects?: Project[]
 }
 
 function Pagination({ totalPages, currentPage }: PaginationProps) {
@@ -104,6 +115,7 @@ export default function ListLayoutWithTags({
   title,
   initialDisplayPosts = [],
   pagination,
+  projects = [],
 }: ListLayoutProps) {
   const pathname = usePathname()
   const tagCounts = tagData as Record<string, number>
@@ -243,6 +255,28 @@ export default function ListLayoutWithTags({
             </div>
             {pagination && pagination.totalPages > 1 && (
               <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
+            )}
+
+            {/* Projects Section */}
+            {projects.length > 0 && (
+              <div className="mt-12">
+                <h3 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  Projects
+                </h3>
+                <div className="-m-4 flex flex-wrap">
+                  {projects.map((project) => (
+                    <Card
+                      key={project.title}
+                      title={project.title}
+                      description={project.description}
+                      imgSrc={project.imgSrc}
+                      href={project.href}
+                      repoHref={project.repoHref}
+                      tags={project.tags}
+                    />
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         </div>

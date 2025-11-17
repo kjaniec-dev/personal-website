@@ -4,6 +4,7 @@ import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allBlogs } from 'contentlayer/generated'
 import tagData from 'app/tag-data.json'
 import { notFound } from 'next/navigation'
+import projectsData from '@/data/projectsData'
 
 const POSTS_PER_PAGE = 5
 
@@ -27,6 +28,9 @@ export default async function TagPage(props: { params: Promise<{ tag: string; pa
   const filteredPosts = allCoreContent(
     sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
   )
+  const filteredProjects = projectsData.filter(
+    (project) => project.tags && project.tags.map((t) => slug(t)).includes(tag)
+  )
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
 
   // Return 404 for invalid page numbers or empty pages
@@ -48,6 +52,7 @@ export default async function TagPage(props: { params: Promise<{ tag: string; pa
       initialDisplayPosts={initialDisplayPosts}
       pagination={pagination}
       title={title}
+      projects={filteredProjects}
     />
   )
 }
