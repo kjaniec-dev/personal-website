@@ -1,7 +1,16 @@
 import Image from './Image'
 import Link from './Link'
 
-const Card = ({ title, description, imgSrc, href, repoHref = null, tags = [] }) => (
+interface CardProps {
+  title: string
+  description: string
+  imgSrc?: string
+  href?: string
+  repoHref?: string
+  tags?: string[]
+}
+
+const Card = ({ title, description, imgSrc, href, repoHref, tags = [] }: CardProps) => (
   <div className="md max-w-[544px] p-4 md:w-1/2">
     <div
       className={`${
