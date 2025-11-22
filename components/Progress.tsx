@@ -18,7 +18,7 @@ const Skill = ({ percent, name }) => (
           className="stroke-gray-200 dark:stroke-gray-700"
           strokeWidth="2.5"
         />
-        {/* Progress circle with gradient */}
+        {/* Progress circle with gradient - optimized for GPU acceleration */}
         <circle
           cx="18"
           cy="18"
@@ -32,6 +32,8 @@ const Skill = ({ percent, name }) => (
           className="transition-all duration-1000 ease-out"
           style={{
             animation: 'progressAnimation 1.5s ease-out forwards',
+            willChange: 'stroke-dashoffset',
+            ['--progress-offset' as string]: `${100 - percent}`,
           }}
         />
         {/* Gradient definition */}

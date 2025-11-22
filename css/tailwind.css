@@ -61,47 +61,47 @@
   --z-80: 80;
 }
 
-/* Keyframe animations */
+/* Keyframe animations - optimized for GPU acceleration using transform and opacity only */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(10px) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateX(30px) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) translateZ(0);
   }
 }
 
 @keyframes float {
   0%,
   100% {
-    transform: translateY(0px);
+    transform: translateY(0px) translateZ(0);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-20px) translateZ(0);
   }
 }
 
@@ -138,6 +138,15 @@
 @keyframes blink {
   50% {
     border-color: transparent;
+  }
+}
+
+@keyframes progressAnimation {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: var(--progress-offset, 0);
   }
 }
 
@@ -255,6 +264,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    will-change: background-position;
   }
 
   /* Glassmorphism effect */
@@ -270,13 +280,14 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  /* Hover lift effect */
+  /* Hover lift effect - optimized for GPU acceleration */
   .hover-lift {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
   }
 
   .hover-lift:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) translateZ(0);
     box-shadow:
       0 20px 25px -5px rgba(0, 0, 0, 0.1),
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
