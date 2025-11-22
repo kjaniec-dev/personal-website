@@ -17,12 +17,19 @@ export default function AnalyticsWrapper({ analyticsConfig }: AnalyticsWrapperPr
   const [shouldLoad, setShouldLoad] = useState(false)
 
   useEffect(() => {
-    // Defer analytics loading until after initial page load
-    const timer = setTimeout(() => {
-      setShouldLoad(true)
-    }, 1000) // Load analytics after 1 second
-
-    return () => clearTimeout(timer)
+    // Defer analytics loading until browser is idle
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(
+        () => {
+          setShouldLoad(true)
+        },
+        { timeout: 2000 }
+      )
+    } else {
+      setTimeout(() => {
+        setShouldLoad(true)
+      }, 1500)
+    }
   }, [])
 
   if (!shouldLoad) {

@@ -89,7 +89,13 @@ module.exports = () => {
     },
     // Experimental features for better performance
     experimental: {
-      optimizePackageImports: ['@headlessui/react', 'pliny'],
+      optimizePackageImports: [
+        '@headlessui/react',
+        'pliny',
+        'react-icons',
+        '@algolia/client-search',
+        'algoliasearch',
+      ],
     },
     async headers() {
       return [
@@ -123,21 +129,50 @@ module.exports = () => {
           runtimeChunk: 'single',
           splitChunks: {
             chunks: 'all',
+            maxInitialRequests: 25,
+            minSize: 20000,
             cacheGroups: {
               default: false,
               vendors: false,
-              // Vendor chunk for node_modules
+              // React and React-DOM in separate chunk
+              react: {
+                name: 'react',
+                test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+                priority: 40,
+                reuseExistingChunk: true,
+              },
+              // Search-related libraries (lazy loaded)
+              search: {
+                name: 'search',
+                test: /[\\/]node_modules[\\/](kbar|@algolia|algoliasearch|search-insights)[\\/]/,
+                priority: 35,
+                reuseExistingChunk: true,
+              },
+              // Contentlayer and MDX processing
+              content: {
+                name: 'content',
+                test: /[\\/]node_modules[\\/](contentlayer2|next-contentlayer2|gray-matter|remark|rehype|unified|unist|hast|mdast)[\\/]/,
+                priority: 30,
+                reuseExistingChunk: true,
+              },
+              // UI libraries
+              ui: {
+                name: 'ui',
+                test: /[\\/]node_modules[\\/](@headlessui|next-themes)[\\/]/,
+                priority: 25,
+                reuseExistingChunk: true,
+              },
+              // Other vendor libraries
               vendor: {
                 name: 'vendor',
-                chunks: 'all',
-                test: /node_modules/,
+                test: /[\\/]node_modules[\\/]/,
                 priority: 20,
+                reuseExistingChunk: true,
               },
-              // Common chunk for shared code
+              // Common code shared across pages
               common: {
                 name: 'common',
                 minChunks: 2,
-                chunks: 'all',
                 priority: 10,
                 reuseExistingChunk: true,
                 enforce: true,
