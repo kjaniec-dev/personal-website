@@ -30,7 +30,19 @@ export function reportWebVitals() {
 
 export default function WebVitalsReporter() {
   useEffect(() => {
-    reportWebVitals()
+    // Defer web vitals loading even more aggressively
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(
+        () => {
+          reportWebVitals()
+        },
+        { timeout: 5000 }
+      )
+    } else {
+      setTimeout(() => {
+        reportWebVitals()
+      }, 3000)
+    }
   }, [])
 
   return null
