@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { SearchConfig } from 'pliny/search'
 import { ReactNode, Suspense } from 'react'
 
-const SearchProvider = dynamic(() => import('pliny/search').then((mod) => mod.SearchProvider), {
+const SearchProvider = dynamic(() => import('./SearchProvider').then((mod) => mod.SearchProvider), {
   ssr: false,
   loading: () => null,
 })
@@ -20,7 +20,7 @@ export default function SearchProviderWrapper({
 }: SearchProviderWrapperProps) {
   return (
     <Suspense fallback={<>{children}</>}>
-      <SearchProvider searchConfig={searchConfig}>{children}</SearchProvider>
+      <SearchProvider>{children}</SearchProvider>
     </Suspense>
   )
 }

@@ -103,9 +103,31 @@ function createSearchIndex(allBlogs) {
     siteMetadata?.search?.provider === 'kbar' &&
     siteMetadata.search.kbarConfig.searchDocumentsPath
   ) {
+    // Create blog posts index
+    const blogPosts = allCoreContent(sortPosts(allBlogs))
+
+    // Create projects index - format projects to match blog structure
+    const projects = projectsData.map((project) => ({
+      title: project.title,
+      summary: project.description,
+      tags: project.tags || [],
+      path: project.href || '',
+      // Add a type field to distinguish between content types
+      type: 'project',
+    }))
+
+    // Add type field to blog posts as well
+    const blogsWithType = blogPosts.map((post) => ({
+      ...post,
+      type: 'blog',
+    }))
+
+    // Combine both blogs and projects
+    const searchIndex = [...blogsWithType, ...projects]
+
     writeFileSync(
       `public/${path.basename(siteMetadata.search.kbarConfig.searchDocumentsPath)}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs)))
+      JSON.stringify(searchIndex)
     )
     console.log('Local search index generated...')
   }
