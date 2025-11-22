@@ -69,6 +69,9 @@ module.exports = () => {
     reactStrictMode: true,
     trailingSlash: false,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+    // Performance optimizations
+    compress: true,
+    poweredByHeader: false,
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
@@ -80,12 +83,29 @@ module.exports = () => {
         },
       ],
       unoptimized,
+      // Add image optimization settings
+      formats: ['image/avif', 'image/webp'],
+      minimumCacheTTL: 60,
+    },
+    // Experimental features for better performance
+    experimental: {
+      optimizePackageImports: ['@headlessui/react', 'pliny'],
     },
     async headers() {
       return [
         {
           source: '/(.*)',
           headers: securityHeaders,
+        },
+        // Add caching headers for static assets
+        {
+          source: '/static/:path*',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
         },
       ]
     },
@@ -94,6 +114,38 @@ module.exports = () => {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       })
+
+      // Optimize bundle size
+      if (!options.dev) {
+        config.optimization = {
+          ...config.optimization,
+          moduleIds: 'deterministic',
+          runtimeChunk: 'single',
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              default: false,
+              vendors: false,
+              // Vendor chunk for node_modules
+              vendor: {
+                name: 'vendor',
+                chunks: 'all',
+                test: /node_modules/,
+                priority: 20,
+              },
+              // Common chunk for shared code
+              common: {
+                name: 'common',
+                minChunks: 2,
+                chunks: 'all',
+                priority: 10,
+                reuseExistingChunk: true,
+                enforce: true,
+              },
+            },
+          },
+        }
+      }
 
       return config
     },
