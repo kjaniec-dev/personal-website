@@ -1,4 +1,5 @@
 import 'css/tailwind.css'
+import 'css/prism.css'
 import 'remark-github-blockquote-alert/alert.css'
 
 import { Space_Grotesk } from 'next/font/google'
@@ -20,6 +21,7 @@ const space_grotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
   preload: true,
   adjustFontFallback: true,
+  fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'],
 })
 
 export const metadata: Metadata = {
