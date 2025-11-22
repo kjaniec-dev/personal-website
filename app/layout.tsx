@@ -16,7 +16,7 @@ import WebVitalsReporter from '@/components/WebVitals'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
-  display: 'swap',
+  display: 'optional',
   variable: '--font-space-grotesk',
   preload: true,
   adjustFontFallback: true,

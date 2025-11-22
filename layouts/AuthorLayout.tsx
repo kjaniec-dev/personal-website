@@ -33,13 +33,14 @@ export default function AuthorLayout({ children, content }: Props) {
             {/* Avatar */}
             <div className="flex flex-shrink-0 justify-center">
               {avatar && (
-                <div className="group relative">
+                <div className="group relative h-48 w-48">
                   <div className="from-primary-500 to-accent-cyan absolute -inset-1 rounded-full bg-gradient-to-r opacity-75 blur transition-all group-hover:opacity-100" />
                   <Image
                     src={avatar}
                     alt="avatar"
                     width={192}
                     height={192}
+                    priority={true}
                     className="relative h-48 w-48 rounded-full border-4 border-white object-cover shadow-2xl dark:border-gray-800"
                   />
                 </div>
