@@ -47,7 +47,6 @@ const experienceData: ExperienceSectionEntry[] = [
     primaryText: 'Cinkciarz.pl',
     secondaryText: '2015 - 2019',
     tags: ['Java', 'Spring Boot', 'Typescript', 'Angular', 'PostgreSQL', 'Bootstrap', 'Docker'],
-    link: { href: 'https://forex.cinkciarz.pl', text: 'Forex' },
   },
   {
     primaryText: 'Trax S.A. / Icomp Sp. z o.o.',

@@ -1,15 +1,12 @@
 ![Logo](/public/static/images/logo.svg)
 
-To check site configuration see [template site repo](https://github.com/timlrx/tailwind-nextjs-starter-blog). 
-
-To use my template you should create a mapbox account and add an environment variable `NEXT_PUBLIC_MAPBOX_TOKEN`
+To check site configuration see [template site repo](https://github.com/timlrx/tailwind-nextjs-starter-blog).
 
 ## My changes to this template
-1) Experience section 
-2) Education section 
+1) Experience section
+2) Education section
 3) Skills section
-4) Mapbox map
-5) Posts on a blog
+4) Posts on a blog
 
 ## Licence
 
