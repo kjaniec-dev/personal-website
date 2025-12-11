@@ -7,12 +7,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.mapbox.com;
-  style-src 'self' 'unsafe-inline';
-  img-src * blob: data: *.mapbox.com;
-  media-src *.s3.amazonaws.com *.mapbox.com;
+  script-src 'self';
+  style-src 'self';
   connect-src *;
-  font-src 'self' *.mapbox.com;
+  font-src 'self';
   frame-src giscus.app
 `
 
@@ -75,9 +73,6 @@ module.exports = () => {
     // Performance optimizations
     compress: true,
     poweredByHeader: false,
-    eslint: {
-      dirs: ['app', 'components', 'layouts', 'scripts'],
-    },
     images: {
       remotePatterns: [
         {
@@ -92,8 +87,6 @@ module.exports = () => {
     },
     // Experimental features for better performance
     experimental: {
-      // Built-in SVGR support under Turbopack
-      svgr: true,
       optimizePackageImports: [
         '@headlessui/react',
         'pliny',
