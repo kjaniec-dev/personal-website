@@ -7,7 +7,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.mapbox.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.mapbox.com *.umami.is;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data: *.mapbox.com;
   media-src *.s3.amazonaws.com *.mapbox.com;
@@ -59,7 +59,7 @@ const basePath = process.env.BASE_PATH || undefined
 const unoptimized = process.env.UNOPTIMIZED ? true : undefined
 
 /**
- * @type {import('next/dist/next-server/server/config').NextConfig}
+ * @type {import('next').NextConfig}
  **/
 module.exports = () => {
   const plugins = [withContentlayer, withBundleAnalyzer]
@@ -68,13 +68,13 @@ module.exports = () => {
     basePath,
     reactStrictMode: true,
     trailingSlash: false,
+    // Enable Turbopack explicitly to avoid Next 16 warning when a legacy webpack
+    // config existed previously. An empty config is sufficient.
+    turbopack: {},
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     // Performance optimizations
     compress: true,
     poweredByHeader: false,
-    eslint: {
-      dirs: ['app', 'components', 'layouts', 'scripts'],
-    },
     images: {
       remotePatterns: [
         {
@@ -114,75 +114,6 @@ module.exports = () => {
           ],
         },
       ]
-    },
-    webpack: (config, options) => {
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      })
-
-      // Optimize bundle size
-      if (!options.dev) {
-        config.optimization = {
-          ...config.optimization,
-          moduleIds: 'deterministic',
-          runtimeChunk: 'single',
-          splitChunks: {
-            chunks: 'all',
-            maxInitialRequests: 25,
-            minSize: 20000,
-            cacheGroups: {
-              default: false,
-              vendors: false,
-              // React and React-DOM in separate chunk
-              react: {
-                name: 'react',
-                test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
-                priority: 40,
-                reuseExistingChunk: true,
-              },
-              // Search-related libraries (lazy loaded)
-              search: {
-                name: 'search',
-                test: /[\\/]node_modules[\\/](kbar|@algolia|algoliasearch|search-insights)[\\/]/,
-                priority: 35,
-                reuseExistingChunk: true,
-              },
-              // Contentlayer and MDX processing
-              content: {
-                name: 'content',
-                test: /[\\/]node_modules[\\/](contentlayer2|next-contentlayer2|gray-matter|remark|rehype|unified|unist|hast|mdast)[\\/]/,
-                priority: 30,
-                reuseExistingChunk: true,
-              },
-              // UI libraries
-              ui: {
-                name: 'ui',
-                test: /[\\/]node_modules[\\/](@headlessui|next-themes)[\\/]/,
-                priority: 25,
-                reuseExistingChunk: true,
-              },
-              // Other vendor libraries
-              vendor: {
-                name: 'vendor',
-                test: /[\\/]node_modules[\\/]/,
-                priority: 20,
-                reuseExistingChunk: true,
-              },
-              // Common code shared across pages
-              common: {
-                name: 'common',
-                minChunks: 2,
-                priority: 10,
-                reuseExistingChunk: true,
-                enforce: true,
-              },
-            },
-          },
-        }
-      }
-
-      return config
     },
   })
 }
