@@ -9,36 +9,43 @@ const faqData: FAQItem[] = [
   {
     question: "What's your preferred programming language?",
     answer:
-      "TypeScript is my go-to language. I love the type safety, excellent IDE support, and the flexibility to use it across the entire stack - from React frontends to Node.js backends. That said, Java holds a special place in my heart for enterprise applications and its robust ecosystem.",
+      "On the backend: Golang, Python, and Rust. On the frontend: TypeScript. That's my preferred combo for building reliable, performant systems end-to-end.",
     category: 'technical',
   },
   {
     question: 'Frontend or Backend?',
     answer:
-      "Full-stack, but if I had to choose, I'd lean slightly towards backend. I enjoy designing system architectures, working with databases, and building APIs. However, there's something satisfying about crafting smooth user experiences on the frontend too.",
+      "Both — I'm truly full‑stack and also comfortable with DevOps. I like to take things from idea to production: frontend, backend, infra, CI/CD — the whole thing.",
     category: 'technical',
   },
   {
     question: "What's your go-to tech stack for a new project?",
     answer:
-      "For most projects: Next.js + TypeScript + Tailwind CSS on the frontend, Node.js with NestJS or Express on the backend, and PostgreSQL for the database. Add Docker for containerization and you're good to go. For enterprise projects, I'd reach for Java with Spring Boot.",
+      "It depends on the project's specifics and constraints — I pick tools to fit the problem. The good news: with me, you have it covered broadly, from frontend and backend to infrastructure.",
     category: 'technical',
   },
   {
     question: 'Tabs or spaces?',
-    answer: "Spaces. 2 spaces for JavaScript/TypeScript, 4 for Java. But honestly, as long as the team is consistent, I'm happy. Prettier handles this for me anyway!",
+    answer: 'No strong preference — the team should decide. Consistency is what matters.',
     category: 'technical',
   },
   {
     question: 'What IDE do you use?',
     answer:
-      "VS Code for JavaScript/TypeScript work - it's fast, extensible, and has amazing TypeScript support. IntelliJ IDEA for Java projects - nothing beats its refactoring capabilities and Spring integration.",
+      'JetBrains suite: IntelliJ IDEA for miscellaneous/monorepos, GoLand for Go, PyCharm for Python, WebStorm for frontend, DataGrip for databases, and so on. For COBOL, I use VS Code.',
     category: 'technical',
   },
   {
     question: 'Do you still learn new things?',
     answer:
-      "Always! I've completed over 80 courses on various platforms covering everything from machine learning to mobile development. Currently, I'm diving deeper into AI/ML and exploring how to integrate LLMs into practical applications.",
+      'Absolutely — I try to learn daily. I explore broadly across mobile, web, DevOps, and machine learning, keeping my toolkit sharp without fixating on course counts.',
+    category: 'technical',
+  },
+
+  // Frontend preference
+  {
+    question: 'Which frontend framework/library do you prefer?',
+    answer: 'From the heart — React. I have 5+ years of experience with both React and Angular.',
     category: 'technical',
   },
 
@@ -46,19 +53,18 @@ const faqData: FAQItem[] = [
   {
     question: 'What kind of projects excite you most?',
     answer:
-      "Projects that solve real problems and have a meaningful impact. I particularly enjoy building scalable distributed systems, real-time applications, and IoT solutions. My Planning Poker project and various IoT experiments reflect this passion for practical, interactive systems.",
+      'Projects that solve real problems and have a meaningful impact. I particularly enjoy building scalable distributed systems, real-time applications, and IoT solutions. My Planning Poker project and various IoT experiments reflect this passion for practical, interactive systems.',
     category: 'work',
   },
   {
     question: 'Are you open to freelance or contract work?',
     answer:
-      "I'm always open to interesting opportunities! Feel free to reach out via email or LinkedIn to discuss potential collaborations. I'm particularly interested in projects involving modern web technologies, system architecture, or IoT.",
+      "I'm always open to interesting opportunities! Feel free to reach out via email or LinkedIn to discuss potential collaborations. I'm particularly interested in modern web technologies and system architecture — anything non‑trivial.",
     category: 'work',
   },
   {
     question: 'Remote or on-site preference?',
-    answer:
-      "I prefer hybrid or remote work. I've been working effectively in remote/hybrid setups and appreciate the flexibility it provides. That said, I value face-to-face collaboration for complex problem-solving and team building.",
+    answer: 'Remote for the win — only remote, and I love it.',
     category: 'work',
   },
   {
@@ -78,12 +84,12 @@ const faqData: FAQItem[] = [
   {
     question: 'What do you do outside of coding?',
     answer:
-      "I enjoy photo editing (hence the Affinity Photo course!), tinkering with electronics and IoT projects, and continuous learning. I'm also interested in data science and machine learning, which I explore through various courses and side projects.",
+      "Playing games on various platforms — PlayStation, Nintendo, Xbox, and PC. I'm a big fan of Souls and souls‑like games.",
     category: 'personal',
   },
   {
     question: 'Coffee or tea while coding?',
-    answer: "Coffee, definitely. A good espresso in the morning sets the right tone for a productive coding session. Though I switch to tea in the evenings when debugging late-night issues.",
+    answer: 'Definitely coffee — black, without milk.',
     category: 'personal',
   },
   {
@@ -97,7 +103,7 @@ const faqData: FAQItem[] = [
   {
     question: 'How can I reach you?',
     answer:
-      "The best way is via email at contact@kjaniec.dev or through LinkedIn. I try to respond within a day or two. For professional inquiries, LinkedIn tends to work best.",
+      'Preferably via email at contact@kjaniec.dev. LinkedIn is also okay, though some days I may not have time to check it.',
     category: 'contact',
   },
   {
