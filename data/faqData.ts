@@ -41,6 +41,12 @@ const faqData: FAQItem[] = [
       'Absolutely — I try to learn daily. I explore broadly across mobile, web, DevOps, and machine learning, keeping my toolkit sharp without fixating on course counts.',
     category: 'technical',
   },
+  {
+    question: "What's your experience with cloud platforms?",
+    answer:
+      'Solid experience with AWS and GCP, plus Kubernetes and Docker. I handle the full DevOps cycle — infrastructure as code, CI/CD pipelines, container orchestration. I can take projects from local development to production-ready cloud deployments.',
+    category: 'technical',
+  },
 
   // Frontend preference
   {
@@ -71,6 +77,24 @@ const faqData: FAQItem[] = [
     question: 'How many years of experience do you have?',
     answer:
       "Over 12 years in software development, starting from 2013. I've worked across various domains including fintech, healthcare/IoT, and retail, gaining experience with diverse tech stacks and architectural patterns.",
+    category: 'work',
+  },
+  {
+    question: "What's your most challenging project to date?",
+    answer:
+      'Building distributed IoT systems with real-time data processing. Coordinating sensors, edge computing, and cloud infrastructure while maintaining reliability and performance taught me a lot about system resilience and scalability.',
+    category: 'work',
+  },
+  {
+    question: 'Do you offer technical consulting or code reviews?',
+    answer:
+      "Absolutely. Architecture reviews, code audits, tech stack evaluations, and performance optimization — I'm happy to lend my expertise. Sometimes a second set of experienced eyes is all you need.",
+    category: 'work',
+  },
+  {
+    question: "What's your notice period for new projects?",
+    answer:
+      'At least 3 months. Reach out early if you have specific timelines so we can plan accordingly.',
     category: 'work',
   },
 
@@ -110,6 +134,12 @@ const faqData: FAQItem[] = [
     question: 'Are you open to collaboration?',
     answer:
       "Absolutely! Whether it's open-source projects, technical writing, speaking opportunities, or consulting - I'm always interested in connecting with fellow developers and exploring new collaborations.",
+    category: 'contact',
+  },
+  {
+    question: 'What timezone do you work in?',
+    answer:
+      "Central European Time (CET/CEST) — Poland. I'm flexible with meeting times for collaboration with other timezones, especially for kickoffs and important discussions.",
     category: 'contact',
   },
 ]
