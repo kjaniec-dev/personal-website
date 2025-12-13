@@ -190,9 +190,9 @@ export default function ListLayoutWithTags({
                 return (
                   <article
                     key={path}
-                    className="group hover:border-primary-200 dark:hover:border-primary-800 rounded-xl border border-gray-200/60 bg-white/60 p-6 transition-all hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60"
+                    className="group hover:border-primary-200 dark:hover:border-primary-800 flex min-h-[280px] flex-col rounded-xl border border-gray-200/60 bg-white/60 p-6 transition-all hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60"
                   >
-                    <div className="space-y-3">
+                    <div className="flex h-full flex-col space-y-3">
                       <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                         <svg
                           className="h-4 w-4"
@@ -227,7 +227,7 @@ export default function ListLayoutWithTags({
                         ))}
                       </div>
 
-                      <p className="line-clamp-3 text-gray-600 dark:text-gray-400">{summary}</p>
+                      <p className="flex-1 line-clamp-3 text-gray-600 dark:text-gray-400">{summary}</p>
 
                       <Link
                         href={`/${path}`}

@@ -191,6 +191,23 @@
     outline-color: var(--color-primary-400);
   }
 
+  /* Override default input focus styles to use primary colors */
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--color-primary-500);
+    ring-color: var(--color-primary-500);
+    --tw-ring-color: var(--color-primary-500);
+  }
+
+  .dark input:focus,
+  .dark select:focus,
+  .dark textarea:focus {
+    border-color: var(--color-primary-400);
+    ring-color: var(--color-primary-400);
+    --tw-ring-color: var(--color-primary-400);
+  }
+
   /* Smooth scrolling for the entire page */
   html {
     scroll-behavior: smooth;
@@ -231,7 +248,7 @@
       font-weight: 600;
     }
     & :where(code):not(pre code) {
-      color: var(--color-indigo-500);
+      color: var(--color-primary-500);
     }
   }
 
