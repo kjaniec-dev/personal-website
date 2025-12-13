@@ -184,13 +184,13 @@ export default function ListLayoutWithTags({
 
           {/* Posts List */}
           <div className="flex-1">
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-6">
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags } = post
                 return (
                   <article
                     key={path}
-                    className="group hover:border-primary-200 dark:hover:border-primary-800 flex h-full flex-col rounded-xl border border-gray-200/60 bg-white/60 p-6 transition-all hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60"
+                    className="group hover:border-primary-200 dark:hover:border-primary-800 flex min-h-[280px] flex-col rounded-xl border border-gray-200/60 bg-white/60 p-6 transition-all hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60"
                   >
                     <div className="flex h-full flex-col space-y-3">
                       <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
