@@ -163,26 +163,28 @@ export default function Home({ posts }) {
                   </div>
 
                   <p className="line-clamp-3 text-gray-600 dark:text-gray-400">{summary}</p>
-
                   <Link
                     href={`/blog/${slug}`}
-                    className="animated-underline text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 inline-flex items-center font-medium"
+                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-medium"
                     aria-label={`Read more: "${title}"`}
                   >
-                    Read more
-                    <svg
-                      className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
+                    <span className="animated-underline whitespace-nowrap">
+                      Read more
+                      <svg
+                        className="ml-1 inline-block h-4 w-4 align-middle transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </svg>
+                    </span>
                   </Link>
                 </div>
               </article>

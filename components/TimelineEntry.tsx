@@ -52,18 +52,26 @@ const TimelineEntry = ({
       {entry.link && (
         <Link
           href={entry.link.href}
-          className="animated-underline text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 inline-flex items-center text-sm font-medium"
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start text-sm font-medium"
           aria-label={`Link to project ${entry.primaryText}`}
         >
-          {entry.link.text}
-          <svg className="ml-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-            />
-          </svg>
+          <span className="animated-underline whitespace-nowrap">
+            {entry.link.text}
+            <svg
+              className="ml-1 inline-block h-3 w-3 align-middle"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          </span>
         </Link>
       )}
       {children}

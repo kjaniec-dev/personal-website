@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/forms";
+@plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @source '../node_modules/pliny';
 @custom-variant dark (&:where(.dark, .dark *));
@@ -7,7 +7,8 @@
 /* Core theme configuration */
 @theme {
   /* Font families */
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+  --font-sans:
+    var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
   --animate-spin: spin 500ms ease-in-out forwards;
@@ -167,6 +168,16 @@
     border-color: var(--color-gray-200, currentColor);
   }
 
+  :root input[aria-controls='kbar-listbox'][role='combobox'] {
+    border: 1px solid var(--color-gray-300);
+    border-radius: 0.5rem; /* optional: match your rounded-lg vibe */
+  }
+
+  :root input[aria-controls='kbar-listbox'][role='combobox']:focus {
+    border-color: var(--color-primary-500);
+    outline: none;
+  }
+
   a,
   button {
     outline-color: var(--color-primary-500);
@@ -299,7 +310,9 @@
 
   /* Hover lift effect - optimized for GPU acceleration */
   .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
     will-change: transform;
   }
 
@@ -320,6 +333,7 @@
   .animated-underline {
     position: relative;
     text-decoration: none;
+    display: inline-block;
   }
 
   .animated-underline::after {
