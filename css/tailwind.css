@@ -320,6 +320,7 @@
   .animated-underline {
     position: relative;
     text-decoration: none;
+    display: inline-block;
   }
 
   .animated-underline::after {
