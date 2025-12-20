@@ -16,13 +16,16 @@ const NavLink = ({ href, title }: NavLinkProps) => {
     <Link
       href={href}
       aria-current={isActive ? 'page' : undefined}
-      className={`animated-underline rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+      className={`relative rounded-md px-3 py-2 text-sm font-medium transition-all ${
         isActive
-          ? 'bg-primary-50 text-primary-600 dark:bg-primary-950/50 dark:text-primary-400'
-          : 'hover:text-primary-500 dark:hover:text-primary-400 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
+          ? 'text-primary-600 dark:text-primary-400'
+          : 'text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400'
       }`}
     >
       {title}
+      {isActive && (
+        <span className="absolute bottom-0 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-primary-500" />
+      )}
     </Link>
   )
 }

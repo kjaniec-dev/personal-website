@@ -20,23 +20,23 @@
   --animate-gradient: gradient 8s linear infinite;
   --animate-glow: glow 2s ease-in-out infinite alternate;
 
-  /* Modern vibrant color palette - Purple/Violet gradient theme */
-  --color-primary-50: oklch(0.97 0.014 293);
-  --color-primary-100: oklch(0.94 0.038 293);
-  --color-primary-200: oklch(0.88 0.074 293);
-  --color-primary-300: oklch(0.79 0.124 293);
-  --color-primary-400: oklch(0.69 0.171 293);
-  --color-primary-500: oklch(0.59 0.214 293);
-  --color-primary-600: oklch(0.52 0.213 293);
-  --color-primary-700: oklch(0.45 0.185 293);
-  --color-primary-800: oklch(0.38 0.152 293);
-  --color-primary-900: oklch(0.33 0.122 293);
-  --color-primary-950: oklch(0.22 0.098 293);
+  /* Sophisticated developer-focused color palette - Refined blue-slate theme */
+  --color-primary-50: oklch(0.98 0.008 240);
+  --color-primary-100: oklch(0.96 0.012 240);
+  --color-primary-200: oklch(0.92 0.022 240);
+  --color-primary-300: oklch(0.84 0.042 240);
+  --color-primary-400: oklch(0.72 0.082 240);
+  --color-primary-500: oklch(0.60 0.118 240);
+  --color-primary-600: oklch(0.50 0.125 240);
+  --color-primary-700: oklch(0.42 0.112 240);
+  --color-primary-800: oklch(0.32 0.088 240);
+  --color-primary-900: oklch(0.24 0.065 240);
+  --color-primary-950: oklch(0.16 0.042 240);
 
-  /* Accent colors for gradients */
-  --color-accent-cyan: oklch(0.79 0.171 192);
-  --color-accent-pink: oklch(0.72 0.202 3);
-  --color-accent-orange: oklch(0.75 0.183 55);
+  /* Refined accent colors - minimal usage, sophisticated tones */
+  --color-accent-blue: oklch(0.64 0.15 245);
+  --color-accent-teal: oklch(0.68 0.11 200);
+  --color-accent-amber: oklch(0.75 0.14 65);
 
   --color-gray-50: oklch(0.985 0.002 247.839);
   --color-gray-100: oklch(0.967 0.003 264.542);
@@ -279,20 +279,17 @@
     }
   }
 
-  /* Gradient text utility */
+  /* Subtle gradient text utility - minimal, sophisticated */
   .gradient-text {
     background: linear-gradient(
       135deg,
-      var(--color-primary-500) 0%,
-      var(--color-accent-cyan) 50%,
-      var(--color-accent-pink) 100%
+      var(--color-primary-600) 0%,
+      var(--color-primary-500) 50%,
+      var(--color-accent-blue) 100%
     );
-    background-size: 200% 200%;
-    animation: gradient 8s linear infinite;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    will-change: background-position;
   }
 
   /* Glassmorphism effect */
@@ -343,7 +340,7 @@
     height: 2px;
     bottom: -2px;
     left: 0;
-    background: linear-gradient(90deg, var(--color-primary-500), var(--color-accent-cyan));
+    background: var(--color-primary-500);
     transition: width 0.3s ease;
   }
 
@@ -384,9 +381,9 @@
     content: '';
     position: absolute;
     inset: 0;
-    padding: 2px;
+    padding: 1px;
     border-radius: inherit;
-    background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-cyan));
+    background: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-600));
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
@@ -412,25 +409,148 @@
     background-image: radial-gradient(var(--color-gray-700) 1px, transparent 1px);
   }
 
-  /* Mesh gradient background */
+  /* Subtle mesh gradient background - minimal usage */
   .mesh-gradient {
-    background: linear-gradient(
-      135deg,
+    background: radial-gradient(
+      ellipse at top,
       var(--color-primary-50) 0%,
-      transparent 50%,
-      var(--color-accent-cyan) 100%
+      transparent 60%
     );
-    opacity: 0.1;
+    opacity: 0.5;
   }
 
   .dark .mesh-gradient {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary-900) 0%,
-      transparent 50%,
-      var(--color-accent-cyan) 100%
+    background: radial-gradient(
+      ellipse at top,
+      var(--color-primary-950) 0%,
+      transparent 60%
     );
-    opacity: 0.05;
+    opacity: 0.3;
+  }
+
+  /* Developer-focused utilities */
+  /* Monospace accent - for code-like elements */
+  .mono-accent {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    letter-spacing: -0.02em;
+  }
+
+  /* Terminal/console styling */
+  .terminal-box {
+    background: var(--color-gray-950);
+    color: var(--color-gray-100);
+    border: 1px solid var(--color-gray-800);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.875rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .terminal-box::before {
+    content: '';
+    display: block;
+    height: 1.5rem;
+    margin: -1.5rem -1.5rem 1rem -1.5rem;
+    background: var(--color-gray-900);
+    border-bottom: 1px solid var(--color-gray-800);
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  /* Sophisticated card with border accent */
+  .card-modern {
+    background: white;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .card-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-primary-500);
+    border-radius: 0.75rem 0 0 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-modern:hover::before {
+    opacity: 1;
+  }
+
+  .card-modern:hover {
+    border-color: var(--color-primary-300);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .dark .card-modern {
+    background: var(--color-gray-900);
+    border-color: var(--color-gray-800);
+  }
+
+  .dark .card-modern:hover {
+    border-color: var(--color-primary-700);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Geometric accent line */
+  .accent-line {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .accent-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--color-primary-500);
+  }
+
+  /* Subtle hover glow for interactive elements */
+  .hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(96, 111, 207, 0.15);
+  }
+
+  .dark .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(96, 111, 207, 0.25);
+  }
+
+  /* Grid pattern background - subtle */
+  .grid-pattern {
+    background-image:
+      linear-gradient(var(--color-gray-200) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-gray-200) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .dark .grid-pattern {
+    background-image:
+      linear-gradient(var(--color-gray-800) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-gray-800) 1px, transparent 1px);
+  }
+
+  /* Text shadow for better readability */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   }
 }
 

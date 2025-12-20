@@ -50,33 +50,48 @@ export default function Home({ posts }) {
       />
       {/* Hero Section */}
       <div className="relative overflow-hidden px-4 sm:px-6 lg:px-8">
-        {/* Background decoration - optimized with will-change */}
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="bg-primary-500/10 dark:bg-primary-400/5 absolute -top-40 -right-40 h-80 w-80 rounded-full blur-2xl will-change-transform" />
-          <div className="bg-accent-cyan/10 dark:bg-accent-cyan/5 absolute -bottom-40 -left-40 h-80 w-80 rounded-full blur-2xl will-change-transform" />
+        {/* Subtle background pattern */}
+        <div className="pointer-events-none absolute inset-0 -z-10 opacity-30 dark:opacity-20">
+          <div className="dot-pattern absolute inset-0" />
         </div>
 
-        <div className="space-y-8 pt-12 pb-16 md:pt-16 md:pb-20">
-          <div className="animate-fade-in space-y-4">
-            <h1 className="pb-2 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              <span className="block text-gray-900 dark:text-gray-100">Hi, I'm</span>
-              <span className="gradient-text block leading-tight">{siteMetadata.author}</span>
+        <div className="mx-auto max-w-4xl space-y-10 py-16 md:py-24">
+          {/* Main heading with accent line */}
+          <div className="animate-fade-in space-y-6">
+            {/* Developer-style tag */}
+            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+              <span className="mono-accent text-primary-600 dark:text-primary-400">~/</span>
+              <span>Software Engineer</span>
+            </div>
+
+            <h1 className="text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
+              <span className="block text-gray-900 dark:text-gray-100">
+                Hi, I'm{' '}
+                <span className="gradient-text relative inline-block">
+                  {siteMetadata.author}
+                  <span className="absolute -bottom-2 left-0 h-1 w-20 bg-primary-500" />
+                </span>
+              </span>
             </h1>
-            <p className="max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl dark:text-gray-300">
+
+            <p className="max-w-2xl text-xl leading-relaxed text-gray-600 dark:text-gray-300">
               {siteMetadata.description}
             </p>
           </div>
 
-          <div
-            className="flex flex-wrap gap-4"
-            style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
-          >
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-4 pt-4">
             <Link
               href="/about"
-              className="glow-button bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-500 inline-flex items-center rounded-lg px-6 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl"
+              className="group inline-flex items-center gap-2 rounded-lg bg-primary-600 px-6 py-3 font-semibold text-white shadow-sm transition-all hover:bg-primary-700 hover:shadow-md dark:bg-primary-500 dark:hover:bg-primary-600"
             >
               About Me
-              <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -87,104 +102,130 @@ export default function Home({ posts }) {
             </Link>
             <Link
               href="/projects"
-              className="hover:border-primary-500 hover:text-primary-500 dark:hover:border-primary-400 dark:hover:text-primary-400 inline-flex items-center rounded-lg border-2 border-gray-300 bg-transparent px-6 py-3 font-semibold text-gray-900 transition-all dark:border-gray-600 dark:text-gray-100"
+              className="group inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-900 transition-all hover:border-primary-500 hover:text-primary-600 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 dark:hover:border-primary-400 dark:hover:text-primary-400"
             >
               View Projects
+              <svg
+                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
             </Link>
           </div>
         </div>
       </div>
 
       {/* Latest Posts Section */}
-      <div className="mt-12 space-y-8 md:mt-16">
-        <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-            Latest Posts
-          </h2>
+      <div className="mt-16 space-y-8 md:mt-24">
+        <div className="flex items-center justify-between border-b border-gray-200 pb-4 dark:border-gray-800">
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-1 bg-primary-500" />
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+              Latest Posts
+            </h2>
+          </div>
           {posts.length > MAX_DISPLAY && (
             <Link
               href="/blog"
-              className="animated-underline text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              className="group flex items-center gap-1 text-sm font-medium text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
             >
-              View all posts →
+              View all
+              <svg
+                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
             </Link>
           )}
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {!posts.length && <p className="text-gray-500 dark:text-gray-400">No posts found.</p>}
           {posts.slice(0, MAX_DISPLAY).map((post, index) => {
             const { slug, date, title, summary, tags } = post
             return (
               <article
                 key={slug}
-                className="hover-lift group relative rounded-2xl border border-gray-200/80 bg-white p-6 transition-all dark:border-gray-700/80 dark:bg-gray-900/50"
+                className="card-modern group flex flex-col"
                 style={{
                   animationDelay: `${index * 0.1}s`,
                   animationFillMode: 'both',
                 }}
               >
-                {/* Gradient border on hover */}
-                <div className="from-primary-500/0 via-primary-500/0 to-accent-cyan/0 group-hover:from-primary-500/20 group-hover:to-accent-cyan/20 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r opacity-0 blur-sm transition-opacity group-hover:opacity-100" />
-
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
-                    <time dateTime={date} className="flex items-center gap-1">
-                      <svg
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                      {formatDate(date, siteMetadata.locale)}
-                    </time>
+                <div className="flex-1 space-y-4">
+                  {/* Date */}
+                  <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                   </div>
 
-                  <h3 className="text-xl leading-tight font-bold tracking-tight">
+                  {/* Title */}
+                  <h3 className="text-xl font-bold leading-tight tracking-tight">
                     <Link
                       href={`/blog/${slug}`}
-                      className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-900 transition-colors dark:text-gray-100"
+                      className="text-gray-900 transition-colors hover:text-primary-600 dark:text-gray-100 dark:hover:text-primary-400"
                     >
                       {title}
                     </Link>
                   </h3>
 
+                  {/* Tags */}
                   <div className="flex flex-wrap gap-2">
-                    {tags.map((tag) => (
+                    {tags.slice(0, 3).map((tag) => (
                       <Tag key={tag} text={tag} />
                     ))}
                   </div>
 
-                  <p className="line-clamp-3 text-gray-600 dark:text-gray-400">{summary}</p>
+                  {/* Summary */}
+                  <p className="line-clamp-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                    {summary}
+                  </p>
+                </div>
+
+                {/* Read more link */}
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800">
                   <Link
                     href={`/blog/${slug}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-medium"
+                    className="group/link inline-flex items-center gap-1 text-sm font-medium text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                     aria-label={`Read more: "${title}"`}
                   >
-                    <span className="animated-underline whitespace-nowrap">
-                      Read more
-                      <svg
-                        className="ml-1 inline-block h-4 w-4 align-middle transition-transform group-hover:translate-x-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M13 7l5 5m0 0l-5 5m5-5H6"
-                        />
-                      </svg>
-                    </span>
+                    Read article
+                    <svg
+                      className="h-4 w-4 transition-transform group-hover/link:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </svg>
                   </Link>
                 </div>
               </article>
@@ -194,15 +235,27 @@ export default function Home({ posts }) {
       </div>
 
       {siteMetadata.newsletter?.provider && (
-        <div className="mt-16 flex items-center justify-center">
-          <div className="w-full max-w-xl rounded-2xl border border-gray-200 bg-gray-50/50 p-8 dark:border-gray-700 dark:bg-gray-900/50">
-            <h3 className="mb-4 text-center text-2xl font-bold text-gray-900 dark:text-gray-100">
-              Subscribe to the newsletter
-            </h3>
-            <p className="mb-6 text-center text-gray-600 dark:text-gray-400">
-              Get notified when I publish new content. No spam, unsubscribe anytime.
-            </p>
-            <NewsletterForm />
+        <div className="mt-20 flex items-center justify-center">
+          <div className="w-full max-w-xl card-modern">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <svg className="h-6 w-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  Subscribe to the newsletter
+                </h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400">
+                Get notified when I publish new content. No spam, unsubscribe anytime.
+              </p>
+              <NewsletterForm />
+            </div>
           </div>
         </div>
       )}
