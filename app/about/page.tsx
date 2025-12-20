@@ -27,7 +27,7 @@ export default function Page() {
 
       <SectionLayout title={'Experience'}>
         <div className="container mt-8">
-          <div className="flex grid-cols-12 flex-col text-gray-50 md:grid">
+          <div className="flex grid-cols-12 flex-col md:grid">
             {experienceData.map((experienceDataEntry, index) => (
               <TimelineEntry key={`experience-entry-${index}`} entry={experienceDataEntry} />
             ))}
@@ -45,10 +45,10 @@ export default function Page() {
 
       <SectionLayout title={'Education'}>
         <div className="container mt-8">
-          <div className="flex grid-cols-12 flex-col text-gray-50 md:grid">
+          <div className="flex grid-cols-12 flex-col md:grid">
             {educationData.map((educationEntry, index) => (
               <TimelineEntry key={`education-entry-${index}`} entry={educationEntry}>
-                <p className="my-2 text-justify leading-tight text-gray-500">
+                <p className="my-2 text-justify leading-tight text-gray-500 dark:text-gray-400">
                   {'Specialization: Software Engineering'}
                 </p>
               </TimelineEntry>

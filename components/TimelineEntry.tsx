@@ -16,9 +16,9 @@ const TimelineEntry = ({
     {/* Timeline line and dot */}
     <div className="relative col-start-1 col-end-3 mr-10 md:mx-auto">
       <div className="flex h-full w-6 items-center justify-center">
-        <div className="from-primary-500 to-accent-cyan dark:from-primary-400 dark:to-accent-cyan pointer-events-none h-full w-0.5 bg-gradient-to-b"></div>
+        <div className="from-accent-500 to-primary-500 dark:from-accent-400 dark:to-primary-400 pointer-events-none h-full w-0.5 bg-gradient-to-b" />
       </div>
-      <div className="from-primary-500 to-accent-cyan shadow-primary-500/25 absolute top-4 left-0 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br shadow-lg ring-4 ring-white dark:ring-gray-950">
+      <div className="from-accent-500 to-primary-500 shadow-accent-500/25 absolute top-4 left-0 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br shadow-lg ring-4 ring-white dark:ring-gray-900">
         <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
           <path
             fillRule="evenodd"
@@ -30,18 +30,18 @@ const TimelineEntry = ({
     </div>
 
     {/* Content */}
-    <div className="hover:border-primary-200 dark:hover:border-primary-800 col-start-3 col-end-12 mr-auto mb-8 ml-2 w-full rounded-xl border border-gray-200/60 bg-white/60 p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md md:ml-4 dark:border-gray-700/60 dark:bg-gray-900/60">
-      <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-gray-100">
+    <div className="hover:border-accent-300 dark:hover:border-accent-600 col-start-3 col-end-12 mr-auto mb-8 ml-2 w-full rounded-xl border border-gray-200 bg-white/80 p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md md:ml-4 dark:border-gray-700 dark:bg-gray-800/80">
+      <h3 className="font-display mb-2 text-lg font-bold text-gray-900 dark:text-white">
         {entry.primaryText}
       </h3>
-      <p className="mb-3 leading-relaxed text-gray-600 dark:text-gray-400">{entry.secondaryText}</p>
+      <p className="mb-3 leading-relaxed text-gray-600 dark:text-gray-300">{entry.secondaryText}</p>
 
       {entry.tags && (
         <div className="mb-3 flex flex-wrap gap-2">
           {entry.tags.map((tag, index) => (
             <span
               key={index}
-              className="bg-primary-50 text-primary-700 dark:bg-primary-950/50 dark:text-primary-300 inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium"
+              className="bg-accent-50 text-accent-700 dark:bg-accent-900/50 dark:text-accent-300 inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium"
             >
               #{tag}
             </span>
@@ -52,7 +52,7 @@ const TimelineEntry = ({
       {entry.link && (
         <Link
           href={entry.link.href}
-          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start text-sm font-medium"
+          className="text-accent-600 hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300 w-fit self-start text-sm font-medium"
           aria-label={`Link to project ${entry.primaryText}`}
         >
           <span className="animated-underline whitespace-nowrap">

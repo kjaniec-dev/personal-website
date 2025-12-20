@@ -48,7 +48,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           <Link
             href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
             rel="prev"
-            className="hover:border-primary-500 hover:text-primary-500 dark:hover:border-primary-400 dark:hover:text-primary-400 inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300"
+            className="hover:border-accent-500 hover:text-accent-600 dark:hover:border-accent-500 dark:hover:text-accent-400 inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
           >
             <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -62,7 +62,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           </Link>
         ) : (
           <button
-            className="inline-flex cursor-not-allowed items-center rounded-lg border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-400 dark:border-gray-700 dark:bg-gray-800"
+            className="inline-flex cursor-not-allowed items-center rounded-lg border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-400 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500"
             disabled
           >
             <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,7 +78,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
         )}
       </div>
 
-      <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+      <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
         Page {currentPage} of {totalPages}
       </span>
 
@@ -87,7 +87,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           <Link
             href={`/${basePath}/page/${currentPage + 1}`}
             rel="next"
-            className="hover:border-primary-500 hover:text-primary-500 dark:hover:border-primary-400 dark:hover:text-primary-400 inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300"
+            className="hover:border-accent-500 hover:text-accent-600 dark:hover:border-accent-500 dark:hover:text-accent-400 inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
           >
             Next
             <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           </Link>
         ) : (
           <button
-            className="inline-flex cursor-not-allowed items-center rounded-lg border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-400 dark:border-gray-700 dark:bg-gray-800"
+            className="inline-flex cursor-not-allowed items-center rounded-lg border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-400 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500"
             disabled
           >
             Next
@@ -126,27 +126,33 @@ export default function ListLayoutWithTags({
 
   return (
     <>
-      <div className="space-y-8">
+      <div className="space-y-8 py-8">
         {/* Header */}
         <div className="space-y-4">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-gray-100">
-            <span className="gradient-text">{title}</span>
+          <div className="flex items-center gap-3">
+            <div className="bg-accent-500 h-px w-8" />
+            <span className="text-accent-600 dark:text-accent-400 text-sm font-semibold tracking-widest uppercase">
+              Articles
+            </span>
+          </div>
+          <h1 className="font-display text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
+            {title}
           </h1>
-          <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-400">
+          <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-300">
             Thoughts, tutorials, and insights on software development.
           </p>
         </div>
 
         <div className="flex flex-col gap-8 lg:flex-row">
           {/* Sidebar */}
-          <aside className="no-scrollbar hidden h-fit max-h-[calc(100vh-200px)] w-full max-w-[280px] flex-shrink-0 overflow-auto rounded-2xl border border-gray-200/60 bg-white/80 p-6 shadow-sm backdrop-blur-sm lg:block dark:border-gray-700/60 dark:bg-gray-900/80">
+          <aside className="no-scrollbar hidden h-fit max-h-[calc(100vh-200px)] w-full max-w-[280px] flex-shrink-0 overflow-auto rounded-2xl border border-gray-200 bg-white/80 p-6 shadow-sm backdrop-blur-sm lg:block dark:border-gray-700 dark:bg-gray-800/80">
             <div className="mb-4">
               {pathname.startsWith('/blog') && !pathname.includes('/tags/') ? (
-                <h3 className="text-primary-500 font-bold">All Posts</h3>
+                <h3 className="text-accent-600 dark:text-accent-400 font-bold">All Posts</h3>
               ) : (
                 <Link
                   href={`/blog`}
-                  className="hover:text-primary-500 dark:hover:text-primary-400 font-bold text-gray-700 transition-colors dark:text-gray-300"
+                  className="hover:text-accent-600 dark:hover:text-accent-400 font-bold text-gray-700 transition-colors dark:text-gray-200"
                 >
                   All Posts
                 </Link>
@@ -158,20 +164,20 @@ export default function ListLayoutWithTags({
                 return (
                   <div key={t}>
                     {isActive ? (
-                      <span className="bg-primary-50 text-primary-700 dark:bg-primary-950/50 dark:text-primary-300 flex items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold">
+                      <span className="bg-accent-50 text-accent-700 dark:bg-accent-900/50 dark:text-accent-300 flex items-center justify-between rounded-lg px-3 py-2 text-sm font-semibold">
                         {t}
-                        <span className="bg-primary-100 dark:bg-primary-900 rounded-full px-2 py-0.5 text-xs">
+                        <span className="bg-accent-100 dark:bg-accent-800 rounded-full px-2 py-0.5 text-xs">
                           {tagCounts[t]}
                         </span>
                       </span>
                     ) : (
                       <Link
                         href={`/tags/${slug(t)}`}
-                        className="hover:text-primary-500 dark:hover:text-primary-400 flex items-center justify-between rounded-lg px-3 py-2 text-sm text-gray-600 transition-all hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                        className="hover:text-accent-600 dark:hover:text-accent-400 flex items-center justify-between rounded-lg px-3 py-2 text-sm text-gray-600 transition-all hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700/50"
                         aria-label={`View posts tagged ${t}`}
                       >
                         {t}
-                        <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500 dark:bg-gray-800 dark:text-gray-400">
+                        <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500 dark:bg-gray-700 dark:text-gray-400">
                           {tagCounts[t]}
                         </span>
                       </Link>
@@ -190,7 +196,7 @@ export default function ListLayoutWithTags({
                 return (
                   <article
                     key={path}
-                    className="group hover:border-primary-200 dark:hover:border-primary-800 flex min-h-[280px] flex-col rounded-xl border border-gray-200/60 bg-white/60 p-6 transition-all hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60"
+                    className="group hover:border-accent-300 dark:hover:border-accent-600 flex min-h-[280px] flex-col rounded-xl border border-gray-200 bg-white/80 p-6 transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-800/80"
                   >
                     <div className="flex h-full flex-col space-y-3">
                       <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
@@ -212,10 +218,10 @@ export default function ListLayoutWithTags({
                         </time>
                       </div>
 
-                      <h2 className="text-2xl leading-tight font-bold tracking-tight">
+                      <h2 className="font-display text-2xl leading-tight font-bold tracking-tight">
                         <Link
                           href={`/${path}`}
-                          className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-900 transition-colors dark:text-gray-100"
+                          className="hover:text-accent-600 dark:hover:text-accent-400 text-gray-900 transition-colors dark:text-white"
                         >
                           {title}
                         </Link>
@@ -227,13 +233,13 @@ export default function ListLayoutWithTags({
                         ))}
                       </div>
 
-                      <p className="line-clamp-3 flex-1 text-gray-600 dark:text-gray-400">
+                      <p className="line-clamp-3 flex-1 text-gray-600 dark:text-gray-300">
                         {summary}
                       </p>
 
                       <Link
                         href={`/${path}`}
-                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-medium"
+                        className="text-accent-600 hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300 w-fit self-start font-medium"
                       >
                         <span className="animated-underline whitespace-nowrap">
                           Read more
@@ -265,7 +271,7 @@ export default function ListLayoutWithTags({
             {/* Projects Section */}
             {projects.length > 0 && (
               <div className="mt-12">
-                <h3 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <h3 className="font-display mb-6 text-2xl font-bold text-gray-900 dark:text-white">
                   Projects
                 </h3>
                 <div className="-m-4 flex flex-wrap">

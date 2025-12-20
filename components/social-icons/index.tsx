@@ -30,19 +30,25 @@ const components = {
 
 type SocialIconProps = {
   kind: keyof typeof components
-  href: string | undefined
+  href?: string | undefined
   size?: number
   className?: string
 }
 
 const SocialIcon = ({ kind, href, size = 8, className }: SocialIconProps) => {
-  if (
-    !href ||
-    (kind === 'mail' && !/^mailto:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(href))
-  )
-    return null
-
   const SocialSvg = components[kind]
+
+  // If no href provided, render just the icon (for use inside Link wrappers)
+  if (!href) {
+    return (
+      <SocialSvg className={`h-${size} w-${size} fill-current text-current transition-colors`} />
+    )
+  }
+
+  // Validate mailto links
+  if (kind === 'mail' && !/^mailto:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(href)) {
+    return null
+  }
 
   return (
     <a
@@ -56,7 +62,7 @@ const SocialIcon = ({ kind, href, size = 8, className }: SocialIconProps) => {
     >
       <span className="sr-only">{kind}</span>
       <SocialSvg
-        className={`fill-current h-${size} w-${size} ${className ? '' : 'hover:text-primary-500 dark:hover:text-primary-400 text-gray-700 dark:text-gray-200'}`}
+        className={`fill-current h-${size} w-${size} ${className ? '' : 'hover:text-accent-500 dark:hover:text-accent-400 text-gray-700 dark:text-gray-200'}`}
       />
     </a>
   )

@@ -95,6 +95,10 @@ module.exports = () => {
         'react-icons',
         '@algolia/client-search',
         'algoliasearch',
+        'contentlayer2',
+        'next-contentlayer2',
+        'rehype-prism-plus',
+        'remark-gfm',
       ],
     },
     async headers() {

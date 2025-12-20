@@ -10,17 +10,25 @@ export default async function Page() {
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
   return (
-    <>
+    <div className="py-12">
       <div className="space-y-12">
+        {/* Header */}
         <div className="space-y-4">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-gray-100">
-            <span className="gradient-text">Tags</span>
+          <div className="flex items-center gap-3">
+            <div className="bg-accent-500 h-px w-8" />
+            <span className="text-accent-600 dark:text-accent-400 text-sm font-semibold tracking-widest uppercase">
+              Browse Topics
+            </span>
+          </div>
+          <h1 className="font-display text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
+            All Tags
           </h1>
-          <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-400">
-            Browse all topics I write about
+          <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-300">
+            Explore articles by topic
           </p>
         </div>
 
+        {/* Tags Grid */}
         <div className="flex flex-wrap gap-3">
           {tagKeys.length === 0 && (
             <p className="text-gray-500 dark:text-gray-400">No tags found.</p>
@@ -30,11 +38,14 @@ export default async function Page() {
               <Link
                 key={t}
                 href={`/tags/${slug(t)}`}
-                className="bg-primary-50 text-primary-700 ring-primary-500/20 hover:bg-primary-100 hover:ring-primary-500/40 dark:bg-primary-950/50 dark:text-primary-300 dark:ring-primary-400/20 dark:hover:bg-primary-900/50 dark:hover:ring-primary-400/40 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium ring-1 transition-all"
+                className="group hover:border-accent-400 hover:bg-accent-50 hover:text-accent-700 dark:hover:border-accent-500 dark:hover:bg-accent-900/50 dark:hover:text-accent-300 inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white/80 px-4 py-2.5 text-sm font-semibold text-gray-700 backdrop-blur-sm transition-all duration-300 dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-200"
                 aria-label={`View posts tagged ${t}`}
               >
-                #{t.split(' ').join('-')}
-                <span className="bg-primary-200 text-primary-800 dark:bg-primary-800 dark:text-primary-200 rounded-full px-2 py-0.5 text-xs font-semibold">
+                <span className="text-accent-500 transition-transform duration-300 group-hover:scale-110">
+                  #
+                </span>
+                {t.split(' ').join('-')}
+                <span className="group-hover:bg-accent-100 group-hover:text-accent-700 dark:group-hover:bg-accent-800 dark:group-hover:text-accent-200 rounded-md bg-gray-100 px-2 py-0.5 text-xs font-bold text-gray-600 transition-colors dark:bg-gray-700 dark:text-gray-300">
                   {tagCounts[t]}
                 </span>
               </Link>
@@ -42,6 +53,6 @@ export default async function Page() {
           })}
         </div>
       </div>
-    </>
+    </div>
   )
 }

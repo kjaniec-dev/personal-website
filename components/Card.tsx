@@ -12,66 +12,66 @@ interface CardProps {
 }
 
 const Card = ({ title, description, imgSrc, href, repoHref, tags = [] }: CardProps) => (
-  <div className="md max-w-[544px] p-4 md:w-1/2">
-    <div
-      className={`${
-        imgSrc && 'h-full'
-      } hover-lift group hover:border-primary-300 dark:hover:border-primary-700 relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200/60 bg-white/80 shadow-sm backdrop-blur-sm transition-all hover:shadow-lg dark:border-gray-700/60 dark:bg-gray-900/80`}
-    >
-      {/* Gradient overlay on hover */}
-      <div className="from-primary-500/0 to-accent-cyan/0 group-hover:from-primary-500/5 group-hover:to-accent-cyan/5 dark:group-hover:from-primary-500/10 dark:group-hover:to-accent-cyan/10 absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity group-hover:opacity-100" />
+  <div className="p-4 md:w-1/2">
+    <div className="card-architect group flex h-full flex-col overflow-hidden">
+      {/* Image Section */}
+      {imgSrc && (
+        <div className="relative overflow-hidden">
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-gray-900/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-      {imgSrc &&
-        (href ? (
-          <Link href={href} aria-label={`Link to ${title}`}>
-            <div className="relative overflow-hidden">
+          {href ? (
+            <Link href={href} aria-label={`Link to ${title}`}>
               <Image
                 alt={title}
                 src={imgSrc}
-                className="object-cover object-center p-4 transition-transform duration-300 group-hover:scale-105 dark:invert"
+                className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 width={544}
                 height={306}
               />
-            </div>
-          </Link>
-        ) : (
-          <div className="relative overflow-hidden">
+            </Link>
+          ) : (
             <Image
               alt={title}
               src={imgSrc}
-              className="object-cover object-center p-4 transition-transform duration-300 group-hover:scale-105"
+              className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
               width={544}
               height={306}
             />
-          </div>
-        ))}
+          )}
+        </div>
+      )}
+
+      {/* Content Section */}
       <div className="relative flex flex-1 flex-col p-6">
-        <h2 className="mb-3 text-2xl leading-8 font-bold tracking-tight">
+        {/* Title */}
+        <h2 className="font-display mb-3 text-2xl leading-tight font-bold tracking-tight">
           {href ? (
             <Link
               href={href}
               aria-label={`Link to ${title}`}
-              className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+              className="hover:text-accent-600 dark:hover:text-accent-400 text-gray-900 transition-colors duration-300 dark:text-white"
             >
               {title}
             </Link>
           ) : (
-            title
+            <span className="text-gray-900 dark:text-white">{title}</span>
           )}
         </h2>
-        <p className="prose mb-4 max-w-none flex-1 text-gray-600 dark:text-gray-400">
-          {description}
-        </p>
+
+        {/* Description */}
+        <p className="mb-5 flex-1 text-gray-600 dark:text-gray-300">{description}</p>
 
         {/* Tags */}
         {tags && tags.length > 0 && (
-          <div className="mb-4 flex flex-wrap gap-2">
+          <div className="mb-5 flex flex-wrap gap-2">
             {tags.map((tag) => (
               <Link
                 key={tag}
                 href={`/tags/${slug(tag)}`}
-                className="bg-primary-100 text-primary-700 hover:bg-primary-200 dark:bg-primary-900/30 dark:text-primary-300 dark:hover:bg-primary-900/50 rounded-full px-3 py-1 text-xs font-medium transition-colors"
+                className="hover:border-accent-400 hover:bg-accent-50 hover:text-accent-700 dark:hover:border-accent-500 dark:hover:bg-accent-900/50 dark:hover:text-accent-300 inline-flex items-center gap-1 rounded-md border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-600 transition-all duration-300 dark:border-gray-700 dark:bg-gray-800/70 dark:text-gray-300"
               >
+                <span className="text-accent-500">#</span>
                 {tag}
               </Link>
             ))}
@@ -83,24 +83,30 @@ const Card = ({ title, description, imgSrc, href, repoHref, tags = [] }: CardPro
           {href && (
             <Link
               href={href}
-              className="bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-500 inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors"
+              className="group/btn from-accent-500 to-primary-500 shadow-accent-500/20 hover:shadow-accent-500/25 relative inline-flex items-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl"
               aria-label={`Visit ${title}`}
             >
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span className="relative z-10">Visit</span>
+              <svg
+                className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover/btn:rotate-45"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
                 />
               </svg>
-              Visit
+              <div className="from-accent-400 to-primary-400 absolute inset-0 bg-gradient-to-r opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100" />
             </Link>
           )}
           {repoHref && (
             <Link
               href={repoHref}
-              className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+              className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all duration-300 hover:border-gray-400 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:bg-gray-700"
               aria-label={`View source code for ${title}`}
             >
               <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
