@@ -9,7 +9,7 @@ import Image from '@/components/Image'
 
 const Header = () => {
   let headerClass =
-    'flex items-center w-full bg-white/90 dark:bg-gray-950/90 backdrop-blur-md justify-between py-4 border-b border-gray-200 dark:border-gray-800'
+    'flex items-center w-full bg-white/95 dark:bg-gray-950/95 backdrop-blur-xl justify-between px-4 sm:px-6 lg:px-8 py-5 border-b border-gray-200/60 dark:border-gray-800/60 shadow-sm'
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'
   }
@@ -17,19 +17,21 @@ const Header = () => {
   return (
     <header className={headerClass} role="banner">
       <Link href="/" aria-label={`${siteMetadata.headerTitle} - Home`}>
-        <div className="flex items-center gap-3 transition-opacity hover:opacity-80">
-          <div className="flex items-center gap-2">
-            <Image
-              className={'dark:invert'}
-              width={32}
-              height={32}
-              src={'/static/images/logo.svg'}
-              alt={`${siteMetadata.headerTitle} logo`}
-              priority
-            />
+        <div className="group flex items-center gap-3 transition-all hover:opacity-90">
+          <div className="flex items-center gap-2.5">
+            <div className="relative">
+              <Image
+                className="dark:invert transition-transform group-hover:scale-105"
+                width={36}
+                height={36}
+                src={'/static/images/logo.svg'}
+                alt={`${siteMetadata.headerTitle} logo`}
+                priority
+              />
+            </div>
             {typeof siteMetadata.headerTitle === 'string' ? (
-              <div className="hidden text-lg font-bold tracking-tight sm:block">
-                <span className="mono-accent text-gray-900 dark:text-gray-100">
+              <div className="hidden text-xl font-bold tracking-tight sm:block">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent dark:from-gray-100 dark:to-gray-300">
                   {siteMetadata.headerTitle}
                 </span>
               </div>
@@ -39,15 +41,15 @@ const Header = () => {
           </div>
         </div>
       </Link>
-      <div className="flex items-center gap-2 leading-5 sm:gap-4">
-        <nav className="hidden items-center gap-1 sm:flex" aria-label="Main navigation">
+      <div className="flex items-center gap-3 leading-5 sm:gap-6">
+        <nav className="hidden items-center gap-2 sm:flex" aria-label="Main navigation">
           {headerNavLinks
             .filter((link) => link.href !== '/')
             .map((link) => (
               <NavLink key={link.title} href={link.href} title={link.title} />
             ))}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 border-l border-gray-200 pl-3 dark:border-gray-800 sm:pl-6">
           <SearchButton />
           <ThemeSwitch />
         </div>
