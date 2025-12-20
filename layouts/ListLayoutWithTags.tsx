@@ -128,10 +128,13 @@ export default function ListLayoutWithTags({
     <>
       <div className="space-y-8">
         {/* Header */}
-        <div className="space-y-4">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-gray-100">
-            <span className="gradient-text">{title}</span>
-          </h1>
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-1 bg-primary-500" />
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-100">
+              {title}
+            </h1>
+          </div>
           <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-400">
             Thoughts, tutorials, and insights on software development.
           </p>
@@ -139,7 +142,7 @@ export default function ListLayoutWithTags({
 
         <div className="flex flex-col gap-8 lg:flex-row">
           {/* Sidebar */}
-          <aside className="no-scrollbar hidden h-fit max-h-[calc(100vh-200px)] w-full max-w-[280px] flex-shrink-0 overflow-auto rounded-2xl border border-gray-200/60 bg-white/80 p-6 shadow-sm backdrop-blur-sm lg:block dark:border-gray-700/60 dark:bg-gray-900/80">
+          <aside className="no-scrollbar hidden h-fit max-h-[calc(100vh-200px)] w-full max-w-[280px] flex-shrink-0 overflow-auto rounded-lg border border-gray-200 bg-white p-6 lg:block dark:border-gray-800 dark:bg-gray-900">
             <div className="mb-4">
               {pathname.startsWith('/blog') && !pathname.includes('/tags/') ? (
                 <h3 className="text-primary-500 font-bold">All Posts</h3>
@@ -188,18 +191,11 @@ export default function ListLayoutWithTags({
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags } = post
                 return (
-                  <article
-                    key={path}
-                    className="group hover:border-primary-200 dark:hover:border-primary-800 flex min-h-[280px] flex-col rounded-xl border border-gray-200/60 bg-white/60 p-6 transition-all hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60"
-                  >
-                    <div className="flex h-full flex-col space-y-3">
-                      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                        <svg
-                          className="h-4 w-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
+                  <article key={path} className="card-modern group flex flex-col">
+                    <div className="flex flex-col space-y-4">
+                      {/* Date */}
+                      <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -212,37 +208,38 @@ export default function ListLayoutWithTags({
                         </time>
                       </div>
 
-                      <h2 className="text-2xl leading-tight font-bold tracking-tight">
+                      {/* Title */}
+                      <h2 className="text-2xl font-bold leading-tight tracking-tight">
                         <Link
                           href={`/${path}`}
-                          className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-900 transition-colors dark:text-gray-100"
+                          className="text-gray-900 transition-colors hover:text-primary-600 dark:text-gray-100 dark:hover:text-primary-400"
                         >
                           {title}
                         </Link>
                       </h2>
 
+                      {/* Tags */}
                       <div className="flex flex-wrap gap-2">
-                        {tags?.map((tag) => (
+                        {tags?.slice(0, 4).map((tag) => (
                           <Tag key={tag} text={tag} />
                         ))}
                       </div>
 
-                      <p className="line-clamp-3 flex-1 text-gray-600 dark:text-gray-400">
-                        {summary}
-                      </p>
+                      {/* Summary */}
+                      <p className="line-clamp-3 text-gray-600 dark:text-gray-400">{summary}</p>
 
-                      <Link
-                        href={`/${path}`}
-                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-medium"
-                      >
-                        <span className="animated-underline whitespace-nowrap">
-                          Read more
+                      {/* Read more link */}
+                      <div className="pt-2">
+                        <Link
+                          href={`/${path}`}
+                          className="group/link inline-flex items-center gap-1 text-sm font-medium text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                        >
+                          Read article
                           <svg
-                            className="ml-1 inline-block h-4 w-4 align-middle transition-transform group-hover:translate-x-1"
+                            className="h-4 w-4 transition-transform group-hover/link:translate-x-1"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            aria-hidden="true"
                           >
                             <path
                               strokeLinecap="round"
@@ -251,8 +248,8 @@ export default function ListLayoutWithTags({
                               d="M13 7l5 5m0 0l-5 5m5-5H6"
                             />
                           </svg>
-                        </span>
-                      </Link>
+                        </Link>
+                      </div>
                     </div>
                   </article>
                 )
