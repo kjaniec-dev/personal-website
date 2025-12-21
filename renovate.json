@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "description": "Group all major updates together",
+      "matchUpdateTypes": ["major"],
+      "groupName": "major-updates"
+    },
+    {
+      "description": "Group minor and patch dev dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "dev-dependencies-minor-patch"
+    },
+    {
+      "description": "Group minor and patch prod dependencies",
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "prod-dependencies-minor-patch"
+    }
+  ],
+  "schedule": ["0 0 * * *"],
+  "prConcurrentLimit": 5,
+  "prCreationLimit": 3
+}
