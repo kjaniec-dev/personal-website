@@ -20,6 +20,6 @@
       "groupName": "prod-dependencies-minor-patch"
     }
   ],
-  "schedule": ["before 1am every day"],
+  "schedule": ["before 1am"],
   "prConcurrentLimit": 5
 }
