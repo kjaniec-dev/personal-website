@@ -45,7 +45,7 @@ const Header = () => {
               <NavLink key={link.title} href={link.href} title={link.title} />
             ))}
         </nav>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <SearchButton />
           <ThemeSwitch />
         </div>
