@@ -162,11 +162,12 @@ export default function Home({ posts }) {
                 <div className="flex flex-wrap gap-3">
                   {/* TypeScript */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-blue-700 dark:hover:bg-blue-900/20">
-                    <img
-                      src="https://techicons.dev/icons/typescript"
-                      alt="TypeScript"
-                      className="h-5 w-5"
-                    />
+                    <svg className="h-5 w-5" viewBox="0 0 128 128">
+                      <path
+                        fill="#007ACC"
+                        d="M2 63.91v62.5h125v-125H2zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H57.16v46.23H45.65V69.26H29.38v-5a49.19 49.19 0 01.14-5.16c.06-.08 10-.12 22-.1h21.81z"
+                      />
+                    </svg>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       TypeScript
                     </span>
@@ -174,7 +175,12 @@ export default function Home({ posts }) {
 
                   {/* React */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-cyan-300 hover:bg-cyan-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-cyan-700 dark:hover:bg-cyan-900/20">
-                    <img src="https://techicons.dev/icons/react" alt="React" className="h-5 w-5" />
+                    <svg className="h-5 w-5" viewBox="0 0 128 128">
+                      <g fill="#61DAFB">
+                        <circle cx="64" cy="64" r="11.4" />
+                        <path d="M107.3 45.2c-2.2-.8-4.5-1.6-6.9-2.3.6-2.4 1.1-4.8 1.5-7.1 2.1-13.2-.2-22.5-6.6-26.1-1.9-1.1-4-1.6-6.4-1.6-7 0-15.9 5.2-24.9 13.9-9-8.7-17.9-13.9-24.9-13.9-2.4 0-4.5.5-6.4 1.6-6.4 3.7-8.7 13-6.6 26.1.4 2.3.9 4.7 1.5 7.1-2.4.7-4.7 1.4-6.9 2.3C8.2 50 1.4 56.6 1.4 64s6.9 14 19.3 18.8c2.2.8 4.5 1.6 6.9 2.3-.6 2.4-1.1 4.8-1.5 7.1-2.1 13.2.2 22.5 6.6 26.1 1.9 1.1 4 1.6 6.4 1.6 7.1 0 16-5.2 24.9-13.9 9 8.7 17.9 13.9 24.9 13.9 2.4 0 4.5-.5 6.4-1.6 6.4-3.7 8.7-13 6.6-26.1-.4-2.3-.9-4.7-1.5-7.1 2.4-.7 4.7-1.4 6.9-2.3 12.5-4.8 19.3-11.4 19.3-18.8s-6.8-14-19.3-18.8zM92.5 14.7c4.1 2.4 5.5 9.8 3.8 20.3-.3 2.1-.8 4.3-1.4 6.6-5.2-1.2-10.7-2-16.5-2.5-3.4-4.8-6.9-9.1-10.4-13 7.4-7.3 14.9-12.3 21-12.3 1.3 0 2.5.3 3.5.9zM81.3 74c-1.8 3.2-3.9 6.4-6.1 9.6-3.7.3-7.4.4-11.2.4-3.9 0-7.6-.1-11.2-.4-2.2-3.2-4.2-6.4-6-9.6-1.9-3.3-3.7-6.7-5.3-10 1.6-3.3 3.4-6.7 5.3-10 1.8-3.2 3.9-6.4 6.1-9.6 3.7-.3 7.4-.4 11.2-.4 3.9 0 7.6.1 11.2.4 2.2 3.2 4.2 6.4 6 9.6 1.9 3.3 3.7 6.7 5.3 10-1.7 3.3-3.4 6.6-5.3 10zm8.3-3.3c1.5 3.5 2.7 6.9 3.8 10.3-3.4.8-7 1.4-10.8 1.9 1.2-1.9 2.5-3.9 3.6-6 1.2-2.1 2.3-4.2 3.4-6.2zM64 97.8c-2.4-2.6-4.7-5.4-6.9-8.3 2.3.1 4.6.2 6.9.2 2.3 0 4.6-.1 6.9-.2-2.2 2.9-4.5 5.7-6.9 8.3zm-18.6-15c-3.8-.5-7.4-1.1-10.8-1.9 1.1-3.3 2.3-6.8 3.8-10.3 1.1 2 2.2 4.1 3.4 6.1 1.2 2.2 2.4 4.1 3.6 6.1zm-7-25.5c-1.5-3.5-2.7-6.9-3.8-10.3 3.4-.8 7-1.4 10.8-1.9-1.2 1.9-2.5 3.9-3.6 6-1.2 2.1-2.3 4.2-3.4 6.2zM64 30.2c2.4 2.6 4.7 5.4 6.9 8.3-2.3-.1-4.6-.2-6.9-.2-2.3 0-4.6.1-6.9.2 2.2-2.9 4.5-5.7 6.9-8.3zm22.2 21.1c-1.2-2.2-2.4-4.2-3.6-6.1-1.2-2-2.5-3.9-3.6-5.8 3.8.5 7.4 1.1 10.8 1.9-1.1 3.3-2.3 6.8-3.8 10.3-1.1-2.1-2.2-4.2-3.4-6.2zm-54.5-16.2c0-6.2 12.5-11.3 28.1-11.3 15.6 0 28.1 5.1 28.1 11.3 0 6.2-12.5 11.3-28.1 11.3-15.6 0-28.1-5.1-28.1-11.3z" />
+                      </g>
+                    </svg>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       React
                     </span>
@@ -182,11 +188,12 @@ export default function Home({ posts }) {
 
                   {/* Next.js */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-gray-400 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-gray-600 dark:hover:bg-gray-800">
-                    <img
-                      src="https://techicons.dev/icons/nextjs"
-                      alt="Next.js"
-                      className="h-5 w-5 dark:invert"
-                    />
+                    <svg className="h-5 w-5" viewBox="0 0 128 128">
+                      <path
+                        className="fill-gray-900 dark:fill-white"
+                        d="M64 0C28.7 0 0 28.7 0 64s28.7 64 64 64c11.2 0 21.7-2.9 30.8-7.9L48.4 55.3v36.6h-6.8V41.8h6.8l50.5 75.8C116.4 106.2 128 86.5 128 64c0-35.3-28.7-64-64-64zm22.1 84.6l-7.5-11.3V41.8h7.5v42.8z"
+                      />
+                    </svg>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Next.js
                     </span>
@@ -194,11 +201,12 @@ export default function Home({ posts }) {
 
                   {/* Node.js */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-green-300 hover:bg-green-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-green-700 dark:hover:bg-green-900/20">
-                    <img
-                      src="https://techicons.dev/icons/nodejs"
-                      alt="Node.js"
-                      className="h-5 w-5"
-                    />
+                    <svg className="h-5 w-5" viewBox="0 0 128 128">
+                      <path
+                        fill="#83CD29"
+                        d="M112.771 30.334L68.674 4.729c-2.781-1.584-6.402-1.584-9.205 0L14.901 30.334C12.031 31.985 10 35.088 10 38.407v51.142c0 3.319 2.084 6.423 4.954 8.083l11.775 6.688c5.628 2.772 7.617 2.772 10.178 2.772 8.333 0 13.093-5.039 13.093-13.828v-50.49c0-.713-.371-1.774-1.071-1.774h-5.623C42.594 41 41 42.061 41 42.773v50.49c0 3.896-3.524 7.773-10.11 4.48L18.723 90.73c-.424-.23-.723-.693-.723-1.181V38.407c0-.482.555-.966.982-1.213l44.424-25.561c.415-.235 1.025-.235 1.439 0l43.882 25.555c.42.253.272.722.272 1.219v51.142c0 .488.183.963-.232 1.198l-44.086 25.576c-.378.227-.847.227-1.261 0l-11.307-6.749c-.341-.198-.746-.269-1.073-.086-3.146 1.783-3.726 2.02-6.677 3.043-.726.253-1.797.692.41 1.929l14.798 8.754a9.294 9.294 0 004.647 1.246c1.642 0 3.25-.426 4.667-1.246l43.885-25.582c2.87-1.672 4.23-4.764 4.23-8.083V38.407c0-3.319-1.36-6.414-4.229-8.073z"
+                      />
+                    </svg>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Node.js
                     </span>
@@ -206,11 +214,12 @@ export default function Home({ posts }) {
 
                   {/* Tailwind */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-cyan-300 hover:bg-cyan-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-cyan-700 dark:hover:bg-cyan-900/20">
-                    <img
-                      src="https://techicons.dev/icons/tailwind"
-                      alt="Tailwind CSS"
-                      className="h-5 w-5"
-                    />
+                    <svg className="h-5 w-5" viewBox="0 0 128 128">
+                      <path
+                        d="M64.004 25.602c-17.067 0-27.73 8.53-32 25.597 6.398-8.531 13.867-11.73 22.398-9.597 4.871 1.214 8.352 4.746 12.207 8.66C72.883 56.629 80.145 64 96.004 64c17.066 0 27.73-8.531 32-25.602-6.399 8.536-13.867 11.735-22.399 9.602-4.87-1.215-8.347-4.746-12.207-8.66-6.27-6.367-13.53-13.738-29.394-13.738zM32.004 64c-17.066 0-27.73 8.531-32 25.602C6.402 81.066 13.87 77.867 22.402 80c4.871 1.215 8.352 4.746 12.207 8.66 6.274 6.367 13.536 13.738 29.395 13.738 17.066 0 27.73-8.53 32-25.597-6.399 8.531-13.867 11.73-22.399 9.597-4.87-1.214-8.347-4.746-12.207-8.66C55.128 71.371 47.868 64 32.004 64z"
+                        fill="#38bdf8"
+                      />
+                    </svg>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Tailwind
                     </span>
@@ -218,7 +227,12 @@ export default function Home({ posts }) {
 
                   {/* Git */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-orange-300 hover:bg-orange-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-orange-700 dark:hover:bg-orange-900/20">
-                    <img src="https://techicons.dev/icons/git" alt="Git" className="h-5 w-5" />
+                    <svg className="h-5 w-5" viewBox="0 0 128 128">
+                      <path
+                        fill="#F34F29"
+                        d="M124.737 58.378L69.621 3.264c-3.172-3.174-8.32-3.174-11.497 0L46.68 14.71l14.518 14.518c3.375-1.139 7.243-.375 9.932 2.314 2.703 2.706 3.461 6.607 2.294 9.993l13.992 13.993c3.385-1.167 7.292-.413 9.994 2.295 3.78 3.777 3.78 9.9 0 13.679a9.673 9.673 0 01-13.683 0 9.677 9.677 0 01-2.105-10.521L68.574 47.933l-.002 34.341a9.708 9.708 0 012.559 1.828c3.778 3.777 3.778 9.898 0 13.683-3.779 3.777-9.904 3.777-13.679 0-3.778-3.784-3.778-9.905 0-13.683a9.65 9.65 0 013.167-2.11V47.333a9.581 9.581 0 01-3.167-2.111c-2.862-2.86-3.551-7.06-2.083-10.576L41.056 20.333 3.264 58.123a8.133 8.133 0 000 11.5l55.117 55.114c3.174 3.174 8.32 3.174 11.499 0l54.858-54.858a8.135 8.135 0 00-.001-11.501z"
+                      />
+                    </svg>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Git
                     </span>
@@ -226,11 +240,16 @@ export default function Home({ posts }) {
 
                   {/* Docker */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-blue-700 dark:hover:bg-blue-900/20">
-                    <img
-                      src="https://techicons.dev/icons/docker"
-                      alt="Docker"
-                      className="h-5 w-5"
-                    />
+                    <svg className="h-5 w-5" viewBox="0 0 128 128">
+                      <path
+                        fill="#019BC6"
+                        d="M124.8 52.1c-4.3-2.5-10-2.8-14.8-1.4-.6-5.2-4-9.7-8-12.9l-1.6-1.3-1.4 1.6c-2.7 3.1-3.5 8.3-3.1 12.3.3 2.9 1.2 5.9 3 8.3-1.4.8-2.9 1.9-4.3 2.4-2.8 1-5.9 2-8.9 2H79V49H66V24H51v12H26v13H13v14H1.8l.2 1.5c.5 6.4 3.1 12 7.7 16.5 4.8 4.7 11.1 7.5 18.4 8.3 3.3.4 6.7.5 10 .5 5.4 0 10.9-.4 16.2-1.3 4.2-.7 8.4-1.9 12.4-3.3 3.8-1.4 7.5-3.1 10.8-5.3 3.1-2 6-4.4 8.6-7.1 2.5-2.5 4.7-5.3 6.5-8.3 2.9-4.8 5.1-10 6.5-15.5 1-3.9 1.7-7.9 2.2-11.9h7.5c2.8 0 5.6-.9 7.9-2.5 2.2-1.5 3.9-3.6 5-6l.5-1.2-1.1-.7z"
+                      />
+                      <path
+                        fill="#019BC6"
+                        d="M51 34h13v12H51V34zm14 0h13v12H65V34zm14 0h13v12H79V34zm-42 13h13v12H37V47zm14 0h13v12H51V47zm14 0h13v12H65V47zm14 0h13v12H79V47zM37 61h13v12H37V61zm14 0h13v12H51V61zm14 0h13v12H65V61z"
+                      />
+                    </svg>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Docker
                     </span>
@@ -238,11 +257,12 @@ export default function Home({ posts }) {
 
                   {/* PostgreSQL */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-blue-700 dark:hover:bg-blue-900/20">
-                    <img
-                      src="https://techicons.dev/icons/postgresql"
-                      alt="PostgreSQL"
-                      className="h-5 w-5"
-                    />
+                    <svg className="h-5 w-5" viewBox="0 0 128 128">
+                      <path
+                        fill="#336791"
+                        d="M105.555 90.059c-1.17 0-2.204.281-3.148.812a8.765 8.765 0 00-2.531 2.172 10.53 10.53 0 00-1.688 3.102 13.283 13.283 0 00-.609 3.992c0 1.484.203 2.844.609 4.078.406 1.234.984 2.297 1.734 3.188a7.72 7.72 0 002.531 2.031 6.88 6.88 0 003.102.719c1.109 0 2.094-.266 2.938-.797a7.753 7.753 0 002.25-2.078 9.65 9.65 0 001.406-3.016 12.44 12.44 0 00.484-3.406v-1.031a14.115 14.115 0 00-.484-3.828 9.71 9.71 0 00-1.453-3.188 7.375 7.375 0 00-2.297-2.172c-.875-.531-1.938-.797-3.156-.797h-.688z"
+                      />
+                    </svg>
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       PostgreSQL
                     </span>
