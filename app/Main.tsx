@@ -162,13 +162,11 @@ export default function Home({ posts }) {
                 <div className="flex flex-wrap gap-3">
                   {/* TypeScript */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-blue-700 dark:hover:bg-blue-900/20">
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                      <rect width="24" height="24" rx="2" fill="#3178C6" />
-                      <path
-                        d="M12.5 7.5h1.4v5.7h-1.4V7.5zm-4.5 0h4.7v1.2h-1.6v4.5h-1.5V8.7H8v-1.2z"
-                        fill="white"
-                      />
-                    </svg>
+                    <img
+                      src="https://techicons.dev/icons/typescript"
+                      alt="TypeScript"
+                      className="h-5 w-5"
+                    />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       TypeScript
                     </span>
@@ -176,38 +174,7 @@ export default function Home({ posts }) {
 
                   {/* React */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-cyan-300 hover:bg-cyan-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-cyan-700 dark:hover:bg-cyan-900/20">
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="2" fill="#61DAFB" />
-                      <ellipse
-                        cx="12"
-                        cy="12"
-                        rx="10"
-                        ry="4"
-                        stroke="#61DAFB"
-                        strokeWidth="1"
-                        fill="none"
-                      />
-                      <ellipse
-                        cx="12"
-                        cy="12"
-                        rx="10"
-                        ry="4"
-                        stroke="#61DAFB"
-                        strokeWidth="1"
-                        fill="none"
-                        transform="rotate(60 12 12)"
-                      />
-                      <ellipse
-                        cx="12"
-                        cy="12"
-                        rx="10"
-                        ry="4"
-                        stroke="#61DAFB"
-                        strokeWidth="1"
-                        fill="none"
-                        transform="rotate(120 12 12)"
-                      />
-                    </svg>
+                    <img src="https://techicons.dev/icons/react" alt="React" className="h-5 w-5" />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       React
                     </span>
@@ -215,18 +182,11 @@ export default function Home({ posts }) {
 
                   {/* Next.js */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-gray-400 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-gray-600 dark:hover:bg-gray-800">
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                      <rect
-                        width="24"
-                        height="24"
-                        rx="12"
-                        className="fill-gray-900 dark:fill-white"
-                      />
-                      <path
-                        d="M16 16.5L10 8.5v8h-1v-10h1l6 8v-8h1v10h-1z"
-                        className="fill-white dark:fill-gray-900"
-                      />
-                    </svg>
+                    <img
+                      src="https://techicons.dev/icons/nextjs"
+                      alt="Next.js"
+                      className="h-5 w-5 dark:invert"
+                    />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Next.js
                     </span>
@@ -234,13 +194,11 @@ export default function Home({ posts }) {
 
                   {/* Node.js */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-green-300 hover:bg-green-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-green-700 dark:hover:bg-green-900/20">
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M12 2L3 7v10l9 5 9-5V7l-9-5zm0 2.2l6.5 3.6v7.4L12 19l-6.5-3.8V7.8L12 4.2z"
-                        fill="#83CD29"
-                      />
-                      <path d="M12 6.5v11M9 9l6 6M9 15l6-6" stroke="#83CD29" strokeWidth="0.5" />
-                    </svg>
+                    <img
+                      src="https://techicons.dev/icons/nodejs"
+                      alt="Node.js"
+                      className="h-5 w-5"
+                    />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Node.js
                     </span>
@@ -248,12 +206,11 @@ export default function Home({ posts }) {
 
                   {/* Tailwind */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-cyan-300 hover:bg-cyan-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-cyan-700 dark:hover:bg-cyan-900/20">
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M12 6c-2.7 0-4.5 1.35-5.4 4.05.9-1.35 1.95-1.86 3.15-1.53.686.17 1.176.665 1.717 1.213C12.302 10.604 13.394 12 16.2 12c2.7 0 4.5-1.35 5.4-4.05-.9 1.35-1.95 1.86-3.15 1.53-.686-.17-1.176-.665-1.717-1.213C15.898 7.396 14.806 6 12 6zm-5.4 6c-2.7 0-4.5 1.35-5.4 4.05.9-1.35 1.95-1.86 3.15-1.53.686.17 1.176.665 1.717 1.213C6.902 16.604 7.994 18 10.8 18c2.7 0 4.5-1.35 5.4-4.05-.9 1.35-1.95 1.86-3.15 1.53-.686-.17-1.176-.665-1.717-1.213C10.498 13.396 9.406 12 6.6 12z"
-                        fill="#38BDF8"
-                      />
-                    </svg>
+                    <img
+                      src="https://techicons.dev/icons/tailwind"
+                      alt="Tailwind CSS"
+                      className="h-5 w-5"
+                    />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Tailwind
                     </span>
@@ -261,12 +218,7 @@ export default function Home({ posts }) {
 
                   {/* Git */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-orange-300 hover:bg-orange-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-orange-700 dark:hover:bg-orange-900/20">
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M21.62 11.11l-8.73-8.73c-.49-.49-1.28-.49-1.77 0L9.71 3.79l1.93 1.93c.52-.18.97.05 1.18.26.32.32.39.78.21 1.18l1.86 1.86c.4-.18.86-.11 1.18.21.45.45.45 1.19 0 1.64-.45.45-1.19.45-1.64 0-.25-.25-.32-.62-.23-.94l-1.73-1.73v4.54c.11.05.21.12.3.21.45.45.45 1.19 0 1.64-.45.45-1.19.45-1.64 0-.45-.45-.45-1.19 0-1.64.11-.11.24-.19.37-.24V7.07c-.13-.05-.26-.13-.37-.24-.25-.25-.32-.63-.22-.95L9.09 4.08 2.38 10.8c-.49.49-.49 1.28 0 1.77l8.73 8.73c.49.49 1.28.49 1.77 0l8.74-8.74c.48-.49.48-1.28 0-1.77z"
-                        fill="#F05032"
-                      />
-                    </svg>
+                    <img src="https://techicons.dev/icons/git" alt="Git" className="h-5 w-5" />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Git
                     </span>
@@ -274,19 +226,11 @@ export default function Home({ posts }) {
 
                   {/* Docker */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-blue-700 dark:hover:bg-blue-900/20">
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                      <rect x="7" y="10" width="2" height="2" fill="#2496ED" />
-                      <rect x="10" y="10" width="2" height="2" fill="#2496ED" />
-                      <rect x="13" y="10" width="2" height="2" fill="#2496ED" />
-                      <rect x="7" y="7" width="2" height="2" fill="#2496ED" />
-                      <rect x="10" y="7" width="2" height="2" fill="#2496ED" />
-                      <rect x="13" y="7" width="2" height="2" fill="#2496ED" />
-                      <rect x="10" y="4" width="2" height="2" fill="#2496ED" />
-                      <path
-                        d="M21 12c-1-.5-2-.5-3 0-1-2-2-3-3-3h-1v-1h-2v1h-1c-1 0-2 1-3 3-1-.5-2-.5-3 0 0 2 1 4 3 5v2l6 2 6-2v-2c2-1 3-3 3-5z"
-                        fill="#2496ED"
-                      />
-                    </svg>
+                    <img
+                      src="https://techicons.dev/icons/docker"
+                      alt="Docker"
+                      className="h-5 w-5"
+                    />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       Docker
                     </span>
@@ -294,14 +238,11 @@ export default function Home({ posts }) {
 
                   {/* PostgreSQL */}
                   <div className="group inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-4 py-2 transition-all hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900/50 dark:hover:border-blue-700 dark:hover:bg-blue-900/20">
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M17.5 4c-1.5 0-2.5.5-3 1.5-.5-1-1.5-1.5-3-1.5S9 4.5 8.5 5.5C8 4.5 7 4 5.5 4 4 4 3 5 3 6.5v11c0 1.5 1 2.5 2.5 2.5 1.5 0 2.5-.5 3-1.5.5 1 1.5 1.5 3 1.5s2.5-.5 3-1.5c.5 1 1.5 1.5 3 1.5 1.5 0 2.5-1 2.5-2.5v-11C20 5 19 4 17.5 4z"
-                        fill="#336791"
-                      />
-                      <ellipse cx="8.5" cy="12" rx="1.5" ry="4" fill="white" opacity="0.3" />
-                      <ellipse cx="15.5" cy="12" rx="1.5" ry="4" fill="white" opacity="0.3" />
-                    </svg>
+                    <img
+                      src="https://techicons.dev/icons/postgresql"
+                      alt="PostgreSQL"
+                      className="h-5 w-5"
+                    />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       PostgreSQL
                     </span>
