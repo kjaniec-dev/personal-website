@@ -2,13 +2,19 @@
 
 import { useEffect, useRef } from 'react'
 
+const ANIMATION_KEY = 'hero-animation-played'
+
 export default function HeroAnimationWrapper({ children }: { children: React.ReactNode }) {
-  const hasAnimated = useRef(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!hasAnimated.current && containerRef.current) {
-      hasAnimated.current = true
+    // Check if animation has already played in this session
+    const hasPlayedInSession =
+      typeof window !== 'undefined' && sessionStorage.getItem(ANIMATION_KEY) === 'true'
+
+    if (!hasPlayedInSession && containerRef.current) {
+      // Mark as played in sessionStorage to persist across component remounts
+      sessionStorage.setItem(ANIMATION_KEY, 'true')
       containerRef.current.classList.add('hero-animate')
     }
   }, [])
