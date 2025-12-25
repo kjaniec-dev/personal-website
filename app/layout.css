@@ -74,34 +74,64 @@
   }
 }
 
-/* Apply animations */
-.hero-title-reveal {
+/* Apply animations only when hero-animate class is present */
+.hero-animate .hero-title-reveal {
   animation: hero-title-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
 
-.hero-subtitle-reveal {
+.hero-animate .hero-subtitle-reveal {
   animation: hero-subtitle-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) 1s both;
 }
 
-.hero-description-reveal {
+.hero-animate .hero-description-reveal {
   animation: hero-description-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) 1.4s both;
 }
 
-.hero-cta-reveal {
+.hero-animate .hero-cta-reveal {
   animation: hero-cta-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
 }
 
-.hero-scroll-reveal {
+.hero-animate .hero-scroll-reveal {
   animation: hero-cta-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) 1.6s both;
 }
 
-.hero-badge-reveal {
+.hero-animate .hero-badge-reveal {
   animation: hero-badge-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
-.hero-accent-line {
+.hero-animate .hero-accent-line {
   animation: hero-accent-line 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
   max-width: 180px;
+}
+
+/* Ensure elements start in their hidden state before animation */
+.hero-title-reveal,
+.hero-subtitle-reveal,
+.hero-description-reveal,
+.hero-cta-reveal,
+.hero-scroll-reveal,
+.hero-badge-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero-accent-line {
+  max-width: 180px;
+  width: 0;
+}
+
+/* Override hidden state once animated */
+.hero-animate .hero-title-reveal,
+.hero-animate .hero-subtitle-reveal,
+.hero-animate .hero-description-reveal,
+.hero-animate .hero-cta-reveal,
+.hero-animate .hero-scroll-reveal,
+.hero-animate .hero-badge-reveal {
+  /* Animations will handle the opacity and transform */
+}
+
+.hero-animate .hero-accent-line {
+  /* Animation will handle the width */
 }
 
 .scroll-bounce {
