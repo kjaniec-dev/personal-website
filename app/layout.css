@@ -134,6 +134,21 @@
   /* Animation will handle the width */
 }
 
+/* Skip animation - show content immediately without animation */
+.hero-animate-skip .hero-title-reveal,
+.hero-animate-skip .hero-subtitle-reveal,
+.hero-animate-skip .hero-description-reveal,
+.hero-animate-skip .hero-cta-reveal,
+.hero-animate-skip .hero-scroll-reveal,
+.hero-animate-skip .hero-badge-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-animate-skip .hero-accent-line {
+  width: 100%;
+}
+
 .scroll-bounce {
   animation: scroll-bounce 2s ease-in-out infinite;
 }
