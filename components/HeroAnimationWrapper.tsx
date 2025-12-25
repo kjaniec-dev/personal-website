@@ -8,12 +8,17 @@ export default function HeroAnimationWrapper({ children }: { children: React.Rea
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (!containerRef.current) return
+
     // Check if animation has already played in this session
     const hasPlayedInSession =
       typeof window !== 'undefined' && sessionStorage.getItem(ANIMATION_KEY) === 'true'
 
-    if (!hasPlayedInSession && containerRef.current) {
-      // Mark as played in sessionStorage to persist across component remounts
+    if (hasPlayedInSession) {
+      // Skip animation, show content immediately
+      containerRef.current.classList.add('hero-animate-skip')
+    } else {
+      // Play animation and mark as played
       sessionStorage.setItem(ANIMATION_KEY, 'true')
       containerRef.current.classList.add('hero-animate')
     }
