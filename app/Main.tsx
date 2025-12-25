@@ -108,6 +108,7 @@ export default function Home({ posts }) {
                   <h3 className="text-xl leading-tight font-bold tracking-tight">
                     <Link
                       href={`/blog/${slug}`}
+                      prefetch={false}
                       className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-900 transition-colors dark:text-gray-100"
                     >
                       {title}
@@ -123,6 +124,7 @@ export default function Home({ posts }) {
                   <p className="line-clamp-3 text-gray-600 dark:text-gray-400">{summary}</p>
                   <Link
                     href={`/blog/${slug}`}
+                    prefetch={false}
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-medium"
                     aria-label={`Read more: "${title}"`}
                   >
