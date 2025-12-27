@@ -234,9 +234,10 @@ export default function ListLayoutWithTags({
                       <Link
                         href={`/${path}`}
                         className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-medium"
+                        aria-label={`Read more: "${title}"`}
                       >
                         <span className="animated-underline whitespace-nowrap">
-                          Read more
+                          Read more<span className="sr-only">: {title}</span>
                           <svg
                             className="ml-1 inline-block h-4 w-4 align-middle transition-transform group-hover:translate-x-1"
                             fill="none"
