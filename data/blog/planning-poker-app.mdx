@@ -1,0 +1,170 @@
+---
+title: 'Building a Real-Time Planning Poker App: Architecture and Design Decisions'
+date: 2025-12-30T10:00:00Z
+lastmod: '2025-12-30'
+tags: ['next-js', 'websocket', 'real-time', 'agile', 'typescript', 'go', 'nodejs', 'kubernetes']
+draft: false
+summary: 'A deep dive into my planning poker application - a real-time collaborative estimation tool for distributed agile teams with flexible deployment options'
+layout: PostSimple
+---
+
+## What is Planning Poker?
+
+Planning poker is an agile estimation technique where team members use cards to estimate the effort or complexity of user stories. It's a consensus-based approach that encourages discussion and helps teams arrive at more accurate estimates. Traditionally done in person, remote work has created a need for digital alternatives that can replicate the simultaneous reveal and discussion aspects of the physical game.
+
+## The Challenge
+
+When teams go remote, traditional planning poker becomes difficult. Video calls with people holding up cards to cameras don't scale well, and asynchronous estimation loses the valuable real-time discussion that makes planning poker effective. I wanted to build a solution that:
+
+- Enables distributed teams to estimate in real-time
+- Supports unlimited concurrent estimation sessions
+- Provides instant synchronization across all participants
+- Works reliably on mobile devices
+- Can scale horizontally for larger organizations
+
+## Project Overview
+
+You can find the full source code at [github.com/kjaniec-dev/planning-poker](https://github.com/kjaniec-dev/planning-poker). The application is a real-time collaborative estimation tool built with modern web technologies and designed for flexibility in deployment.
+
+## Technical Architecture
+
+### Frontend Stack
+
+The client application is built with:
+
+- **Next.js 16** with React 19 and TypeScript 5.9 for type-safe, server-rendered React
+- **Tailwind CSS v4** paired with **shadcn/ui** components for a beautiful, responsive design
+- **WebSocket client** for real-time bidirectional communication
+- Full dark mode support for better user experience
+
+### Backend Flexibility: Choose Your Own Adventure
+
+One of the most interesting design decisions I made was to provide **dual server implementations**. Teams can choose between:
+
+1. **Node.js Server** - Built with the `ws` library, perfect for teams already comfortable with the Node.js ecosystem
+2. **Go Server** - Using `gorilla/websocket`, offering higher performance and lower resource usage for teams that prefer Go
+
+Both implementations expose identical WebSocket APIs, making them completely interchangeable from the frontend's perspective. This gives teams the freedom to choose based on their infrastructure preferences, team expertise, or performance requirements.
+
+### Deployment Models
+
+The application supports three distinct deployment approaches:
+
+#### 1. Embedded Mode (Simplest)
+The WebSocket server runs within the Next.js application as a single container. This is the easiest way to get started and works great for small to medium teams.
+
+#### 2. External Node.js Mode
+The frontend and backend run as separate services, allowing independent scaling and better separation of concerns.
+
+#### 3. External Go Mode
+Similar to the Node.js external mode but with the higher-performance Go backend, ideal for organizations with high concurrency requirements.
+
+### Horizontal Scaling with Redis
+
+All three deployment modes support optional **Redis pub/sub integration**. When enabled, multiple server instances can coordinate through Redis, allowing the application to scale horizontally across multiple containers or nodes. This ensures that:
+
+- Users in the same room can connect to different server instances
+- Votes are synchronized across all instances in real-time
+- The system can handle thousands of concurrent users
+
+## Key Features
+
+### Real-Time Synchronization
+Using WebSockets, all participants see votes and reveals instantly. There's no polling, no refresh needed - just instant updates when anyone votes or when the moderator reveals the cards.
+
+### Unlimited Concurrent Rooms
+The architecture supports unlimited simultaneous planning poker sessions. Each team can have their own room, and rooms are completely isolated from each other.
+
+### Mobile-Friendly Design
+The responsive design built with Tailwind CSS ensures the app works seamlessly on phones and tablets, so team members can participate from anywhere on any device.
+
+### Comprehensive Testing
+The project includes 38+ tests across all components, ensuring reliability and making it easy to add new features with confidence.
+
+## Production-Ready Infrastructure
+
+### Kubernetes Deployment
+The project includes **Helm charts** for Kubernetes deployment, making it easy to deploy in production environments with:
+
+- Automated health checks
+- Resource limits and requests
+- Horizontal pod autoscaling
+- ConfigMap and Secret management
+- Ingress configuration
+
+### Docker Compose Profiles
+For simpler deployments, Docker Compose profiles are included for all three deployment modes:
+
+```bash
+# Embedded mode
+docker-compose --profile embedded up
+
+# External Node.js mode
+docker-compose --profile external-node up
+
+# External Go mode
+docker-compose --profile external-go up
+```
+
+## Design Decisions and Trade-offs
+
+### Why WebSockets?
+
+I chose WebSockets over alternatives like Server-Sent Events (SSE) or long polling because:
+
+- **Bidirectional communication** - Both client and server can push messages
+- **Low latency** - Persistent connections eliminate handshake overhead
+- **Efficient** - Less bandwidth than repeated HTTP requests
+- **Wide support** - Modern browsers have excellent WebSocket support
+
+### Why Both Node.js and Go?
+
+Supporting two backend implementations adds complexity, but it provides real value:
+
+- **Node.js**: Familiar to most web developers, easy to modify, great ecosystem
+- **Go**: Better performance, lower memory footprint, excellent for high-concurrency scenarios
+
+Teams can start with Node.js for simplicity and switch to Go if they need better performance, without changing a single line of frontend code.
+
+### Monorepo Structure
+
+The project uses a monorepo structure with clear separation of concerns:
+
+```
+/frontend          # Next.js application
+/server-node       # Node.js WebSocket server
+/server-go         # Go WebSocket server
+/helm              # Kubernetes Helm charts
+```
+
+This makes it easy to work on different parts of the system while keeping everything in one repository.
+
+## Development Experience
+
+The project includes comprehensive documentation specifically designed for development with AI assistants. The `CLAUDE.md` file provides detailed guidance on the architecture, tech stack, and development workflows, making it easy for AI tools to understand and contribute to the codebase.
+
+## What I Learned
+
+Building this application taught me a lot about:
+
+- **Real-time architecture** - Managing state synchronization and handling edge cases in distributed systems
+- **WebSocket patterns** - Reconnection strategies, heartbeat mechanisms, and error handling
+- **Deployment flexibility** - Designing systems that can adapt to different infrastructure requirements
+- **Cross-origin WebSockets** - Supporting both same-origin and cross-origin connections
+- **Kubernetes deployment** - Creating production-ready Helm charts with proper resource management
+
+## What's Next
+
+Future improvements I'm considering:
+
+- Adding authentication and user accounts
+- Persistent room history and estimation analytics
+- Integration with project management tools like Jira or Linear
+- Support for custom card decks (Fibonacci, T-shirt sizes, etc.)
+- Voice/video integration for better remote collaboration
+
+## Try It Yourself
+
+The project is open source and available at [github.com/kjaniec-dev/planning-poker](https://github.com/kjaniec-dev/planning-poker). Whether you want to use it for your team or learn from the implementation, feel free to clone it and give it a try!
+
+If you have questions or suggestions, feel free to open an issue on GitHub or reach out directly. I'd love to hear how teams are using it or what features would make it more useful for remote agile teams.
