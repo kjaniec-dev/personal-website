@@ -186,7 +186,7 @@ export default function ListLayoutWithTags({
           <div className="flex-1">
             <div className="space-y-6">
               {displayPosts.map((post) => {
-                const { path, date, title, summary, tags } = post
+                const { path, date, title, summary, tags, readingTime } = post
                 return (
                   <article
                     key={path}
@@ -210,6 +210,12 @@ export default function ListLayoutWithTags({
                         <time dateTime={date} suppressHydrationWarning>
                           {formatDate(date, siteMetadata.locale)}
                         </time>
+                        {readingTime && (
+                          <>
+                            <span>•</span>
+                            <span>{readingTime.text}</span>
+                          </>
+                        )}
                       </div>
 
                       <h2 className="text-2xl leading-tight font-bold tracking-tight">
