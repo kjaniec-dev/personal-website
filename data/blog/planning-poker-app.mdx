@@ -24,7 +24,21 @@ When teams go remote, traditional planning poker becomes difficult. Video calls 
 
 ## Project Overview
 
-You can find the full source code at [github.com/kjaniec-dev/planning-poker](https://github.com/kjaniec-dev/planning-poker). The application is a real-time collaborative estimation tool built with modern web technologies and designed for flexibility in deployment.
+You can try the live application at [planning-poker.kjaniec.dev](https://planning-poker.kjaniec.dev) or explore the full source code at [github.com/kjaniec-dev/planning-poker](https://github.com/kjaniec-dev/planning-poker). The application is a real-time collaborative estimation tool built with modern web technologies and designed for flexibility in deployment.
+
+<Image
+  src="/static/images/planning_poker_light_theme.png"
+  alt="Planning Poker - Light Theme"
+  width={2654}
+  height={1686}
+/>
+
+<Image
+  src="/static/images/planning_poker_dark_theme.png"
+  alt="Planning Poker - Dark Theme"
+  width={2746}
+  height={1684}
+/>
 
 ## Technical Architecture
 
@@ -51,12 +65,15 @@ Both implementations expose identical WebSocket APIs, making them completely int
 The application supports three distinct deployment approaches:
 
 #### 1. Embedded Mode (Simplest)
+
 The WebSocket server runs within the Next.js application as a single container. This is the easiest way to get started and works great for small to medium teams.
 
 #### 2. External Node.js Mode
+
 The frontend and backend run as separate services, allowing independent scaling and better separation of concerns.
 
 #### 3. External Go Mode
+
 Similar to the Node.js external mode but with the higher-performance Go backend, ideal for organizations with high concurrency requirements.
 
 ### Horizontal Scaling with Redis
@@ -70,20 +87,25 @@ All three deployment modes support optional **Redis pub/sub integration**. When 
 ## Key Features
 
 ### Real-Time Synchronization
+
 Using WebSockets, all participants see votes and reveals instantly. There's no polling, no refresh needed - just instant updates when anyone votes or when the moderator reveals the cards.
 
 ### Unlimited Concurrent Rooms
+
 The architecture supports unlimited simultaneous planning poker sessions. Each team can have their own room, and rooms are completely isolated from each other.
 
 ### Mobile-Friendly Design
+
 The responsive design built with Tailwind CSS ensures the app works seamlessly on phones and tablets, so team members can participate from anywhere on any device.
 
 ### Comprehensive Testing
+
 The project includes 38+ tests across all components, ensuring reliability and making it easy to add new features with confidence.
 
 ## Production-Ready Infrastructure
 
 ### Kubernetes Deployment
+
 The project includes **Helm charts** for Kubernetes deployment, making it easy to deploy in production environments with:
 
 - Automated health checks
@@ -93,6 +115,7 @@ The project includes **Helm charts** for Kubernetes deployment, making it easy t
 - Ingress configuration
 
 ### Docker Compose Profiles
+
 For simpler deployments, Docker Compose profiles are included for all three deployment modes:
 
 ```bash
@@ -131,10 +154,10 @@ Teams can start with Node.js for simplicity and switch to Go if they need better
 The project uses a monorepo structure with clear separation of concerns:
 
 ```
-/frontend          # Next.js application
-/server-node       # Node.js WebSocket server
-/server-go         # Go WebSocket server
-/helm              # Kubernetes Helm charts
+/src               # Next.js application
+/servers/node      # Node.js WebSocket server
+/servers/golang    # Go WebSocket server
+/chart             # Kubernetes Helm charts
 ```
 
 This makes it easy to work on different parts of the system while keeping everything in one repository.
@@ -153,18 +176,8 @@ Building this application taught me a lot about:
 - **Cross-origin WebSockets** - Supporting both same-origin and cross-origin connections
 - **Kubernetes deployment** - Creating production-ready Helm charts with proper resource management
 
-## What's Next
-
-Future improvements I'm considering:
-
-- Adding authentication and user accounts
-- Persistent room history and estimation analytics
-- Integration with project management tools like Jira or Linear
-- Support for custom card decks (Fibonacci, T-shirt sizes, etc.)
-- Voice/video integration for better remote collaboration
-
 ## Try It Yourself
 
-The project is open source and available at [github.com/kjaniec-dev/planning-poker](https://github.com/kjaniec-dev/planning-poker). Whether you want to use it for your team or learn from the implementation, feel free to clone it and give it a try!
+You can try the application right now at [planning-poker.kjaniec.dev](https://planning-poker.kjaniec.dev) or explore the open source code at [github.com/kjaniec-dev/planning-poker](https://github.com/kjaniec-dev/planning-poker). Whether you want to use it for your team or learn from the implementation, feel free to give it a try!
 
 If you have questions or suggestions, feel free to open an issue on GitHub or reach out directly. I'd love to hear how teams are using it or what features would make it more useful for remote agile teams.
