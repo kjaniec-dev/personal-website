@@ -72,7 +72,7 @@ export default function Home({ posts }) {
         <div className="grid gap-6 md:grid-cols-2">
           {!posts.length && <p className="text-gray-500 dark:text-gray-400">No posts found.</p>}
           {posts.slice(0, MAX_DISPLAY).map((post, index) => {
-            const { slug, date, title, summary, tags } = post
+            const { slug, date, title, summary, tags, readingTime } = post
             return (
               <article
                 key={slug}
@@ -103,6 +103,12 @@ export default function Home({ posts }) {
                       </svg>
                       {formatDate(date, siteMetadata.locale)}
                     </time>
+                    {readingTime && (
+                      <>
+                        <span>•</span>
+                        <span>{readingTime.text}</span>
+                      </>
+                    )}
                   </div>
 
                   <h3 className="text-xl leading-tight font-bold tracking-tight">
