@@ -13,7 +13,8 @@ const ContentSecurityPolicy = `
   media-src *.s3.amazonaws.com *.mapbox.com;
   connect-src *;
   font-src 'self' *.mapbox.com;
-  frame-src giscus.app
+  frame-src giscus.app;
+  frame-ancestors 'self' https://app.netlify.com;
 `
 
 const securityHeaders = [
@@ -28,9 +29,10 @@ const securityHeaders = [
     value: 'strict-origin-when-cross-origin',
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+  // Note: CSP frame-ancestors takes precedence in modern browsers
   {
     key: 'X-Frame-Options',
-    value: 'DENY',
+    value: 'SAMEORIGIN',
   },
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
   {
