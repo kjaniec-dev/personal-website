@@ -13,7 +13,7 @@ const ContentSecurityPolicy = `
   media-src *.s3.amazonaws.com *.mapbox.com;
   connect-src *;
   font-src 'self' *.mapbox.com;
-  frame-src giscus.app;
+  frame-src giscus.app https://app.netlify.com;
   frame-ancestors 'self' https://app.netlify.com;
 `
 
