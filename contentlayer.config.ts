@@ -26,7 +26,6 @@ import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import prettier from 'prettier'
 import projectsData from './data/projectsData'
-import faqData from './data/faqData'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -117,23 +116,14 @@ function createSearchIndex(allBlogs) {
       type: 'project',
     }))
 
-    // Create FAQ index - format FAQ items to match blog structure
-    const faqs = faqData.map((faq) => ({
-      title: faq.question,
-      summary: faq.answer,
-      tags: [faq.category],
-      path: `/faq#${slug(faq.question)}`,
-      type: 'faq',
-    }))
-
     // Add type field to blog posts as well
     const blogsWithType = blogPosts.map((post) => ({
       ...post,
       type: 'blog',
     }))
 
-    // Combine blogs, projects, and FAQs
-    const searchIndex = [...blogsWithType, ...projects, ...faqs]
+    // Combine blogs and projects
+    const searchIndex = [...blogsWithType, ...projects]
 
     writeFileSync(
       `public/${path.basename(siteMetadata.search.kbarConfig.searchDocumentsPath)}`,

@@ -9,7 +9,7 @@ interface SearchDocument {
   summary?: string
   tags?: string[]
   path: string
-  type: 'blog' | 'project' | 'faq'
+  type: 'blog' | 'project'
 }
 
 interface SearchProviderProps {
@@ -77,16 +77,13 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             id: doc.path,
             name: doc.title,
             keywords: doc?.summary || '',
-            section: doc.type === 'blog' ? 'Blog Posts' : doc.type === 'faq' ? 'FAQ' : 'Projects',
+            section: doc.type === 'blog' ? 'Blog Posts' : 'Projects',
             subtitle: doc.tags?.join(', ') || '',
             perform: () => {
               // For blog posts, navigate to the blog path
-              // For FAQ, navigate to the FAQ page with anchor
               // For projects, use the external link
               if (doc.type === 'blog') {
                 router.push('/' + doc.path)
-              } else if (doc.type === 'faq') {
-                router.push(doc.path)
               } else {
                 // For projects, open in same tab since it's the user's own project
                 window.location.href = doc.path
