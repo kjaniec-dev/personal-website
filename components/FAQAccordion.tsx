@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FAQItem } from '@/data/faqData'
+import { slug } from 'github-slugger'
 
 interface FAQAccordionProps {
   items: FAQItem[]
@@ -17,11 +18,30 @@ const FAQAccordion = ({ items, category }: FAQAccordionProps) => {
     setOpenIndex(openIndex === index ? null : index)
   }
 
+  // Auto-expand accordion item if the page is loaded with an anchor link
+  useEffect(() => {
+    const hash = window.location.hash.slice(1) // Remove the # symbol
+    if (hash) {
+      const itemIndex = filteredItems.findIndex((item) => slug(item.question) === hash)
+      if (itemIndex !== -1) {
+        setOpenIndex(itemIndex)
+        // Scroll to the item after a short delay to ensure the accordion has expanded
+        setTimeout(() => {
+          const element = document.getElementById(hash)
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }, 100)
+      }
+    }
+  }, [filteredItems])
+
   return (
     <div className="space-y-3">
       {filteredItems.map((item, index) => (
         <div
           key={index}
+          id={slug(item.question)}
           className="hover-lift group overflow-hidden rounded-xl border border-gray-200/60 bg-white/80 shadow-sm backdrop-blur-sm transition-all hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/80"
         >
           <button

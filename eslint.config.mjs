@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename)
 export default [
   // Ignore patterns (migrated from .eslintignore)
   {
-    ignores: ['node_modules', '.eslintrc.js'],
+    ignores: ['node_modules', '.eslintrc.js', '.contentlayer', '.next', 'public'],
   },
 
   // Base JS recommended
