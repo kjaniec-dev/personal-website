@@ -56,6 +56,14 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             perform: () => router.push('/tags'),
           },
           {
+            id: 'faq',
+            name: 'FAQ',
+            keywords: '',
+            shortcut: ['f'],
+            section: 'Navigation',
+            perform: () => router.push('/faq'),
+          },
+          {
             id: 'about',
             name: 'About',
             keywords: '',
