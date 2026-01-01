@@ -63,6 +63,14 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             section: 'Navigation',
             perform: () => router.push('/about'),
           },
+          {
+            id: 'faq',
+            name: 'FAQ',
+            keywords: '',
+            shortcut: ['f'],
+            section: 'Navigation',
+            perform: () => router.push('/faq'),
+          },
         ],
         onSearchDocumentsLoad(json) {
           return json.map((doc: SearchDocument) => ({
