@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { FAQItem } from '@/data/faqData'
 import { slug } from 'github-slugger'
+import { usePathname } from 'next/navigation'
 
 interface FAQAccordionProps {
   items: FAQItem[]
@@ -11,6 +12,7 @@ interface FAQAccordionProps {
 
 const FAQAccordion = ({ items, category }: FAQAccordionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const pathname = usePathname()
 
   const filteredItems = items.filter((item) => item.category === category)
 
@@ -18,8 +20,8 @@ const FAQAccordion = ({ items, category }: FAQAccordionProps) => {
     setOpenIndex(openIndex === index ? null : index)
   }
 
-  // Auto-expand accordion item if the page is loaded with an anchor link
-  useEffect(() => {
+  // Function to handle hash navigation
+  const handleHashNavigation = useCallback(() => {
     const hash = window.location.hash.slice(1) // Remove the # symbol
     if (hash) {
       const itemIndex = filteredItems.findIndex((item) => slug(item.question) === hash)
@@ -35,6 +37,23 @@ const FAQAccordion = ({ items, category }: FAQAccordionProps) => {
       }
     }
   }, [filteredItems])
+
+  // Auto-expand accordion item on mount and when hash changes
+  useEffect(() => {
+    // Handle initial hash
+    handleHashNavigation()
+
+    // Listen for hash changes
+    const onHashChange = () => {
+      handleHashNavigation()
+    }
+
+    window.addEventListener('hashchange', onHashChange)
+
+    return () => {
+      window.removeEventListener('hashchange', onHashChange)
+    }
+  }, [handleHashNavigation, pathname])
 
   return (
     <div className="space-y-3">
