@@ -1,0 +1,54 @@
+---
+title: 'Polishing the Experience: UI/UX Enhancements in Planning Poker'
+date: 2026-01-15T10:00:00Z
+lastmod: '2026-01-15'
+tags: ['next-js', 'framer-motion', 'ux', 'ui-design', 'react', 'tailwind-css']
+draft: false
+summary: 'How I transformed a functional planning tool into an engaging, tactile experience using Framer Motion, adaptive themes, and visual feedback loops.'
+layout: PostSimple
+---
+
+## Beyond Functionality: Why UX Matters in Agile
+
+A planning tool is only as good as the team's willingness to use it. While the core logic of Planning Poker is simple, the _feel_ of the application determines whether it becomes a seamless part of the sprint ceremony or a chore. Recently, I focused on bringing a "game-like" polish to the app, ensuring that every interaction provides clear, satisfying feedback.
+
+## 1. Interactive Card Animations
+
+Estimation should feel tactile. Using `framer-motion`, I implemented two key animations that bridge the gap between digital and physical cards:
+
+### The 3D Flip
+
+When the facilitator hits "Reveal," the cards don't just appear. They perform a smooth **3D flip animation**. This creates a moment of anticipation and makes the reveal feel like a significant event in the game flow.
+
+### The Wiggle Feedback
+
+Choosing a card is a commitment. When a user selects a value or changes their mind, the card performs a subtle **wiggle**. This micro-interaction provides immediate visual confirmation that the server has acknowledged the vote, reducing the need for "Did it go through?" questions.
+
+## 2. Theme-First Design & Readability
+
+One of the biggest challenges was ensuring the app looked "rich" while remaining fully compliant with both light and dark modes.
+
+- **Vibrant Selected States:** Instead of simple borders, chosen cards now use the full `primary` color with a `scale-105` effect and `shadow-lg`. This makes the current selection pop against the grid.
+- **Contrast-Aware Typography:** By using `text-primary-foreground`, I ensured that card values remain perfectly legible regardless of the user's theme.
+- **Tactile Gradients:** Non-selected cards use subtle gradients (`from-card to-muted/50`) to give them a slight 3D appearance without being distracting.
+
+## 3. Real-Time Participant Presence
+
+Planning Poker is a team sport. The participant list was upgraded from a static text list to a dynamic dashboard:
+
+- **Initials-Based Avatars:** Clean, grayscale circular avatars help team members quickly identify each other at a glance.
+- **Animated Progress Tracking:** I replaced the simple "X/Y ready" text with a linear progress bar. As votes come in, the bar fills up with a smooth spring animation, giving the team a "living" sense of the group's progress.
+- **Entrance/Exit Animations:** Using `AnimatePresence`, participants joining or leaving the room slide in and out smoothly, making the room feel alive and reactive.
+
+## 4. Simplified Navigation with Tabbed Interface
+
+As features grew, the UI started to feel cluttered. I refactored the main game area into a clean, tabbed interface:
+
+- **Voting:** The primary workspace.
+- **Results:** Focused data visualization once cards are revealed.
+- **History:** A searchable log of previous estimations.
+- **Settings:** Tucked away but accessible, with a "Danger Zone" clearly marked at the bottom.
+
+## Conclusion
+
+By focusing on these UI/UX details, the Planning Poker app has evolved from a basic WebSocket demo into a polished tool that teams actually enjoy using. These changes prove that even in "enterprise" or "agile" tools, there is always room for a bit of delight and playfulness.
