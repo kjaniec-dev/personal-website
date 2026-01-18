@@ -1,0 +1,27 @@
+export default function GridBackground() {
+  return (
+    <div
+      className="pointer-events-none fixed inset-0 -z-10"
+      aria-hidden="true"
+      style={{
+        backgroundImage:
+          'linear-gradient(to right, rgb(209 213 219 / 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgb(209 213 219 / 0.3) 1px, transparent 1px)',
+        backgroundSize: '32px 32px',
+        WebkitMaskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)',
+        maskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)',
+      }}
+    >
+      {/* Dark mode overlay - grid lines adapt to theme */}
+      <div
+        className="absolute inset-0 opacity-0 dark:opacity-100"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, rgb(75 85 99 / 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgb(75 85 99 / 0.3) 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+          WebkitMaskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)',
+          maskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)',
+        }}
+      />
+    </div>
+  )
+}

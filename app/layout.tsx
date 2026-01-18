@@ -14,6 +14,7 @@ import { Metadata } from 'next'
 import SearchProviderWrapper from '@/components/SearchProviderWrapper'
 import AnalyticsWrapper from '@/components/AnalyticsWrapper'
 import WebVitalsReporter from '@/components/WebVitals'
+import GridBackground from '@/components/GridBackground'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -139,6 +140,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             style={{ willChange: 'opacity' }}
           />
         </div>
+
+        {/* Grid background pattern with radial fade */}
+        <GridBackground />
 
         <ThemeProviders>
           <AnalyticsWrapper analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
