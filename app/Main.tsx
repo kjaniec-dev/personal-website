@@ -76,7 +76,7 @@ export default function Home({ posts }) {
             return (
               <article
                 key={slug}
-                className="hover-lift group relative rounded-2xl border border-gray-200/80 bg-white p-6 transition-all dark:border-gray-700/80 dark:bg-gray-900/50"
+                className="hover-lift group relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-900"
                 style={{
                   animationDelay: `${index * 0.1}s`,
                   animationFillMode: 'both',
@@ -161,7 +161,7 @@ export default function Home({ posts }) {
 
       {siteMetadata.newsletter?.provider && (
         <div className="mt-16 flex items-center justify-center">
-          <div className="w-full max-w-xl rounded-2xl border border-gray-200 bg-gray-50/50 p-8 dark:border-gray-700 dark:bg-gray-900/50">
+          <div className="w-full max-w-xl rounded-2xl border border-gray-200 bg-gray-50 p-8 shadow-sm dark:border-gray-700 dark:bg-gray-900">
             <h3 className="mb-4 text-center text-2xl font-bold text-gray-900 dark:text-gray-100">
               Subscribe to the newsletter
             </h3>

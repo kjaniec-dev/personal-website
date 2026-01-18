@@ -25,7 +25,7 @@ export default function AuthorLayout({ children, content }: Props) {
         </div>
 
         {/* Profile Card */}
-        <div className="relative overflow-hidden rounded-3xl border border-gray-200/60 bg-white/80 p-8 shadow-xl backdrop-blur-sm dark:border-gray-700/60 dark:bg-gray-900/80">
+        <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-xl backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900">
           {/* Decorative gradient */}
           <div className="from-primary-500/20 to-accent-cyan/20 absolute -top-24 -right-24 h-48 w-48 rounded-full bg-gradient-to-br blur-3xl" />
 
@@ -105,7 +105,7 @@ export default function AuthorLayout({ children, content }: Props) {
         </div>
 
         {/* Bio Content */}
-        <div className="prose dark:prose-invert max-w-none rounded-2xl border border-gray-200/60 bg-white/60 p-8 backdrop-blur-sm dark:border-gray-700/60 dark:bg-gray-900/60">
+        <div className="prose dark:prose-invert max-w-none rounded-2xl border border-gray-200 bg-white p-8 shadow-sm backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900">
           {children}
         </div>
       </div>

@@ -5,10 +5,12 @@ export default function GridBackground() {
       aria-hidden="true"
       style={{
         backgroundImage:
-          'linear-gradient(to right, rgb(209 213 219 / 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgb(209 213 219 / 0.3) 1px, transparent 1px)',
+          'linear-gradient(to right, rgb(209 213 219 / 0.15) 1px, transparent 1px), linear-gradient(to bottom, rgb(209 213 219 / 0.15) 1px, transparent 1px)',
         backgroundSize: '32px 32px',
-        WebkitMaskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)',
-        maskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)',
+        WebkitMaskImage:
+          'radial-gradient(ellipse 80% 60% at 50% 50%, #000 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+        maskImage:
+          'radial-gradient(ellipse 80% 60% at 50% 50%, #000 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
       }}
     >
       {/* Dark mode overlay - grid lines adapt to theme */}
@@ -16,10 +18,12 @@ export default function GridBackground() {
         className="absolute inset-0 opacity-0 dark:opacity-100"
         style={{
           backgroundImage:
-            'linear-gradient(to right, rgb(75 85 99 / 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgb(75 85 99 / 0.3) 1px, transparent 1px)',
+            'linear-gradient(to right, rgb(75 85 99 / 0.2) 1px, transparent 1px), linear-gradient(to bottom, rgb(75 85 99 / 0.2) 1px, transparent 1px)',
           backgroundSize: '32px 32px',
-          WebkitMaskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)',
-          maskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse 80% 60% at 50% 50%, #000 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
+          maskImage:
+            'radial-gradient(ellipse 80% 60% at 50% 50%, #000 0%, rgba(0,0,0,0.4) 50%, transparent 100%)',
         }}
       />
     </div>

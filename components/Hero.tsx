@@ -105,7 +105,7 @@ export default function Hero() {
             {/* Right column - Stats or feature highlight */}
             <div className="hero-description-reveal space-y-8 lg:col-span-5">
               {/* Feature card */}
-              <div className="border-primary-100 from-primary-50/50 dark:border-primary-900/50 dark:from-primary-950/30 relative rounded-2xl border bg-gradient-to-br to-transparent p-8 backdrop-blur-sm">
+              <div className="border-primary-100 from-primary-50 dark:border-primary-900/50 dark:from-primary-950/50 relative rounded-2xl border bg-gradient-to-br to-white shadow-md backdrop-blur-sm dark:to-gray-900">
                 {/* Top accent */}
                 <div className="from-primary-500 to-accent-cyan absolute top-0 left-8 h-1 w-12 rounded-b-full bg-gradient-to-r" />
 
@@ -177,7 +177,7 @@ export default function Hero() {
                 ].map((stat, idx) => (
                   <div
                     key={idx}
-                    className="border-primary-100 hover:border-primary-500 hover:shadow-primary-500/10 dark:border-primary-900/50 dark:hover:border-primary-500 rounded-xl border bg-white/80 p-4 text-center backdrop-blur-sm transition-all duration-300 hover:shadow-lg dark:bg-gray-900/80"
+                    className="border-primary-100 hover:border-primary-500 hover:shadow-primary-500/10 dark:border-primary-900/50 dark:hover:border-primary-500 rounded-xl border bg-white p-4 text-center shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-lg dark:bg-gray-900"
                   >
                     <div className="text-primary-600 dark:text-primary-400 font-serif text-3xl font-bold">
                       {stat.number}

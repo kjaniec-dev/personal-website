@@ -30,7 +30,7 @@ const TimelineEntry = ({
     </div>
 
     {/* Content */}
-    <div className="hover:border-primary-200 dark:hover:border-primary-800 col-start-3 col-end-12 mr-auto mb-8 ml-2 w-full rounded-xl border border-gray-200/60 bg-white/60 p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md md:ml-4 dark:border-gray-700/60 dark:bg-gray-900/60">
+    <div className="hover:border-primary-200 dark:hover:border-primary-800 col-start-3 col-end-12 mr-auto mb-8 ml-2 w-full rounded-xl border border-gray-200 bg-white p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md md:ml-4 dark:border-gray-700 dark:bg-gray-900">
       <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-gray-100">
         {entry.primaryText}
       </h3>

@@ -139,7 +139,7 @@ export default function ListLayoutWithTags({
 
         <div className="flex flex-col gap-8 lg:flex-row">
           {/* Sidebar */}
-          <aside className="no-scrollbar hidden h-fit max-h-[calc(100vh-200px)] w-full max-w-[280px] flex-shrink-0 overflow-auto rounded-2xl border border-gray-200/60 bg-white/80 p-6 shadow-sm backdrop-blur-sm lg:block dark:border-gray-700/60 dark:bg-gray-900/80">
+          <aside className="no-scrollbar hidden h-fit max-h-[calc(100vh-200px)] w-full max-w-[280px] flex-shrink-0 overflow-auto rounded-2xl border border-gray-200 bg-white p-6 shadow-sm backdrop-blur-sm lg:block dark:border-gray-700 dark:bg-gray-900">
             <div className="mb-4">
               {pathname.startsWith('/blog') && !pathname.includes('/tags/') ? (
                 <h3 className="text-primary-500 font-bold">All Posts</h3>
@@ -190,7 +190,7 @@ export default function ListLayoutWithTags({
                 return (
                   <article
                     key={path}
-                    className="group hover:border-primary-200 dark:hover:border-primary-800 flex min-h-[280px] flex-col rounded-xl border border-gray-200/60 bg-white/60 p-6 transition-all hover:shadow-md dark:border-gray-700/60 dark:bg-gray-900/60"
+                    className="group hover:border-primary-200 dark:hover:border-primary-800 flex min-h-[280px] flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-gray-700 dark:bg-gray-900"
                   >
                     <div className="flex h-full flex-col space-y-3">
                       <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">

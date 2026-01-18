@@ -16,7 +16,7 @@ const Card = ({ title, description, imgSrc, href, repoHref, tags = [] }: CardPro
     <div
       className={`${
         imgSrc && 'h-full'
-      } hover-lift group hover:border-primary-300 dark:hover:border-primary-700 relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200/60 bg-white/80 shadow-sm backdrop-blur-sm transition-all hover:shadow-lg dark:border-gray-700/60 dark:bg-gray-900/80`}
+      } hover-lift group hover:border-primary-300 dark:hover:border-primary-700 relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md backdrop-blur-sm transition-all hover:shadow-xl dark:border-gray-700 dark:bg-gray-900`}
     >
       {/* Gradient overlay on hover */}
       <div className="from-primary-500/0 to-accent-cyan/0 group-hover:from-primary-500/5 group-hover:to-accent-cyan/5 dark:group-hover:from-primary-500/10 dark:group-hover:to-accent-cyan/10 absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity group-hover:opacity-100" />
