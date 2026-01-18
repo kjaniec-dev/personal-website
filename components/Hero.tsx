@@ -105,7 +105,7 @@ export default function Hero() {
             {/* Right column - Stats or feature highlight */}
             <div className="hero-description-reveal space-y-8 lg:col-span-5">
               {/* Feature card */}
-              <div className="border-primary-100 from-primary-50 dark:border-primary-900/50 dark:from-primary-950/50 relative rounded-2xl border bg-gradient-to-br to-white shadow-md backdrop-blur-sm dark:to-gray-900">
+              <div className="border-primary-100 from-primary-50 dark:border-primary-900/50 dark:from-primary-950/50 relative rounded-2xl border bg-gradient-to-br to-white p-8 shadow-md backdrop-blur-sm dark:to-gray-900">
                 {/* Top accent */}
                 <div className="from-primary-500 to-accent-cyan absolute top-0 left-8 h-1 w-12 rounded-b-full bg-gradient-to-r" />
 
