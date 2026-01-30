@@ -15,7 +15,7 @@ const projectsData: Project[] = [
     with excellent Lighthouse scores. Showcases my work, skills, and thoughts on software development.`,
     href: 'https://kjaniec.dev',
     repoHref: 'https://github.com/kjaniec-dev/personal-website',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MDX'],
+    tags: ['next-js', 'TypeScript', 'Tailwind CSS', 'MDX'],
   },
   {
     title: 'Planning Poker',
