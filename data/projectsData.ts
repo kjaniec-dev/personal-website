@@ -26,6 +26,15 @@ const projectsData: Project[] = [
     repoHref: 'https://github.com/kjaniec-dev/planning-poker',
     tags: ['React', 'WebSocket', 'Real-time', 'Agile'],
   },
+  {
+    title: 'Cyberpunk Voxel City - Interactive Resume',
+    description: `An interactive 3D resume disguised as a browser-based game. Explore a sprawling cyberpunk city
+    rendered entirely from voxels, discovering skill boxes that represent technical expertise. Features custom
+    voxel engine with greedy meshing, procedural city generation, dynamic lighting effects, and chunk-based
+    streaming for smooth 60 FPS performance. Think Minecraft meets Blade Runner in your browser.`,
+    href: 'https://3dresume.kjaniec.dev',
+    tags: ['Babylon.js', 'WebGL', 'TypeScript', 'Resume'],
+  },
 ]
 
 export default projectsData

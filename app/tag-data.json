@@ -7,6 +7,13 @@
   "ui-design": 1,
   "react": 2,
   "tailwind-css": 2,
+  "babylonjs": 2,
+  "webgl": 2,
+  "typescript": 4,
+  "voxel-engine": 1,
+  "procedural-generation": 1,
+  "game-dev": 1,
+  "greedy-meshing": 1,
   "website": 1,
   "content": 1,
   "design": 2,
@@ -23,7 +30,6 @@
   "websocket": 2,
   "real-time": 2,
   "agile": 2,
-  "typescript": 2,
   "go": 1,
   "nodejs": 1,
   "kubernetes": 1,
@@ -32,5 +38,6 @@
   "windows": 1,
   "linux": 1,
   "nextjs": 1,
-  "mdx": 1
+  "mdx": 1,
+  "resume": 1
 }
