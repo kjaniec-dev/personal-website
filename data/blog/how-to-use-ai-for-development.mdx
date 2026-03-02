@@ -204,7 +204,49 @@ Worktrees shine when you have independent features that touch different parts of
 
 My typical pattern: one worktree for a feature I am actively reviewing and guiding, another for a more mechanical task (updating dependencies, adding tests, fixing lint issues) that Claude Code can handle more autonomously.
 
-## Principle 5: Let the agent verify its own work
+## Principle 5: Orchestrate multiple agents within a feature
+
+Git worktrees solve the isolation problem. But there is a higher-level pattern worth learning: using an orchestrator agent to coordinate a team of sub-agents working on the same feature.
+
+### Parallel vs sequential agents
+
+When building a non-trivial feature, most of the work naturally splits into parts. Some parts are independent and can run simultaneously. Others have dependencies and must run in order.
+
+For the planning poker suspend/resume example:
+
+**Run in parallel:**
+```
+Agent A → Add suspend-voting to Node server
+Agent B → Add suspend-voting to Go server
+```
+
+These touch completely different codebases and can be worked on at the same time — open two worktrees, run two Claude Code sessions.
+
+**Run sequentially:**
+```
+Agent 1 → Define shared WebSocket message types
+Agent 2 → Implement server handling (depends on types from Agent 1)
+Agent 3 → Build client UI (depends on server contract from Agent 2)
+```
+
+The orchestrator pattern makes this explicit. Instead of doing everything in one long session, you give a top-level agent a plan and let it delegate:
+```
+You are coordinating a feature implementation.
+
+Step 1: Spawn a subagent to define the new WebSocket protocol types
+Step 2: Once types are done, spawn two parallel subagents:
+  - one for Node server implementation
+  - one for Go server implementation
+Step 3: Once both servers are done, implement the client-side changes
+```
+
+### Why this helps context windows
+
+An orchestrator agent does not need to hold all the implementation details in memory — it holds the plan and the interfaces between steps. Each sub-agent gets a focused context: one set of files, one task, one area of concern. When the sub-agent finishes and reports back, its working memory is discarded. The orchestrator accumulates summaries, not full file contents.
+
+This is why agent teams handle large features better than a single long session. The context stays clean at every level.
+
+## Principle 6: Let the agent verify its own work
 
 This is about building feedback loops. A good AI workflow is not "generate code, copy, paste, hope." It is "generate, run, fix, verify, repeat."
 
@@ -247,17 +289,15 @@ This pipes test output directly to Claude Code as a one-shot prompt. It reads th
 
 Step 6 is non-negotiable. Always review. AI writes plausible code — code that looks right and usually works. "Usually" is not production-grade. Check edge cases, verify the logic makes sense, run it manually.
 
-## Principle 6: Know when NOT to use AI
+## Principle 7: Know when NOT to use AI
 
 AI tools are not universally better. Here is where I still work manually:
 
 **Complex architectural decisions.** The agent can implement an architecture, but deciding between embedded vs external WebSocket servers, or choosing Redis pub/sub over a message queue — those decisions need human judgment with full business context.
 
-**Intricate UI interactions.** Custom animations, complex drag-and-drop, canvas rendering — AI-generated code for these tends to be fragile and needs heavy iteration. Faster to write it yourself.
+**Security-sensitive code.** Authentication flows, token handling, input sanitization — you can use AI to write the first draft, but you need to review it yourself, carefully, more than once. Read every line. The AI may miss subtle logic flaws that only show up under specific conditions. Sometimes you will need to fix things manually even after the code looks correct at a glance.
 
-**Security-sensitive code.** Authentication flows, token handling, input sanitization — I write these manually and use the AI only for reviewing what I wrote.
-
-**When you cannot explain what you want.** If you cannot write a clear prompt, you probably do not understand the problem well enough yet. Think first, then prompt.
+**When you cannot explain what you want.** If you cannot write a clear prompt, that is actually a useful signal — it means you have not fully thought through the problem yet. Instead of stopping, use it: enable planning mode and discuss the problem with the AI. Walk through the requirements together, let it ask clarifying questions, and use that dialogue to sharpen your own understanding before any code gets written.
 
 ## Putting it all together
 
@@ -266,11 +306,12 @@ Here is my complete workflow for a non-trivial feature:
 1. Plan           → Define what, where, and in what order
 2. Branch         → git worktree add for isolated work
 3. Context        → CLAUDE.md + specific file references
-4. Execute        → Claude Code scaffolds, Copilot assists inline
-5. Verify         → Hooks auto-lint, agent runs tests
-6. Compact        → /compact between major milestones
-7. Review         → Manual code review before commit
-8. Clean up       → git worktree remove, merge to main
+4. Orchestrate    → Parallel agents for independent parts, sequential for dependent ones
+5. Execute        → Claude Code scaffolds, Copilot assists inline
+6. Verify         → Hooks auto-lint, agent runs tests
+7. Compact        → /compact between major milestones
+8. Review         → Manual code review before commit
+9. Clean up       → git worktree remove, merge to main
 ```
 
 The tools keep evolving — Claude Code recently added agent teams, Copilot has a coding agent that creates PRs from issues — but the principles stay the same. Plan before you prompt. Give context. Manage the window. Verify the output. Review everything.
