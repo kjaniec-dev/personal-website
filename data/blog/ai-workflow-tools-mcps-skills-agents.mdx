@@ -1,0 +1,338 @@
+---
+title: 'Useful MCPs, Skills, and Agents for AI Workflow'
+date: '2026-03-15T00:00:00Z'
+lastmod: '2026-03-15'
+tags: ['ai', 'claude', 'development', 'workflow', 'automation']
+draft: false
+summary: 'A practical guide to MCP servers, custom skills, and agent patterns that have made the biggest difference in my AI-assisted development workflow.'
+layout: PostSimple
+---
+
+## The ecosystem is maturing fast
+
+A year ago, using AI in development mostly meant chat windows and autocomplete. Now there is a richer layer: Model Context Protocol (MCP) servers that give agents real tools, custom skills that encode repeatable workflows, and multi-agent architectures that can handle tasks too large or complex for a single session.
+
+This post covers the specific MCPs, skills, and agent patterns I rely on daily — what they actually do, why they are useful, and where they fit in a real workflow.
+
+---
+
+## MCPs: Giving your agent real tools
+
+MCP (Model Context Protocol) is an open standard that lets AI agents connect to external tools and data sources. Instead of copying and pasting context into a chat, the agent can directly query a database, read a file tree, or create a GitHub PR.
+
+Think of MCPs as plugins. Each one exposes a set of capabilities the agent can call like functions. The agent decides when to use them based on the task.
+
+### Filesystem MCP
+
+The most fundamental one. Lets the agent read and write files, list directories, and move things around — but scoped to a specific directory you define.
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/user/projects"]
+    }
+  }
+}
+```
+
+Without this, every interaction requires you to manually paste file contents. With it, you can say "read the auth middleware and explain what it does" and the agent handles the rest.
+
+**Best for:** local development, reviewing your own code, bulk file operations.
+
+### GitHub MCP
+
+Connects the agent to the GitHub API. It can read issues, list PRs, fetch diffs, create branches, and post comments.
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your_token>"
+      }
+    }
+  }
+}
+```
+
+With this, you can say "look at the open issues on this repo and suggest which one to tackle next" or "summarize the diff in PR #42." The agent reads actual live data instead of a screenshot you took earlier.
+
+**Best for:** triaging issues, reviewing PRs, generating release notes, understanding what changed between commits.
+
+### Playwright MCP
+
+Gives the agent a headless browser. It can navigate pages, click elements, fill forms, take screenshots, and scrape content.
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  }
+}
+```
+
+This one unlocks a whole class of tasks: visual regression checks, UI testing automation, scraping documentation that is not available as an API. I use it to verify that a deployed page looks right and to test form flows without writing a full Playwright script manually.
+
+**Best for:** UI verification, end-to-end testing, extracting content from web pages, automating browser-based workflows.
+
+### PostgreSQL MCP
+
+Lets the agent connect to a Postgres database and run read queries. You define which connection string it uses, so you control access level.
+
+```json
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://localhost/mydb"]
+    }
+  }
+}
+```
+
+Useful for data exploration — "how many users signed up last week, broken down by referral source" — without switching to a separate DB client. Also helps with understanding schema when building queries or migrations.
+
+**Best for:** analytics questions, schema exploration, debugging data issues.
+
+### Memory MCP
+
+Gives the agent a persistent key-value store that survives across sessions. It can store facts, project context, decisions made, and anything else worth remembering long-term.
+
+```json
+{
+  "mcpServers": {
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    }
+  }
+}
+```
+
+This is underrated. Without memory, every new session starts cold — the agent has no idea what you built last week or what conventions you decided on. With memory, it can retrieve that context on demand.
+
+**Best for:** storing project-level decisions, tracking ongoing work, building up domain knowledge over time.
+
+### Slack MCP
+
+Connects the agent to your Slack workspace. It can read channel messages, post updates, search for previous discussions, and look up user information.
+
+This is most useful for automated status updates and for surfacing relevant context from past discussions. Instead of digging through channels yourself, ask the agent "what was the last discussion about the authentication redesign."
+
+**Best for:** standup automation, surfacing historical decisions from team conversations, posting build notifications.
+
+---
+
+## Skills: Encoding repeatable workflows
+
+Skills are reusable prompts or workflow definitions that encode a pattern you use repeatedly. Instead of re-explaining how to do a code review or how to structure a blog post, you define it once and invoke it with a short command.
+
+In Claude Code, skills live in `.claude/commands/` as markdown files. Each one gets a `/name` shortcut.
+
+### Code review skill
+
+```markdown
+# Code Review
+
+Review the currently staged changes. For each file changed:
+
+1. Identify logic bugs, edge cases, and security issues
+2. Flag any TypeScript `any` types or missing null checks
+3. Check for performance anti-patterns (missing memoization, unnecessary re-renders)
+4. Verify tests exist and cover the changed behavior
+5. Confirm the code follows conventions in CLAUDE.md
+
+Output a prioritized list: blockers first, then warnings, then suggestions.
+```
+
+Invoke with `/review` before every commit. Catches things that are easy to miss when you have been staring at the same code for an hour.
+
+### Content checks skill
+
+```markdown
+# Content Checks
+
+Validate the most recently modified MDX blog post:
+
+1. Frontmatter: title, date, tags, summary, layout are all present and well-formed
+2. No broken internal links (links starting with /)
+3. Code blocks have language identifiers
+4. No orphaned headings (h3 without h2 parent)
+5. Summary is under 200 characters
+
+Report any issues found.
+```
+
+Invoke with `/content-checks` after writing a post. Prevents the embarrassing publish-and-immediately-fix-typo cycle.
+
+### Pre-deploy checklist skill
+
+```markdown
+# Pre-deploy
+
+Before deploying to production:
+
+1. Run `npm run build` and confirm it completes with 0 errors
+2. Run `npm run lint` and confirm 0 warnings
+3. Check that all new environment variables are documented in .env.example
+4. Verify no console.log or debug statements in changed files
+5. Confirm any new routes have metadata (title, description)
+
+Report pass/fail for each item.
+```
+
+Encoding this as a skill means it never gets skipped when you are in a hurry.
+
+### Dependency audit skill
+
+```markdown
+# Dependency Audit
+
+Review package.json for:
+
+1. Packages with known vulnerabilities (run npm audit and summarize)
+2. Packages that have not been updated in over 12 months
+3. Duplicate packages solving the same problem
+4. Dev dependencies accidentally listed in dependencies
+
+Produce a prioritized action list.
+```
+
+Run this monthly. Keeps the dependency graph from quietly accumulating technical debt.
+
+---
+
+## Agents: Patterns that scale
+
+MCPs give agents tools. Skills give them repeatable workflows. Agents are how you compose both into something that can handle real-world tasks.
+
+### The research agent
+
+When you need to understand something before doing it — evaluating a library, auditing how a codebase handles a specific pattern, comparing approaches — spin up a focused research agent.
+
+```text
+You are a research agent. Your task:
+Analyze how the current codebase handles authentication. Specifically:
+- Where are JWT tokens generated and validated?
+- What is the token expiry strategy?
+- Are refresh tokens implemented?
+- What happens when a token is invalid — is the error handling consistent?
+
+Read only. Do not modify any files. Produce a written summary.
+```
+
+The read-only constraint is important. Research agents should observe and report, not change things. This keeps the main agent's context clean and ensures the research can be repeated safely.
+
+### The implementation agent
+
+Once you have a clear plan (from planning or from the research agent), the implementation agent executes it. Give it a narrow scope:
+
+```text
+Implement refresh token support.
+
+Context: see the research summary above. Tokens are generated in auth/jwt.ts.
+
+Your tasks:
+1. Add refreshToken field to the User model in prisma/schema.prisma
+2. Update auth/jwt.ts to generate and validate refresh tokens
+3. Add POST /auth/refresh endpoint in app/api/auth/refresh/route.ts
+4. Write tests in __tests__/auth/refresh.test.ts
+
+Do not touch the existing login/logout endpoints. Run tests when done.
+```
+
+Scope matters. An implementation agent that tries to "add refresh tokens and also clean up the auth module" will take longer and produce harder-to-review changes.
+
+### The reviewer agent
+
+After implementation, before you merge:
+
+```text
+Review the changes in the auth/refresh feature branch.
+
+Focus on:
+1. Security: are refresh tokens stored securely? Is rotation implemented?
+2. Edge cases: what happens when a refresh token is expired? Reused?
+3. Test coverage: do the tests cover the cases above?
+4. Consistency: do the error responses match the pattern in other auth endpoints?
+
+Do not make changes. Produce a review report.
+```
+
+Using a separate agent for review means it approaches the code fresh, without the implementation agent's assumptions baked in. You get a more honest audit.
+
+### The orchestrator agent
+
+For large features, use an orchestrator that delegates to sub-agents:
+
+```text
+You are coordinating the implementation of multi-tenancy support.
+
+Step 1: Spawn a research sub-agent to map the current data model and
+        identify all places where tenant isolation needs to be added.
+
+Step 2: Once research is complete, spawn parallel sub-agents for:
+        - Database schema changes (migrations)
+        - API middleware for tenant context
+        - Frontend tenant switcher UI
+
+Step 3: Once all three are complete, spawn a reviewer sub-agent to
+        check for consistency across the changes.
+
+Report status after each step. If any sub-agent fails, stop and report.
+```
+
+The orchestrator holds the plan, not the implementation details. Each sub-agent holds only what it needs. Context windows stay manageable even for multi-day features.
+
+---
+
+## How they fit together
+
+Here is how I combine these in a typical feature:
+
+**1. Research phase**
+MCP: filesystem + github (to read code and open issues)
+Agent: research agent to understand the current state
+
+**2. Planning**
+No agent needed — I do this myself based on the research report
+
+**3. Implementation**
+MCP: filesystem (for file read/write)
+Skill: `/next-validation` to check build after changes
+Agent: implementation agent with narrow scope per task
+
+**4. Review**
+MCP: github (to inspect the diff as the agent sees it)
+Skill: `/review` for code quality
+Agent: reviewer agent for security and edge cases
+
+**5. Publish / Deploy**
+Skill: `/pre-deploy` checklist
+MCP: github (to create PR and post review summary)
+
+The pattern is: use MCPs to give agents access to real data, use skills to encode the checklist work, use agents to keep tasks focused and context windows clean.
+
+---
+
+## Starting points
+
+If you are setting up this stack fresh, start small:
+
+1. **Install filesystem MCP first.** It solves the most common friction point immediately.
+2. **Write one skill for your most-repeated workflow.** Code review or a pre-commit checklist are good first choices.
+3. **Add github MCP once you are comfortable with agents reading your codebase.** It opens up a lot of useful patterns around issues and PRs.
+4. **Introduce the research/implementation split** when you notice a single long session producing inconsistent or confused results.
+
+Each addition multiplies what agents can do. But the foundational thing — clear prompts and focused scopes — is what actually makes it work.
+
+---
+
+*Have MCPs or agent patterns that have saved you hours? I would like to hear about them — [contact@kjaniec.dev](mailto:contact@kjaniec.dev).*
