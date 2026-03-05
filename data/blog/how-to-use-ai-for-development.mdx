@@ -1,38 +1,40 @@
 ---
 title: 'How to Actually Use AI for Development: A Practical Guide'
 date: '2026-03-02T00:00:00Z'
-lastmod: '2026-03-02'
-tags: ['development', 'typescript', 'go', 'node-js']
+lastmod: '2026-03-05'
+tags: ['development', 'typescript', 'go', 'node-js', 'productivity']
 draft: false
-summary: 'AI coding tools are everywhere, but most developers use them wrong. This is a hands-on guide to planning before prompting, managing context windows, running parallel agents with git worktrees, and building a workflow that actually ships quality code.'
+summary: 'AI coding tools are everywhere, but many developers are using them inefficiently. This guide covers how to plan before prompting, manage context windows, run parallel agents with git worktrees, and build a workflow that actually ships quality code.'
 layout: PostSimple
 ---
 
 ## Most developers use AI tools wrong
 
-The default way people use AI coding tools looks something like this: open a chat, paste some code, ask "fix this", get a result, paste it back. That is basically using a jet engine to power a bicycle.
+The default way people use AI coding tools usually looks something like this: open a chat, paste some code, ask "fix this", get a result, and paste it back. That is like using a jet engine to power a bicycle.
 
-After months of daily work with Claude Code and GitHub Copilot across multiple projects — from my [planning poker app](https://github.com/kjaniec-dev/planning-poker) (Next.js + Go/Node WebSocket monorepo) to my [personal website](https://github.com/kjaniec-dev/personal-website) (Next.js + Tailwind) — I have developed a workflow that gets significantly better results. The key principles: plan before you prompt, give the AI proper context, manage the context window actively, and use git worktrees to run agents in parallel.
+After months of daily work with Claude Code and GitHub Copilot across multiple projects — from my [planning poker app](https://github.com/kjaniec-dev/planning-poker) (a Next.js + Go/Node WebSocket monorepo) to my [personal website](https://github.com/kjaniec-dev/personal-website) (Next.js + Tailwind) — I've developed a workflow that gets significantly better results. The key principles: plan before you prompt, give the AI proper context, manage the context window actively, and use git worktrees to run agents in parallel.
 
-This post covers all of it with concrete examples.
+This post covers it all with concrete examples.
 
 ## Principle 1: Plan before you prompt
 
 The biggest mistake is jumping straight into "write me a component." AI agents are powerful executors, but they need direction. The more precise your plan, the better the output.
 
-Before I open Claude Code, I always have a plan — even if it is just a mental checklist. For anything non-trivial, I write it down.
+Before I open Claude Code, I always have a plan — even if it's just a mental checklist. For anything non-trivial, I write it down.
 
 ### Planning in practice
 
-Say I want to add a new feature to my planning poker app — suspend/resume voting during a session. Before touching any AI tool, I think through:
+Say I want to add a new feature to my planning poker app — suspending and resuming voting during a session. Before touching any AI tool, I think through:
 
 **What changes are needed?**
+
 - New WebSocket message types: `suspend-voting`, `resume-voting`
 - Server-side state: `votingSuspended` boolean on the room
 - Client-side UI: a button for the room creator, visual feedback for participants
 - Tests: server message handling, client hook behavior
 
 **What files are affected?**
+
 - `servers/node/src/index.ts` — message handler
 - `servers/golang/main.go` — same for Go server
 - `src/lib/realtime/wsClient.ts` — client message types
@@ -40,9 +42,10 @@ Say I want to add a new feature to my planning poker app — suspend/resume voti
 - Test files for each
 
 **What is the right order?**
-Protocol first (server), then client logic, then UI, then tests.
+Protocol first (server), then client logic, then UI, and finally tests.
 
-Now when I open Claude Code, my prompt is not "add suspend voting feature." It is:
+Now when I open Claude Code, my prompt is not "add suspend voting feature." It's:
+
 ```
 Add suspend/resume voting to the planning poker app.
 
@@ -60,7 +63,7 @@ The difference in output quality between a vague prompt and a structured one is 
 
 ## Principle 2: Give the AI your project context
 
-AI agents are only as good as their context. Without it, they generate plausible but generic code that does not match your conventions. With it, they generate code that looks like you wrote it.
+AI agents are only as good as their context. Without it, they generate plausible but generic code that doesn't match your conventions. With it, they generate code that looks like you wrote it.
 
 ### CLAUDE.md — the most important file in your repo
 
@@ -69,8 +72,10 @@ Both my [planning-poker](https://github.com/kjaniec-dev/planning-poker) and [per
 A good `CLAUDE.md` covers:
 
 **Build and test commands** — so the agent can verify its own work:
+
 ```markdown
 ## Commands
+
 - `npm run dev:external` — start Next.js + WebSocket server
 - `npm test` — run Jest tests
 - `npm run lint:fix` — auto-fix with Biome
@@ -78,8 +83,10 @@ A good `CLAUDE.md` covers:
 ```
 
 **Architecture overview** — so it understands where things go:
+
 ```markdown
 ## Architecture
+
 - Frontend: Next.js 16 App Router in src/
 - WebSocket client: src/lib/realtime/wsClient.ts
 - Node server: servers/node/src/index.ts
@@ -88,8 +95,10 @@ A good `CLAUDE.md` covers:
 ```
 
 **Code conventions** — so generated code matches your style:
+
 ```markdown
 ## Conventions
+
 - Use Biome for formatting (not Prettier)
 - shadcn/ui for UI components
 - Conventional commits: feat:, fix:, test:, docs:
@@ -97,8 +106,10 @@ A good `CLAUDE.md` covers:
 ```
 
 **What NOT to do** — this is underrated but incredibly useful:
+
 ```markdown
 ## Constraints
+
 - Do not modify shadcn/ui base components directly
 - Do not add new npm dependencies without discussion
 - WebSocket server must remain stateless (Redis handles state sharing)
@@ -109,24 +120,27 @@ I also keep a `.claude/` directory with additional settings like permission rule
 ### GitHub Copilot instructions
 
 For Copilot in the IDE, create a `.github/copilot-instructions.md`:
+
 ```markdown
 ## Project: Planning Poker
-- TypeScript strict mode, no any types
+
+- TypeScript strict mode, no "any" types
 - React 19 with hooks, no class components
 - Use shadcn/ui patterns for new UI elements
 - Test files live next to source files
-- Biome handles formatting — do not add Prettier configs
+- Biome handles formatting — don't add Prettier configs
 ```
 
 This tunes Copilot's inline suggestions to match your project instead of generating generic React patterns.
 
 ## Principle 3: Manage the context window
 
-This is the concept most developers overlook. AI models have a fixed context window — essentially their working memory. Every file, every message, every tool output consumes tokens. When you fill it up, the model starts forgetting earlier instructions and quality drops.
+This is the concept most developers overlook. AI models have a fixed context window — essentially their working memory. Every file, message, and tool output consumes tokens. When you fill it up, the model starts forgetting earlier instructions and quality drops.
 
 ### Symptoms of context overflow
 
-You will notice it when the agent:
+You'll notice it when the agent:
+
 - Forgets a constraint you mentioned earlier
 - Starts generating code that contradicts earlier patterns
 - Repeats work it already did
@@ -134,11 +148,12 @@ You will notice it when the agent:
 
 ### How to manage it
 
-**Start fresh sessions for new tasks.** Do not reuse a session where you debugged a WebSocket issue to then refactor your CSS. Each session should have a focused purpose.
+**Start fresh sessions (the ultimate context clear).** Don't reuse a session where you debugged a WebSocket issue to then refactor your CSS. Starting a new session is the most reliable way to clear the memory and ensure the agent isn't being influenced by stale information.
 
-**Use `/compact` aggressively.** In Claude Code, the `/compact` command summarizes the conversation and reclaims context space. I use it after every major milestone — once the server changes compile and tests pass, compact before moving to the client work.
+**Use `/compact` for long-running tasks.** If you're in the middle of a complex feature and don't want to lose the current state but need more tokens, the `/compact` command in Claude Code summarizes the conversation and reclaims space. I use it after major milestones — like when the server changes compile — before moving to the next part of the same task.
 
 **Be surgical with context.** Instead of "look at the whole project," point the agent to specific files:
+
 ```
 Look at servers/node/src/index.ts and add handling
 for the new suspend-voting message type.
@@ -148,6 +163,7 @@ Follow the pattern used by the reveal message handler.
 This gives the agent exactly what it needs without wasting tokens on irrelevant files.
 
 **Use subagents for exploration.** When Claude Code encounters something it needs to investigate — like understanding how your WebSocket broadcasting works — it can spawn a lighter subagent (Haiku) to explore and report back. This keeps your main context clean. You can trigger this with:
+
 ```
 Use a subagent to analyze how Redis pub/sub is implemented
 in servers/node/src/index.ts, then come back with a summary.
@@ -155,13 +171,14 @@ in servers/node/src/index.ts, then come back with a summary.
 
 ## Principle 4: Git worktrees for parallel agents
 
-This is the power move that most people do not know about. Git worktrees let you check out multiple branches of the same repo simultaneously in different directories. Combined with AI agents, you can run parallel development streams.
+This is the power move that many developers aren't aware of. Git worktrees let you check out multiple branches of the same repo simultaneously in different directories. Combined with AI agents, you can run parallel development streams.
 
 ### The problem
 
-Normally, if you want to work on two features at once — say, adding dark mode to the voting cards AND adding a story link field — you need to stash, switch branches, work, switch back. With an AI agent occupying a terminal session on one branch, you are stuck waiting.
+Normally, if you want to work on two features at once — say, adding dark mode to the voting cards AND adding a story link field — you need to stash, switch branches, work, and switch back. With an AI agent occupying a terminal session on one branch, you're stuck waiting.
 
 ### The solution: worktrees
+
 ```bash
 # You are in ~/projects/planning-poker on main branch
 
@@ -173,11 +190,13 @@ git worktree add ../planning-poker-story-links feature/story-links
 ```
 
 Now you have three directories:
+
 - `~/projects/planning-poker` — main branch
 - `~/projects/planning-poker-dark-mode` — dark mode feature
 - `~/projects/planning-poker-story-links` — story links feature
 
 Each has its own working directory with the full repo. You can open Claude Code in each one independently:
+
 ```bash
 # Terminal 1
 cd ~/projects/planning-poker-dark-mode
@@ -190,9 +209,10 @@ claude
 > Add a story link/title field to the room state and UI...
 ```
 
-Two agents, working in parallel, on isolated branches. No conflicts, no stashing, no context mixing. When both are done, merge them into main separately.
+Two agents, working in parallel, on isolated branches. No conflicts, no stashing, and no context mixing. When both are done, merge them into main separately.
 
 ### Clean up when done
+
 ```bash
 git worktree remove ../planning-poker-dark-mode
 git worktree remove ../planning-poker-story-links
@@ -202,11 +222,11 @@ git worktree remove ../planning-poker-story-links
 
 Worktrees shine when you have independent features that touch different parts of the codebase. They are less useful when two features overlap heavily — in that case, work sequentially to avoid merge hell.
 
-My typical pattern: one worktree for a feature I am actively reviewing and guiding, another for a more mechanical task (updating dependencies, adding tests, fixing lint issues) that Claude Code can handle more autonomously.
+My typical pattern: one worktree for a feature I'm actively reviewing and guiding, another for a more mechanical task (updating dependencies, adding tests, fixing lint issues) that Claude Code can handle more autonomously.
 
 ## Principle 5: Orchestrate multiple agents within a feature
 
-Git worktrees solve the isolation problem. But there is a higher-level pattern worth learning: using an orchestrator agent to coordinate a team of sub-agents working on the same feature.
+Git worktrees solve the isolation problem. But there's a higher-level pattern worth learning: using an orchestrator agent to coordinate a team of sub-agents working on the same feature.
 
 ### Parallel vs sequential agents
 
@@ -215,6 +235,7 @@ When building a non-trivial feature, most of the work naturally splits into part
 For the planning poker suspend/resume example:
 
 **Run in parallel:**
+
 ```
 Agent A → Add suspend-voting to Node server
 Agent B → Add suspend-voting to Go server
@@ -223,6 +244,7 @@ Agent B → Add suspend-voting to Go server
 These touch completely different codebases and can be worked on at the same time — open two worktrees, run two Claude Code sessions.
 
 **Run sequentially:**
+
 ```
 Agent 1 → Define shared WebSocket message types
 Agent 2 → Implement server handling (depends on types from Agent 1)
@@ -230,6 +252,7 @@ Agent 3 → Build client UI (depends on server contract from Agent 2)
 ```
 
 The orchestrator pattern makes this explicit. Instead of doing everything in one long session, you give a top-level agent a plan and let it delegate:
+
 ```
 You are coordinating a feature implementation.
 
@@ -242,17 +265,18 @@ Step 3: Once both servers are done, implement the client-side changes
 
 ### Why this helps context windows
 
-An orchestrator agent does not need to hold all the implementation details in memory — it holds the plan and the interfaces between steps. Each sub-agent gets a focused context: one set of files, one task, one area of concern. When the sub-agent finishes and reports back, its working memory is discarded. The orchestrator accumulates summaries, not full file contents.
+An orchestrator agent doesn't need to hold all the implementation details in memory — it holds the plan and the interfaces between steps. Each sub-agent gets a focused context: one set of files, one task, one area of concern. When the sub-agent finishes and reports back, its working memory is discarded. The orchestrator accumulates summaries, not full file contents.
 
 This is why agent teams handle large features better than a single long session. The context stays clean at every level.
 
 ## Principle 6: Let the agent verify its own work
 
-This is about building feedback loops. A good AI workflow is not "generate code, copy, paste, hope." It is "generate, run, fix, verify, repeat."
+This is about building feedback loops. A good AI workflow is not "generate code, copy, paste, hope." It's "generate, run, fix, verify, repeat."
 
 ### Hooks automate verification
 
 In Claude Code, hooks run shell commands automatically at key points:
+
 ```json
 {
   "hooks": {
@@ -271,6 +295,7 @@ This means every file Claude Code touches gets auto-formatted. No "fix the forma
 ### Pipe outputs for debugging
 
 One of my most-used patterns:
+
 ```bash
 npm test 2>&1 | claude -p "analyze these test failures and fix the root cause"
 ```
@@ -278,6 +303,7 @@ npm test 2>&1 | claude -p "analyze these test failures and fix the root cause"
 This pipes test output directly to Claude Code as a one-shot prompt. It reads the failures, identifies the issue, and edits the files. For my planning poker project with 38+ tests across frontend, Node server, and Go server, this catches issues fast.
 
 ### The verification loop
+
 ```
 1. Claude Code makes changes
 2. Hooks auto-lint and format
@@ -287,7 +313,7 @@ This pipes test output directly to Claude Code as a one-shot prompt. It reads th
 6. I do a final review before committing
 ```
 
-Step 6 is non-negotiable. Always review. AI writes plausible code — code that looks right and usually works. "Usually" is not production-grade. Check edge cases, verify the logic makes sense, run it manually.
+Step 6 is non-negotiable. Always review. AI writes plausible code — code that looks right and usually works. "Usually" is not production-grade. Check edge cases, verify the logic makes sense, and run it manually.
 
 ## Principle 7: Know when NOT to use AI
 
@@ -295,13 +321,14 @@ AI tools are not universally better. Here is where I still work manually:
 
 **Complex architectural decisions.** The agent can implement an architecture, but deciding between embedded vs external WebSocket servers, or choosing Redis pub/sub over a message queue — those decisions need human judgment with full business context.
 
-**Security-sensitive code.** Authentication flows, token handling, input sanitization — you can use AI to write the first draft, but you need to review it yourself, carefully, more than once. Read every line. The AI may miss subtle logic flaws that only show up under specific conditions. Sometimes you will need to fix things manually even after the code looks correct at a glance.
+**Security-sensitive code.** Authentication flows, token handling, and input sanitization — you can use AI to write the first draft, but you need to review it yourself, carefully, more than once. Read every line. The AI may miss subtle logic flaws that only show up under specific conditions. Sometimes you'll need to fix things manually even after the code looks correct at a glance.
 
-**When you cannot explain what you want.** If you cannot write a clear prompt, that is actually a useful signal — it means you have not fully thought through the problem yet. Instead of stopping, use it: enable planning mode and discuss the problem with the AI. Walk through the requirements together, let it ask clarifying questions, and use that dialogue to sharpen your own understanding before any code gets written.
+**When you cannot explain what you want.** If you can't write a clear prompt, that's actually a useful signal — it means you haven't fully thought through the problem yet. Instead of stopping, use it: enable planning mode and discuss the problem with the AI. Walk through the requirements together, let it ask clarifying questions, and use that dialogue to sharpen your own understanding before any code gets written.
 
 ## Putting it all together
 
 Here is my complete workflow for a non-trivial feature:
+
 ```
 1. Plan           → Define what, where, and in what order
 2. Branch         → git worktree add for isolated work
@@ -309,15 +336,15 @@ Here is my complete workflow for a non-trivial feature:
 4. Orchestrate    → Parallel agents for independent parts, sequential for dependent ones
 5. Execute        → Claude Code scaffolds, Copilot assists inline
 6. Verify         → Hooks auto-lint, agent runs tests
-7. Compact        → /compact between major milestones
+7. Start fresh sessions / Compact between major milestones
 8. Review         → Manual code review before commit
 9. Clean up       → git worktree remove, merge to main
 ```
 
 The tools keep evolving — Claude Code recently added agent teams, Copilot has a coding agent that creates PRs from issues — but the principles stay the same. Plan before you prompt. Give context. Manage the window. Verify the output. Review everything.
 
-AI does not replace the developer. It replaces the tedious parts so you can spend more time on the parts that actually need a human brain.
+AI doesn't replace the developer. It replaces the tedious parts so you can spend more time on the parts that actually need a human brain.
 
 ---
 
-*Working on your own AI-assisted workflow? I would love to hear what patterns work for you — reach out at [contact@kjaniec.dev](mailto:contact@kjaniec.dev).*
+_Working on your own AI-assisted workflow? I'd love to hear what patterns work for you — reach out at [contact@kjaniec.dev](mailto:contact@kjaniec.dev)._
