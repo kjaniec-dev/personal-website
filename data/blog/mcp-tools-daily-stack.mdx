@@ -1,0 +1,174 @@
+---
+title: 'My Daily MCP Stack: Tools That Actually Supercharge Claude Code'
+date: '2026-03-23T10:00:00Z'
+lastmod: '2026-03-23'
+tags: ['development', 'productivity', 'tools']
+draft: false
+summary: 'Five MCPs I use every day with Claude Code — Serena, Playwright, Sequential Thinking, Claude Code Superpowers, and Context7 — and what makes each worth keeping.'
+layout: PostSimple
+authors: ['default']
+---
+
+## The right tool for the job
+
+I wrote a post a while back about [how to actually use AI for development](/blog/how-to-use-ai-for-development) — principles like planning before prompting, managing context windows, and running parallel agents with git worktrees. That post is about mindset and workflow. This one is about the specific tools sitting underneath that workflow.
+
+MCPs — Model Context Protocol servers — are plugins for Claude Code. They extend what Claude can do beyond reading and writing files. Instead of working blind, Claude can navigate your codebase semantically, control a real browser, reason through hard problems step by step, or pull up the latest documentation for any library. The difference in output quality when you have the right MCPs wired up is significant.
+
+After months of experimenting, I've settled on five tools that I use on almost every project. Here's what they are and what I actually use them for.
+
+## A quick note on MCP setup
+
+If you haven't used MCPs before: they're configured either via the CLI (`claude mcp add`) or directly in `~/.claude/settings.json`. Each MCP runs as a server process that Claude communicates with during a session. You can scope them globally (available in all projects) or per-project.
+
+The five tools below are all installed globally on my machine. They add very little overhead and I'd rather have them available than need them and not have them.
+
+---
+
+## Serena — code intelligence through language servers
+
+The most transformative tool in my stack. Serena is an MCP that wraps Language Server Protocol (LSP) — the same underlying technology that powers IDE features like go-to-definition, find-all-references, and symbol search.
+
+Without Serena, Claude navigates your codebase the way a junior developer navigates an unfamiliar project on their first day: by grep-ing, reading directory listings, and making educated guesses. With Serena, it navigates the way someone who has been working in the codebase for months navigates it: by understanding symbols, types, and call graphs.
+
+### What it enables
+
+- **Go to definition** — Claude can jump directly to where a function, type, or variable is defined instead of searching for it
+- **Find all references** — instantly find every place a symbol is used across the entire project
+- **Symbol search** — locate any class, function, or type by name without knowing which file it's in
+- **Hover types** — understand what a value actually is at any point in the code
+
+### Where I actually use it
+
+The biggest win is cross-file refactors. Say I have a utility function that's been around for two years and I want to rename it or change its signature. With a normal Claude session, finding all the callers involves careful grepping and hoping nothing was missed. With Serena, Claude calls find-references and gets an exhaustive list — files, line numbers, exact call sites — before touching a single line of code.
+
+It also pays dividends on large codebases I don't fully know. When I join a client project and need to understand how a particular API route is wired up — what middleware runs, what services it calls, what types flow through it — Serena lets Claude trace that path accurately rather than piecing it together from file reads.
+
+The setup requires a language server compatible with your project (e.g., `typescript-language-server` for TypeScript projects, `gopls` for Go). Once configured, it's transparent — Claude just uses it.
+
+---
+
+## Playwright MCP — Claude controlling a real browser
+
+Playwright MCP is exactly what it sounds like: it gives Claude the ability to drive a real browser. Navigate to a URL, take a screenshot, click buttons, fill in forms, read page content, run JavaScript — all of it.
+
+The official MCP is maintained by Microsoft alongside the Playwright project itself, which means it's well-maintained and keeps pace with Playwright updates.
+
+### What it enables
+
+- **Screenshots on demand** — Claude can capture a page at any point during a task
+- **Interaction** — click elements, type into inputs, submit forms, navigate between pages
+- **Page state reading** — access the DOM, read text content, check what's visible
+- **Multi-step flows** — execute sequences of actions (log in, navigate to dashboard, verify a value)
+
+### Where I actually use it
+
+The most frequent use case for me is visual verification after UI changes. I'll ask Claude to make a CSS adjustment, and instead of me alt-tabbing to a browser to check it, Claude screenshots the page before and after and tells me what changed. This is surprisingly effective for catching regressions — "the spacing on mobile got worse" — without me having to manually inspect every breakpoint.
+
+The second use case is testing auth flows. When I'm working on an OAuth integration or a login flow, I can ask Claude to walk through the actual user journey: open the page, click sign in, complete the form, verify the redirect. It's not a replacement for proper E2E test suites, but for spot-checking during development it's fast and concrete.
+
+I also use it for quick scraping tasks. Instead of writing a scraper, describing what data I need, and pointing Claude at the URL is often enough for one-off data extraction.
+
+One thing worth knowing: the MCP launches a real browser process (with a `--headed` option to make it visible). For CI or automated runs you'll want headless mode; for local development, watching Claude click through your app in real time is genuinely useful for spotting UX issues.
+
+---
+
+## Sequential Thinking — structured reasoning for hard problems
+
+This one from Anthropic's official MCP servers collection is less about external capabilities and more about how Claude reasons. The Sequential Thinking MCP provides a tool that lets Claude work through problems in explicit, tracked steps — thinking out loud in a structured way rather than jumping to conclusions.
+
+It's particularly useful for problems where the solution space is large, the dependencies between decisions matter, or getting the wrong first step means all subsequent steps are wrong.
+
+### What it enables
+
+- **Step-by-step decomposition** — Claude breaks a problem into a numbered sequence of reasoning steps before acting
+- **Revision support** — steps can be marked as needing revision; Claude can backtrack and correct earlier reasoning
+- **Branching thoughts** — different solution paths can be explored and compared before committing
+- **Transparent reasoning** — the chain of thought is visible and auditable, not hidden inside a single response
+
+### Where I actually use it
+
+Architecture decisions are the main use case. When I'm designing a new data model or choosing between two approaches for a service boundary, I'll explicitly invoke sequential thinking to walk through the trade-offs systematically. Claude stops treating it as a quick judgment call and actually evaluates each option against the constraints.
+
+The other high-value case is debugging complex issues — particularly cascade failures or race conditions where the cause is several layers removed from the symptom. I had a bug recently where a WebSocket client was occasionally missing messages during reconnection. The root cause turned out to be a combination of event handler registration timing and reconnection backoff behavior. With sequential thinking active, Claude worked through the possible failure modes one by one rather than immediately proposing the first fix that came to mind. It found the right cause on the first attempt.
+
+You can trigger it explicitly ("use sequential thinking for this") or configure Claude to invoke it automatically for certain types of tasks. I do both — automatic for architecture tasks, explicit for debugging.
+
+---
+
+## Claude Code Superpowers — extending the Claude Code skill set
+
+Claude Code Superpowers is an MCP that adds an additional layer of skills and utilities on top of what Claude Code ships with out of the box. Think of it as a curated collection of additional capabilities — things that would be possible to do manually but that Superpowers makes available as first-class tools.
+
+### What it enables
+
+The exact set of skills evolves as the MCP is updated, but the core value is consistent: operations that fall into the gap between "Claude can reason about this" and "Claude can actually execute this" become executable. It bridges that gap with concrete tools.
+
+Commonly useful additions include enhanced git operations, richer project analysis, smarter file system operations, and utilities for working with structured data formats. The MCP is designed to complement Claude Code's native toolset rather than replace any part of it.
+
+### Where I actually use it
+
+My primary use case is project-level analysis tasks — things like "what's the overall health of this codebase?" or "where are the biggest coupling problems?" These are questions Claude can theorize about from file reads, but with Superpowers the analysis is richer and more actionable.
+
+I also use it when I need to do operations across multiple files in ways that would be tedious to orchestrate manually. Batch operations, bulk transformations, consistency checks across a large number of files — Superpowers handles these more cleanly than trying to thread together native Claude Code tools.
+
+It's the MCP I reach for when I find myself thinking "Claude could almost do this, but not quite."
+
+---
+
+## Context7 — always-fresh library documentation
+
+The problem this solves is simple and serious: Claude's training data has a cutoff date. Libraries don't. Next.js is on version 15 with the App Router having changed significantly. Tailwind CSS is on version 4 with a completely different configuration model. React 19 introduced APIs that didn't exist when Claude's training ended.
+
+Without fresh documentation, Claude makes confident-sounding mistakes. It generates code that uses deprecated APIs, misses new patterns, or simply doesn't know about features that exist.
+
+Context7 fixes this by fetching live, up-to-date documentation for any library on demand. When Claude needs to know how something works in a current version, it queries Context7 instead of relying on training data.
+
+### What it enables
+
+- **Current API reference** — fetch the actual documentation for any library version
+- **Migration guides** — get the official guide for upgrading between major versions
+- **Example code** — pull real, current usage examples from official docs
+- **On-demand lookup** — no configuration needed per-library; just ask about what you need
+
+### Where I actually use it
+
+Every time I work with a library that's moved significantly in the last year. This is more often than I'd like — Next.js, Tailwind, shadcn/ui, Drizzle ORM, and Hono have all changed enough that relying on Claude's training data alone produces wrong answers regularly.
+
+The workflow is simple: when Claude starts generating code that involves a library API I'm not sure is current, I tell it to check Context7 first. It fetches the relevant documentation, then generates code based on that. The difference in accuracy is night and day for fast-moving libraries.
+
+I've also found it valuable when working with internal or less-common libraries that wouldn't have much representation in Claude's training data at all. If the library has public docs, Context7 can fetch them.
+
+One practical tip: make it a habit to mention the specific version you're targeting ("use Context7 to check the Next.js 15 docs for this"). The more specific you are, the more precise the documentation fetch.
+
+---
+
+## How they work together
+
+The real value comes when these tools combine in a single workflow. Here's what a realistic session looks like:
+
+I'm adding a new API route to a Next.js project that's already running in production. The route needs to interface with an existing service layer, follow the project's auth patterns, and use some newer Next.js App Router features I'm less familiar with.
+
+1. **Serena** navigates the existing service layer — go-to-definition on the relevant interfaces, find-references to understand how similar routes consume them
+2. **Context7** fetches the Next.js 15 documentation for Route Handlers and the caching behavior I need to configure correctly
+3. **Sequential Thinking** works through the implementation plan — what the route needs to do, how it fits the existing patterns, what edge cases matter
+4. **Playwright MCP** verifies the finished route in a real browser — actually hits the endpoint, checks the response, confirms the auth middleware is behaving correctly
+5. **Superpowers** handles the cleanup — consistency checks against existing routes, ensuring naming and structure matches project conventions
+
+None of these tools is doing something I couldn't do manually with enough effort. What they do is compress the time between "starting a task" and "having something correct" by removing the friction at each step.
+
+---
+
+## Final thoughts
+
+These five MCPs are daily drivers for me now, not experiments. Each one addresses a real limitation in the default Claude Code setup:
+
+- **Serena** removes navigational guesswork in code
+- **Playwright MCP** makes visual and E2E verification fast
+- **Sequential Thinking** improves reasoning on hard problems
+- **Claude Code Superpowers** fills capability gaps
+- **Context7** keeps documentation current
+
+If you're already using Claude Code and haven't explored MCPs beyond the defaults, start with Context7 — it has the most immediate, visible impact for most projects. Then add Serena if you work in large codebases. The rest follow naturally.
+
+If you've got MCPs in your own stack that I haven't mentioned, I'd genuinely like to hear about them.
