@@ -1,10 +1,10 @@
 ---
-title: 'My Daily MCP Stack: Tools That Actually Supercharge Claude Code'
+title: 'My Daily Claude Code Toolkit: MCPs, Skills, and the Tools That Stick'
 date: '2026-03-23T10:00:00Z'
 lastmod: '2026-03-23'
 tags: ['development', 'productivity', 'tools']
 draft: false
-summary: 'Five MCPs I use every day with Claude Code — Serena, Playwright, Sequential Thinking, Claude Code Superpowers, and Context7 — and what makes each worth keeping.'
+summary: 'Five tools I use every day with Claude Code — Serena, Playwright MCP, Sequential Thinking, Superpowers, and Context7 — what each does and why it earns its spot.'
 layout: PostSimple
 authors: ['default']
 ---
@@ -13,15 +13,17 @@ authors: ['default']
 
 I wrote a post a while back about [how to actually use AI for development](/blog/how-to-use-ai-for-development) — principles like planning before prompting, managing context windows, and running parallel agents with git worktrees. That post is about mindset and workflow. This one is about the specific tools sitting underneath that workflow.
 
-MCPs — Model Context Protocol servers — are plugins for Claude Code. They extend what Claude can do beyond reading and writing files. Instead of working blind, Claude can navigate your codebase semantically, control a real browser, reason through hard problems step by step, or pull up the latest documentation for any library. The difference in output quality when you have the right MCPs wired up is significant.
+Not all of these are MCPs. Some are MCP servers — plugins that give Claude access to external capabilities like browser control or live documentation. One is a skills framework that reshapes how Claude approaches the entire development process. They're different kinds of tools but they all live in the same daily workflow.
 
-After months of experimenting, I've settled on five tools that I use on almost every project. Here's what they are and what I actually use them for.
+After months of experimenting, I've settled on five that I use on almost every project. Here's what they are and what I actually use them for.
 
-## A quick note on MCP setup
+## A quick note on setup
 
-If you haven't used MCPs before: they're configured either via the CLI (`claude mcp add`) or directly in `~/.claude/settings.json`. Each MCP runs as a server process that Claude communicates with during a session. You can scope them globally (available in all projects) or per-project.
+**MCPs** (Model Context Protocol servers) are configured via the CLI (`claude mcp add`) or directly in `~/.claude/settings.json`. Each runs as a server process Claude communicates with during a session. You can scope them globally or per-project.
 
-The five tools below are all installed globally on my machine. They add very little overhead and I'd rather have them available than need them and not have them.
+**Skills frameworks** like Superpowers work differently — they're installed as plugins and provide skill files (structured markdown documents) that Claude reads and follows automatically. No manual invocation needed; they trigger based on context.
+
+All five tools below are installed globally on my machine.
 
 ---
 
@@ -67,7 +69,7 @@ The most frequent use case for me is visual verification after UI changes. I'll 
 
 The second use case is testing auth flows. When I'm working on an OAuth integration or a login flow, I can ask Claude to walk through the actual user journey: open the page, click sign in, complete the form, verify the redirect. It's not a replacement for proper E2E test suites, but for spot-checking during development it's fast and concrete.
 
-I also use it for quick scraping tasks. Instead of writing a scraper, describing what data I need, and pointing Claude at the URL is often enough for one-off data extraction.
+I also use it for quick scraping tasks. Instead of writing a scraper, describing what data I need and pointing Claude at the URL is often enough for one-off data extraction.
 
 One thing worth knowing: the MCP launches a real browser process (with a `--headed` option to make it visible). For CI or automated runs you'll want headless mode; for local development, watching Claude click through your app in real time is genuinely useful for spotting UX issues.
 
@@ -96,23 +98,31 @@ You can trigger it explicitly ("use sequential thinking for this") or configure 
 
 ---
 
-## Claude Code Superpowers — extending the Claude Code skill set
+## Superpowers — a structured development workflow as a skill set
 
-Claude Code Superpowers is an MCP that adds an additional layer of skills and utilities on top of what Claude Code ships with out of the box. Think of it as a curated collection of additional capabilities — things that would be possible to do manually but that Superpowers makes available as first-class tools.
+[Superpowers](https://github.com/obra/superpowers) by Jesse Vincent is unlike the other tools on this list. It's not an MCP — it's a skills framework: a curated collection of structured workflow skills that Claude automatically follows when relevant. Installing it changes how Claude approaches software development at a process level, not just a capability level.
 
-### What it enables
+The core philosophy is four things: test-driven development, systematic processes over intuition, complexity reduction, and evidence-based verification. These aren't suggestions — they're enforced patterns built into the skills.
 
-The exact set of skills evolves as the MCP is updated, but the core value is consistent: operations that fall into the gap between "Claude can reason about this" and "Claude can actually execute this" become executable. It bridges that gap with concrete tools.
+### What it enforces
 
-Commonly useful additions include enhanced git operations, richer project analysis, smarter file system operations, and utilities for working with structured data formats. The MCP is designed to complement Claude Code's native toolset rather than replace any part of it.
+The framework shapes Claude's behaviour across the full development lifecycle:
+
+- **Design phase** — Claude asks clarifying questions before writing a single line, refines requirements through back-and-forth, and presents designs in digestible sections for approval before proceeding
+- **Planning phase** — approved designs get converted into bite-sized implementation tasks (2–5 minutes each), each with specific file paths, complete code context, and verification steps
+- **Execution phase** — tasks are dispatched to fresh subagents with isolated git worktrees; each subagent gets a two-stage code review on completion: spec compliance first, then code quality
+- **TDD enforcement** — the RED-GREEN-REFACTOR cycle is mandatory; if tests weren't written before implementation, the code gets deleted and redone correctly
+- **Debugging methodology** — systematic four-phase root cause analysis instead of "try things until something works"
 
 ### Where I actually use it
 
-My primary use case is project-level analysis tasks — things like "what's the overall health of this codebase?" or "where are the biggest coupling problems?" These are questions Claude can theorize about from file reads, but with Superpowers the analysis is richer and more actionable.
+The biggest payoff is on non-trivial features where the temptation to just start coding is high. Superpowers forces a design conversation first. That conversation almost always reveals assumptions I hadn't examined — edge cases, integration points, constraints that change the implementation approach. Catching those before writing code is worth a lot.
 
-I also use it when I need to do operations across multiple files in ways that would be tedious to orchestrate manually. Batch operations, bulk transformations, consistency checks across a large number of files — Superpowers handles these more cleanly than trying to thread together native Claude Code tools.
+The planning phase output is also genuinely useful on its own. Even when I end up doing tasks manually rather than through subagents, having bite-sized chunks with explicit verification steps makes progress easier to track and review.
 
-It's the MCP I reach for when I find myself thinking "Claude could almost do this, but not quite."
+The TDD enforcement is uncomfortable at first if you're not used to writing tests before implementation. After a while it's just how you work, and you notice the gap when it's absent.
+
+Install it via the Claude Code plugin marketplace by searching for "superpowers", or manually by following the instructions in the [GitHub repo](https://github.com/obra/superpowers). Once installed, the skills activate automatically — you don't need to invoke them explicitly.
 
 ---
 
@@ -139,7 +149,7 @@ The workflow is simple: when Claude starts generating code that involves a libra
 
 I've also found it valuable when working with internal or less-common libraries that wouldn't have much representation in Claude's training data at all. If the library has public docs, Context7 can fetch them.
 
-One practical tip: make it a habit to mention the specific version you're targeting ("use Context7 to check the Next.js 15 docs for this"). The more specific you are, the more precise the documentation fetch.
+One practical tip: mention the specific version you're targeting ("use Context7 to check the Next.js 15 docs for this"). The more specific you are, the more precise the documentation fetch.
 
 ---
 
@@ -149,26 +159,26 @@ The real value comes when these tools combine in a single workflow. Here's what 
 
 I'm adding a new API route to a Next.js project that's already running in production. The route needs to interface with an existing service layer, follow the project's auth patterns, and use some newer Next.js App Router features I'm less familiar with.
 
-1. **Serena** navigates the existing service layer — go-to-definition on the relevant interfaces, find-references to understand how similar routes consume them
-2. **Context7** fetches the Next.js 15 documentation for Route Handlers and the caching behavior I need to configure correctly
-3. **Sequential Thinking** works through the implementation plan — what the route needs to do, how it fits the existing patterns, what edge cases matter
-4. **Playwright MCP** verifies the finished route in a real browser — actually hits the endpoint, checks the response, confirms the auth middleware is behaving correctly
-5. **Superpowers** handles the cleanup — consistency checks against existing routes, ensuring naming and structure matches project conventions
+1. **Superpowers** kicks in first — before any code gets written, Claude asks clarifying questions about the route's requirements, presents the design, and plans the implementation as discrete tasks
+2. **Serena** navigates the existing service layer — go-to-definition on the relevant interfaces, find-references to understand how similar routes consume them
+3. **Context7** fetches the Next.js 15 documentation for Route Handlers and the caching behaviour I need to configure correctly
+4. **Sequential Thinking** works through edge cases — auth failure paths, caching invalidation, error response shapes
+5. **Playwright MCP** verifies the finished route in a real browser — actually hits the endpoint, checks the response, confirms the auth middleware is behaving correctly
 
-None of these tools is doing something I couldn't do manually with enough effort. What they do is compress the time between "starting a task" and "having something correct" by removing the friction at each step.
+None of these tools is doing something I couldn't do manually with enough effort. What they do is compress the time between "starting a task" and "having something correct" by removing friction at each step.
 
 ---
 
 ## Final thoughts
 
-These five MCPs are daily drivers for me now, not experiments. Each one addresses a real limitation in the default Claude Code setup:
+These five tools are daily drivers, not experiments. Each one addresses a real gap:
 
-- **Serena** removes navigational guesswork in code
+- **Serena** removes navigational guesswork in large codebases
 - **Playwright MCP** makes visual and E2E verification fast
 - **Sequential Thinking** improves reasoning on hard problems
-- **Claude Code Superpowers** fills capability gaps
-- **Context7** keeps documentation current
+- **Superpowers** enforces a disciplined development process end-to-end
+- **Context7** keeps library documentation current
 
-If you're already using Claude Code and haven't explored MCPs beyond the defaults, start with Context7 — it has the most immediate, visible impact for most projects. Then add Serena if you work in large codebases. The rest follow naturally.
+If you're new to extending Claude Code, start with Context7 — it has the most immediate impact. Then Serena if you work in large codebases. Superpowers if you want your whole development process to tighten up.
 
-If you've got MCPs in your own stack that I haven't mentioned, I'd genuinely like to hear about them.
+If you've got tools in your own Claude Code setup that aren't on this list, I'd genuinely like to hear about them.
