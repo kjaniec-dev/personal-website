@@ -1,7 +1,7 @@
 ---
 title: 'My Daily Claude Code Toolkit: MCPs, Skills, and the Tools That Stick'
 date: '2026-03-23T10:00:00Z'
-lastmod: '2026-03-23'
+lastmod: '2026-03-30'
 tags: ['development', 'productivity', 'tools']
 draft: false
 summary: 'Five tools I use every day with Claude Code — Serena, Playwright MCP, Sequential Thinking, Superpowers, and Context7 — what each does and why it earns its spot.'
@@ -94,7 +94,7 @@ Architecture decisions are the main use case. When I'm designing a new data mode
 
 The other high-value case is debugging complex issues — particularly cascade failures or race conditions where the cause is several layers removed from the symptom. I had a bug recently where a WebSocket client was occasionally missing messages during reconnection. The root cause turned out to be a combination of event handler registration timing and reconnection backoff behavior. With sequential thinking active, Claude worked through the possible failure modes one by one rather than immediately proposing the first fix that came to mind. It found the right cause on the first attempt.
 
-You can trigger it explicitly ("use sequential thinking for this") or configure Claude to invoke it automatically for certain types of tasks. I do both — automatic for architecture tasks, explicit for debugging.
+Trigger it explicitly when you know a problem warrants it — "use sequential thinking for this". It adds overhead, so it's worth reserving for problems that genuinely need it rather than applying it automatically across the board.
 
 ---
 
