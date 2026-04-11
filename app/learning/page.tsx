@@ -1,5 +1,5 @@
-import Card from "@/components/Card";
 import { genPageMetadata } from "app/seo";
+import Card from "@/components/Card";
 import coursesData from "@/data/coursesData";
 
 export const metadata = genPageMetadata({ title: "Learning" });

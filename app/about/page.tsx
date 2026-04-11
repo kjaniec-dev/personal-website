@@ -1,14 +1,14 @@
-import { Authors, allAuthors } from "contentlayer/generated";
-import { MDXLayoutRenderer } from "pliny/mdx-components";
-import AuthorLayout from "@/layouts/AuthorLayout";
-import { coreContent } from "pliny/utils/contentlayer";
 import { genPageMetadata } from "app/seo";
-import SectionLayout from "@/layouts/SectionLayout";
-import TimelineEntry from "@/components/TimelineEntry";
+import { type Authors, allAuthors } from "contentlayer/generated";
+import { MDXLayoutRenderer } from "pliny/mdx-components";
+import { coreContent } from "pliny/utils/contentlayer";
 import Skill from "@/components/Progress";
+import TimelineEntry from "@/components/TimelineEntry";
+import educationData from "@/data/educationData";
 import experienceData from "@/data/experienceData";
 import skillsData from "@/data/skillsData";
-import educationData from "@/data/educationData";
+import AuthorLayout from "@/layouts/AuthorLayout";
+import SectionLayout from "@/layouts/SectionLayout";
 // import dynamic from 'next/dynamic'
 
 export const metadata = genPageMetadata({ title: "About" });

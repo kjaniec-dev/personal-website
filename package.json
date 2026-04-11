@@ -11,6 +11,7 @@
 		"lint": "biome check .",
 		"lint:fix": "biome check --write .",
 		"format": "biome format --write .",
+		"test": "vitest run",
 		"prepare": "husky"
 	},
 	"dependencies": {
@@ -55,12 +56,16 @@
 		"@biomejs/biome": "2.4.11",
 		"@types/mdx": "2.0.13",
 		"@types/react": "19.2.14",
+		"@vitejs/plugin-react": "^6.0.1",
+		"@vitest/ui": "^4.1.4",
 		"cross-env": "10.1.0",
 		"globals": "17.4.0",
 		"husky": "9.1.7",
+		"jsdom": "^29.0.2",
 		"lint-staged": "16.4.0",
 		"sharp": "0.34.5",
-		"typescript": "6.0.2"
+		"typescript": "6.0.2",
+		"vitest": "^4.1.4"
 	},
 	"overrides": {
 		"next-themes": "0.4.6"

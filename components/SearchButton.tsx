@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, ComponentType } from "react";
+import { type ComponentType, useEffect, useState } from "react";
 import siteMetadata from "@/data/siteMetadata";
 
 const SearchButton = () => {

@@ -1,6 +1,6 @@
+import { slug } from "github-slugger";
 import Image from "./Image";
 import Link from "./Link";
-import { slug } from "github-slugger";
 
 interface CardProps {
 	title: string;

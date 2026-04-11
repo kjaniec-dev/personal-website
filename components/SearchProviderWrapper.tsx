@@ -1,7 +1,7 @@
 "use client";
 
-import { SearchConfig } from "pliny/search";
-import { ReactNode, Suspense, useEffect, useState } from "react";
+import type { SearchConfig } from "pliny/search";
+import { type ReactNode, Suspense, useEffect, useState } from "react";
 
 interface SearchProviderWrapperProps {
 	searchConfig: SearchConfig;

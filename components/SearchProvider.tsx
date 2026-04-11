@@ -1,8 +1,8 @@
 "use client";
 
-import { KBarSearchProvider } from "pliny/search/KBar";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import { KBarSearchProvider } from "pliny/search/KBar";
+import type { ReactNode } from "react";
 
 interface SearchDocument {
 	title: string;

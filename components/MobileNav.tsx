@@ -6,9 +6,9 @@ import {
 	Transition,
 	TransitionChild,
 } from "@headlessui/react";
-import { Fragment, useState, useEffect } from "react";
-import Link from "./Link";
+import { Fragment, useEffect, useState } from "react";
 import headerNavLinks from "@/data/headerNavLinks";
+import Link from "./Link";
 
 const MobileNav = () => {
 	const [navShow, setNavShow] = useState(false);
