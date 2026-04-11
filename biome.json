@@ -26,26 +26,26 @@
 		"rules": {
 			"recommended": true,
 			"a11y": {
-				"noSvgWithoutTitle": "off",
-				"useButtonType": "off",
-				"useAltText": "off",
-				"noPositiveTabindex": "off",
-				"useKeyWithClickEvents": "off",
-				"useKeyWithMouseEvents": "off",
-				"noNoninteractiveElementToInteractiveRole": "off"
+				"noSvgWithoutTitle": "warn",
+				"useButtonType": "warn",
+				"useAltText": "warn",
+				"noPositiveTabindex": "warn",
+				"useKeyWithClickEvents": "warn",
+				"useKeyWithMouseEvents": "warn",
+				"noNoninteractiveElementToInteractiveRole": "warn"
 			},
 			"security": {
-				"noDangerouslySetInnerHtml": "off"
+				"noDangerouslySetInnerHtml": "warn"
 			},
 			"suspicious": {
-				"noArrayIndexKey": "off",
-				"noExplicitAny": "off"
+				"noArrayIndexKey": "warn",
+				"noExplicitAny": "warn"
 			},
 			"style": {
-				"useNodejsImportProtocol": "off"
+				"useNodejsImportProtocol": "warn"
 			},
 			"complexity": {
-				"useOptionalChain": "off"
+				"useOptionalChain": "warn"
 			}
 		}
 	},
