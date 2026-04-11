@@ -1,0 +1,59 @@
+---
+title: 'Modernizing My Workflow: Migrating to Bun and Biome'
+date: 2026-04-11T23:55:00Z
+lastmod: '2026-04-11'
+tags: ['bun', 'biome', 'dx', 'performance', 'ci-cd', 'next-js']
+draft: false
+summary: 'A look into how I streamlined my development workflow by switching to Bun and Biome for faster linting, formatting, and dependency management.'
+layout: PostSimple
+---
+
+## Why the Change?
+
+In modern web development, toolchain fatigue is real. For a long time, the standard setup involved a mix of ESLint for linting, Prettier for formatting, and npm or yarn for package management. While these tools are battle-tested, they can sometimes feel slow and require complex configurations to work together seamlessly.
+
+Recently, I decided to modernize this website's infrastructure by migrating to two rising stars in the ecosystem: **Bun** and **Biome**.
+
+## Biome: One Tool to Rule Them All
+
+[Biome](https://biomejs.dev/) is an extremely fast toolchain for web projects that aims to provide a unified experience for linting and formatting.
+
+### What I Gained
+- **Incredible Speed**: Biome is written in Rust and is orders of magnitude faster than ESLint and Prettier. Linting and formatting the entire project now happens in milliseconds.
+- **Simplified Configuration**: Instead of managing `.eslintrc`, `.prettierrc`, and various ignore files, I now have a single `biome.json`.
+- **Better Integration**: No more fighting between Prettier and ESLint rules. Biome handles both, ensuring they never conflict.
+
+### The Migration Process
+The migration involved:
+1. Uninstalling over a dozen ESLint and Prettier-related packages.
+2. Initializing Biome with `bun x @biomejs/biome init`.
+3. Configuring `biome.json` to match my preferred style (tabs for indentation, double quotes for strings).
+4. Fixing accessibility (a11y) and security warnings that Biome's recommended rules caught.
+
+## Bun: The All-in-One JavaScript Runtime
+
+[Bun](https://bun.sh/) has replaced npm as my package manager and test runner. It's designed for speed and developer productivity.
+
+### Why Bun?
+- **Blazing Fast Installs**: Dependency installation is significantly faster, which is especially noticeable in CI/CD pipelines.
+- **Built-in Tooling**: Bun includes a bundler, test runner (though I'm using Vitest, which runs perfectly on Bun), and package manager out of the box.
+- **Compatibility**: It works seamlessly with existing Node.js packages and Next.js.
+
+## Infrastructure Updates
+
+The move to Bun and Biome also meant updating the deployment pipeline:
+
+### GitHub Actions
+I updated the CI workflow to use `oven-sh/setup-bun`. The entire pipeline—from installation to linting and testing—now finishes much quicker, providing faster feedback on Pull Requests.
+
+### Netlify
+My Netlify configuration now uses Bun for building the site. By setting `BUN_VERSION` in `netlify.toml`, I ensured the build environment is consistent with my local development setup.
+
+## Results
+
+After the migration:
+- **Zero Lint Errors**: The codebase is now fully compliant with Biome's `recommended` rules.
+- **Faster CI**: Total pipeline time has been reduced.
+- **Cleaner Repo**: Fewer configuration files and dependencies to maintain.
+
+Modernizing the toolchain isn't just about using the latest tech; it's about reducing friction in the development process. With Bun and Biome, I can focus more on building features and less on managing my tools.
