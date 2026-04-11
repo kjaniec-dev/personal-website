@@ -14,7 +14,6 @@ import {
 	remarkImgToJsx,
 } from "pliny/mdx-plugins/index.js";
 import { allCoreContent, sortPosts } from "pliny/utils/contentlayer.js";
-import prettier from "prettier";
 import readingTime from "reading-time";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCitation from "rehype-citation";
@@ -98,10 +97,7 @@ async function createTagCount(allBlogs) {
 		}
 	});
 
-	const formatted = await prettier.format(JSON.stringify(tagCount, null, 2), {
-		parser: "json",
-	});
-	writeFileSync("./app/tag-data.json", formatted);
+	writeFileSync("./app/tag-data.json", JSON.stringify(tagCount, null, 2));
 }
 
 function createSearchIndex(allBlogs) {

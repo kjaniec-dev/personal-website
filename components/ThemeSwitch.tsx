@@ -31,7 +31,6 @@ const ThemeSwitch = () => {
 		>
 			{/* Sun icon (visible in dark mode) */}
 			<svg
-				title="Sun icon"
 				className={`group-hover:text-primary-600 dark:group-hover:text-primary-400 absolute h-5 w-5 text-gray-600 transition-all duration-500 dark:text-gray-400 ${
 					isDark
 						? "scale-100 rotate-0 opacity-100"
@@ -52,7 +51,6 @@ const ThemeSwitch = () => {
 
 			{/* Moon icon (visible in light mode) */}
 			<svg
-				title="Moon icon"
 				className={`group-hover:text-primary-600 dark:group-hover:text-primary-400 absolute h-5 w-5 text-gray-600 transition-all duration-500 dark:text-gray-400 ${
 					isDark
 						? "scale-0 -rotate-90 opacity-0"

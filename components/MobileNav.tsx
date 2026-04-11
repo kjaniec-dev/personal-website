@@ -43,7 +43,6 @@ const MobileNav = () => {
 				className="sm:hidden"
 			>
 				<svg
-					title="Menu icon"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
@@ -104,7 +103,6 @@ const MobileNav = () => {
 									onClick={onToggleNav}
 								>
 									<svg
-										title="Close icon"
 										xmlns="http://www.w3.org/2000/svg"
 										viewBox="0 0 20 20"
 										fill="currentColor"

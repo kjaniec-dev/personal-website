@@ -8,7 +8,6 @@ const Skill = ({ percent, name }) => (
 			<div className="from-primary-500/20 to-accent-cyan/20 absolute inset-0 rounded-full bg-gradient-to-br opacity-0 blur-xl transition-opacity group-hover:opacity-100" />
 
 			<svg
-				title={`${name} skill progress`}
 				className="h-full w-full -rotate-90 transform"
 				viewBox="0 0 36 36"
 				xmlns="http://www.w3.org/2000/svg"

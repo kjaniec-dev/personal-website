@@ -30,7 +30,7 @@ export default function Page() {
 					<div className="flex grid-cols-12 flex-col text-gray-50 md:grid">
 						{experienceData.map((experienceDataEntry) => (
 							<TimelineEntry
-								key={experienceDataEntry.title}
+								key={experienceDataEntry.primaryText}
 								entry={experienceDataEntry}
 							/>
 						))}
@@ -54,7 +54,10 @@ export default function Page() {
 				<div className="container mt-8">
 					<div className="flex grid-cols-12 flex-col text-gray-50 md:grid">
 						{educationData.map((educationEntry) => (
-							<TimelineEntry key={educationEntry.title} entry={educationEntry}>
+							<TimelineEntry
+								key={educationEntry.primaryText}
+								entry={educationEntry}
+							>
 								<p className="my-2 text-justify leading-tight text-gray-500">
 									{"Specialization: Software Engineering"}
 								</p>

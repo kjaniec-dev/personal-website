@@ -39,7 +39,6 @@ const FAQAccordion = ({ items, category }: FAQAccordionProps) => {
 							}`}
 						>
 							<svg
-								title="Chevron icon"
 								className="h-5 w-5"
 								fill="none"
 								stroke="currentColor"
