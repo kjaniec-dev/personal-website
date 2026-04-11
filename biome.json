@@ -39,17 +39,5 @@
 				"organizeImports": "on"
 			}
 		}
-	},
-	"overrides": [
-		{
-			"includes": ["scripts/*.mjs"],
-			"linter": {
-				"rules": {
-					"suspicious": {
-						"noShadowRestrictedNames": "off"
-					}
-				}
-			}
-		}
-	]
+	}
 }
