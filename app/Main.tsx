@@ -44,10 +44,12 @@ export default function Home({ posts }) {
 		<>
 			<script
 				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify(personSchema) is safe for personSchema
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
 			/>
 			<script
 				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify(websiteSchema) is safe for websiteSchema
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
 			/>
 			{/* Hero Section */}
@@ -91,11 +93,13 @@ export default function Home({ posts }) {
 									<div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
 										<time dateTime={date} className="flex items-center gap-1">
 											<svg
+												title="Calendar icon"
 												className="h-4 w-4"
 												fill="none"
 												stroke="currentColor"
 												viewBox="0 0 24 24"
 											>
+												<title>Calendar icon</title>
 												<path
 													strokeLinecap="round"
 													strokeLinejoin="round"

@@ -44,6 +44,7 @@ const SearchButton = () => {
 		<div className="group hover:border-primary-300 hover:bg-primary-50/80 dark:hover:border-primary-700 dark:hover:bg-primary-900/30 relative inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50/50 px-4 py-2 backdrop-blur-sm transition-all duration-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800/50">
 			{/* Search icon */}
 			<svg
+				title="Search icon"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
 				viewBox="0 0 24 24"
@@ -51,6 +52,7 @@ const SearchButton = () => {
 				stroke="currentColor"
 				className="group-hover:text-primary-600 dark:group-hover:text-primary-400 h-4 w-4 text-gray-600 transition-colors duration-300 dark:text-gray-400"
 			>
+				<title>Search icon</title>
 				<path
 					strokeLinecap="round"
 					strokeLinejoin="round"
@@ -73,7 +75,7 @@ const SearchButton = () => {
 	if (!SearchButtonComponent) {
 		// Show placeholder button while loading
 		return (
-			<button aria-label="Search" className="cursor-pointer">
+			<button type="button" aria-label="Search" className="cursor-pointer">
 				<SearchContent />
 			</button>
 		);

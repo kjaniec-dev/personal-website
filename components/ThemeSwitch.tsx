@@ -24,12 +24,14 @@ const ThemeSwitch = () => {
 
 	return (
 		<button
+			type="button"
 			onClick={toggleTheme}
 			aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
 			className="group hover:border-primary-300 hover:bg-primary-50/80 dark:hover:border-primary-700 dark:hover:bg-primary-900/30 relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-gray-50/50 backdrop-blur-sm transition-all duration-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800/50"
 		>
 			{/* Sun icon (visible in dark mode) */}
 			<svg
+				title="Sun icon"
 				className={`group-hover:text-primary-600 dark:group-hover:text-primary-400 absolute h-5 w-5 text-gray-600 transition-all duration-500 dark:text-gray-400 ${
 					isDark
 						? "scale-100 rotate-0 opacity-100"
@@ -39,6 +41,7 @@ const ThemeSwitch = () => {
 				stroke="currentColor"
 				viewBox="0 0 24 24"
 			>
+				<title>Sun icon</title>
 				<path
 					strokeLinecap="round"
 					strokeLinejoin="round"
@@ -49,6 +52,7 @@ const ThemeSwitch = () => {
 
 			{/* Moon icon (visible in light mode) */}
 			<svg
+				title="Moon icon"
 				className={`group-hover:text-primary-600 dark:group-hover:text-primary-400 absolute h-5 w-5 text-gray-600 transition-all duration-500 dark:text-gray-400 ${
 					isDark
 						? "scale-0 -rotate-90 opacity-0"
@@ -58,6 +62,7 @@ const ThemeSwitch = () => {
 				stroke="currentColor"
 				viewBox="0 0 24 24"
 			>
+				<title>Moon icon</title>
 				<path
 					strokeLinecap="round"
 					strokeLinejoin="round"

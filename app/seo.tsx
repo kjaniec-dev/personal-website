@@ -5,7 +5,7 @@ interface PageSEOProps {
 	title: string;
 	description?: string;
 	image?: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	// biome-ignore lint/suspicious/noExplicitAny: Metadata and its nested properties are complex, [key: string]: any is standard for rest props in SEO functions
 	[key: string]: any;
 }
 
