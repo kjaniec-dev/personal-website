@@ -114,7 +114,6 @@ export default function ListLayout({
 							/>
 						</label>
 						<svg
-							title="Search icon"
 							className="absolute top-3 right-3 h-5 w-5 text-gray-400 dark:text-gray-300"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"

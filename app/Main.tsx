@@ -93,7 +93,6 @@ export default function Home({ posts }) {
 									<div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
 										<time dateTime={date} className="flex items-center gap-1">
 											<svg
-												title="Calendar icon"
 												className="h-4 w-4"
 												fill="none"
 												stroke="currentColor"

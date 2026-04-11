@@ -33,12 +33,7 @@ const ScrollTopAndComment = () => {
 					onClick={handleScrollToComment}
 					className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
 				>
-					<svg
-						title="Comment icon"
-						className="h-5 w-5"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
+					<svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
 						<title>Comment icon</title>
 						<path
 							fillRule="evenodd"
@@ -54,12 +49,7 @@ const ScrollTopAndComment = () => {
 				onClick={handleScrollTop}
 				className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
 			>
-				<svg
-					title="Arrow up icon"
-					className="h-5 w-5"
-					viewBox="0 0 20 20"
-					fill="currentColor"
-				>
+				<svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
 					<title>Arrow up icon</title>
 					<path
 						fillRule="evenodd"

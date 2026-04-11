@@ -10,7 +10,6 @@ const categories = [
 		title: "Technical Preferences",
 		icon: (
 			<svg
-				title="Technical icon"
 				className="h-6 w-6"
 				fill="none"
 				stroke="currentColor"
@@ -31,7 +30,6 @@ const categories = [
 		title: "Work & Experience",
 		icon: (
 			<svg
-				title="Work icon"
 				className="h-6 w-6"
 				fill="none"
 				stroke="currentColor"
@@ -52,7 +50,6 @@ const categories = [
 		title: "Personal",
 		icon: (
 			<svg
-				title="Personal icon"
 				className="h-6 w-6"
 				fill="none"
 				stroke="currentColor"
@@ -73,7 +70,6 @@ const categories = [
 		title: "Contact & Collaboration",
 		icon: (
 			<svg
-				title="Contact icon"
 				className="h-6 w-6"
 				fill="none"
 				stroke="currentColor"
