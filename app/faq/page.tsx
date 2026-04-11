@@ -1,6 +1,6 @@
 import { genPageMetadata } from "app/seo";
-import faqData from "@/data/faqData";
 import FAQAccordion from "@/components/FAQAccordion";
+import faqData from "@/data/faqData";
 
 export const metadata = genPageMetadata({ title: "FAQ" });
 

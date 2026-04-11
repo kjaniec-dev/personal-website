@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { AnalyticsConfig } from "pliny/analytics";
+import type { AnalyticsConfig } from "pliny/analytics";
 import { useEffect, useState } from "react";
 
 const Analytics = dynamic(

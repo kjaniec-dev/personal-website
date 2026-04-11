@@ -2,18 +2,18 @@ import "css/tailwind.css";
 import "css/prism.css";
 import "remark-github-blockquote-alert/alert.css";
 
+import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
-import { AnalyticsConfig } from "pliny/analytics";
-import { SearchConfig } from "pliny/search";
-import Header from "@/components/Header";
-import SectionContainer from "@/components/SectionContainer";
+import type { AnalyticsConfig } from "pliny/analytics";
+import type { SearchConfig } from "pliny/search";
+import AnalyticsWrapper from "@/components/AnalyticsWrapper";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import SearchProviderWrapper from "@/components/SearchProviderWrapper";
+import SectionContainer from "@/components/SectionContainer";
+import WebVitalsReporter from "@/components/WebVitals";
 import siteMetadata from "@/data/siteMetadata";
 import { ThemeProviders } from "./theme-providers";
-import { Metadata } from "next";
-import SearchProviderWrapper from "@/components/SearchProviderWrapper";
-import AnalyticsWrapper from "@/components/AnalyticsWrapper";
-import WebVitalsReporter from "@/components/WebVitals";
 
 const space_grotesk = Space_Grotesk({
 	subsets: ["latin"],

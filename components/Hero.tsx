@@ -1,6 +1,6 @@
+import HeroAnimationWrapper from "@/components/HeroAnimationWrapper";
 import Link from "@/components/Link";
 import siteMetadata from "@/data/siteMetadata";
-import HeroAnimationWrapper from "@/components/HeroAnimationWrapper";
 
 export default function Hero() {
 	return (
