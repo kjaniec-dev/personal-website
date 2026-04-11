@@ -9,7 +9,6 @@ interface SearchProviderWrapperProps {
 }
 
 export default function SearchProviderWrapper({
-	searchConfig,
 	children,
 }: SearchProviderWrapperProps) {
 	const [SearchProvider, setSearchProvider] = useState<React.ComponentType<{
@@ -39,7 +38,7 @@ export default function SearchProviderWrapper({
 	}
 
 	return (
-		<Suspense fallback={<>{children}</>}>
+		<Suspense fallback={children}>
 			<SearchProvider>{children}</SearchProvider>
 		</Suspense>
 	);

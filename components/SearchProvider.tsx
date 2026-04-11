@@ -83,7 +83,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
 							// For blog posts, navigate to the blog path
 							// For projects, use the external link
 							if (doc.type === "blog") {
-								router.push("/" + doc.path);
+								router.push(`/${doc.path}`);
 							} else {
 								// For projects, open in same tab since it's the user's own project
 								window.location.href = doc.path;

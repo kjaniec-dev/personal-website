@@ -9,8 +9,8 @@ const CustomLink = ({
 	className = "",
 	...rest
 }: LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>) => {
-	const isInternalLink = href && href.startsWith("/");
-	const isAnchorLink = href && href.startsWith("#");
+	const isInternalLink = href?.startsWith("/");
+	const isAnchorLink = href?.startsWith("#");
 
 	const finalClassName = className || "break-words";
 

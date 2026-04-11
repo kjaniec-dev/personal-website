@@ -12,7 +12,6 @@ import {
 	sortPosts,
 } from "pliny/utils/contentlayer";
 import { components } from "@/components/MDXComponents";
-import PageTitle from "@/components/PageTitle";
 import siteMetadata from "@/data/siteMetadata";
 import PostBanner from "@/layouts/PostBanner";
 import PostLayout from "@/layouts/PostLayout";
@@ -49,7 +48,7 @@ export async function generateMetadata(props: {
 	}
 	const ogImages = imageList.map((img) => {
 		return {
-			url: img && img.includes("http") ? img : siteMetadata.siteUrl + img,
+			url: img?.includes("http") ? img : siteMetadata.siteUrl + img,
 			width: 1200,
 			height: 630,
 			alt: post.title,
@@ -108,7 +107,7 @@ export default async function Page(props: {
 	});
 	const mainContent = coreContent(post);
 	const jsonLd = post.structuredData;
-	jsonLd["author"] = authorDetails.map((author) => {
+	jsonLd.author = authorDetails.map((author) => {
 		return {
 			"@type": "Person",
 			name: author.name,

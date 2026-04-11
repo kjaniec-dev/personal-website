@@ -22,7 +22,7 @@ export default function PostLayout({
 	prev,
 	children,
 }: LayoutProps) {
-	const { path, slug, date, title, readingTime } = content;
+	const { slug, date, title, readingTime } = content;
 
 	return (
 		<SectionContainer>
@@ -68,7 +68,7 @@ export default function PostLayout({
 						)}
 						<footer>
 							<div className="flex flex-col text-sm font-medium sm:flex-row sm:justify-between sm:text-base">
-								{prev && prev.path && (
+								{prev?.path && (
 									<div className="pt-4 xl:pt-8">
 										<Link
 											href={`/${prev.path}`}
@@ -79,7 +79,7 @@ export default function PostLayout({
 										</Link>
 									</div>
 								)}
-								{next && next.path && (
+								{next?.path && (
 									<div className="pt-4 xl:pt-8">
 										<Link
 											href={`/${next.path}`}

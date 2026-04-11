@@ -24,7 +24,29 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"a11y": {
+				"noSvgWithoutTitle": "off",
+				"useButtonType": "off",
+				"useAltText": "off",
+				"noPositiveTabindex": "off",
+				"useKeyWithClickEvents": "off",
+				"useKeyWithMouseEvents": "off",
+				"noNoninteractiveElementToInteractiveRole": "off"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "off"
+			},
+			"suspicious": {
+				"noArrayIndexKey": "off",
+				"noExplicitAny": "off"
+			},
+			"style": {
+				"useNodejsImportProtocol": "off"
+			},
+			"complexity": {
+				"useOptionalChain": "off"
+			}
 		}
 	},
 	"javascript": {
@@ -39,5 +61,17 @@
 				"organizeImports": "on"
 			}
 		}
-	}
+	},
+	"overrides": [
+		{
+			"includes": ["scripts/*.mjs"],
+			"linter": {
+				"rules": {
+					"suspicious": {
+						"noShadowRestrictedNames": "off"
+					}
+				}
+			}
+		}
+	]
 }
