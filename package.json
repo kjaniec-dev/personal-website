@@ -1,85 +1,73 @@
 {
-  "name": "tailwind-nextjs-starter-blog",
-  "version": "2.4.0",
-  "private": true,
-  "scripts": {
-    "start": "next dev",
-    "dev": "cross-env INIT_CWD=$PWD next dev",
-    "build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
-    "serve": "next start",
-    "analyze": "cross-env ANALYZE=true next build",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "prepare": "husky"
-  },
-  "dependencies": {
-    "@algolia/client-search": "5.50.1",
-    "@headlessui/react": "2.2.9",
-    "@next/bundle-analyzer": "16.2.2",
-    "@tailwindcss/forms": "0.5.11",
-    "@tailwindcss/postcss": "4.2.2",
-    "@tailwindcss/typography": "0.5.19",
-    "algoliasearch": "5.50.1",
-    "contentlayer2": "0.5.8",
-    "esbuild": "0.27.7",
-    "github-slugger": "2.0.0",
-    "gray-matter": "4.0.3",
-    "hast-util-from-html-isomorphic": "2.0.0",
-    "image-size": "2.0.2",
-    "next": "16.2.2",
-    "next-contentlayer2": "0.5.8",
-    "next-themes": "0.4.6",
-    "pliny": "0.4.1",
-    "postcss": "8.5.8",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "reading-time": "1.5.0",
-    "rehype-autolink-headings": "7.1.0",
-    "rehype-citation": "2.3.2",
-    "rehype-katex": "7.0.1",
-    "rehype-katex-notranslate": "1.1.4",
-    "rehype-preset-minify": "7.0.1",
-    "rehype-prism-plus": "2.0.2",
-    "rehype-slug": "6.0.0",
-    "remark": "15.0.1",
-    "remark-gfm": "4.0.1",
-    "remark-github-blockquote-alert": "2.1.0",
-    "remark-math": "6.0.0",
-    "search-insights": "2.17.3",
-    "tailwindcss": "4.2.2",
-    "unist-util-visit": "5.1.0",
-    "web-vitals": "5.2.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "3.3.5",
-    "@eslint/js": "10.0.1",
-    "@types/mdx": "2.0.13",
-    "@types/react": "19.2.14",
-    "@typescript-eslint/eslint-plugin": "8.58.0",
-    "@typescript-eslint/parser": "8.58.0",
-    "@next/eslint-plugin-next": "16.2.2",
-    "cross-env": "10.1.0",
-    "eslint": "10.1.0",
-    "eslint-config-next": "16.2.2",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-prettier": "5.5.5",
-    "globals": "17.4.0",
-    "husky": "9.1.7",
-    "lint-staged": "16.4.0",
-    "prettier": "3.8.1",
-    "prettier-plugin-tailwindcss": "0.7.2",
-    "sharp": "0.34.5",
-    "typescript": "6.0.2"
-  },
-  "overrides": {
-    "next-themes": "0.4.6"
-  },
-  "lint-staged": {
-    "*.+(js|jsx|ts|tsx)": [
-      "eslint --fix"
-    ],
-    "*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
-      "prettier --write"
-    ]
-  }
+	"name": "tailwind-nextjs-starter-blog",
+	"version": "2.4.0",
+	"private": true,
+	"scripts": {
+		"start": "next dev",
+		"dev": "cross-env INIT_CWD=$PWD next dev",
+		"build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
+		"serve": "next start",
+		"analyze": "cross-env ANALYZE=true next build",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"format": "biome format --write .",
+		"prepare": "husky"
+	},
+	"dependencies": {
+		"@algolia/client-search": "5.50.1",
+		"@headlessui/react": "2.2.9",
+		"@next/bundle-analyzer": "16.2.2",
+		"@tailwindcss/forms": "0.5.11",
+		"@tailwindcss/postcss": "4.2.2",
+		"@tailwindcss/typography": "0.5.19",
+		"algoliasearch": "5.50.1",
+		"contentlayer2": "0.5.8",
+		"esbuild": "0.27.7",
+		"github-slugger": "2.0.0",
+		"gray-matter": "4.0.3",
+		"hast-util-from-html-isomorphic": "2.0.0",
+		"image-size": "2.0.2",
+		"next": "16.2.2",
+		"next-contentlayer2": "0.5.8",
+		"next-themes": "0.4.6",
+		"pliny": "0.4.1",
+		"postcss": "8.5.8",
+		"react": "19.2.4",
+		"react-dom": "19.2.4",
+		"reading-time": "1.5.0",
+		"rehype-autolink-headings": "7.1.0",
+		"rehype-citation": "2.3.2",
+		"rehype-katex": "7.0.1",
+		"rehype-katex-notranslate": "1.1.4",
+		"rehype-preset-minify": "7.0.1",
+		"rehype-prism-plus": "2.0.2",
+		"rehype-slug": "6.0.0",
+		"remark": "15.0.1",
+		"remark-gfm": "4.0.1",
+		"remark-github-blockquote-alert": "2.1.0",
+		"remark-math": "6.0.0",
+		"search-insights": "2.17.3",
+		"tailwindcss": "4.2.2",
+		"unist-util-visit": "5.1.0",
+		"web-vitals": "5.2.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.11",
+		"@types/mdx": "2.0.13",
+		"@types/react": "19.2.14",
+		"cross-env": "10.1.0",
+		"globals": "17.4.0",
+		"husky": "9.1.7",
+		"lint-staged": "16.4.0",
+		"sharp": "0.34.5",
+		"typescript": "6.0.2"
+	},
+	"overrides": {
+		"next-themes": "0.4.6"
+	},
+	"lint-staged": {
+		"*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
+			"biome check --write"
+		]
+	}
 }
