@@ -7,7 +7,7 @@ const POSTS_PER_PAGE = 6;
 
 export const metadata = genPageMetadata({ title: "Blog" });
 
-export default async function BlogPage(props: {
+export default async function BlogPage(_props: {
 	searchParams: Promise<{ page: string }>;
 }) {
 	const posts = allCoreContent(sortPosts(allBlogs));

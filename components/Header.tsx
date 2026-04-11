@@ -16,7 +16,7 @@ const Header = () => {
 	}
 
 	return (
-		<header className={headerClass} role="banner">
+		<header className={headerClass}>
 			<Link href="/" aria-label={`${siteMetadata.headerTitle} - Home`}>
 				<div className="flex items-center justify-between transition-transform hover:scale-105">
 					<div className="mr-3">

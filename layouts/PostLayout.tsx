@@ -149,7 +149,7 @@ export default function PostLayout({
 								)}
 								{(next || prev) && (
 									<div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-										{prev && prev.path && (
+										{prev?.path && (
 											<div>
 												<h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
 													Previous Article
@@ -159,7 +159,7 @@ export default function PostLayout({
 												</div>
 											</div>
 										)}
-										{next && next.path && (
+										{next?.path && (
 											<div>
 												<h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
 													Next Article
