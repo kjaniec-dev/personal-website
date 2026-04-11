@@ -20,10 +20,12 @@ const TimelineEntry = ({
 			</div>
 			<div className="from-primary-500 to-accent-cyan shadow-primary-500/25 absolute top-4 left-0 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br shadow-lg ring-4 ring-white dark:ring-gray-950">
 				<svg
+					title="Check icon"
 					className="h-3 w-3 text-white"
 					fill="currentColor"
 					viewBox="0 0 20 20"
 				>
+					<title>Check icon</title>
 					<path
 						fillRule="evenodd"
 						d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -44,9 +46,9 @@ const TimelineEntry = ({
 
 			{entry.tags && (
 				<div className="mb-3 flex flex-wrap gap-2">
-					{entry.tags.map((tag, index) => (
+					{entry.tags.map((tag) => (
 						<span
-							key={index}
+							key={tag}
 							className="bg-primary-50 text-primary-700 dark:bg-primary-950/50 dark:text-primary-300 inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium"
 						>
 							#{tag}

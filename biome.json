@@ -24,29 +24,7 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
-			"a11y": {
-				"noSvgWithoutTitle": "warn",
-				"useButtonType": "warn",
-				"useAltText": "warn",
-				"noPositiveTabindex": "warn",
-				"useKeyWithClickEvents": "warn",
-				"useKeyWithMouseEvents": "warn",
-				"noNoninteractiveElementToInteractiveRole": "warn"
-			},
-			"security": {
-				"noDangerouslySetInnerHtml": "warn"
-			},
-			"suspicious": {
-				"noArrayIndexKey": "warn",
-				"noExplicitAny": "warn"
-			},
-			"style": {
-				"useNodejsImportProtocol": "warn"
-			},
-			"complexity": {
-				"useOptionalChain": "warn"
-			}
+			"recommended": true
 		}
 	},
 	"javascript": {

@@ -28,9 +28,9 @@ export default function Page() {
 			<SectionLayout title={"Experience"}>
 				<div className="container mt-8">
 					<div className="flex grid-cols-12 flex-col text-gray-50 md:grid">
-						{experienceData.map((experienceDataEntry, index) => (
+						{experienceData.map((experienceDataEntry) => (
 							<TimelineEntry
-								key={`experience-entry-${index}`}
+								key={experienceDataEntry.title}
 								entry={experienceDataEntry}
 							/>
 						))}
@@ -40,9 +40,9 @@ export default function Page() {
 
 			<SectionLayout title="Skills">
 				<div className="my-4 flex flex-wrap items-center justify-center gap-4">
-					{skillsData.map((skill, index) => (
+					{skillsData.map((skill) => (
 						<Skill
-							key={`skill-${index}`}
+							key={skill.title}
 							name={skill.title}
 							percent={skill.percent}
 						/>
@@ -53,11 +53,8 @@ export default function Page() {
 			<SectionLayout title={"Education"}>
 				<div className="container mt-8">
 					<div className="flex grid-cols-12 flex-col text-gray-50 md:grid">
-						{educationData.map((educationEntry, index) => (
-							<TimelineEntry
-								key={`education-entry-${index}`}
-								entry={educationEntry}
-							>
+						{educationData.map((educationEntry) => (
+							<TimelineEntry key={educationEntry.title} entry={educationEntry}>
 								<p className="my-2 text-justify leading-tight text-gray-500">
 									{"Specialization: Software Engineering"}
 								</p>

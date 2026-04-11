@@ -36,6 +36,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 			<nav className="flex justify-between">
 				{!prevPage && (
 					<button
+						type="button"
 						className="cursor-auto disabled:opacity-50"
 						disabled={!prevPage}
 					>
@@ -59,6 +60,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 				</span>
 				{!nextPage && (
 					<button
+						type="button"
 						className="cursor-auto disabled:opacity-50"
 						disabled={!nextPage}
 					>
@@ -112,12 +114,14 @@ export default function ListLayout({
 							/>
 						</label>
 						<svg
+							title="Search icon"
 							className="absolute top-3 right-3 h-5 w-5 text-gray-400 dark:text-gray-300"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
 						>
+							<title>Search icon</title>
 							<path
 								strokeLinecap="round"
 								strokeLinejoin="round"

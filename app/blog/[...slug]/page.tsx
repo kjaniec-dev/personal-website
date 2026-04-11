@@ -146,10 +146,12 @@ export default async function Page(props: {
 		<>
 			<script
 				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify(jsonLd) is safe
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 			/>
 			<script
 				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify(breadcrumbSchema) is safe
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
 			/>
 			<Layout

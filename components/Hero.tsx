@@ -63,11 +63,13 @@ export default function Hero() {
 								>
 									<span className="relative z-10">Explore my work</span>
 									<svg
+										title="Arrow right icon"
 										className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
 										fill="none"
 										stroke="currentColor"
 										viewBox="0 0 24 24"
 									>
+										<title>Arrow right icon</title>
 										<path
 											strokeLinecap="round"
 											strokeLinejoin="round"
@@ -86,11 +88,13 @@ export default function Hero() {
 								>
 									<span>Read insights</span>
 									<svg
+										title="Arrow right icon"
 										className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
 										fill="none"
 										stroke="currentColor"
 										viewBox="0 0 24 24"
 									>
+										<title>Arrow right icon</title>
 										<path
 											strokeLinecap="round"
 											strokeLinejoin="round"
@@ -130,9 +134,9 @@ export default function Hero() {
 												title: "DevOps & Infrastructure",
 												desc: "CI/CD, Cloud deployment & monitoring",
 											},
-										].map((item, idx) => (
+										].map((item) => (
 											<div
-												key={idx}
+												key={item.title}
 												className="group flex items-start gap-4 transition-transform duration-300 hover:translate-x-2"
 											>
 												<div className="bg-primary-500 mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
@@ -155,11 +159,13 @@ export default function Hero() {
 									>
 										<span>View all projects</span>
 										<svg
+											title="Arrow right icon"
 											className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
 											fill="none"
 											stroke="currentColor"
 											viewBox="0 0 24 24"
 										>
+											<title>Arrow right icon</title>
 											<path
 												strokeLinecap="round"
 												strokeLinejoin="round"
@@ -177,9 +183,9 @@ export default function Hero() {
 									{ number: "12+", label: "Years Exp." },
 									{ number: "∞", label: "Learning" },
 									{ number: "100%", label: "Dedication" },
-								].map((stat, idx) => (
+								].map((stat) => (
 									<div
-										key={idx}
+										key={stat.label}
 										className="border-primary-100 hover:border-primary-500 hover:shadow-primary-500/10 dark:border-primary-900/50 dark:hover:border-primary-500 rounded-xl border bg-white/80 p-4 text-center backdrop-blur-sm transition-all duration-300 hover:shadow-lg dark:bg-gray-900/80"
 									>
 										<div className="text-primary-600 dark:text-primary-400 font-serif text-3xl font-bold">
