@@ -6,10 +6,15 @@
 
 /* Core theme configuration */
 @theme {
-	/* Font families */
+	/* Font families - terminal/developer aesthetic */
 	--font-sans:
-		var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif,
-		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+		Consolas, "Liberation Mono", monospace;
+	--font-mono:
+		var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+		Consolas, "Liberation Mono", monospace;
+	--font-display:
+		var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
 
 	--animate-spin: spin 500ms ease-in-out forwards;
 	--animate-fade-in: fadeIn 0.6s ease-out forwards;
@@ -20,23 +25,24 @@
 	--animate-gradient: gradient 8s linear infinite;
 	--animate-glow: glow 2s ease-in-out infinite alternate;
 
-	/* Modern vibrant color palette - Purple/Violet gradient theme */
-	--color-primary-50: oklch(0.97 0.014 293);
-	--color-primary-100: oklch(0.94 0.038 293);
-	--color-primary-200: oklch(0.88 0.074 293);
-	--color-primary-300: oklch(0.79 0.124 293);
-	--color-primary-400: oklch(0.69 0.171 293);
-	--color-primary-500: oklch(0.59 0.214 293);
-	--color-primary-600: oklch(0.52 0.213 293);
-	--color-primary-700: oklch(0.45 0.185 293);
-	--color-primary-800: oklch(0.38 0.152 293);
-	--color-primary-900: oklch(0.33 0.122 293);
-	--color-primary-950: oklch(0.22 0.098 293);
+	/* Terminal-green primary palette (hue ~142, Tailwind green) */
+	--color-primary-50: oklch(0.98 0.02 142);
+	--color-primary-100: oklch(0.95 0.05 142);
+	--color-primary-200: oklch(0.9 0.1 142);
+	--color-primary-300: oklch(0.82 0.15 142);
+	--color-primary-400: oklch(0.75 0.19 142);
+	--color-primary-500: oklch(0.72 0.21 142);
+	--color-primary-600: oklch(0.62 0.2 142);
+	--color-primary-700: oklch(0.52 0.17 142);
+	--color-primary-800: oklch(0.42 0.14 142);
+	--color-primary-900: oklch(0.34 0.11 142);
+	--color-primary-950: oklch(0.22 0.08 142);
 
-	/* Accent colors for gradients */
-	--color-accent-cyan: oklch(0.79 0.171 192);
-	--color-accent-pink: oklch(0.72 0.202 3);
-	--color-accent-orange: oklch(0.75 0.183 55);
+	/* Terminal accent colors */
+	--color-accent-cyan: oklch(0.78 0.15 195);
+	--color-accent-pink: oklch(0.72 0.18 350);
+	--color-accent-orange: oklch(0.78 0.17 55);
+	--color-accent-amber: oklch(0.82 0.17 85);
 
 	--color-gray-50: oklch(0.985 0.002 247.839);
 	--color-gray-100: oklch(0.967 0.003 264.542);
@@ -279,13 +285,12 @@
 		}
 	}
 
-	/* Gradient text utility */
+	/* Gradient text utility — terminal variant (green→cyan) */
 	.gradient-text {
 		background: linear-gradient(
 			135deg,
-			var(--color-primary-500) 0%,
-			var(--color-accent-cyan) 50%,
-			var(--color-accent-pink) 100%
+			var(--color-primary-400) 0%,
+			var(--color-accent-cyan) 100%
 		);
 		background-size: 200% 200%;
 		animation: gradient 8s linear infinite;
@@ -293,6 +298,124 @@
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
 		will-change: background-position;
+	}
+
+	/* ---------- TERMINAL / DEVELOPER AESTHETIC ---------- */
+
+	/* Subtle grid backdrop */
+	.grid-bg {
+		background-image:
+			linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+			linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+		background-size: 40px 40px;
+	}
+
+	.dark .grid-bg {
+		background-image:
+			linear-gradient(to right, rgba(34, 197, 94, 0.06) 1px, transparent 1px),
+			linear-gradient(to bottom, rgba(34, 197, 94, 0.06) 1px, transparent 1px);
+	}
+
+	/* Terminal window card */
+	.terminal-card {
+		position: relative;
+		border: 1px solid var(--color-gray-300);
+		background: rgba(255, 255, 255, 0.7);
+		backdrop-filter: blur(8px);
+		border-radius: 10px;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+	}
+
+	.dark .terminal-card {
+		border-color: var(--color-gray-800);
+		background: rgba(10, 14, 20, 0.75);
+		box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.06);
+	}
+
+	/* Traffic-light window header (macOS-terminal style) */
+	.terminal-chrome {
+		display: flex;
+		align-items: center;
+		gap: 0.375rem;
+		padding: 0.625rem 0.875rem;
+		border-bottom: 1px solid var(--color-gray-200);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--color-gray-500);
+	}
+
+	.dark .terminal-chrome {
+		border-bottom-color: var(--color-gray-800);
+		color: var(--color-gray-400);
+	}
+
+	.terminal-chrome::before {
+		content: "";
+		display: inline-block;
+		width: 0.625rem;
+		height: 0.625rem;
+		border-radius: 9999px;
+		background: #ff5f57;
+		box-shadow:
+			1rem 0 0 #febc2e,
+			2rem 0 0 #28c840;
+		margin-right: 2.25rem;
+	}
+
+	/* Prompt prefix: renders `~ $ ` before content */
+	.terminal-prompt::before {
+		content: "~ $ ";
+		color: var(--color-primary-500);
+		font-family: var(--font-mono);
+		font-weight: 500;
+	}
+
+	/* Comment prefix for section headers: `// ` */
+	.terminal-comment::before {
+		content: "// ";
+		color: var(--color-gray-500);
+		font-family: var(--font-mono);
+	}
+
+	.dark .terminal-comment::before {
+		color: var(--color-gray-500);
+	}
+
+	/* Blinking caret */
+	.caret::after {
+		content: "";
+		display: inline-block;
+		width: 0.5ch;
+		height: 1em;
+		margin-left: 0.15ch;
+		vertical-align: -0.15em;
+		background: var(--color-primary-500);
+		animation: blink 1s steps(2, start) infinite;
+	}
+
+	/* Section divider with terminal prompt */
+	.section-divider {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--color-gray-500);
+	}
+
+	.section-divider::after {
+		content: "";
+		flex: 1;
+		height: 1px;
+		background: linear-gradient(
+			to right,
+			var(--color-primary-500) 0,
+			transparent 80%
+		);
+		opacity: 0.4;
 	}
 
 	/* Glassmorphism effect */
@@ -429,6 +552,23 @@
 			var(--color-gray-700) 1px,
 			transparent 1px
 		);
+	}
+
+	/* Mono tag pill */
+	.mono-tag {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		padding: 0.125rem 0.5rem;
+		border-radius: 0.25rem;
+		border: 1px solid var(--color-gray-300);
+		color: var(--color-gray-700);
+		background: var(--color-gray-50);
+	}
+
+	.dark .mono-tag {
+		border-color: var(--color-gray-700);
+		color: var(--color-gray-300);
+		background: rgba(255, 255, 255, 0.02);
 	}
 
 	/* Mesh gradient background */

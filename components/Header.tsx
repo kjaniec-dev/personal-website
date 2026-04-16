@@ -9,29 +9,34 @@ import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
 	let headerClass =
-		"flex items-center w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md justify-between py-6";
+		"flex items-center w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md justify-between py-5";
 	if (siteMetadata.stickyNav) {
 		headerClass +=
-			" sticky top-0 z-50 border-b border-gray-200/50 dark:border-gray-800/50";
+			" sticky top-0 z-50 border-b border-gray-200/60 dark:border-gray-800/60";
 	}
 
 	return (
 		<header className={headerClass}>
 			<Link href="/" aria-label={`${siteMetadata.headerTitle} - Home`}>
-				<div className="flex items-center justify-between transition-transform hover:scale-105">
-					<div className="mr-3">
+				<div className="group flex items-center gap-3 transition-colors">
+					<div className="flex h-10 w-10 items-center justify-center rounded-md border border-gray-300 bg-white/60 dark:border-gray-700 dark:bg-gray-900/60">
 						<Image
 							className={"dark:invert"}
-							width={48}
-							height={48}
+							width={28}
+							height={28}
 							src={"/static/images/logo.svg"}
 							alt={`${siteMetadata.headerTitle} logo`}
 							priority
 						/>
 					</div>
 					{typeof siteMetadata.headerTitle === "string" ? (
-						<div className="hidden text-xl font-bold tracking-tight text-gray-900 sm:block dark:text-gray-100">
-							<span className="gradient-text">{siteMetadata.headerTitle}</span>
+						<div className="hidden font-mono text-sm font-medium tracking-tight text-gray-900 sm:flex sm:items-center sm:gap-1 dark:text-gray-100">
+							<span className="text-primary-500">~</span>
+							<span className="text-gray-400 dark:text-gray-500">/</span>
+							<span className="group-hover:text-primary-500 transition-colors">
+								{siteMetadata.headerTitle}
+							</span>
+							<span className="text-primary-500 ml-1">$</span>
 						</div>
 					) : (
 						siteMetadata.headerTitle

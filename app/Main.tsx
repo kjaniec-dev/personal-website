@@ -57,16 +57,20 @@ export default function Home({ posts }) {
 
 			{/* Latest Posts Section */}
 			<div className="mt-12 space-y-8 md:mt-16">
+				<div className="section-divider">
+					<span className="text-primary-500">{"//"}</span>
+					<span>latest posts</span>
+				</div>
 				<div className="flex items-center justify-between">
-					<h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-						Latest Posts
+					<h2 className="font-mono text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+						<span className="text-primary-500">$</span> ls ~/blog
 					</h2>
 					{posts.length > MAX_DISPLAY && (
 						<Link
 							href="/blog"
-							className="animated-underline text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+							className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 font-mono text-sm"
 						>
-							View all posts →
+							cat ./blog/* →
 						</Link>
 					)}
 				</div>
@@ -80,15 +84,12 @@ export default function Home({ posts }) {
 						return (
 							<article
 								key={slug}
-								className="hover-lift group relative rounded-2xl border border-gray-200/80 bg-white p-6 transition-all dark:border-gray-700/80 dark:bg-gray-900/50"
+								className="terminal-card hover:border-primary-500/60 dark:hover:border-primary-500/60 group relative p-6 transition-colors"
 								style={{
 									animationDelay: `${index * 0.1}s`,
 									animationFillMode: "both",
 								}}
 							>
-								{/* Gradient border on hover */}
-								<div className="from-primary-500/0 via-primary-500/0 to-accent-cyan/0 group-hover:from-primary-500/20 group-hover:to-accent-cyan/20 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r opacity-0 blur-sm transition-opacity group-hover:opacity-100" />
-
 								<div className="space-y-3">
 									<div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
 										<time dateTime={date} className="flex items-center gap-1">
@@ -116,12 +117,15 @@ export default function Home({ posts }) {
 										)}
 									</div>
 
-									<h3 className="text-xl leading-tight font-bold tracking-tight">
+									<h3 className="font-mono text-lg leading-tight font-semibold tracking-tight">
 										<Link
 											href={`/blog/${slug}`}
 											prefetch={false}
 											className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-900 transition-colors dark:text-gray-100"
 										>
+											<span className="text-primary-500 mr-1 opacity-70 group-hover:opacity-100">
+												&gt;
+											</span>
 											{title}
 										</Link>
 									</h3>
@@ -138,11 +142,11 @@ export default function Home({ posts }) {
 									<Link
 										href={`/blog/${slug}`}
 										prefetch={false}
-										className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-medium"
+										className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-mono text-sm"
 										aria-label={`Read more: "${title}"`}
 									>
-										<span className="animated-underline whitespace-nowrap">
-											Read more<span className="sr-only">: {title}</span>
+										<span className="whitespace-nowrap">
+											$ read more<span className="sr-only">: {title}</span>
 											<svg
 												className="ml-1 inline-block h-4 w-4 align-middle transition-transform group-hover:translate-x-1"
 												fill="none"
@@ -168,13 +172,17 @@ export default function Home({ posts }) {
 
 			{siteMetadata.newsletter?.provider && (
 				<div className="mt-16 flex items-center justify-center">
-					<div className="w-full max-w-xl rounded-2xl border border-gray-200 bg-gray-50/50 p-8 dark:border-gray-700 dark:bg-gray-900/50">
-						<h3 className="mb-4 text-center text-2xl font-bold text-gray-900 dark:text-gray-100">
-							Subscribe to the newsletter
+					<div className="terminal-card w-full max-w-xl p-8">
+						<div className="section-divider mb-4">
+							<span className="text-primary-500">{"//"}</span>
+							<span>subscribe</span>
+						</div>
+						<h3 className="mb-3 text-center font-mono text-xl font-semibold text-gray-900 dark:text-gray-100">
+							<span className="text-primary-500">$</span> subscribe --newsletter
 						</h3>
-						<p className="mb-6 text-center text-gray-600 dark:text-gray-400">
-							Get notified when I publish new content. No spam, unsubscribe
-							anytime.
+						<p className="mb-6 text-center font-mono text-sm text-gray-600 dark:text-gray-400">
+							<span className="text-gray-400">#</span> no spam, unsubscribe
+							anytime
 						</p>
 						<NewsletterForm />
 					</div>

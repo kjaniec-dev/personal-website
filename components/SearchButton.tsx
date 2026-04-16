@@ -41,15 +41,18 @@ const SearchButton = () => {
 	}, []);
 
 	const SearchContent = () => (
-		<div className="group hover:border-primary-300 hover:bg-primary-50/80 dark:hover:border-primary-700 dark:hover:bg-primary-900/30 relative inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50/50 px-4 py-2 backdrop-blur-sm transition-all duration-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800/50">
+		<div className="group hover:border-primary-500 hover:bg-primary-500/5 dark:hover:border-primary-500 dark:hover:bg-primary-500/10 relative inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white/60 px-3 py-1.5 font-mono text-sm transition-colors duration-200 dark:border-gray-700 dark:bg-gray-900/60">
+			{/* Prompt */}
+			<span className="text-primary-500 select-none">/</span>
+
 			{/* Search icon */}
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
 				viewBox="0 0 24 24"
-				strokeWidth={1.5}
+				strokeWidth={1.75}
 				stroke="currentColor"
-				className="group-hover:text-primary-600 dark:group-hover:text-primary-400 h-4 w-4 text-gray-600 transition-colors duration-300 dark:text-gray-400"
+				className="group-hover:text-primary-500 h-4 w-4 text-gray-500 transition-colors duration-200 dark:text-gray-400"
 			>
 				<title>Search icon</title>
 				<path
@@ -60,13 +63,13 @@ const SearchButton = () => {
 			</svg>
 
 			{/* Search text */}
-			<span className="group-hover:text-primary-700 dark:group-hover:text-primary-300 hidden text-sm font-medium text-gray-600 transition-colors duration-300 sm:inline-block dark:text-gray-400">
-				Search
+			<span className="group-hover:text-primary-600 dark:group-hover:text-primary-400 hidden text-gray-600 transition-colors duration-200 sm:inline-block dark:text-gray-400">
+				search
 			</span>
 
 			{/* Keyboard shortcut */}
-			<kbd className="group-hover:border-primary-400 group-hover:bg-primary-50 group-hover:text-primary-700 dark:group-hover:border-primary-600 dark:group-hover:bg-primary-900 dark:group-hover:text-primary-300 hidden items-center gap-0.5 rounded border border-gray-300 bg-white px-1.5 py-0.5 font-mono text-xs font-medium text-gray-500 shadow-sm transition-all duration-300 lg:inline-flex dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400">
-				{isMac ? "⌘" : "Ctrl"}K
+			<kbd className="hidden items-center gap-0.5 rounded border border-gray-300 bg-gray-50 px-1.5 py-0.5 text-[0.7rem] font-medium text-gray-500 lg:inline-flex dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400">
+				{isMac ? "⌘" : "^"}K
 			</kbd>
 		</div>
 	);

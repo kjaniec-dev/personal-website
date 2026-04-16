@@ -20,7 +20,6 @@ A modern, high-performance personal portfolio website built with Next.js 16, fea
 - **Project Portfolio** - Showcase of professional projects
 - **Experience Timeline** - Career history with detailed role descriptions
 - **Education & Skills** - Academic background and technical proficiency
-- **Learning Journey** - Completed courses and certifications
 - **Dark/Light Mode** - Seamless theme switching with system preference detection
 - **SEO Optimized** - Structured data, sitemaps, and metadata for search engines
 - **RSS Feed** - Auto-generated feed for blog subscribers
