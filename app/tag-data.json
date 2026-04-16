@@ -1,5 +1,5 @@
 {
-  "next-js": 5,
+  "next-js": 6,
   "tailwind-css": 4,
   "jamstack": 1,
   "framer-motion": 1,
@@ -25,6 +25,11 @@
   "oauth": 1,
   "docker": 1,
   "tools": 1,
+  "bun": 1,
+  "biome": 1,
+  "dx": 1,
+  "performance": 1,
+  "ci-cd": 1,
   "flutter": 1,
   "dart": 1,
   "mqtt": 1,
