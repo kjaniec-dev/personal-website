@@ -27,6 +27,16 @@ const projectsData: Project[] = [
 		tags: ["React", "WebSocket", "Real-time", "Agile"],
 	},
 	{
+		title: "MUI Greyscale Admin Dashboard",
+		description: `A comprehensive, production-ready admin dashboard template with a minimalist greyscale design.
+    Covers 27 feature domains including CRM, finance, inventory, marketing, and security — all built with
+    React 19, Material UI v7, and Vite 7. Fully open source and ready to use as a starting point for
+    your next internal tool or admin panel.`,
+		href: "https://dashboard.kjaniec.dev",
+		repoHref: "https://github.com/kjaniec-dev/mui-greyscale-admin-dashboard",
+		tags: ["React", "TypeScript", "Material UI", "Vite"],
+	},
+	{
 		title: "Cyberpunk Voxel City - Interactive Resume",
 		description: `An interactive 3D resume disguised as a browser-based game. Explore a sprawling cyberpunk city
     rendered entirely from voxels, discovering skill boxes that represent technical expertise. Features custom
