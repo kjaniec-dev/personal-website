@@ -1,0 +1,84 @@
+---
+title: 'MUI Greyscale Admin Dashboard — Open Source Template'
+date: '2026-04-25T12:00:00Z'
+lastmod: '2026-04-25'
+tags: ['react', 'typescript', 'material-ui', 'vite', 'open-source', 'dashboard']
+draft: false
+summary: 'A comprehensive, production-ready admin dashboard built with React 19, Material UI v7, and Vite 7. Minimalist greyscale design, 27 feature domains, and fully open source — grab it as a template for your next project.'
+layout: PostSimple
+---
+
+## Background
+
+I built this dashboard primarily using **Google Antigravity** — Google's AI-assisted development environment — and the experience was a great exercise in prompting, iterating, and guiding an AI through a complex, multi-domain UI project. The result is something I think is genuinely useful as a starting point for anyone building an internal tool or admin panel, so I decided to open source it.
+
+Live demo: [dashboard.kjaniec.dev](https://dashboard.kjaniec.dev)
+Source code: [github.com/kjaniec-dev/mui-greyscale-admin-dashboard](https://github.com/kjaniec-dev/mui-greyscale-admin-dashboard)
+
+## What It Is
+
+A full-featured admin dashboard covering everything you'd expect from a real internal tool: user management, e-commerce analytics, CRM pipelines, inventory tracking, finance reports, support ticketing, and more. All of it under one roof, with a clean, consistent design.
+
+The stack:
+
+| Layer | Choice |
+|---|---|
+| Framework | React 19 + TypeScript |
+| Build | Vite 7 (with HMR) |
+| UI Components | Material UI v7 |
+| Data / Charts | MUI X Data Grid, MUI X Charts, MUI X Date Pickers |
+| Calendar | FullCalendar.js |
+| Drag & Drop | @hello-pangea/dnd |
+| Animations | Framer Motion |
+| Forms | React Hook Form + Zod |
+| Routing | React Router v7 (with code-splitting) |
+| PDF Export | @react-pdf/renderer |
+
+## Design Philosophy: Greyscale First
+
+The entire UI uses black, white, and grey for surfaces and typography. Color appears only where it carries meaning — chart series, status chips (success / warning / error), and data highlights. The result is a dashboard that looks professional without visual noise, and where color immediately draws the eye to the things that matter.
+
+Both light and dark modes are supported, with a centralized theme and shared status color utilities so the scheme stays consistent across all 27 sections.
+
+## Feature Coverage (27 Domains)
+
+**Dashboards** — KPI overview, analytics, e-commerce metrics, real-time updates, heatmaps
+
+**Management** — Users, products, orders, invoices, customers
+
+**Finance** — Transactions, refunds, subscriptions, payouts, tax reporting
+
+**CRM** — Contacts, companies, Kanban deal pipeline with drag-and-drop
+
+**Inventory & Logistics** — Warehouses, stock levels, suppliers, returns, shipping
+
+**Marketing** — Coupon management, campaigns, email templates
+
+**Apps & Tools** — Tasks, notes, calendar, Kanban boards, email client, chat, file manager
+
+**Support** — Ticketing, chat history, knowledge base, lead tracking
+
+**Security** — Role-based access control, 2FA, audit logs, session management, API keys
+
+## Using It as a Template
+
+Getting started is straightforward:
+
+```bash
+git clone https://github.com/kjaniec-dev/mui-greyscale-admin-dashboard
+cd mui-greyscale-admin-dashboard
+npm install
+npm run dev
+```
+
+Requires Node.js 18+ (20+ recommended). The dev server runs on `http://localhost:5173`.
+
+The codebase follows TypeScript strict mode throughout, uses PascalCase for components and camelCase for utilities, and avoids duplicate logic by extracting shared utilities. It should be easy to pick up and extend without fighting the existing structure.
+
+## Takeaways from AI-Assisted Development
+
+Building this with Google Antigravity gave me a clear picture of where AI shines in a project like this and where it needs guidance. Generating boilerplate-heavy CRUD views, consistent table schemas, and repetitive form definitions is where the AI earned its keep. The design system decisions and cross-cutting concerns — routing structure, theme architecture, shared utilities — those needed a human in the loop.
+
+If you're evaluating AI-assisted development for a similar project, a dashboard like this is a good candidate: the domain is well-defined, the patterns repeat, and you can iterate fast.
+
+Feel free to use it as a starting point for your own internal tool. Issues and PRs welcome on GitHub.
