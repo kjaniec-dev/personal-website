@@ -30,7 +30,7 @@ const projectsData: Project[] = [
 		title: "MUI Greyscale Admin Dashboard",
 		description: `A comprehensive, production-ready admin dashboard template with a minimalist greyscale design.
     Covers 27 feature domains including CRM, finance, inventory, marketing, and security — all built with
-    React 19, Material UI v7, and Vite 7. Fully open source and ready to use as a starting point for
+    React 19, Material UI v9, and Vite 7. Fully open source and ready to use as a starting point for
     your next internal tool or admin panel.`,
 		href: "https://dashboard.kjaniec.dev",
 		repoHref: "https://github.com/kjaniec-dev/mui-greyscale-admin-dashboard",
