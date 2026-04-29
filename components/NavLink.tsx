@@ -17,13 +17,22 @@ const NavLink = ({ href, title }: NavLinkProps) => {
 		<Link
 			href={href}
 			aria-current={isActive ? "page" : undefined}
-			className={`animated-underline rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+			className={`group rounded-md px-3 py-1.5 font-mono text-sm transition-colors ${
 				isActive
-					? "bg-primary-50 text-primary-600 dark:bg-primary-950/50 dark:text-primary-400"
-					: "hover:text-primary-500 dark:hover:text-primary-400 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+					? "bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
+					: "hover:text-primary-600 dark:hover:text-primary-400 text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-900"
 			}`}
 		>
-			{title}
+			<span
+				className={`mr-1 ${
+					isActive
+						? "text-primary-500"
+						: "text-gray-400 group-hover:text-primary-500 dark:text-gray-600"
+				}`}
+			>
+				./
+			</span>
+			{title.toLowerCase()}
 		</Link>
 	);
 };
