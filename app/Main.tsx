@@ -2,7 +2,6 @@ import NewsletterForm from "pliny/ui/NewsletterForm";
 import { formatDate } from "pliny/utils/formatDate";
 import Hero from "@/components/Hero";
 import Link from "@/components/Link";
-import Tag from "@/components/Tag";
 import siteMetadata from "@/data/siteMetadata";
 import "./layout.css";
 
@@ -52,133 +51,122 @@ export default function Home({ posts }) {
 				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify(websiteSchema) is safe for websiteSchema
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
 			/>
-			{/* Hero Section */}
+
 			<Hero />
 
-			{/* Latest Posts Section */}
-			<div className="mt-12 space-y-8 md:mt-16">
-				<div className="flex items-center justify-between">
-					<h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-						Latest Posts
-					</h2>
+			{/* Field notes — latest posts, as an editorial index */}
+			<section className="mt-8 md:mt-16">
+				<div className="flex items-baseline justify-between">
+					<div className="flex items-baseline gap-3">
+						<span className="section-mark">§ 02</span>
+						<span className="label text-vermilion">Field notes</span>
+					</div>
 					{posts.length > MAX_DISPLAY && (
 						<Link
 							href="/blog"
-							className="animated-underline text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+							className="editorial-link font-mono text-xs tracking-wide"
 						>
-							View all posts →
+							All entries →
 						</Link>
 					)}
 				</div>
 
-				<div className="grid gap-6 md:grid-cols-2">
-					{!posts.length && (
-						<p className="text-gray-500 dark:text-gray-400">No posts found.</p>
-					)}
+				<h2 className="font-display text-ink dark:text-paper mt-3 text-4xl leading-[1.05] font-[600] tracking-[-0.025em] md:text-5xl">
+					From the journal —{" "}
+					<span className="text-ink-muted dark:text-paper-deep italic">
+						recent entries.
+					</span>
+				</h2>
+
+				<hr className="rule mt-6 h-px border-0" />
+
+				{!posts.length && (
+					<p className="text-ink-muted dark:text-paper-deep mt-10 text-base">
+						No entries yet. Check back soon.
+					</p>
+				)}
+
+				<ul className="divide-[color:var(--color-rule)] mt-2 divide-y">
 					{posts.slice(0, MAX_DISPLAY).map((post, index) => {
 						const { slug, date, title, summary, tags, readingTime } = post;
+						const entryNo = String(index + 1).padStart(2, "0");
 						return (
-							<article
-								key={slug}
-								className="hover-lift group relative rounded-2xl border border-gray-200/80 bg-white p-6 transition-all dark:border-gray-700/80 dark:bg-gray-900/50"
-								style={{
-									animationDelay: `${index * 0.1}s`,
-									animationFillMode: "both",
-								}}
-							>
-								{/* Gradient border on hover */}
-								<div className="from-primary-500/0 via-primary-500/0 to-accent-cyan/0 group-hover:from-primary-500/20 group-hover:to-accent-cyan/20 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r opacity-0 blur-sm transition-opacity group-hover:opacity-100" />
-
-								<div className="space-y-3">
-									<div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
-										<time dateTime={date} className="flex items-center gap-1">
-											<svg
-												className="h-4 w-4"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
+							<li key={slug} className="group relative py-8 md:py-10">
+								<Link
+									href={`/blog/${slug}`}
+									prefetch={false}
+									className="grid grid-cols-1 gap-y-4 md:grid-cols-12 md:gap-x-8"
+								>
+									{/* Entry number + date — the spine of the entry */}
+									<div className="md:col-span-3">
+										<div className="flex items-baseline gap-3">
+											<span className="font-mono text-vermilion text-xs tracking-wider">
+												№ {entryNo}
+											</span>
+											<time
+												dateTime={date}
+												className="label text-ink-muted dark:text-paper-deep"
 											>
-												<title>Calendar icon</title>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth={2}
-													d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-												/>
-											</svg>
-											{formatDate(date, siteMetadata.locale)}
-										</time>
+												{formatDate(date, siteMetadata.locale)}
+											</time>
+										</div>
 										{readingTime && (
-											<>
-												<span>•</span>
-												<span>{readingTime.text}</span>
-											</>
+											<span className="marginalia mt-1 block">
+												{readingTime.text}
+											</span>
 										)}
 									</div>
 
-									<h3 className="text-xl leading-tight font-bold tracking-tight">
-										<Link
-											href={`/blog/${slug}`}
-											prefetch={false}
-											className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-900 transition-colors dark:text-gray-100"
-										>
+									{/* Headline + dek + tags */}
+									<div className="md:col-span-9">
+										<h3 className="font-display text-ink dark:text-paper group-hover:text-vermilion text-2xl leading-[1.15] font-[600] tracking-tight transition-colors md:text-[1.9rem]">
 											{title}
-										</Link>
-									</h3>
-
-									<div className="flex flex-wrap gap-2">
-										{tags.map((tag) => (
-											<Tag key={tag} text={tag} />
-										))}
+										</h3>
+										<p className="text-ink-soft dark:text-paper-deep mt-2 max-w-[58ch] text-base leading-relaxed md:text-[1.05rem]">
+											{summary}
+										</p>
+										{tags?.length ? (
+											<ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
+												{tags.map((tag: string) => (
+													<li
+														key={tag}
+														className="label text-ink-muted dark:text-paper-deep"
+													>
+														#{tag}
+													</li>
+												))}
+											</ul>
+										) : null}
 									</div>
-
-									<p className="line-clamp-3 text-gray-600 dark:text-gray-400">
-										{summary}
-									</p>
-									<Link
-										href={`/blog/${slug}`}
-										prefetch={false}
-										className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-medium"
-										aria-label={`Read more: "${title}"`}
-									>
-										<span className="animated-underline whitespace-nowrap">
-											Read more<span className="sr-only">: {title}</span>
-											<svg
-												className="ml-1 inline-block h-4 w-4 align-middle transition-transform group-hover:translate-x-1"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-												aria-hidden="true"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth={2}
-													d="M13 7l5 5m0 0l-5 5m5-5H6"
-												/>
-											</svg>
-										</span>
-									</Link>
-								</div>
-							</article>
+								</Link>
+							</li>
 						);
 					})}
-				</div>
-			</div>
+				</ul>
+			</section>
 
 			{siteMetadata.newsletter?.provider && (
-				<div className="mt-16 flex items-center justify-center">
-					<div className="w-full max-w-xl rounded-2xl border border-gray-200 bg-gray-50/50 p-8 dark:border-gray-700 dark:bg-gray-900/50">
-						<h3 className="mb-4 text-center text-2xl font-bold text-gray-900 dark:text-gray-100">
-							Subscribe to the newsletter
-						</h3>
-						<p className="mb-6 text-center text-gray-600 dark:text-gray-400">
-							Get notified when I publish new content. No spam, unsubscribe
-							anytime.
-						</p>
-						<NewsletterForm />
+				<section className="border-ink dark:border-paper mt-24 border-t-2 pt-10 pb-4">
+					<div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10">
+						<div className="md:col-span-5">
+							<span className="label text-vermilion">Subscribe</span>
+							<h3 className="font-display text-ink dark:text-paper mt-3 text-3xl leading-tight font-[600] tracking-tight md:text-4xl">
+								Delivered by post,
+								<br />
+								<span className="italic">rather than algorithm.</span>
+							</h3>
+						</div>
+						<div className="md:col-span-7 md:border-l md:border-[color:var(--color-rule)] md:pl-10">
+							<p className="text-ink-soft dark:text-paper-deep max-w-md text-base leading-relaxed">
+								New entries in your inbox when they're published — no tracking,
+								no cadence pressure, unsubscribe at any time.
+							</p>
+							<div className="mt-5 max-w-md">
+								<NewsletterForm />
+							</div>
+						</div>
 					</div>
-				</div>
+				</section>
 			)}
 		</>
 	);

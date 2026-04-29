@@ -18,7 +18,6 @@ const MobileNav = () => {
 		setNavShow((status) => !status);
 	};
 
-	// Handle body scroll lock with CSS instead of JS for better performance
 	useEffect(() => {
 		setMounted(true);
 
@@ -28,7 +27,6 @@ const MobileNav = () => {
 			document.body.style.overflow = "";
 		}
 
-		// Cleanup on unmount
 		return () => {
 			document.body.style.overflow = "";
 		};
@@ -40,20 +38,18 @@ const MobileNav = () => {
 				type="button"
 				aria-label="Toggle Menu"
 				onClick={onToggleNav}
-				className="sm:hidden"
+				className="border-rule text-ink dark:text-paper flex h-9 w-9 items-center justify-center border sm:hidden"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 20 20"
-					fill="currentColor"
-					className="hover:text-primary-500 dark:hover:text-primary-400 h-8 w-8 text-gray-900 dark:text-gray-100"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth="1.5"
+					className="h-4 w-4"
 				>
 					<title>Menu icon</title>
-					<path
-						fillRule="evenodd"
-						d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-						clipRule="evenodd"
-					/>
+					<path strokeLinecap="round" d="M3 7h18M3 12h18M3 17h18" />
 				</svg>
 			</button>
 			{mounted && (
@@ -69,52 +65,58 @@ const MobileNav = () => {
 							leaveTo="opacity-0"
 							unmount={false}
 						>
-							<div className="fixed inset-0 z-60 bg-black/25" />
+							<div className="fixed inset-0 z-60 bg-black/40" />
 						</TransitionChild>
 
 						<TransitionChild
 							as={Fragment}
 							enter="transition ease-in-out duration-300 transform"
 							enterFrom="translate-x-full opacity-0"
-							enterTo="translate-x-0 opacity-95"
+							enterTo="translate-x-0 opacity-100"
 							leave="transition ease-in duration-200 transform"
-							leaveFrom="translate-x-0 opacity-95"
+							leaveFrom="translate-x-0 opacity-100"
 							leaveTo="translate-x-full opacity-0"
 							unmount={false}
 						>
-							<DialogPanel className="fixed top-0 left-0 z-70 h-full w-full bg-white/95 duration-300 dark:bg-gray-950/98">
-								<nav className="mt-8 flex h-full basis-0 flex-col items-start overflow-y-auto pt-2 pl-12 text-left">
-									{headerNavLinks.map((link) => (
+							<DialogPanel className="bg-paper dark:bg-gray-950 fixed top-0 right-0 z-70 h-full w-full max-w-sm duration-300">
+								<div className="border-rule flex items-center justify-between border-b px-6 py-5">
+									<span className="label text-ink-muted dark:text-paper-deep">
+										Index
+									</span>
+									<button
+										type="button"
+										className="text-ink dark:text-paper border-rule flex h-9 w-9 items-center justify-center border"
+										aria-label="Close menu"
+										onClick={onToggleNav}
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="1.5"
+											className="h-4 w-4"
+										>
+											<title>Close icon</title>
+											<path strokeLinecap="round" d="M6 6l12 12M6 18L18 6" />
+										</svg>
+									</button>
+								</div>
+								<nav className="flex flex-col divide-y divide-[color:var(--color-rule)] px-6">
+									{headerNavLinks.map((link, i) => (
 										<Link
 											key={link.title}
 											href={link.href}
-											className="hover:text-primary-500 dark:hover:text-primary-400 mb-4 py-2 pr-4 text-2xl font-bold tracking-widest text-gray-900 outline outline-0 dark:text-gray-100"
+											className="group font-display text-ink hover:text-vermilion dark:text-paper flex items-baseline gap-4 py-5 text-3xl font-medium tracking-tight transition-colors"
 											onClick={onToggleNav}
 										>
+											<span className="text-vermilion font-mono text-xs tracking-wider">
+												{String(i + 1).padStart(2, "0")}
+											</span>
 											{link.title}
 										</Link>
 									))}
 								</nav>
-
-								<button
-									type="button"
-									className="hover:text-primary-500 dark:hover:text-primary-400 fixed top-7 right-4 z-80 h-16 w-16 p-4 text-gray-900 dark:text-gray-100"
-									aria-label="Toggle Menu"
-									onClick={onToggleNav}
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 20 20"
-										fill="currentColor"
-									>
-										<title>Close icon</title>
-										<path
-											fillRule="evenodd"
-											d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-											clipRule="evenodd"
-										/>
-									</svg>
-								</button>
 							</DialogPanel>
 						</TransitionChild>
 					</Dialog>
