@@ -1,4 +1,3 @@
-import Image from "@/components/Image";
 import headerNavLinks from "@/data/headerNavLinks";
 import siteMetadata from "@/data/siteMetadata";
 import Link from "./Link";
@@ -8,53 +7,70 @@ import SearchButton from "./SearchButton";
 import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
-	let headerClass =
-		"flex items-center w-full bg-white/80 dark:bg-gray-950/80 backdrop-blur-md justify-between py-6";
-	if (siteMetadata.stickyNav) {
-		headerClass +=
-			" sticky top-0 z-50 border-b border-gray-200/50 dark:border-gray-800/50";
-	}
+	const stickyClass = siteMetadata.stickyNav
+		? "sticky top-0 z-40 bg-paper/85 dark:bg-gray-950/85 backdrop-blur"
+		: "";
 
 	return (
-		<header className={headerClass}>
-			<Link href="/" aria-label={`${siteMetadata.headerTitle} - Home`}>
-				<div className="flex items-center justify-between transition-transform hover:scale-105">
-					<div className="mr-3">
-						<Image
-							className={"dark:invert"}
-							width={48}
-							height={48}
-							src={"/static/images/logo.svg"}
-							alt={`${siteMetadata.headerTitle} logo`}
-							priority
-						/>
-					</div>
-					{typeof siteMetadata.headerTitle === "string" ? (
-						<div className="hidden text-xl font-bold tracking-tight text-gray-900 sm:block dark:text-gray-100">
-							<span className="gradient-text">{siteMetadata.headerTitle}</span>
-						</div>
-					) : (
-						siteMetadata.headerTitle
-					)}
-				</div>
-			</Link>
-			<div className="flex items-center gap-2 leading-5 sm:gap-4">
-				<nav
-					className="hidden items-center gap-1 sm:flex"
-					aria-label="Main navigation"
-				>
-					{headerNavLinks
-						.filter((link) => link.href !== "/")
-						.map((link) => (
-							<NavLink key={link.title} href={link.href} title={link.title} />
-						))}
-				</nav>
-				<div className="flex items-center gap-2">
-					<SearchButton />
-					<ThemeSwitch />
-				</div>
-				<MobileNav />
+		<header className={`relative z-20 ${stickyClass}`}>
+			{/* Top meta strip — the masthead micro-info */}
+			<div className="border-rule flex items-center justify-between border-b py-2">
+				<span className="label text-ink-muted dark:text-paper-deep">
+					kjaniec.dev · a journal of software in practice
+				</span>
+				<span className="label text-ink-muted dark:text-paper-deep hidden sm:block">
+					Issue {new Date().getFullYear()}
+				</span>
 			</div>
+
+			{/* Main masthead — wordmark left, nav right */}
+			<div className="flex items-end justify-between pt-6 pb-5">
+				<Link
+					href="/"
+					aria-label={`${siteMetadata.headerTitle} — Home`}
+					className="group"
+				>
+					<div className="flex items-baseline gap-2">
+						<span className="font-display text-ink dark:text-paper text-3xl leading-none font-[600] tracking-[-0.03em] sm:text-4xl">
+							kjaniec
+						</span>
+						<span
+							className="text-vermilion font-display text-3xl leading-none font-[600] italic sm:text-4xl"
+							aria-hidden="true"
+						>
+							.dev
+						</span>
+					</div>
+					<span className="label text-ink-muted dark:text-paper-deep mt-1 block">
+						Krzysztof Janiec — Engineer, Writer
+					</span>
+				</Link>
+
+				<div className="flex items-center gap-3">
+					<nav
+						className="hidden items-center gap-1 sm:flex"
+						aria-label="Main navigation"
+					>
+						{headerNavLinks
+							.filter((link) => link.href !== "/")
+							.map((link) => (
+								<NavLink key={link.title} href={link.href} title={link.title} />
+							))}
+					</nav>
+					<div className="border-rule hidden items-center gap-1 border-l pl-3 sm:flex">
+						<SearchButton />
+						<ThemeSwitch />
+					</div>
+					<div className="flex items-center gap-2 sm:hidden">
+						<SearchButton />
+						<ThemeSwitch />
+						<MobileNav />
+					</div>
+				</div>
+			</div>
+
+			{/* Thick rule below — like the masthead bar of a printed journal */}
+			<hr className="bg-ink dark:bg-paper h-[2px] border-0" />
 		</header>
 	);
 };

@@ -3,7 +3,7 @@ import "css/prism.css";
 import "remark-github-blockquote-alert/alert.css";
 
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Fraunces, JetBrains_Mono, Newsreader } from "next/font/google";
 import type { AnalyticsConfig } from "pliny/analytics";
 import type { SearchConfig } from "pliny/search";
 import AnalyticsWrapper from "@/components/AnalyticsWrapper";
@@ -15,13 +15,31 @@ import WebVitalsReporter from "@/components/WebVitals";
 import siteMetadata from "@/data/siteMetadata";
 import { ThemeProviders } from "./theme-providers";
 
-const space_grotesk = Space_Grotesk({
+const fraunces = Fraunces({
 	subsets: ["latin"],
-	display: "optional",
-	variable: "--font-space-grotesk",
+	display: "swap",
+	variable: "--font-fraunces",
+	axes: ["opsz", "SOFT"],
+	style: ["normal", "italic"],
 	preload: true,
-	adjustFontFallback: true,
-	fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
+	fallback: ["Georgia", "serif"],
+});
+
+const newsreader = Newsreader({
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-newsreader",
+	style: ["normal", "italic"],
+	preload: true,
+	fallback: ["Georgia", "serif"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-jetbrains",
+	preload: false,
+	fallback: ["ui-monospace", "monospace"],
 });
 
 export const metadata: Metadata = {
@@ -81,7 +99,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang={siteMetadata.language}
-			className={`${space_grotesk.variable} scroll-smooth`}
+			className={`${fraunces.variable} ${newsreader.variable} ${jetbrainsMono.variable} scroll-smooth`}
 			data-scroll-behavior="smooth"
 			suppressHydrationWarning
 		>
@@ -109,65 +127,36 @@ export default function RootLayout({
 			<link
 				rel="mask-icon"
 				href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
-				color="#5bbad5"
+				color="#D63A1E"
 			/>
-			{/* Resource hints for performance */}
-			<link rel="preconnect" href="https://fonts.googleapis.com" />
-			<link
-				rel="preconnect"
-				href="https://fonts.gstatic.com"
-				crossOrigin="anonymous"
-			/>
-			<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-			<meta name="msapplication-TileColor" content="#000000" />
+			<meta name="msapplication-TileColor" content="#14110F" />
 			<meta
 				name="theme-color"
 				media="(prefers-color-scheme: light)"
-				content="#fff"
+				content="#F4EFE4"
 			/>
 			<meta
 				name="theme-color"
 				media="(prefers-color-scheme: dark)"
-				content="#000"
+				content="#14110F"
 			/>
 			<link
 				rel="alternate"
 				type="application/rss+xml"
 				href={`${basePath}/feed.xml`}
 			/>
-			{/* Performance optimizations */}
 			<meta
 				name="viewport"
 				content="width=device-width, initial-scale=1, viewport-fit=cover"
 			/>
 			<meta httpEquiv="x-ua-compatible" content="ie=edge" />
-			<body className="relative min-h-screen bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-				{/* Skip to main content link for accessibility */}
+			<body className="bg-paper text-ink dark:bg-gray-950 dark:text-paper relative min-h-screen pl-[calc(100vw-100%)] font-sans antialiased">
 				<a
 					href="#main-content"
-					className="bg-primary-500 absolute top-0 left-0 z-50 -translate-y-full transform px-4 py-3 text-white transition-transform duration-200 focus:translate-y-0"
+					className="bg-vermilion text-paper absolute top-0 left-0 z-50 -translate-y-full transform px-4 py-3 text-sm font-medium tracking-wide transition-transform duration-200 focus:translate-y-0"
 				>
 					Skip to main content
 				</a>
-
-				{/* Decorative background elements - optimized for GPU acceleration */}
-				<div
-					className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-					aria-hidden="true"
-				>
-					<div
-						className="bg-primary-500/5 dark:bg-primary-400/5 absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full blur-2xl"
-						style={{ willChange: "opacity" }}
-					/>
-					<div
-						className="bg-accent-cyan/5 absolute top-1/2 -left-1/4 h-96 w-96 rounded-full blur-2xl"
-						style={{ willChange: "opacity" }}
-					/>
-					<div
-						className="bg-accent-pink/5 dark:bg-accent-pink/3 absolute right-1/3 -bottom-1/4 h-96 w-96 rounded-full blur-2xl"
-						style={{ willChange: "opacity" }}
-					/>
-				</div>
 
 				<ThemeProviders>
 					<AnalyticsWrapper
@@ -179,7 +168,7 @@ export default function RootLayout({
 							searchConfig={siteMetadata.search as SearchConfig}
 						>
 							<Header />
-							<main id="main-content" className="mb-auto">
+							<main id="main-content" className="relative z-10 mb-auto">
 								{children}
 							</main>
 						</SearchProviderWrapper>

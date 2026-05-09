@@ -17,13 +17,21 @@ const NavLink = ({ href, title }: NavLinkProps) => {
 		<Link
 			href={href}
 			aria-current={isActive ? "page" : undefined}
-			className={`animated-underline rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+			className={`group font-display relative px-2.5 py-1.5 text-[0.95rem] tracking-tight transition-colors ${
 				isActive
-					? "bg-primary-50 text-primary-600 dark:bg-primary-950/50 dark:text-primary-400"
-					: "hover:text-primary-500 dark:hover:text-primary-400 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+					? "text-vermilion"
+					: "text-ink hover:text-vermilion dark:text-paper"
 			}`}
 		>
-			{title}
+			<span className="relative">
+				{title}
+				<span
+					aria-hidden="true"
+					className={`bg-vermilion absolute -bottom-1 left-0 h-[2px] transition-all duration-300 ${
+						isActive ? "w-full" : "w-0 group-hover:w-full"
+					}`}
+				/>
+			</span>
 		</Link>
 	);
 };
