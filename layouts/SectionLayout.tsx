@@ -7,13 +7,17 @@ interface Props {
 }
 
 export default function SectionLayout({ children, title }: Props) {
+	const slug = title.toLowerCase().replace(/\s+/g, "-");
 	return (
 		<div className="my-16">
-			<div className="mb-8 flex items-center gap-4">
-				<h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-					{title}
+			<div className="mb-8 space-y-2">
+				<div className="section-divider">
+					<span className="text-primary-500">{"//"}</span>
+					<span>{slug}.md</span>
+				</div>
+				<h2 className="font-mono text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+					<span className="text-primary-500">$</span> cat {slug}.md
 				</h2>
-				<div className="from-primary-500/50 h-px flex-1 bg-gradient-to-r to-transparent" />
 			</div>
 			<SectionContainer>{children}</SectionContainer>
 		</div>

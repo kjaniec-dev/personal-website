@@ -8,12 +8,17 @@ export default function Projects() {
 	return (
 		<div className="space-y-12">
 			<div className="space-y-4">
-				<h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-gray-100">
-					<span className="gradient-text">Projects</span>
+				<div className="section-divider">
+					<span className="text-primary-500">{"//"}</span>
+					<span>projects/</span>
+				</div>
+				<h1 className="font-mono text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
+					<span className="text-primary-500">$</span> ls ./projects
 				</h1>
-				<p className="max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-					A collection of projects I've worked on. Each project represents
-					different challenges and learning experiences.
+				<p className="max-w-2xl font-mono text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+					<span className="text-gray-400"># </span>A collection of projects I've
+					worked on. Each project represents different challenges and learning
+					experiences.
 				</p>
 			</div>
 

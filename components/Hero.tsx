@@ -2,68 +2,110 @@ import HeroAnimationWrapper from "@/components/HeroAnimationWrapper";
 import Link from "@/components/Link";
 import siteMetadata from "@/data/siteMetadata";
 
+const heroLines: { prompt: string; command: string; output?: string }[] = [
+	{
+		prompt: "~ $",
+		command: "whoami",
+		output: siteMetadata.author,
+	},
+	{
+		prompt: "~ $",
+		command: "cat role.txt",
+		output: "Software Engineer — building tomorrow's software.",
+	},
+	{
+		prompt: "~ $",
+		command: "cat bio.txt",
+		output: siteMetadata.description,
+	},
+];
+
+const focusAreas = [
+	{
+		title: "full-stack",
+		desc: "Frontend, Backend, APIs & Databases",
+	},
+	{
+		title: "architecture",
+		desc: "Scalable & maintainable systems",
+	},
+	{
+		title: "devops",
+		desc: "CI/CD, cloud & observability",
+	},
+];
+
 export default function Hero() {
 	return (
 		<HeroAnimationWrapper>
-			<section className="relative flex min-h-[64vh] items-center overflow-hidden">
-				{/* Subtle background texture */}
+			<section className="relative flex min-h-[64vh] items-center overflow-hidden py-8">
+				{/* Grid backdrop */}
 				<div
-					className="pointer-events-none absolute inset-0 opacity-[0.015] dark:opacity-[0.025]"
-					style={{
-						backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-					}}
+					aria-hidden="true"
+					className="grid-bg pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]"
 				/>
 
-				{/* Main content container */}
-				<div className="mx-auto w-full max-w-7xl py-2">
-					<div className="grid grid-cols-1 items-center gap-12 xl:grid-cols-12 xl:gap-22">
-						{/* Left column - Main content */}
-						<div className="space-y-8 lg:col-span-7">
-							{/* Main heading */}
-							<div className="space-y-6">
-								<h1 className="hero-title-reveal font-serif text-6xl leading-[0.95] font-bold tracking-tight text-gray-900 sm:text-7xl lg:text-8xl dark:text-gray-100">
-									Building
-									<br />
-									<span className="italic">tomorrow's</span>
-									<br />
-									software
-								</h1>
-
-								{/* Accent line with gradient */}
-								<div className="hero-accent-line from-primary-500 to-accent-cyan h-[3px] rounded-full bg-gradient-to-r" />
+				<div className="relative mx-auto w-full max-w-7xl">
+					<div className="grid grid-cols-1 items-start gap-10 xl:grid-cols-12 xl:gap-16">
+						{/* Left column — Terminal window */}
+						<div className="space-y-8 xl:col-span-7">
+							{/* Kicker badge */}
+							<div className="hero-badge-reveal inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white/60 px-3 py-1 font-mono text-xs text-gray-600 backdrop-blur dark:border-gray-700 dark:bg-gray-900/60 dark:text-gray-400">
+								<span className="relative flex h-2 w-2">
+									<span className="bg-primary-500 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+									<span className="bg-primary-500 relative inline-flex h-2 w-2 rounded-full" />
+								</span>
+								<span>
+									<span className="text-primary-500">$</span> status:{" "}
+									<span className="text-gray-900 dark:text-gray-100">
+										available for opportunities
+									</span>
+								</span>
 							</div>
 
-							{/* Subtitle */}
-							<div className="hero-subtitle-reveal max-w-xl space-y-4">
-								<div className="flex flex-wrap items-center gap-3">
-									<p className="text-xl leading-relaxed font-medium text-gray-900 sm:text-2xl dark:text-gray-100">
-										{siteMetadata.author}
-									</p>
-									{/* Badge - Available for opportunities */}
-									<div className="border-primary-200 bg-primary-50/80 dark:border-primary-800 dark:bg-primary-900/80 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 backdrop-blur-sm">
-										<span className="relative flex h-2 w-2">
-											<span className="bg-primary-500 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-											<span className="bg-primary-500 relative inline-flex h-2 w-2 rounded-full"></span>
-										</span>
-										<span className="text-primary-700 dark:text-primary-300 text-xs font-medium tracking-wide">
-											Available for opportunities
-										</span>
-									</div>
+							{/* Terminal card */}
+							<div className="terminal-card overflow-hidden shadow-sm">
+								<div className="terminal-chrome">
+									<span className="ml-auto select-none">
+										{siteMetadata.author.toLowerCase().replace(/\s+/g, "-")}
+										@portfolio — zsh
+									</span>
 								</div>
-								<p className="text-lg leading-relaxed text-gray-600 dark:text-gray-400">
-									{siteMetadata.description}
-								</p>
+
+								<div className="hero-title-reveal space-y-3 p-5 font-mono text-sm leading-relaxed sm:p-6 sm:text-base">
+									{heroLines.map((line, idx) => (
+										<div key={line.command} className="space-y-1">
+											<div className="flex items-baseline gap-2">
+												<span className="text-primary-500 select-none">
+													{line.prompt}
+												</span>
+												<span className="text-gray-900 dark:text-gray-100">
+													{line.command}
+												</span>
+												{idx === heroLines.length - 1 && (
+													<span aria-hidden="true" className="caret ml-1" />
+												)}
+											</div>
+											{line.output && (
+												<div className="pl-8 text-gray-600 dark:text-gray-400">
+													{line.output}
+												</div>
+											)}
+										</div>
+									))}
+								</div>
 							</div>
 
-							{/* CTA Buttons */}
-							<div className="hero-cta-reveal flex flex-wrap gap-4 pt-4">
+							{/* CTAs */}
+							<div className="hero-cta-reveal flex flex-wrap gap-3">
 								<Link
 									href="/about"
-									className="group bg-primary-500 hover:bg-primary-600 hover:shadow-primary-500/30 relative inline-flex items-center gap-2 overflow-hidden rounded-full px-8 py-4 font-medium text-white transition-all duration-300 hover:shadow-lg"
+									className="group border-primary-500 bg-primary-500/10 text-primary-700 hover:bg-primary-500 dark:text-primary-300 inline-flex items-center gap-2 rounded-md border px-5 py-2.5 font-mono text-sm transition-colors duration-200 hover:text-white dark:hover:text-black"
 								>
-									<span className="relative z-10">Explore my work</span>
+									<span className="opacity-70 group-hover:opacity-100">$</span>
+									<span>./about</span>
 									<svg
-										className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+										className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
 										fill="none"
 										stroke="currentColor"
 										viewBox="0 0 24 24"
@@ -76,119 +118,78 @@ export default function Hero() {
 											d="M17 8l4 4m0 0l-4 4m4-4H3"
 										/>
 									</svg>
-
-									{/* Hover effect */}
-									<div className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-[100%]" />
 								</Link>
 
 								<Link
 									href="/blog"
-									className="group inline-flex items-center gap-2 rounded-full border-2 border-gray-900 px-8 py-4 font-medium text-gray-900 transition-all duration-300 hover:bg-gray-900 hover:text-white dark:border-gray-100 dark:text-gray-100 dark:hover:bg-gray-100 dark:hover:text-gray-900"
+									className="group inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white/60 px-5 py-2.5 font-mono text-sm text-gray-700 transition-colors duration-200 hover:border-gray-900 hover:bg-gray-900 hover:text-white dark:border-gray-700 dark:bg-gray-900/60 dark:text-gray-300 dark:hover:border-gray-100 dark:hover:bg-gray-100 dark:hover:text-gray-900"
 								>
-									<span>Read insights</span>
-									<svg
-										className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<title>Arrow right icon</title>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											strokeWidth={2}
-											d="M17 8l4 4m0 0l-4 4m4-4H3"
-										/>
-									</svg>
+									<span className="text-primary-500 opacity-70 group-hover:opacity-100">
+										$
+									</span>
+									<span>cat blog/*</span>
 								</Link>
 							</div>
 						</div>
 
-						{/* Right column - Stats or feature highlight */}
-						<div className="hero-description-reveal space-y-8 lg:col-span-5">
-							{/* Feature card */}
-							<div className="border-primary-100 from-primary-50/50 dark:border-primary-900/50 dark:from-primary-950/30 relative rounded-2xl border bg-gradient-to-br to-transparent p-8 backdrop-blur-sm">
-								{/* Top accent */}
-								<div className="from-primary-500 to-accent-cyan absolute top-0 left-8 h-1 w-12 rounded-b-full bg-gradient-to-r" />
-
-								<div className="space-y-6">
-									<div className="space-y-2">
-										<h3 className="text-primary-600 dark:text-primary-400 text-lg font-semibold tracking-[0.1em] uppercase">
-											Featured Areas
-										</h3>
-									</div>
-
-									<div className="space-y-4">
-										{[
-											{
-												title: "Full-Stack Development",
-												desc: "Frontend, Backend, APIs & Databases",
-											},
-											{
-												title: "System Architecture",
-												desc: "Scalable & maintainable solutions",
-											},
-											{
-												title: "DevOps & Infrastructure",
-												desc: "CI/CD, Cloud deployment & monitoring",
-											},
-										].map((item) => (
-											<div
-												key={item.title}
-												className="group flex items-start gap-4 transition-transform duration-300 hover:translate-x-2"
-											>
-												<div className="bg-primary-500 mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-												<div className="space-y-1">
-													<h4 className="text-base font-semibold text-gray-900 dark:text-gray-100">
-														{item.title}
-													</h4>
-													<p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-														{item.desc}
-													</p>
-												</div>
-											</div>
-										))}
-									</div>
-
-									{/* Bottom link */}
-									<Link
-										href="/projects"
-										className="group text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 inline-flex items-center gap-2 pt-2 text-sm font-medium transition-colors duration-300"
-									>
-										<span>View all projects</span>
-										<svg
-											className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24"
-										>
-											<title>Arrow right icon</title>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth={2.5}
-												d="M17 8l4 4m0 0l-4 4m4-4H3"
-											/>
-										</svg>
-									</Link>
+						{/* Right column — focus areas */}
+						<div className="hero-description-reveal space-y-6 xl:col-span-5">
+							<div className="terminal-card p-6">
+								<div className="section-divider mb-5">
+									<span className="text-primary-500">{"//"}</span>
+									<span>focus areas</span>
 								</div>
+								<ul className="space-y-4">
+									{focusAreas.map((item) => (
+										<li
+											key={item.title}
+											className="group flex items-start gap-3 font-mono text-sm"
+										>
+											<span className="text-primary-500 mt-0.5 select-none">
+												▸
+											</span>
+											<div className="space-y-0.5">
+												<div className="font-medium text-gray-900 dark:text-gray-100">
+													<span className="text-gray-400 dark:text-gray-600">
+														./
+													</span>
+													{item.title}
+												</div>
+												<p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
+													{item.desc}
+												</p>
+											</div>
+										</li>
+									))}
+								</ul>
+
+								<Link
+									href="/projects"
+									className="hover:text-primary-500 group mt-5 inline-flex items-center gap-2 font-mono text-xs text-gray-600 dark:text-gray-400"
+								>
+									<span className="text-primary-500">$</span>
+									<span>ls ./projects</span>
+									<span className="transition-transform duration-200 group-hover:translate-x-0.5">
+										→
+									</span>
+								</Link>
 							</div>
 
-							{/* Quick stats */}
-							<div className="grid grid-cols-3 gap-4">
+							{/* Stats grid */}
+							<div className="grid grid-cols-3 gap-3">
 								{[
-									{ number: "12+", label: "Years Exp." },
-									{ number: "∞", label: "Learning" },
-									{ number: "100%", label: "Dedication" },
+									{ number: "12+", label: "years" },
+									{ number: "E2E", label: "ownership" },
+									{ number: "100%", label: "dedication" },
 								].map((stat) => (
 									<div
 										key={stat.label}
-										className="border-primary-100 hover:border-primary-500 hover:shadow-primary-500/10 dark:border-primary-900/50 dark:hover:border-primary-500 rounded-xl border bg-white/80 p-4 text-center backdrop-blur-sm transition-all duration-300 hover:shadow-lg dark:bg-gray-900/80"
+										className="terminal-card p-3 text-center"
 									>
-										<div className="text-primary-600 dark:text-primary-400 font-serif text-3xl font-bold">
+										<div className="text-primary-500 font-mono text-xl font-semibold">
 											{stat.number}
 										</div>
-										<div className="mt-1 text-xs font-medium tracking-wider text-gray-600 uppercase dark:text-gray-400">
+										<div className="mt-0.5 font-mono text-[0.7rem] tracking-wider text-gray-500 lowercase dark:text-gray-400">
 											{stat.label}
 										</div>
 									</div>

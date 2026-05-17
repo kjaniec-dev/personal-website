@@ -5,8 +5,15 @@ import Link from "./Link";
 export default function Footer() {
 	return (
 		<footer className="relative mt-20">
-			{/* Decorative gradient line */}
-			<div className="via-primary-500/50 mx-auto mb-8 h-px w-full max-w-2xl bg-gradient-to-r from-transparent to-transparent" />
+			{/* Terminal-style divider */}
+			<div className="mb-8 flex items-center gap-3 font-mono text-xs tracking-widest text-gray-500 uppercase">
+				<span className="text-primary-500">{">"}</span>
+				<span>end of transmission</span>
+				<span
+					aria-hidden="true"
+					className="via-primary-500/40 h-px flex-1 bg-gradient-to-r from-transparent to-transparent"
+				/>
+			</div>
 
 			<div className="flex flex-col items-center space-y-6">
 				{/* Social Icons */}
@@ -101,16 +108,18 @@ export default function Footer() {
 					)}
 				</div>
 
-				{/* Copyright */}
-				<div className="flex flex-col items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-					<div className="flex items-center gap-2">
-						<span className="font-medium">{siteMetadata.author}</span>
-						<span className="text-gray-300 dark:text-gray-600">•</span>
+				{/* Copyright - terminal signature line */}
+				<div className="flex flex-col items-center gap-1 font-mono text-xs text-gray-500 dark:text-gray-400">
+					<div className="flex flex-wrap items-center justify-center gap-2">
+						<span className="text-primary-500">$</span>
+						<span>echo</span>
+						<span className="text-accent-cyan">"{siteMetadata.author}"</span>
+						<span className="text-gray-400 dark:text-gray-600">—</span>
 						<span>© {new Date().getFullYear()}</span>
-						<span className="text-gray-300 dark:text-gray-600">•</span>
+						<span className="text-gray-400 dark:text-gray-600">—</span>
 						<Link
 							href="/"
-							className="animated-underline hover:text-primary-500 dark:hover:text-primary-400 font-medium text-gray-600 dark:text-gray-300"
+							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-600 dark:text-gray-300"
 						>
 							{siteMetadata.title}
 						</Link>
@@ -118,13 +127,13 @@ export default function Footer() {
 				</div>
 
 				{/* Credits */}
-				<div className="pb-8 text-xs text-gray-400 dark:text-gray-500">
-					Built with{" "}
+				<div className="pb-8 font-mono text-xs text-gray-400 dark:text-gray-500">
+					<span className="text-gray-500">#</span> built with{" "}
 					<Link
 						href="https://github.com/timlrx/tailwind-nextjs-starter-blog"
-						className="animated-underline hover:text-primary-500 dark:hover:text-primary-400"
+						className="hover:text-primary-500 dark:hover:text-primary-400 underline decoration-dotted underline-offset-4"
 					>
-						Tailwind Nextjs Theme
+						tailwind-nextjs-starter-blog
 					</Link>
 				</div>
 			</div>

@@ -30,17 +30,22 @@ export default function PostLayout({
 			<article>
 				<div>
 					<header>
-						<div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
+						<div className="border-primary-500/30 space-y-2 border-b pb-10 text-center dark:border-gray-700">
+							<div className="section-divider justify-center">
+								<span className="text-primary-500">{"//"}</span>
+								<span>post</span>
+							</div>
 							<dl>
 								<div>
 									<dt className="sr-only">Published on</dt>
-									<dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
+									<dd className="font-mono text-sm leading-6 text-gray-500 dark:text-gray-400">
+										<span className="text-primary-500">$</span> stat —{" "}
 										<time dateTime={date}>
 											{formatDate(date, siteMetadata.locale)}
 										</time>
 										{readingTime && (
 											<>
-												<span className="mx-2">•</span>
+												<span className="mx-2 text-gray-400">·</span>
 												<span>{readingTime.text}</span>
 											</>
 										)}

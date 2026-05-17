@@ -3,7 +3,7 @@ import "css/prism.css";
 import "remark-github-blockquote-alert/alert.css";
 
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import type { AnalyticsConfig } from "pliny/analytics";
 import type { SearchConfig } from "pliny/search";
 import AnalyticsWrapper from "@/components/AnalyticsWrapper";
@@ -22,6 +22,21 @@ const space_grotesk = Space_Grotesk({
 	preload: true,
 	adjustFontFallback: true,
 	fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
+});
+
+const jetbrains_mono = JetBrains_Mono({
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-jetbrains-mono",
+	preload: true,
+	adjustFontFallback: true,
+	fallback: [
+		"ui-monospace",
+		"SFMono-Regular",
+		"Menlo",
+		"Consolas",
+		"monospace",
+	],
 });
 
 export const metadata: Metadata = {
@@ -81,7 +96,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang={siteMetadata.language}
-			className={`${space_grotesk.variable} scroll-smooth`}
+			className={`${space_grotesk.variable} ${jetbrains_mono.variable} scroll-smooth`}
 			data-scroll-behavior="smooth"
 			suppressHydrationWarning
 		>
@@ -150,24 +165,11 @@ export default function RootLayout({
 					Skip to main content
 				</a>
 
-				{/* Decorative background elements - optimized for GPU acceleration */}
+				{/* Subtle terminal grid backdrop */}
 				<div
-					className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+					className="grid-bg pointer-events-none fixed inset-0 -z-10 opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]"
 					aria-hidden="true"
-				>
-					<div
-						className="bg-primary-500/5 dark:bg-primary-400/5 absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full blur-2xl"
-						style={{ willChange: "opacity" }}
-					/>
-					<div
-						className="bg-accent-cyan/5 absolute top-1/2 -left-1/4 h-96 w-96 rounded-full blur-2xl"
-						style={{ willChange: "opacity" }}
-					/>
-					<div
-						className="bg-accent-pink/5 dark:bg-accent-pink/3 absolute right-1/3 -bottom-1/4 h-96 w-96 rounded-full blur-2xl"
-						style={{ willChange: "opacity" }}
-					/>
-				</div>
+				/>
 
 				<ThemeProviders>
 					<AnalyticsWrapper

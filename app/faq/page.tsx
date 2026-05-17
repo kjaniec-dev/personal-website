@@ -91,12 +91,17 @@ export default function FAQ() {
 	return (
 		<div className="space-y-12">
 			<div className="space-y-4">
-				<h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-gray-100">
-					<span className="gradient-text">FAQ</span>
+				<div className="section-divider">
+					<span className="text-primary-500">{"//"}</span>
+					<span>faq.md</span>
+				</div>
+				<h1 className="font-mono text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
+					<span className="text-primary-500">$</span> man faq
 				</h1>
-				<p className="max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+				<p className="max-w-2xl font-mono text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+					<span className="text-gray-400"># </span>
 					Frequently asked questions about me, my work, and my technical
-					preferences. Get to know me better through these common questions.
+					preferences.
 				</p>
 			</div>
 
@@ -107,8 +112,9 @@ export default function FAQ() {
 							<span className="text-primary-500 dark:text-primary-400">
 								{category.icon}
 							</span>
-							<h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-								{category.title}
+							<h2 className="font-mono text-xl font-semibold text-gray-900 dark:text-gray-100">
+								<span className="text-primary-500">&gt;</span>{" "}
+								{category.title.toLowerCase()}
 							</h2>
 						</div>
 						<FAQAccordion items={faqData} category={category.id} />
