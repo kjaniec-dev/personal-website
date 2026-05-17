@@ -1,0 +1,572 @@
+---
+title: 'Before Kubernetes: Why Docker Compose Is Enough for Many Small Products'
+date: '2026-05-16T00:00:00Z'
+lastmod: '2026-05-17'
+tags: ['docker', 'docker-compose', 'devops', 'infrastructure', 'deployment', 'vps', 'kubernetes']
+draft: false
+summary: 'Kubernetes is powerful, but many small products do not need it on day one. A practical look at why Docker Compose is still a great starting point for small SaaS apps, internal tools, and side projects.'
+layout: PostSimple
+---
+
+A lot of small products do not fail because they were not scalable enough.
+
+They fail because they were too annoying to deploy, too complicated to debug, too expensive to run, or too painful to maintain.
+
+That is why I think Docker Compose still deserves more respect.
+
+Kubernetes is one of the most important infrastructure technologies we have.
+
+It is powerful, flexible, and battle-tested. It can run huge systems, standardize deployments, isolate workloads, and give teams a common platform for operating many services.
+
+But for a small product, Kubernetes is often not the first tool I would choose.
+
+## What I actually want from infrastructure
+
+For a small product, I do not need the most advanced platform on day one.
+
+I need something that gives me:
+
+- simple deployments,
+- predictable cost,
+- easy debugging,
+- clear logs,
+- database backups,
+- basic monitoring,
+- a recovery path,
+- and a setup I can understand without reading documentation for two hours.
+
+This is where Docker Compose fits surprisingly well.
+
+## The deployment trap
+
+A lot of developers jump too quickly from local development to Kubernetes.
+
+The thinking often looks like this:
+
+```txt
+I need containers.
+Kubernetes runs containers.
+Therefore, I need Kubernetes.
+```
+
+But this skips an important question:
+
+```txt
+Do I actually need orchestration?
+```
+
+For a small product with one backend, one frontend, one database, maybe Redis and a worker, Kubernetes can be unnecessary complexity.
+
+You do not need a cluster to serve your first users.
+
+You need a reliable way to run your application, deploy it, restart it, back it up, observe it, and debug it when something goes wrong.
+
+Docker Compose can be enough for that.
+
+## Docker Compose is not the same as bad production
+
+Using Docker Compose does not automatically mean the production setup is bad.
+
+A bad production setup is:
+
+- no backups,
+- no restore test,
+- exposed database ports,
+- secrets committed to git,
+- no HTTPS,
+- no logs,
+- no monitoring,
+- no update strategy,
+- no rollback plan.
+
+You can make these mistakes with Docker Compose.
+
+You can also make them with Kubernetes.
+
+The tool does not save you from bad operations.
+
+## What Docker Compose gives you
+
+Docker Compose gives you a simple way to describe a small system.
+
+For example:
+
+- application backend,
+- frontend,
+- PostgreSQL,
+- Redis,
+- background worker,
+- local object storage,
+- monitoring tool,
+- reverse proxy or local entry point.
+
+The biggest advantage is readability.
+
+A developer can open `docker-compose.yml` and understand the shape of the system in a few minutes.
+
+That matters.
+
+For small teams and solo projects, operational simplicity is a feature. If the whole deployment can be understood without reading twenty Kubernetes manifests, Helm values, ingress definitions, and cloud-specific configuration, that is a real productivity win.
+
+A simple Compose file can be boring in the best possible way.
+
+```yaml
+services:
+  app:
+    image: ghcr.io/your-user/your-app:latest
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+
+  worker:
+    image: ghcr.io/your-user/your-app:latest
+    command: ["./worker"]
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+```
+
+This is not exciting.
+
+That is the point.
+
+## Docker Compose vs Kubernetes for small products
+
+| Area | Docker Compose | Kubernetes |
+| --- | --- | --- |
+| Setup complexity | Low | High |
+| Local development | Very simple | Possible, but heavier |
+| Single-server deployment | Great | Usually too much |
+| Multi-node scaling | Limited | Excellent |
+| Learning curve | Small | Large |
+| Operational overhead | Low | Medium to high |
+| Best fit | Small products, MVPs, internal tools | Larger systems, teams, platforms |
+
+## My default Compose stack
+
+For a small product, my default Compose setup would usually include:
+
+- app — backend or full-stack app,
+- postgres — primary database,
+- redis — optional cache or queue backend,
+- worker — optional background processing,
+- backup — scheduled database backup,
+- reverse proxy or managed entry point — depending on hosting.
+
+I would not start with everything.
+
+I would start with app + PostgreSQL, then add Redis, worker, and monitoring only when there is a real reason.
+
+## Local development becomes easier
+
+One underrated benefit of Docker Compose is local development.
+
+Without Compose, a project README often turns into a checklist like this:
+
+```txt
+Install PostgreSQL.
+Install Redis.
+Create a database.
+Create a user.
+Configure environment variables.
+Run migrations.
+Start the backend.
+Start the frontend.
+Start the worker.
+Hope every version matches.
+```
+
+With Compose, the entry point can be much simpler:
+
+```bash
+docker compose up
+```
+
+The local environment does not have to be identical to production. But it can be close enough to catch many integration issues early.
+
+This reduces the classic:
+
+```txt
+It works on my machine.
+```
+
+problem.
+
+It also makes onboarding easier. Even if you are the only developer today, future you will be thankful when you return to the project six months later and can still start everything with one command.
+
+## Docker Compose can work in production
+
+This is sometimes controversial, but I think it is reasonable:
+
+Docker Compose can be perfectly fine in production for small products.
+
+Especially when the production system looks like this:
+
+```txt
+VPS
+ ├── app
+ ├── worker
+ ├── PostgreSQL
+ ├── Redis
+ └── backup job
+```
+
+This is not web-scale architecture.
+
+But many products do not need web-scale architecture.
+
+They need:
+
+- HTTPS,
+- logs,
+- automatic restarts,
+- database backups,
+- simple deployments,
+- basic monitoring,
+- firewall rules,
+- and a rollback plan.
+
+Compose does not solve everything, but it solves enough to get a real product online.
+
+And that is often the most important milestone.
+
+## Cost matters more than people admit
+
+For a side project or early product, infrastructure cost matters.
+
+Not because a few dollars will destroy the business, but because unnecessary fixed costs create pressure before the product has users.
+
+A simple VPS with Docker Compose can be enough for a long time.
+
+Managed platforms are convenient, and I like them, but the bill can grow when you add:
+
+- database,
+- background workers,
+- storage,
+- logs,
+- bandwidth,
+- preview environments,
+- team seats.
+
+There is no free lunch. You either pay with money or with operational responsibility.
+
+## Reverse proxy is an entry point, not the main story
+
+In a real deployment, there is usually some kind of reverse proxy or managed entry point in front of the application.
+
+This could be:
+
+- Nginx,
+- Caddy,
+- Traefik,
+- Cloudflare Tunnel,
+- a cloud load balancer,
+- or another managed platform entry point.
+
+I do not treat the reverse proxy as the main point of the Docker Compose setup.
+
+It is an important production detail, but not the core architectural idea.
+
+The important pattern is this:
+
+```txt
+Expose one public HTTPS entry point.
+Keep application, database, cache, and workers private.
+```
+
+In practice, that means only ports like `80` and `443` should be public. Your database should not be exposed to the internet. Redis should not be exposed to the internet. Internal services should talk through the Docker network or private networking.
+
+The exact reverse proxy tool matters less than the boundary.
+
+## What I would add early
+
+Even for a small Compose-based deployment, I would not ignore operational basics.
+
+I would add these early:
+
+### 1. Restart policies
+
+```yaml
+restart: unless-stopped
+```
+
+This is simple, but useful. If the process crashes or the server reboots, the service should come back.
+
+### 2. Named volumes
+
+For persistent data, use named volumes or clearly documented bind mounts.
+
+```yaml
+volumes:
+  postgres_data:
+```
+
+The important part is knowing exactly where your data lives and how to back it up.
+
+### 3. Environment variables
+
+Keep secrets out of the repository.
+
+```yaml
+env_file:
+  - .env
+```
+
+The `.env` file should not be committed.
+
+### 4. Private services
+
+Do not expose every service with `ports`.
+
+For example, PostgreSQL does not need this in production:
+
+```yaml
+ports:
+  - "5432:5432"
+```
+
+If only the application needs to talk to PostgreSQL, keep it internal.
+
+### 5. Backups
+
+A database without backups is not a production database.
+
+For PostgreSQL, even a basic `pg_dump` strategy is better than nothing.
+
+You should also test restore, not only backup.
+
+A backup that has never been restored is just a hopeful file.
+
+## Example backup approach
+
+For a small setup, a simple backup script can be enough at the beginning:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+BACKUP_DIR="./backups"
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+
+mkdir -p "$BACKUP_DIR"
+
+docker compose exec -T postgres pg_dump \
+  -U app \
+  -d app \
+  > "$BACKUP_DIR/postgres_$TIMESTAMP.sql"
+```
+
+This is not a complete enterprise backup strategy.
+
+But it is a start.
+
+Later, you can improve it with:
+
+- compression,
+- encryption,
+- remote storage,
+- retention policy,
+- restore testing,
+- automated scheduling,
+- monitoring alerts.
+
+Do not wait until the product is important before thinking about backups.
+
+By then, it may already be too late.
+
+## What Docker Compose does not solve
+
+Docker Compose has limits.
+
+It does not give you everything Kubernetes gives you.
+
+You do not get, at least not in the same way:
+
+- multi-node scheduling,
+- advanced autoscaling,
+- cluster-level self-healing,
+- rolling deployments out of the box,
+- service mesh,
+- advanced secret management,
+- complex traffic routing,
+- declarative infrastructure at large scale,
+- strong workload isolation across many machines.
+
+If you need these things, Kubernetes may be the right tool.
+
+But the important word is **need**.
+
+Not every product needs them on day one.
+
+Adding Kubernetes before the product needs it can make the system harder to operate without making the product better.
+
+## When Kubernetes starts to make sense
+
+I would start considering Kubernetes when at least some of these are true:
+
+- the product has multiple services,
+- the team deploys frequently,
+- high availability really matters,
+- workloads need better isolation,
+- horizontal scaling is a real requirement,
+- there are multiple environments to standardize,
+- the organization already has Kubernetes knowledge,
+- the product is expected to run in enterprise or platform environments,
+- infrastructure consistency matters more than simplicity.
+
+Kubernetes is not bad.
+
+Premature Kubernetes is the problem.
+
+It is easy to underestimate how much operational knowledge Kubernetes requires. You need to understand deployments, services, ingress, config maps, secrets, volumes, health checks, resource limits, namespaces, networking, observability, and often Helm or another templating layer.
+
+That can be worth it.
+
+But only when the product benefits from it.
+
+## My preferred path
+
+For many small products, I like this path:
+
+```txt
+Phase 1: Local Docker Compose
+Phase 2: Single VPS with Docker Compose
+Phase 3: Managed database or managed app platform
+Phase 4: Kubernetes only when needed
+```
+
+This keeps the architecture understandable at each stage.
+
+It also gives you a migration story.
+
+If the product grows, you can move pieces out gradually:
+
+- PostgreSQL to a managed database,
+- files to object storage,
+- backend to Cloud Run, Fly.io, Render, or another platform,
+- workers to separate machines,
+- monitoring to a managed service,
+- eventually services to Kubernetes.
+
+You do not need to start at the final architecture.
+
+You need to start with an architecture that lets you ship.
+
+## VPS plus Docker Compose is still a valid option
+
+A small VPS with Docker Compose can be a very practical setup.
+
+It gives you:
+
+- predictable cost,
+- full control,
+- simple networking,
+- easy Docker-based deployment,
+- enough performance for many small apps.
+
+The trade-off is that you own more operational work:
+
+- server updates,
+- firewall,
+- SSH access,
+- disk usage,
+- backups,
+- monitoring,
+- security hardening,
+- incident recovery.
+
+That is why managed platforms are also attractive.
+
+There is no universal answer.
+
+For a small product, the choice is usually between:
+
+```txt
+More control and lower cost
+vs
+Less maintenance and higher platform dependency
+```
+
+Docker Compose on a VPS is a good option when you are comfortable owning the server.
+
+A managed platform is a good option when you want to spend less time on operations.
+
+## Production checklist
+
+If I were using Docker Compose for a small production app, I would want at least this checklist:
+
+```md
+- [ ] Only expose the public entry point
+- [ ] Do not expose PostgreSQL to the internet
+- [ ] Do not expose Redis to the internet
+- [ ] Use SSH keys
+- [ ] Enable a firewall
+- [ ] Use HTTPS
+- [ ] Configure restart policies
+- [ ] Keep secrets out of git
+- [ ] Use named volumes or documented bind mounts
+- [ ] Set up database backups
+- [ ] Test database restore
+- [ ] Monitor disk usage
+- [ ] Monitor memory usage
+- [ ] Keep images versioned
+- [ ] Have a simple rollback plan
+- [ ] Document deployment steps
+```
+
+This is not glamorous work.
+
+But this is the work that makes a small product reliable.
+
+## The best infrastructure is the one you can operate
+
+I like infrastructure that I can explain from memory.
+
+If I need a complex diagram to understand how a small MVP is deployed, I probably made it too complicated too early.
+
+Docker Compose keeps the system visible.
+
+There is a file.
+There are services.
+There are volumes.
+There is a network.
+There are logs.
+
+For many small products, that is enough.
+
+Docker Compose is not the final destination for every product.
+
+But it is often one of the best starting points.
+
+It lets you ship without pretending that your MVP is already a distributed platform.
+
+And that is the main point:
+
+Start with infrastructure you can operate.
+
+Then migrate when the product gives you a real reason.
