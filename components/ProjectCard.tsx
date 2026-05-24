@@ -11,7 +11,7 @@ interface CardProps {
 	tags?: string[];
 }
 
-const Card = ({
+const ProjectCard = ({
 	title,
 	description,
 	imgSrc,
@@ -133,4 +133,4 @@ const Card = ({
 	</div>
 );
 
-export default Card;
+export default ProjectCard;

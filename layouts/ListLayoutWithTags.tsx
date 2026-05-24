@@ -6,8 +6,8 @@ import { slug } from "github-slugger";
 import { usePathname } from "next/navigation";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
-import Card from "@/components/Card";
 import Link from "@/components/Link";
+import ProjectCard from "@/components/ProjectCard";
 import Tag from "@/components/Tag";
 import siteMetadata from "@/data/siteMetadata";
 
@@ -322,7 +322,7 @@ export default function ListLayoutWithTags({
 							</h3>
 							<div className="-m-4 flex flex-wrap">
 								{projects.map((project) => (
-									<Card
+									<ProjectCard
 										key={project.title}
 										title={project.title}
 										description={project.description}

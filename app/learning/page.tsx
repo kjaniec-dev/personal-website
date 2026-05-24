@@ -1,5 +1,5 @@
 import { genPageMetadata } from "app/seo";
-import Card from "@/components/Card";
+import ProjectCard from "@/components/ProjectCard";
 import coursesData from "@/data/coursesData";
 
 export const metadata = genPageMetadata({ title: "Learning" });
@@ -21,7 +21,7 @@ export default function Learning() {
 			<div className="container py-12">
 				<div className="-m-4 flex flex-wrap">
 					{coursesData.map((course) => (
-						<Card
+						<ProjectCard
 							key={course.title}
 							title={course.title}
 							description={course.description}
