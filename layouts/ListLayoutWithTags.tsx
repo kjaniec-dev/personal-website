@@ -159,7 +159,7 @@ export default function ListLayoutWithTags({
 									{tags && tags.length > 0 ? (
 										<div className="flex flex-wrap gap-1.5 pt-1">
 											{tags.map((t) => (
-												<Pill key={t} tone="default">
+												<Pill key={t} tone="secondary">
 													{t}
 												</Pill>
 											))}
