@@ -74,7 +74,9 @@ export default function About() {
 								{entry.tags && entry.tags.length > 0 ? (
 									<div className="flex flex-wrap gap-1.5">
 										{entry.tags.map((t) => (
-											<Pill key={t}>{t}</Pill>
+											<Pill key={t} tone="secondary">
+												{t}
+											</Pill>
 										))}
 									</div>
 								) : null}
@@ -131,7 +133,7 @@ export default function About() {
 									</div>
 									<div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
 										<div
-											className="h-full origin-left rounded-full bg-secondary"
+											className="h-full origin-left rounded-full bg-primary"
 											style={{
 												width: `${s.percent}%`,
 												animation: "skillBarIn 0.8s ease-out forwards",
