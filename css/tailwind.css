@@ -21,18 +21,18 @@
 	--animate-gradient: gradient 8s linear infinite;
 	--animate-glow: glow 2s ease-in-out infinite alternate;
 
-	/* Modern vibrant color palette - Purple/Violet gradient theme */
-	--color-primary-50: oklch(0.97 0.014 293);
-	--color-primary-100: oklch(0.94 0.038 293);
-	--color-primary-200: oklch(0.88 0.074 293);
-	--color-primary-300: oklch(0.79 0.124 293);
-	--color-primary-400: oklch(0.69 0.171 293);
-	--color-primary-500: oklch(0.59 0.214 293);
-	--color-primary-600: oklch(0.52 0.213 293);
-	--color-primary-700: oklch(0.45 0.185 293);
-	--color-primary-800: oklch(0.38 0.152 293);
-	--color-primary-900: oklch(0.33 0.122 293);
-	--color-primary-950: oklch(0.22 0.098 293);
+	/* Amber primary scale — matches kj-design amber tokens */
+	--color-primary-50: oklch(0.987 0.022 95.277);
+	--color-primary-100: oklch(0.962 0.059 95.277);
+	--color-primary-200: oklch(0.924 0.12 84.523);
+	--color-primary-300: oklch(0.879 0.169 91.605);
+	--color-primary-400: oklch(0.828 0.189 84.429);
+	--color-primary-500: oklch(0.769 0.188 70.08);
+	--color-primary-600: oklch(0.666 0.179 58.318);
+	--color-primary-700: oklch(0.555 0.163 48.998);
+	--color-primary-800: oklch(0.473 0.137 46.201);
+	--color-primary-900: oklch(0.414 0.112 45.904);
+	--color-primary-950: oklch(0.279 0.077 45.635);
 
 	/* Accent colors for gradients */
 	--color-accent-cyan: oklch(0.79 0.171 192);
@@ -121,10 +121,10 @@
 
 @keyframes glow {
 	from {
-		box-shadow: 0 0 20px -10px var(--color-primary-500);
+		box-shadow: 0 0 20px -10px var(--color-primary);
 	}
 	to {
-		box-shadow: 0 0 30px -10px var(--color-primary-400);
+		box-shadow: 0 0 30px -10px var(--color-primary);
 	}
 }
 
@@ -175,13 +175,13 @@
 	}
 
 	:root input[aria-controls="kbar-listbox"][role="combobox"]:focus {
-		border-color: var(--color-primary-500);
+		border-color: var(--color-primary);
 		outline: none;
 	}
 
 	a,
 	button {
-		outline-color: var(--color-primary-500);
+		outline-color: var(--color-primary);
 	}
 
 	a:focus-visible,
@@ -189,7 +189,7 @@
 	input:focus-visible,
 	select:focus-visible,
 	textarea:focus-visible {
-		outline: 3px solid var(--color-primary-500);
+		outline: 3px solid var(--color-primary);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -200,24 +200,24 @@
 	.dark input:focus-visible,
 	.dark select:focus-visible,
 	.dark textarea:focus-visible {
-		outline-color: var(--color-primary-400);
+		outline-color: var(--color-primary);
 	}
 
 	/* Override default input focus styles to use primary colors */
 	input:focus,
 	select:focus,
 	textarea:focus {
-		border-color: var(--color-primary-500);
-		ring-color: var(--color-primary-500);
-		--tw-ring-color: var(--color-primary-500);
+		border-color: var(--color-primary);
+		ring-color: var(--color-primary);
+		--tw-ring-color: var(--color-primary);
 	}
 
 	.dark input:focus,
 	.dark select:focus,
 	.dark textarea:focus {
-		border-color: var(--color-primary-400);
-		ring-color: var(--color-primary-400);
-		--tw-ring-color: var(--color-primary-400);
+		border-color: var(--color-primary);
+		ring-color: var(--color-primary);
+		--tw-ring-color: var(--color-primary);
 	}
 
 	/* Smooth scrolling for the entire page */

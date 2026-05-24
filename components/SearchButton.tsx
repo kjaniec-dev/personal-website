@@ -41,7 +41,7 @@ const SearchButton = () => {
 	}, []);
 
 	const SearchContent = () => (
-		<div className="group relative inline-flex items-center gap-2 rounded-kj-lg border border-border bg-card/50 px-4 py-2 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:shadow-kj-sm">
+		<div className="group relative inline-flex h-9 items-center gap-2 rounded-kj-lg border border-border bg-card/50 px-4 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:shadow-kj-sm">
 			{/* Search icon */}
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

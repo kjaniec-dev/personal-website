@@ -48,7 +48,7 @@ export default function Header() {
 					{siteMetadata.email ? (
 						<Link
 							href={`mailto:${siteMetadata.email}`}
-							className="hidden items-center gap-2 rounded-kj-lg bg-primary px-4 py-2 font-sans text-sm font-semibold text-primary-foreground shadow-kj-glow transition-colors hover:bg-primary-hover md:inline-flex"
+							className="hidden h-9 items-center gap-2 rounded-kj-lg bg-primary px-4 font-sans text-sm font-semibold whitespace-nowrap text-primary-foreground shadow-kj-glow transition-colors hover:bg-primary-hover md:inline-flex"
 						>
 							Let's talk
 						</Link>
