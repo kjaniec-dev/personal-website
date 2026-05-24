@@ -131,7 +131,7 @@ export default function About() {
 									</div>
 									<div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
 										<div
-											className="h-full origin-left rounded-full bg-primary"
+											className="h-full origin-left rounded-full bg-secondary"
 											style={{
 												width: `${s.percent}%`,
 												animation: "skillBarIn 0.8s ease-out forwards",

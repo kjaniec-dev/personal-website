@@ -136,14 +136,14 @@ export default function Hero() {
 									<div className="rounded-kj-lg border border-border bg-background p-4 space-y-2">
 										<div className="flex justify-between items-center text-xs font-semibold text-muted-foreground font-mono">
 											<span>CORE WEB VITALS</span>
-											<span className="text-primary font-bold">PASSING</span>
+											<span className="text-secondary font-bold">PASSING</span>
 										</div>
 										<p className="text-xl font-bold text-foreground">
 											This Website
 										</p>
 										<div className="flex items-center justify-between pt-1">
 											<div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
-												<div className="h-full bg-primary w-[94%] rounded-full"></div>
+												<div className="h-full bg-secondary w-[94%] rounded-full"></div>
 											</div>
 											<span className="text-xs font-semibold text-foreground ml-3 font-mono">
 												LCP 1.3s ✓
