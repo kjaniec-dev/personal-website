@@ -141,7 +141,7 @@ export default function RootLayout({
 				content="width=device-width, initial-scale=1, viewport-fit=cover"
 			/>
 			<meta httpEquiv="x-ua-compatible" content="ie=edge" />
-			<body className="relative min-h-screen bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
+			<body className="relative min-h-screen bg-background pl-[calc(100vw-100%)] text-foreground antialiased">
 				{/* Skip to main content link for accessibility */}
 				<a
 					href="#main-content"
@@ -156,15 +156,15 @@ export default function RootLayout({
 					aria-hidden="true"
 				>
 					<div
-						className="bg-primary-500/5 dark:bg-primary-400/5 absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full blur-2xl"
+						className="absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full bg-primary/10 blur-2xl"
 						style={{ willChange: "opacity" }}
 					/>
 					<div
-						className="bg-accent-cyan/5 absolute top-1/2 -left-1/4 h-96 w-96 rounded-full blur-2xl"
+						className="absolute top-1/2 -left-1/4 h-96 w-96 rounded-full bg-secondary/10 blur-2xl"
 						style={{ willChange: "opacity" }}
 					/>
 					<div
-						className="bg-accent-pink/5 dark:bg-accent-pink/3 absolute right-1/3 -bottom-1/4 h-96 w-96 rounded-full blur-2xl"
+						className="absolute right-1/3 -bottom-1/4 h-96 w-96 rounded-full bg-primary/8 blur-2xl"
 						style={{ willChange: "opacity" }}
 					/>
 				</div>
