@@ -1,10 +1,13 @@
-interface Project {
+export type ProjectStatus = "shipped" | "in-progress" | "planned";
+
+export interface Project {
 	title: string;
 	description: string;
 	href?: string;
 	repoHref?: string;
 	imgSrc?: string;
 	tags?: string[];
+	status?: ProjectStatus;
 }
 
 const projectsData: Project[] = [
