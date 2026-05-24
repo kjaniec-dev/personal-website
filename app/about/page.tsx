@@ -44,12 +44,8 @@ export default function About() {
 								: ""}
 						</p>
 						<div className="grid grid-cols-3 gap-6">
-							<StatBadge value="5+" label="Years experience" />
-							<StatBadge
-								value="10+"
-								label="Projects shipped"
-								accent="secondary"
-							/>
+							<StatBadge value="12+" label="Years experience" />
+							<StatBadge value="∞" label="Always learning" accent="secondary" />
 							<StatBadge value="100%" label="Commitment" />
 						</div>
 					</div>
@@ -123,7 +119,7 @@ export default function About() {
 							Skills
 						</p>
 						<ul className="space-y-3">
-							{skillsData.map((s) => (
+							{skillsData.map((s, i) => (
 								<li key={s.title} className="space-y-1">
 									<div className="flex items-center justify-between">
 										<span className="font-sans text-sm font-semibold text-foreground">
@@ -135,8 +131,13 @@ export default function About() {
 									</div>
 									<div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
 										<div
-											className="h-full rounded-full bg-primary"
-											style={{ width: `${s.percent}%` }}
+											className="h-full origin-left rounded-full bg-primary"
+											style={{
+												width: `${s.percent}%`,
+												animation: "skillBarIn 0.8s ease-out forwards",
+												animationDelay: `${i * 0.07}s`,
+												transform: "scaleX(0)",
+											}}
 										/>
 									</div>
 								</li>

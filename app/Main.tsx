@@ -211,7 +211,7 @@ export default function Home() {
 									{project.tags?.map((tag) => (
 										<span
 											key={tag}
-											className="rounded-full border border-border bg-background px-2.5 py-0.5 text-[10px] font-bold text-muted-foreground uppercase font-mono"
+											className="rounded-full border border-secondary/30 bg-secondary/10 px-2.5 py-0.5 text-[10px] font-bold text-secondary uppercase font-mono"
 										>
 											{tag}
 										</span>

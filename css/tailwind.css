@@ -192,6 +192,21 @@
 		color: var(--color-primary) !important;
 	}
 
+	/* KBar section headers: teal */
+	#kbar-listbox .text-primary-600 {
+		color: var(--color-secondary) !important;
+	}
+
+	/* Skill bar animation */
+	@keyframes skillBarIn {
+		from {
+			transform: scaleX(0);
+		}
+		to {
+			transform: scaleX(1);
+		}
+	}
+
 	a,
 	button {
 		outline-color: var(--color-primary);
