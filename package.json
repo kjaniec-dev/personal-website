@@ -7,6 +7,7 @@
 		"dev": "cross-env INIT_CWD=$PWD next dev",
 		"build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
 		"serve": "next start",
+		"sync-design": "node scripts/sync-design.mjs",
 		"analyze": "cross-env ANALYZE=true next build",
 		"lint": "biome check .",
 		"lint:fix": "biome check --write .",
@@ -17,7 +18,6 @@
 	"dependencies": {
 		"@algolia/client-search": "5.52.1",
 		"@headlessui/react": "2.2.10",
-		"@kj/design": "file:../kj-product-kit-starter/packages/design",
 		"@next/bundle-analyzer": "16.2.6",
 		"@tailwindcss/forms": "0.5.11",
 		"@tailwindcss/postcss": "4.3.0",
