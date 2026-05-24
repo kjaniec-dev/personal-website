@@ -3,7 +3,6 @@ import { allBlogs } from "contentlayer/generated";
 import { slug } from "github-slugger";
 import { notFound } from "next/navigation";
 import { allCoreContent, sortPosts } from "pliny/utils/contentlayer";
-import projectsData from "@/data/projectsData";
 import ListLayout from "@/layouts/ListLayoutWithTags";
 
 const POSTS_PER_PAGE = 5;
@@ -32,9 +31,6 @@ export default async function TagPage(props: {
 			allBlogs.filter((post) => post.tags?.map((t) => slug(t)).includes(tag)),
 		),
 	);
-	const filteredProjects = projectsData.filter((project) =>
-		project.tags?.map((t) => slug(t)).includes(tag),
-	);
 	const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
 
 	// Return 404 for invalid page numbers or empty pages
@@ -56,7 +52,6 @@ export default async function TagPage(props: {
 			initialDisplayPosts={initialDisplayPosts}
 			pagination={pagination}
 			title={title}
-			projects={filteredProjects}
 		/>
 	);
 }
