@@ -33,16 +33,23 @@ export default function Footer() {
 									kind="mail"
 									href={`mailto:${siteMetadata.email}`}
 									size={5}
+									className="text-muted-foreground transition-colors hover:text-primary"
 								/>
 							) : null}
 							{siteMetadata.github ? (
-								<SocialIcon kind="github" href={siteMetadata.github} size={5} />
+								<SocialIcon
+									kind="github"
+									href={siteMetadata.github}
+									size={5}
+									className="text-muted-foreground transition-colors hover:text-primary"
+								/>
 							) : null}
 							{siteMetadata.linkedin ? (
 								<SocialIcon
 									kind="linkedin"
 									href={siteMetadata.linkedin}
 									size={5}
+									className="text-muted-foreground transition-colors hover:text-primary"
 								/>
 							) : null}
 						</div>
@@ -102,24 +109,9 @@ export default function Footer() {
 									</Link>
 								</li>
 							) : null}
-							<li>Katowice, Polska</li>
+							<li>Zielona Góra, Poland</li>
 						</ul>
 					</div>
-				</div>
-
-				<div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
-					<span>
-						© {year} {siteMetadata.author}. Wszelkie prawa zastrzeżone.
-					</span>
-					<span>
-						Built with{" "}
-						<Link
-							href="https://github.com/timlrx/tailwind-nextjs-starter-blog"
-							className="underline-offset-2 hover:text-primary hover:underline"
-						>
-							Tailwind Nextjs Theme
-						</Link>
-					</span>
 				</div>
 			</div>
 		</footer>

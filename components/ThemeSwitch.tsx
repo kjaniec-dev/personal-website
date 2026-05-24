@@ -12,7 +12,7 @@ const ThemeSwitch = () => {
 
 	if (!mounted) {
 		return (
-			<div className="h-10 w-10 rounded-full border border-gray-200 bg-gray-50/50 dark:border-gray-700 dark:bg-gray-800/50" />
+			<div className="h-9 w-9 rounded-kj-md border border-border bg-card/50" />
 		);
 	}
 
@@ -27,11 +27,11 @@ const ThemeSwitch = () => {
 			type="button"
 			onClick={toggleTheme}
 			aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
-			className="group hover:border-primary-300 hover:bg-primary-50/80 dark:hover:border-primary-700 dark:hover:bg-primary-900/30 relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-gray-50/50 backdrop-blur-sm transition-all duration-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800/50"
+			className="group relative inline-flex h-9 w-9 items-center justify-center rounded-kj-md border border-border bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:shadow-kj-sm"
 		>
 			{/* Sun icon (visible in dark mode) */}
 			<svg
-				className={`group-hover:text-primary-600 dark:group-hover:text-primary-400 absolute h-5 w-5 text-gray-600 transition-all duration-500 dark:text-gray-400 ${
+				className={`absolute h-5 w-5 text-muted-foreground transition-all duration-500 group-hover:text-primary ${
 					isDark
 						? "scale-100 rotate-0 opacity-100"
 						: "scale-0 rotate-90 opacity-0"
@@ -51,7 +51,7 @@ const ThemeSwitch = () => {
 
 			{/* Moon icon (visible in light mode) */}
 			<svg
-				className={`group-hover:text-primary-600 dark:group-hover:text-primary-400 absolute h-5 w-5 text-gray-600 transition-all duration-500 dark:text-gray-400 ${
+				className={`absolute h-5 w-5 text-muted-foreground transition-all duration-500 group-hover:text-primary ${
 					isDark
 						? "scale-0 -rotate-90 opacity-0"
 						: "scale-100 rotate-0 opacity-100"
@@ -70,7 +70,7 @@ const ThemeSwitch = () => {
 			</svg>
 
 			{/* Ripple effect on click */}
-			<span className="group-active:bg-primary-200/50 dark:group-active:bg-primary-800/50 pointer-events-none absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-active:opacity-100" />
+			<span className="pointer-events-none absolute inset-0 rounded-kj-md bg-primary/10 opacity-0 transition-opacity duration-300 group-active:opacity-100" />
 		</button>
 	);
 };

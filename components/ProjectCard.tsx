@@ -20,8 +20,8 @@ const statusLabel: Record<ProjectStatus, string> = {
 	planned: "Planned",
 };
 
-const statusTone: Record<ProjectStatus, "success" | "primary" | "muted"> = {
-	shipped: "success",
+const statusTone: Record<ProjectStatus, "secondary" | "primary" | "muted"> = {
+	shipped: "secondary",
 	"in-progress": "primary",
 	planned: "muted",
 };
