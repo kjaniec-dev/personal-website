@@ -17,6 +17,7 @@
 	"dependencies": {
 		"@algolia/client-search": "5.52.1",
 		"@headlessui/react": "2.2.10",
+		"@kj/design": "file:../kj-product-kit-starter/packages/design",
 		"@next/bundle-analyzer": "16.2.6",
 		"@tailwindcss/forms": "0.5.11",
 		"@tailwindcss/postcss": "4.3.0",
@@ -70,7 +71,7 @@
 		"next-themes": "0.4.6"
 	},
 	"lint-staged": {
-		"*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
+		"*.+(js|jsx|ts|tsx|json|css)": [
 			"biome check --write"
 		]
 	}
