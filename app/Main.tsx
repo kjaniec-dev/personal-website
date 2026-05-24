@@ -1,14 +1,12 @@
-import NewsletterForm from "pliny/ui/NewsletterForm";
-import { formatDate } from "pliny/utils/formatDate";
 import Hero from "@/components/Hero";
 import Link from "@/components/Link";
-import Tag from "@/components/Tag";
+import StatBadge from "@/components/StatBadge";
+import TechStackBar from "@/components/TechStackBar";
+import projectsData from "@/data/projectsData";
 import siteMetadata from "@/data/siteMetadata";
 import "./layout.css";
 
-const MAX_DISPLAY = 4;
-
-export default function Home({ posts }) {
+export default function Home() {
 	const personSchema = {
 		"@context": "https://schema.org",
 		"@type": "Person",
@@ -55,131 +53,305 @@ export default function Home({ posts }) {
 			{/* Hero Section */}
 			<Hero />
 
-			{/* Latest Posts Section */}
-			<div className="mt-12 space-y-8 md:mt-16">
-				<div className="flex items-center justify-between">
-					<h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-						Latest Posts
+			{/* Stats Band & Tech Stack */}
+			<section className="border-y border-border bg-card/40 py-8">
+				<div className="mx-auto grid max-w-5xl grid-cols-3 gap-6 px-2 sm:gap-12">
+					<StatBadge value="5+" label="Lat doświadczenia" />
+					<StatBadge
+						value="10+"
+						label="Zrealizowanych projektów"
+						accent="secondary"
+					/>
+					<StatBadge value="100%" label="Zaangażowania" />
+				</div>
+				<div className="mx-auto mt-8 flex max-w-5xl items-center justify-center px-2">
+					<TechStackBar />
+				</div>
+			</section>
+
+			{/* Services Section */}
+			<section className="space-y-8 my-16">
+				<div className="space-y-2">
+					<p className="text-xs font-bold tracking-[0.2em] text-primary uppercase font-mono">
+						Services
+					</p>
+					<h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-sans">
+						What I Do & Deliver
 					</h2>
-					{posts.length > MAX_DISPLAY && (
-						<Link
-							href="/blog"
-							className="animated-underline text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+					<p className="text-muted-foreground text-sm max-w-xl font-sans">
+						I partner with teams to design, build, and optimize high-performance
+						software systems. Here are the core services I provide.
+					</p>
+				</div>
+
+				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+					{[
+						{
+							title: "Full-Stack Development",
+							desc: "Building modern, performant web applications using React, Next.js, and TypeScript, backed by clean and scalable APIs.",
+							icon: (
+								<svg
+									className="h-6 w-6 text-primary"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<title>Full-Stack Development</title>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+									/>
+								</svg>
+							),
+						},
+						{
+							title: "System Architecture",
+							desc: "Designing clean, decoupled, and pragmatic system architectures in Go, Python, or Rust built for long-term scalability.",
+							icon: (
+								<svg
+									className="h-6 w-6 text-secondary"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<title>System Architecture</title>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+									/>
+								</svg>
+							),
+						},
+						{
+							title: "Cloud & DevOps",
+							desc: "Setting up automated CI/CD pipelines, container orchestration (Docker/Kubernetes), and secure AWS/GCP cloud environments.",
+							icon: (
+								<svg
+									className="h-6 w-6 text-primary"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<title>Cloud & DevOps</title>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+									/>
+								</svg>
+							),
+						},
+						{
+							title: "Technical Consulting",
+							desc: "Conducting technology evaluations, code audits, architecture reviews, and performance tuning to solve complex bottlenecks.",
+							icon: (
+								<svg
+									className="h-6 w-6 text-secondary"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<title>Technical Consulting</title>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+									/>
+								</svg>
+							),
+						},
+					].map((item) => (
+						<div
+							key={item.title}
+							className="rounded-kj-xl border border-border bg-card p-6 shadow-kj-sm hover:shadow-kj-md transition-all duration-300 font-sans"
 						>
-							View all posts →
-						</Link>
-					)}
+							<div className="mb-4 rounded-kj-lg bg-background p-2.5 w-fit border border-border">
+								{item.icon}
+							</div>
+							<h3 className="text-lg font-bold text-foreground mb-2">
+								{item.title}
+							</h3>
+							<p className="text-muted-foreground text-sm leading-relaxed font-sans">
+								{item.desc}
+							</p>
+						</div>
+					))}
+				</div>
+			</section>
+
+			{/* Featured Projects Section */}
+			<section className="space-y-8 my-16">
+				<div className="flex items-end justify-between">
+					<div className="space-y-2">
+						<p className="text-xs font-bold tracking-[0.2em] text-primary uppercase font-mono">
+							Portfolio
+						</p>
+						<h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-sans">
+							Featured Work
+						</h2>
+					</div>
+					<Link
+						href="/projects"
+						className="group inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors font-mono"
+					>
+						<span>View all work</span>
+						<svg
+							className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<title>Arrow right</title>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2.5}
+								d="M9 5l7 7-7 7"
+							/>
+						</svg>
+					</Link>
 				</div>
 
 				<div className="grid gap-6 md:grid-cols-2">
-					{!posts.length && (
-						<p className="text-gray-500 dark:text-gray-400">No posts found.</p>
-					)}
-					{posts.slice(0, MAX_DISPLAY).map((post, index) => {
-						const { slug, date, title, summary, tags, readingTime } = post;
-						return (
-							<article
-								key={slug}
-								className="hover-lift group relative rounded-2xl border border-gray-200/80 bg-white p-6 transition-all dark:border-gray-700/80 dark:bg-gray-900/50"
-								style={{
-									animationDelay: `${index * 0.1}s`,
-									animationFillMode: "both",
-								}}
-							>
-								{/* Gradient border on hover */}
-								<div className="from-primary-500/0 via-primary-500/0 to-accent-cyan/0 group-hover:from-primary-500/20 group-hover:to-accent-cyan/20 absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r opacity-0 blur-sm transition-opacity group-hover:opacity-100" />
-
-								<div className="space-y-3">
-									<div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
-										<time dateTime={date} className="flex items-center gap-1">
-											<svg
-												className="h-4 w-4"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-											>
-												<title>Calendar icon</title>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth={2}
-													d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-												/>
-											</svg>
-											{formatDate(date, siteMetadata.locale)}
-										</time>
-										{readingTime && (
-											<>
-												<span>•</span>
-												<span>{readingTime.text}</span>
-											</>
-										)}
-									</div>
-
-									<h3 className="text-xl leading-tight font-bold tracking-tight">
-										<Link
-											href={`/blog/${slug}`}
-											prefetch={false}
-											className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-900 transition-colors dark:text-gray-100"
+					{projectsData.slice(0, 4).map((project) => (
+						<div
+							key={project.title}
+							className="group relative flex flex-col justify-between rounded-kj-2xl border border-border bg-card p-6 shadow-kj-sm transition-all duration-300 hover:shadow-kj-md hover:-translate-y-1"
+						>
+							<div className="space-y-4">
+								<div className="flex flex-wrap gap-1.5">
+									{project.tags?.map((tag) => (
+										<span
+											key={tag}
+											className="rounded-full border border-border bg-background px-2.5 py-0.5 text-[10px] font-bold text-muted-foreground uppercase font-mono"
 										>
-											{title}
-										</Link>
-									</h3>
-
-									<div className="flex flex-wrap gap-2">
-										{tags.map((tag) => (
-											<Tag key={tag} text={tag} />
-										))}
-									</div>
-
-									<p className="line-clamp-3 text-gray-600 dark:text-gray-400">
-										{summary}
-									</p>
-									<Link
-										href={`/blog/${slug}`}
-										prefetch={false}
-										className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 w-fit self-start font-medium"
-										aria-label={`Read more: "${title}"`}
-									>
-										<span className="animated-underline whitespace-nowrap">
-											Read more<span className="sr-only">: {title}</span>
-											<svg
-												className="ml-1 inline-block h-4 w-4 align-middle transition-transform group-hover:translate-x-1"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-												aria-hidden="true"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth={2}
-													d="M13 7l5 5m0 0l-5 5m5-5H6"
-												/>
-											</svg>
+											{tag}
 										</span>
-									</Link>
+									))}
 								</div>
-							</article>
-						);
-					})}
+								<h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors font-sans">
+									{project.title}
+								</h3>
+								<p className="text-muted-foreground text-sm leading-relaxed font-sans">
+									{project.description}
+								</p>
+							</div>
+							<div className="flex items-center gap-4 pt-6">
+								{project.href && (
+									<Link
+										href={project.href}
+										className="inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:text-primary-hover transition-colors font-mono"
+									>
+										<span>Launch App</span>
+										<svg
+											className="h-4 w-4"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<title>External Link</title>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+											/>
+										</svg>
+									</Link>
+								)}
+								{project.repoHref && (
+									<Link
+										href={project.repoHref}
+										className="inline-flex items-center gap-1.5 text-sm font-bold text-muted-foreground hover:text-foreground transition-colors font-mono"
+									>
+										<span>View Source</span>
+										<svg
+											className="h-4 w-4"
+											fill="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<title>GitHub</title>
+											<path
+												fillRule="evenodd"
+												clipRule="evenodd"
+												d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+											/>
+										</svg>
+									</Link>
+								)}
+							</div>
+						</div>
+					))}
 				</div>
-			</div>
+			</section>
 
-			{siteMetadata.newsletter?.provider && (
-				<div className="mt-16 flex items-center justify-center">
-					<div className="w-full max-w-xl rounded-2xl border border-gray-200 bg-gray-50/50 p-8 dark:border-gray-700 dark:bg-gray-900/50">
-						<h3 className="mb-4 text-center text-2xl font-bold text-gray-900 dark:text-gray-100">
-							Subscribe to the newsletter
-						</h3>
-						<p className="mb-6 text-center text-gray-600 dark:text-gray-400">
-							Get notified when I publish new content. No spam, unsubscribe
-							anytime.
-						</p>
-						<NewsletterForm />
+			{/* Contact CTA Section */}
+			<section className="my-16 rounded-kj-2xl border border-border bg-card p-8 text-center shadow-kj-lg relative overflow-hidden">
+				{/* Background mesh glow */}
+				<div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
+
+				<div className="relative z-10 max-w-2xl mx-auto space-y-6">
+					<p className="text-xs font-bold tracking-[0.2em] text-primary uppercase font-mono">
+						Get in touch
+					</p>
+					<h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl font-sans">
+						Let's Build Something Extraordinary
+					</h2>
+					<p className="text-muted-foreground text-sm leading-relaxed max-w-xl mx-auto font-sans">
+						Whether you're looking for a senior software consultant, backend
+						architecture design, or a full-stack engineer to scale your SaaS
+						product, I'm ready to collaborate.
+					</p>
+
+					<div className="flex flex-wrap justify-center gap-4 pt-4">
+						{siteMetadata.email && (
+							<Link
+								href={`mailto:${siteMetadata.email}`}
+								className="inline-flex items-center gap-2 rounded-kj-lg bg-primary hover:bg-primary-hover px-6 py-3 font-semibold text-primary-foreground shadow-kj-glow transition-all"
+							>
+								<svg
+									className="h-4 w-4"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<title>Email</title>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+									/>
+								</svg>
+								<span>Say Hello</span>
+							</Link>
+						)}
+
+						{siteMetadata.linkedin && (
+							<Link
+								href={siteMetadata.linkedin}
+								className="inline-flex items-center gap-2 rounded-kj-lg border border-border bg-background hover:bg-muted px-6 py-3 font-semibold text-foreground shadow-kj-sm transition-all"
+							>
+								<svg
+									className="h-4 w-4"
+									fill="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<title>LinkedIn</title>
+									<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+								</svg>
+								<span>LinkedIn</span>
+							</Link>
+						)}
 					</div>
 				</div>
-			)}
+			</section>
 		</>
 	);
 }
