@@ -74,9 +74,7 @@ export default function About() {
 								{entry.tags && entry.tags.length > 0 ? (
 									<div className="flex flex-wrap gap-1.5">
 										{entry.tags.map((t) => (
-											<Pill key={t} tone="secondary">
-												{t}
-											</Pill>
+											<Pill key={t}>{t}</Pill>
 										))}
 									</div>
 								) : null}
