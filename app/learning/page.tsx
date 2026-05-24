@@ -1,35 +1,45 @@
 import { genPageMetadata } from "app/seo";
-import ProjectCard from "@/components/ProjectCard";
+import Card from "@/components/Card";
+import Link from "@/components/Link";
+import PageHeader from "@/components/PageHeader";
 import coursesData from "@/data/coursesData";
 
 export const metadata = genPageMetadata({ title: "Learning" });
 
 export default function Learning() {
 	return (
-		<div className="divide-y divide-gray-200 dark:divide-gray-700">
-			<div className="space-y-2 pt-6 pb-8 md:space-y-5">
-				<h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-					Learning
-				</h1>
-				<p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-					I like to learn a new things by watching courses. I have over 80 or
-					maybe more courses on variety of platforms. Here is a list of only
-					completed ones. I plan to present it differently than the cards, but
-					let assume it's ok now ;)
-				</p>
-			</div>
-			<div className="container py-12">
-				<div className="-m-4 flex flex-wrap">
-					{coursesData.map((course) => (
-						<ProjectCard
-							key={course.title}
-							title={course.title}
-							description={course.description}
-							imgSrc={course.imgSrc}
-							href={course.href}
-						/>
-					))}
-				</div>
+		<div className="space-y-6">
+			<PageHeader
+				eyebrow="Continuous Growth"
+				title="Learning"
+				description="Courses and certifications I've completed to stay sharp across the stack."
+			/>
+
+			<div className="grid gap-4 md:grid-cols-2">
+				{coursesData.map((c) => (
+					<Card key={c.title} as="article" interactive>
+						<div className="flex flex-wrap items-start justify-between gap-3">
+							<div className="space-y-1">
+								<h2 className="font-sans text-lg font-bold text-foreground">
+									{c.title}
+								</h2>
+								<p className="font-mono text-xs text-muted-foreground">
+									{c.description}
+								</p>
+							</div>
+						</div>
+						{c.href ? (
+							<div className="pt-4">
+								<Link
+									href={c.href}
+									className="inline-flex items-center gap-1.5 font-mono text-sm font-semibold text-primary transition-colors hover:text-primary-hover"
+								>
+									View certificate →
+								</Link>
+							</div>
+						) : null}
+					</Card>
+				))}
 			</div>
 		</div>
 	);
