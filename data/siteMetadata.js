@@ -5,7 +5,7 @@ const siteMetadata = {
 	headerTitle: "kjaniec.dev",
 	description: `Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.`,
 	language: "en-us",
-	theme: "system", // system, dark or light
+	theme: "dark", // system, dark or light
 	siteUrl: "https://kjaniec.dev",
 	siteRepo: "https://github.com/kjaniec-dev/personal-site",
 	siteLogo: "/static/images/logo.png",
