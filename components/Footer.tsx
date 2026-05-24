@@ -1,131 +1,125 @@
+import Link from "@/components/Link";
 import SocialIcon from "@/components/social-icons";
+import headerNavLinks from "@/data/headerNavLinks";
 import siteMetadata from "@/data/siteMetadata";
-import Link from "./Link";
+
+const services = [
+	{ label: "Full-Stack Development", href: "/projects" },
+	{ label: "System Architecture", href: "/projects" },
+	{ label: "Cloud & DevOps", href: "/projects" },
+	{ label: "Technical Consulting", href: "/about" },
+];
 
 export default function Footer() {
+	const year = new Date().getFullYear();
+
 	return (
-		<footer className="relative mt-20">
-			{/* Decorative gradient line */}
-			<div className="via-primary-500/50 mx-auto mb-8 h-px w-full max-w-2xl bg-gradient-to-r from-transparent to-transparent" />
-
-			<div className="flex flex-col items-center space-y-6">
-				{/* Social Icons */}
-				<div className="flex flex-wrap justify-center gap-4">
-					{siteMetadata.email && (
-						<SocialIcon
-							kind="mail"
-							href={`mailto:${siteMetadata.email}`}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.github && (
-						<SocialIcon
-							kind="github"
-							href={siteMetadata.github}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.linkedin && (
-						<SocialIcon
-							kind="linkedin"
-							href={siteMetadata.linkedin}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.twitter && (
-						<SocialIcon
-							kind="twitter"
-							href={siteMetadata.twitter}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.x && (
-						<SocialIcon
-							kind="x"
-							href={siteMetadata.x}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.facebook && (
-						<SocialIcon
-							kind="facebook"
-							href={siteMetadata.facebook}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.youtube && (
-						<SocialIcon
-							kind="youtube"
-							href={siteMetadata.youtube}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.bluesky && (
-						<SocialIcon
-							kind="bluesky"
-							href={siteMetadata.bluesky}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.instagram && (
-						<SocialIcon
-							kind="instagram"
-							href={siteMetadata.instagram}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.threads && (
-						<SocialIcon
-							kind="threads"
-							href={siteMetadata.threads}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-					{siteMetadata.medium && (
-						<SocialIcon
-							kind="medium"
-							href={siteMetadata.medium}
-							size={5}
-							className="hover:text-primary-500 dark:hover:text-primary-400 text-gray-500 transition-all hover:-translate-y-1 dark:text-gray-400"
-						/>
-					)}
-				</div>
-
-				{/* Copyright */}
-				<div className="flex flex-col items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-					<div className="flex items-center gap-2">
-						<span className="font-medium">{siteMetadata.author}</span>
-						<span className="text-gray-300 dark:text-gray-600">•</span>
-						<span>© {new Date().getFullYear()}</span>
-						<span className="text-gray-300 dark:text-gray-600">•</span>
-						<Link
-							href="/"
-							className="animated-underline hover:text-primary-500 dark:hover:text-primary-400 font-medium text-gray-600 dark:text-gray-300"
-						>
-							{siteMetadata.title}
+		<footer className="mt-24 border-t border-border bg-card/40">
+			<div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+				<div className="grid gap-10 md:grid-cols-4">
+					{/* Brand column */}
+					<div className="space-y-4">
+						<Link href="/" className="inline-block">
+							<span className="font-mono text-xl font-extrabold text-primary">
+								KJ
+							</span>
 						</Link>
+						<p className="text-sm leading-relaxed text-muted-foreground">
+							{siteMetadata.description}
+						</p>
+						<div className="flex flex-wrap gap-3 pt-2">
+							{siteMetadata.email ? (
+								<SocialIcon
+									kind="mail"
+									href={`mailto:${siteMetadata.email}`}
+									size={5}
+								/>
+							) : null}
+							{siteMetadata.github ? (
+								<SocialIcon kind="github" href={siteMetadata.github} size={5} />
+							) : null}
+							{siteMetadata.linkedin ? (
+								<SocialIcon
+									kind="linkedin"
+									href={siteMetadata.linkedin}
+									size={5}
+								/>
+							) : null}
+						</div>
+					</div>
+
+					{/* Navigation column */}
+					<div className="space-y-4">
+						<h3 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+							Navigation
+						</h3>
+						<ul className="space-y-2">
+							{headerNavLinks.map((link) => (
+								<li key={link.href}>
+									<Link
+										href={link.href}
+										className="text-sm text-muted-foreground transition-colors hover:text-primary"
+									>
+										{link.title}
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
+
+					{/* Services column */}
+					<div className="space-y-4">
+						<h3 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+							Services
+						</h3>
+						<ul className="space-y-2">
+							{services.map((s) => (
+								<li key={s.label}>
+									<Link
+										href={s.href}
+										className="text-sm text-muted-foreground transition-colors hover:text-primary"
+									>
+										{s.label}
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
+
+					{/* Contact column */}
+					<div className="space-y-4">
+						<h3 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+							Contact
+						</h3>
+						<ul className="space-y-2 text-sm text-muted-foreground">
+							{siteMetadata.email ? (
+								<li>
+									<Link
+										href={`mailto:${siteMetadata.email}`}
+										className="transition-colors hover:text-primary"
+									>
+										{siteMetadata.email}
+									</Link>
+								</li>
+							) : null}
+							<li>Katowice, Polska</li>
+						</ul>
 					</div>
 				</div>
 
-				{/* Credits */}
-				<div className="pb-8 text-xs text-gray-400 dark:text-gray-500">
-					Built with{" "}
-					<Link
-						href="https://github.com/timlrx/tailwind-nextjs-starter-blog"
-						className="animated-underline hover:text-primary-500 dark:hover:text-primary-400"
-					>
-						Tailwind Nextjs Theme
-					</Link>
+				<div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
+					<span>
+						© {year} {siteMetadata.author}. Wszelkie prawa zastrzeżone.
+					</span>
+					<span>
+						Built with{" "}
+						<Link
+							href="https://github.com/timlrx/tailwind-nextjs-starter-blog"
+							className="underline-offset-2 hover:text-primary hover:underline"
+						>
+							Tailwind Nextjs Theme
+						</Link>
+					</span>
 				</div>
 			</div>
 		</footer>
