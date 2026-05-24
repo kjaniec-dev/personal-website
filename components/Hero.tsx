@@ -1,6 +1,7 @@
 import HeroAnimationWrapper from "@/components/HeroAnimationWrapper";
 import Link from "@/components/Link";
 import siteMetadata from "@/data/siteMetadata";
+import techStackData from "@/data/techStackData";
 
 export default function Hero() {
 	return (
@@ -150,23 +151,43 @@ export default function Hero() {
 										</div>
 									</div>
 
-									<div className="flex gap-4">
-										<div className="flex-1 rounded-kj-lg border border-border bg-background p-3 text-center">
-											<p className="text-[10px] font-bold text-muted-foreground tracking-wider uppercase">
-												EXPERIENCE
+									<div className="grid grid-cols-3 gap-2">
+										<div className="rounded-kj-lg border border-border bg-background p-2.5 text-center">
+											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase">
+												Exp.
 											</p>
-											<p className="text-lg font-bold text-foreground mt-0.5">
-												7+ yrs
-											</p>
-										</div>
-										<div className="flex-1 rounded-kj-lg border border-border bg-background p-3 text-center">
-											<p className="text-[10px] font-bold text-muted-foreground tracking-wider uppercase">
-												PROJECTS
-											</p>
-											<p className="text-lg font-bold text-foreground mt-0.5">
-												30+
+											<p className="text-base font-bold text-foreground mt-0.5 whitespace-nowrap">
+												12+ yrs
 											</p>
 										</div>
+										<div className="rounded-kj-lg border border-border bg-background p-2.5 text-center">
+											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase">
+												Projects
+											</p>
+											<p className="text-base font-bold text-foreground mt-0.5 whitespace-nowrap">
+												10+
+											</p>
+										</div>
+										<div className="rounded-kj-lg border border-border bg-background p-2.5 text-center">
+											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase">
+												Dedication
+											</p>
+											<p className="text-base font-bold text-foreground mt-0.5 whitespace-nowrap">
+												100%
+											</p>
+										</div>
+									</div>
+
+									{/* Tech stack */}
+									<div className="flex flex-wrap gap-1.5 pt-1">
+										{techStackData.map((item) => (
+											<span
+												key={item.name}
+												className="rounded-kj-sm border border-border bg-background px-2 py-0.5 font-mono text-[10px] font-semibold text-muted-foreground"
+											>
+												{item.short ?? item.name}
+											</span>
+										))}
 									</div>
 								</div>
 							</div>

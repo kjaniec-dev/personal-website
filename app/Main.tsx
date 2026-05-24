@@ -1,7 +1,5 @@
 import Hero from "@/components/Hero";
 import Link from "@/components/Link";
-import StatBadge from "@/components/StatBadge";
-import TechStackBar from "@/components/TechStackBar";
 import projectsData from "@/data/projectsData";
 import siteMetadata from "@/data/siteMetadata";
 import "./layout.css";
@@ -52,22 +50,6 @@ export default function Home() {
 			/>
 			{/* Hero Section */}
 			<Hero />
-
-			{/* Stats Band & Tech Stack */}
-			<section className="border-y border-border bg-card/40 py-8">
-				<div className="mx-auto grid max-w-5xl grid-cols-3 gap-6 px-2 sm:gap-12">
-					<StatBadge value="5+" label="Lat doświadczenia" />
-					<StatBadge
-						value="10+"
-						label="Zrealizowanych projektów"
-						accent="secondary"
-					/>
-					<StatBadge value="100%" label="Zaangażowania" />
-				</div>
-				<div className="mx-auto mt-8 flex max-w-5xl items-center justify-center px-2">
-					<TechStackBar />
-				</div>
-			</section>
 
 			{/* Services Section */}
 			<section className="space-y-8 my-16">
