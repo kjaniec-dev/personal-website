@@ -1,27 +1,20 @@
 import Link from "@/components/Link";
+import PageHeader from "@/components/PageHeader";
 
 export default function NotFound() {
 	return (
-		<div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6">
-			<div className="space-x-2 pt-6 pb-8 md:space-y-5">
-				<h1 className="text-6xl leading-9 font-extrabold tracking-tight text-gray-900 md:border-r-2 md:px-6 md:text-8xl md:leading-14 dark:text-gray-100">
-					404
-				</h1>
-			</div>
-			<div className="max-w-md">
-				<p className="mb-4 text-xl leading-normal font-bold md:text-2xl">
-					Sorry we couldn't find this page.
-				</p>
-				<p className="mb-8">
-					But dont worry, you can find plenty of other things on our homepage.
-				</p>
-				<Link
-					href="/"
-					className="focus:shadow-outline-primary inline rounded-lg border border-transparent bg-primary-500 px-4 py-2 text-sm leading-5 font-medium text-white shadow-xs transition-colors duration-150 hover:bg-primary-600 focus:outline-hidden dark:hover:bg-primary-400"
-				>
-					Back to homepage
-				</Link>
-			</div>
+		<div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
+			<PageHeader
+				eyebrow="404"
+				title="Page not found"
+				description="The page you're looking for doesn't exist or has been moved."
+			/>
+			<Link
+				href="/"
+				className="inline-flex items-center gap-2 rounded-kj-lg bg-primary px-6 py-3 font-sans text-sm font-semibold text-primary-foreground shadow-kj-glow transition-colors hover:bg-primary-hover"
+			>
+				← Back to home
+			</Link>
 		</div>
 	);
 }
