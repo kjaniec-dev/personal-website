@@ -49,6 +49,7 @@ const projectsData: Project[] = [
     voxel engine with greedy meshing, procedural city generation, dynamic lighting effects, and chunk-based
     streaming for smooth 60 FPS performance. Think Minecraft meets Blade Runner in your browser.`,
 		href: "https://3dresume.kjaniec.dev",
+		imgSrc: "/static/images/cyberpunk-resume.png",
 		tags: ["Babylon.js", "WebGL", "TypeScript", "Resume"],
 	},
 ];
