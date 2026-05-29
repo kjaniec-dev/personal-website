@@ -13,7 +13,7 @@ export default function Header() {
 
 	return (
 		<header className="sticky top-4 z-40 w-full rounded-full border border-border bg-card/65 shadow-kj-md backdrop-blur-lg transition-all duration-300">
-			<div className="flex h-14 items-center justify-between gap-4 px-4 sm:px-6">
+			<div className="flex h-14 items-center justify-between gap-1.5 px-3 sm:px-4 md:gap-2.5 lg:gap-3 xl:gap-4 xl:px-6">
 				<Link
 					href="/"
 					aria-label={siteMetadata.headerTitle ?? "Home"}
@@ -25,7 +25,7 @@ export default function Header() {
 						alt="KJ Logo"
 						width={120}
 						height={32}
-						className="h-9 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+						className="h-8 xl:h-9 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
 					/>
 					{/* biome-ignore lint/performance/noImgElement: Native img is intentional to prevent Next.js responsive layout collapse at 1080px and optimize LCP */}
 					<img
@@ -33,11 +33,11 @@ export default function Header() {
 						alt="KJ Logo"
 						width={120}
 						height={32}
-						className="h-9 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+						className="h-8 xl:h-9 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
 					/>
 				</Link>
 
-				<nav className="hidden items-center gap-1 md:flex">
+				<nav className="hidden items-center gap-0.5 lg:gap-1 xl:gap-1.5 md:flex">
 					{headerNavLinks
 						.filter((link) => link.href !== "/")
 						.map((link) => {
@@ -47,7 +47,7 @@ export default function Header() {
 								<Link
 									key={link.title}
 									href={link.href}
-									className={`rounded-full px-3.5 py-1.5 font-sans text-sm font-medium transition-colors ${
+									className={`rounded-full px-2 py-1 md:px-2.5 md:py-1 lg:px-3 lg:py-1.5 xl:px-3.5 xl:py-1.5 font-sans text-xs md:text-sm font-medium transition-colors ${
 										active
 											? "bg-primary/10 text-primary font-semibold"
 											: "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -59,13 +59,13 @@ export default function Header() {
 						})}
 				</nav>
 
-				<div className="flex items-center gap-2">
+				<div className="flex items-center gap-1 sm:gap-1.5 xl:gap-2">
 					<SearchButton />
 					<ThemeSwitch />
 					{siteMetadata.email ? (
 						<Link
 							href={`mailto:${siteMetadata.email}`}
-							className="hidden h-9 items-center gap-2 rounded-full bg-primary px-5 font-sans text-sm font-semibold whitespace-nowrap text-primary-foreground shadow-kj-glow transition-all duration-300 hover:bg-primary-hover hover:-translate-y-0.5 md:inline-flex"
+							className="hidden h-9 items-center gap-1.5 rounded-full bg-primary px-3.5 font-sans text-xs font-semibold whitespace-nowrap text-primary-foreground shadow-kj-glow transition-all duration-300 hover:bg-primary-hover hover:-translate-y-0.5 md:inline-flex lg:px-4 lg:text-sm xl:px-5"
 						>
 							Let&apos;s talk
 						</Link>
