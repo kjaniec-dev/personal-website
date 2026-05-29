@@ -38,6 +38,7 @@ const projectsData: Project[] = [
     your next internal tool or admin panel.`,
 		href: "https://dashboard.kjaniec.dev",
 		repoHref: "https://github.com/kjaniec-dev/mui-greyscale-admin-dashboard",
+		imgSrc: "/static/images/mui-dashboard.png",
 		tags: ["React", "TypeScript", "Material UI", "Vite"],
 	},
 	{
