@@ -18,6 +18,7 @@ const projectsData: Project[] = [
     with excellent Lighthouse scores. Showcases my work, skills, and thoughts on software development.`,
 		href: "https://kjaniec.dev",
 		repoHref: "https://github.com/kjaniec-dev/personal-website",
+		imgSrc: "/static/images/personal-website.png",
 		tags: ["next-js", "TypeScript", "Tailwind CSS", "MDX"],
 	},
 	{
