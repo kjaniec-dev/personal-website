@@ -28,6 +28,7 @@ const projectsData: Project[] = [
     Built with modern web technologies for seamless team collaboration during sprint planning.`,
 		href: "https://planning-poker.kjaniec.dev",
 		repoHref: "https://github.com/kjaniec-dev/planning-poker",
+		imgSrc: "/static/images/planning-poker.png",
 		tags: ["React", "WebSocket", "Real-time", "Agile"],
 	},
 	{
