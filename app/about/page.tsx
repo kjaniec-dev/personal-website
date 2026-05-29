@@ -1,8 +1,9 @@
 import { genPageMetadata } from "app/seo";
 import { allAuthors } from "contentlayer/generated";
-import { coreContent } from "pliny/utils/contentlayer";
+import { MDXLayoutRenderer } from "pliny/mdx-components";
 import Card from "@/components/Card";
 import Image from "@/components/Image";
+import { components } from "@/components/MDXComponents";
 import PageHeader from "@/components/PageHeader";
 import Pill from "@/components/Pill";
 import StatBadge from "@/components/StatBadge";
@@ -14,9 +15,7 @@ import skillsData from "@/data/skillsData";
 export const metadata = genPageMetadata({ title: "About" });
 
 export default function About() {
-	const author = coreContent(
-		allAuthors.find((a) => a.slug === "default") ?? allAuthors[0],
-	);
+	const author = allAuthors.find((a) => a.slug === "default") ?? allAuthors[0];
 
 	return (
 		<div className="space-y-10 pb-16">
@@ -38,19 +37,30 @@ export default function About() {
 						/>
 					) : null}
 					<div className="space-y-4">
-						<p className="text-base leading-relaxed text-muted-foreground">
-							{author.occupation
-								? `${author.occupation}${author.company ? ` at ${author.company}` : ""}.`
-								: ""}
-						</p>
-						<div className="grid grid-cols-3 gap-6">
-							<StatBadge value="12+" label="Years experience" />
-							<StatBadge value="∞" label="Always learning" accent="secondary" />
-							<StatBadge value="100%" label="Commitment" />
+						<div className="space-y-1">
+							<h3 className="font-sans text-2xl font-bold tracking-tight text-foreground">
+								Senior Software Engineer
+							</h3>
+							<p className="font-mono text-xs font-semibold text-primary uppercase tracking-wider">
+								B2B Contractor • Remote Specialist
+							</p>
+						</div>
+						<div className="grid grid-cols-3 gap-4 pt-3 border-t border-border/40">
+							<StatBadge value="12+" label="Years of Exp." />
+							<StatBadge
+								value="B2B"
+								label="Contract Model"
+								accent="secondary"
+							/>
+							<StatBadge value="100%" label="Remote Focus" />
 						</div>
 					</div>
 				</div>
 			</Card>
+
+			<div className="prose dark:prose-invert max-w-none pt-2">
+				<MDXLayoutRenderer code={author.body.code} components={components} />
+			</div>
 
 			<section className="space-y-6">
 				<div className="space-y-2">

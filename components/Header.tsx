@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import Image from "@/components/Image";
 import Link from "@/components/Link";
 import MobileNav from "@/components/MobileNav";
 import SearchButton from "@/components/SearchButton";
@@ -12,12 +13,27 @@ export default function Header() {
 	const pathname = usePathname();
 
 	return (
-		<header className="sticky top-0 z-40 border-b border-border bg-card/70 shadow-kj-xs backdrop-blur-md">
-			<div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
-				<Link href="/" aria-label={siteMetadata.headerTitle ?? "Home"}>
-					<span className="font-mono text-xl font-extrabold text-primary">
-						KJ
-					</span>
+		<header className="sticky top-4 z-40 w-full rounded-full border border-border bg-card/65 shadow-kj-md backdrop-blur-lg transition-all duration-300">
+			<div className="flex h-14 items-center justify-between gap-4 px-4 sm:px-6">
+				<Link
+					href="/"
+					aria-label={siteMetadata.headerTitle ?? "Home"}
+					className="group flex items-center gap-2"
+				>
+					<Image
+						src="/static/images/logo-light.png"
+						alt="KJ Logo"
+						width={120}
+						height={32}
+						className="h-8 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+					/>
+					<Image
+						src="/static/images/logo-dark.png"
+						alt="KJ Logo"
+						width={120}
+						height={32}
+						className="h-8 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+					/>
 				</Link>
 
 				<nav className="hidden items-center gap-1 md:flex">
@@ -30,7 +46,7 @@ export default function Header() {
 								<Link
 									key={link.title}
 									href={link.href}
-									className={`rounded-kj-md px-3 py-2 font-sans text-sm font-medium transition-colors ${
+									className={`rounded-full px-3.5 py-1.5 font-sans text-sm font-medium transition-colors ${
 										active
 											? "bg-primary/10 text-primary font-semibold"
 											: "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -48,9 +64,9 @@ export default function Header() {
 					{siteMetadata.email ? (
 						<Link
 							href={`mailto:${siteMetadata.email}`}
-							className="hidden h-9 items-center gap-2 rounded-kj-lg bg-primary px-4 font-sans text-sm font-semibold whitespace-nowrap text-primary-foreground shadow-kj-glow transition-colors hover:bg-primary-hover md:inline-flex"
+							className="hidden h-9 items-center gap-2 rounded-full bg-primary px-5 font-sans text-sm font-semibold whitespace-nowrap text-primary-foreground shadow-kj-glow transition-all duration-300 hover:bg-primary-hover hover:-translate-y-0.5 md:inline-flex"
 						>
-							Let's talk
+							Let&apos;s talk
 						</Link>
 					) : null}
 					<MobileNav />

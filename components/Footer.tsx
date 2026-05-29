@@ -1,28 +1,53 @@
+import Image from "@/components/Image";
 import Link from "@/components/Link";
 import SocialIcon from "@/components/social-icons";
 import headerNavLinks from "@/data/headerNavLinks";
 import siteMetadata from "@/data/siteMetadata";
 
-const services = [
-	{ label: "Full-Stack Development", href: "/projects" },
-	{ label: "System Architecture", href: "/projects" },
-	{ label: "Cloud & DevOps", href: "/projects" },
-	{ label: "Technical Consulting", href: "/about" },
-];
-
 export default function Footer() {
 	const year = new Date().getFullYear();
+	const email = siteMetadata.email || "contact@kjaniec.dev";
+
+	const services = [
+		{
+			label: "Full-Stack Development",
+			href: `mailto:${email}?subject=Inquiry regarding Full-Stack Development • kjaniec.dev`,
+		},
+		{
+			label: "System Architecture",
+			href: `mailto:${email}?subject=Inquiry regarding System Architecture • kjaniec.dev`,
+		},
+		{
+			label: "Cloud & DevOps",
+			href: `mailto:${email}?subject=Inquiry regarding Cloud %26 DevOps • kjaniec.dev`,
+		},
+		{
+			label: "Technical Consulting",
+			href: `mailto:${email}?subject=Inquiry regarding Technical Consulting • kjaniec.dev`,
+		},
+	];
 
 	return (
-		<footer className="mt-24 border-t border-border bg-card/40">
-			<div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+		<footer className="mt-24 border-t border-border bg-card/30 py-12">
+			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div className="grid gap-10 md:grid-cols-4">
 					{/* Brand column */}
 					<div className="space-y-4">
-						<Link href="/" className="inline-block">
-							<span className="font-mono text-xl font-extrabold text-primary">
-								KJ
-							</span>
+						<Link href="/" className="flex items-center gap-2 group">
+							<Image
+								src="/static/images/logo-light.png"
+								alt="KJ Logo"
+								width={120}
+								height={32}
+								className="h-8 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+							/>
+							<Image
+								src="/static/images/logo-dark.png"
+								alt="KJ Logo"
+								width={120}
+								height={32}
+								className="h-8 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+							/>
 						</Link>
 						<p className="text-sm leading-relaxed text-muted-foreground">
 							{siteMetadata.description}
@@ -33,7 +58,7 @@ export default function Footer() {
 									kind="mail"
 									href={`mailto:${siteMetadata.email}`}
 									size={5}
-									className="text-muted-foreground transition-colors hover:text-primary"
+									className="text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:text-primary"
 								/>
 							) : null}
 							{siteMetadata.github ? (
@@ -41,7 +66,7 @@ export default function Footer() {
 									kind="github"
 									href={siteMetadata.github}
 									size={5}
-									className="text-muted-foreground transition-colors hover:text-primary"
+									className="text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:text-primary"
 								/>
 							) : null}
 							{siteMetadata.linkedin ? (
@@ -49,7 +74,7 @@ export default function Footer() {
 									kind="linkedin"
 									href={siteMetadata.linkedin}
 									size={5}
-									className="text-muted-foreground transition-colors hover:text-primary"
+									className="text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:text-primary"
 								/>
 							) : null}
 						</div>
@@ -65,7 +90,7 @@ export default function Footer() {
 								<li key={link.href}>
 									<Link
 										href={link.href}
-										className="text-sm text-muted-foreground transition-colors hover:text-primary"
+										className="inline-block text-sm text-muted-foreground transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
 									>
 										{link.title}
 									</Link>
@@ -84,7 +109,7 @@ export default function Footer() {
 								<li key={s.label}>
 									<Link
 										href={s.href}
-										className="text-sm text-muted-foreground transition-colors hover:text-primary"
+										className="inline-block text-sm text-muted-foreground transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
 									>
 										{s.label}
 									</Link>
@@ -103,15 +128,29 @@ export default function Footer() {
 								<li>
 									<Link
 										href={`mailto:${siteMetadata.email}`}
-										className="transition-colors hover:text-primary"
+										className="inline-block transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
 									>
 										{siteMetadata.email}
 									</Link>
 								</li>
 							) : null}
-							<li>Zielona Góra, Poland</li>
+							<li className="font-sans text-sm text-muted-foreground">
+								Zielona Góra, Poland
+							</li>
 						</ul>
 					</div>
+				</div>
+
+				{/* Bottom Copyright Row */}
+				<div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-border/40 pt-6 text-[11px] font-medium text-muted-foreground font-mono">
+					<p>
+						© {year} {siteMetadata.headerTitle}. All rights reserved.
+					</p>
+					<p className="flex items-center gap-1.5">
+						<span>Built with Next.js &amp; Tailwind CSS</span>
+						<span className="text-border/60">•</span>
+						<span>Crafted with passion</span>
+					</p>
 				</div>
 			</div>
 		</footer>

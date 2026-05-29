@@ -16,9 +16,9 @@ export default function Hero() {
 				/>
 
 				<div className="mx-auto w-full max-w-7xl">
-					<div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+					<div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-16">
 						{/* Left Column - Positioning and CTAs */}
-						<div className="space-y-8 lg:col-span-7">
+						<div className="space-y-8 lg:col-span-6 xl:col-span-7">
 							{/* Status Badge */}
 							<div className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card/60 px-3.5 py-1.5 shadow-kj-xs backdrop-blur-sm">
 								<span className="relative flex h-2 w-2">
@@ -99,7 +99,7 @@ export default function Hero() {
 						</div>
 
 						{/* Right Column - Premium SaaS / Code sandbox Widget */}
-						<div className="hero-description-reveal lg:col-span-5">
+						<div className="hero-description-reveal lg:col-span-6 xl:col-span-5 max-w-xl lg:max-w-none mx-auto w-full">
 							<div className="relative rounded-kj-2xl border border-border bg-card p-6 shadow-kj-lg backdrop-blur-md">
 								{/* Card browser header */}
 								<div className="flex items-center justify-between border-b border-border pb-4 mb-5">
@@ -115,65 +115,87 @@ export default function Hero() {
 
 								{/* Mock content */}
 								<div className="space-y-5">
-									<div className="rounded-kj-lg border border-border bg-background p-4 space-y-2">
+									<div className="rounded-kj-lg border border-border bg-background p-4 space-y-2.5 transition-all duration-300 hover:border-primary/40">
 										<div className="flex justify-between items-center text-xs font-semibold text-muted-foreground font-mono">
-											<span>DELIVERY RECORD</span>
-											<span className="text-secondary font-bold">VERIFIED</span>
-										</div>
-										<p className="text-xl font-bold text-foreground">
-											On-time, Every Time
-										</p>
-										<div className="flex items-center justify-between pt-1">
-											<div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
-												<div className="h-full bg-secondary w-full rounded-full"></div>
-											</div>
-											<span className="text-xs font-semibold text-foreground ml-3 font-mono">
-												100%
+											<span>BACKEND ARCHITECTURE</span>
+											<span className="rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-bold text-primary tracking-wider uppercase">
+												ROBUST
 											</span>
+										</div>
+										<p className="text-lg font-bold text-foreground leading-tight">
+											Distributed &amp; Event-Driven Systems
+										</p>
+										<p className="text-xs leading-relaxed text-muted-foreground">
+											Designed enterprise microservices at REWE Digital,
+											Cinkciarz.pl, and Biot. Expert in transactional event
+											streams (Kafka, RabbitMQ) and high-scale Java/Spring Boot
+											&amp; TypeScript/Node.js backends.
+										</p>
+										<div className="flex flex-wrap items-center gap-2 pt-2 border-t border-border/40 text-[10px] font-semibold text-muted-foreground font-mono">
+											<div className="flex items-center gap-1">
+												<span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+												<span>Kafka Cluster: Healthy</span>
+											</div>
+											<span className="text-border/60">•</span>
+											<div className="flex items-center gap-1">
+												<span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+												<span>JVM / TS: Scaled</span>
+											</div>
 										</div>
 									</div>
 
-									<div className="rounded-kj-lg border border-border bg-background p-4 space-y-2">
+									<div className="rounded-kj-lg border border-border bg-background p-4 space-y-2.5 transition-all duration-300 hover:border-primary/40">
 										<div className="flex justify-between items-center text-xs font-semibold text-muted-foreground font-mono">
-											<span>CORE WEB VITALS</span>
-											<span className="text-secondary font-bold">PASSING</span>
-										</div>
-										<p className="text-xl font-bold text-foreground">
-											This Website
-										</p>
-										<div className="flex items-center justify-between pt-1">
-											<div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
-												<div className="h-full bg-secondary w-[94%] rounded-full"></div>
-											</div>
-											<span className="text-xs font-semibold text-foreground ml-3 font-mono">
-												LCP 1.3s ✓
+											<span>RICH FRONTEND &amp; WEBGL</span>
+											<span className="rounded-full bg-secondary/10 px-2 py-0.5 text-[9px] font-bold text-secondary tracking-wider uppercase">
+												ACTIVE
 											</span>
+										</div>
+										<p className="text-lg font-bold text-foreground leading-tight">
+											Performant UIs &amp; Interactive Graphics
+										</p>
+										<p className="text-xs leading-relaxed text-muted-foreground">
+											Created a custom 3D WebGL voxel engine in Babylon.js with
+											chunk streaming (60 FPS), real-time collaborative
+											workspace synchronization via WebSockets, and heavy
+											analytical React &amp; Angular UIs.
+										</p>
+										<div className="flex flex-wrap items-center gap-2 pt-2 border-t border-border/40 text-[10px] font-semibold text-muted-foreground font-mono">
+											<div className="flex items-center gap-1">
+												<span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+												<span>WebGL Render: 60 FPS</span>
+											</div>
+											<span className="text-border/60">•</span>
+											<div className="flex items-center gap-1">
+												<span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+												<span>WebSockets: Synchronized</span>
+											</div>
 										</div>
 									</div>
 
 									<div className="grid grid-cols-3 gap-2">
-										<div className="rounded-kj-lg border border-border bg-background p-2.5 text-center">
-											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase">
-												Exp.
+										<div className="group rounded-kj-lg border border-border bg-background p-2.5 text-center transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 cursor-default">
+											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase transition-colors duration-300 group-hover:text-primary/70">
+												Experience
 											</p>
-											<p className="text-base font-bold text-foreground mt-0.5 whitespace-nowrap">
+											<p className="text-xs font-bold text-foreground mt-0.5 transition-colors duration-300 group-hover:text-primary">
 												12+ yrs
 											</p>
 										</div>
-										<div className="rounded-kj-lg border border-border bg-background p-2.5 text-center">
-											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase">
-												Projects
+										<div className="group rounded-kj-lg border border-border bg-background p-2.5 text-center transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 cursor-default">
+											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase transition-colors duration-300 group-hover:text-primary/70">
+												Backend
 											</p>
-											<p className="text-base font-bold text-foreground mt-0.5 whitespace-nowrap">
-												10+
+											<p className="text-xs font-bold text-foreground mt-0.5 transition-colors duration-300 group-hover:text-primary">
+												Java &amp; Node
 											</p>
 										</div>
-										<div className="rounded-kj-lg border border-border bg-background p-2.5 text-center">
-											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase">
-												Dedication
+										<div className="group rounded-kj-lg border border-border bg-background p-2.5 text-center transition-all duration-300 hover:border-secondary/40 hover:bg-secondary/5 cursor-default">
+											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase transition-colors duration-300 group-hover:text-secondary/70">
+												Frontend
 											</p>
-											<p className="text-base font-bold text-foreground mt-0.5 whitespace-nowrap">
-												100%
+											<p className="text-xs font-bold text-foreground mt-0.5 transition-colors duration-300 group-hover:text-secondary">
+												React &amp; Angular
 											</p>
 										</div>
 									</div>
@@ -183,7 +205,7 @@ export default function Hero() {
 										{techStackData.map((item) => (
 											<span
 												key={item.name}
-												className="rounded-kj-sm border border-border bg-background px-2 py-0.5 font-mono text-[10px] font-semibold text-muted-foreground"
+												className="rounded-kj-sm border border-border bg-background px-2 py-0.5 font-mono text-[10px] font-semibold text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 hover:text-primary cursor-default"
 											>
 												{item.short ?? item.name}
 											</span>

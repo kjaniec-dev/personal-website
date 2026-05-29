@@ -5,6 +5,7 @@ import siteMetadata from "@/data/siteMetadata";
 import "./layout.css";
 
 export default function Home() {
+	const email = siteMetadata.email || "contact@kjaniec.dev";
 	const personSchema = {
 		"@context": "https://schema.org",
 		"@type": "Person",
@@ -70,7 +71,10 @@ export default function Home() {
 					{[
 						{
 							title: "Full-Stack Development",
-							desc: "Building modern, performant web applications using React, Next.js, and TypeScript, backed by clean and scalable APIs.",
+							desc: "Building modern, performant web applications using React, Angular, Next.js, and TypeScript, backed by clean and scalable APIs.",
+							href: `mailto:${email}?subject=Inquiry regarding Full-Stack Development • kjaniec.dev`,
+							hoverColor: "hover:border-primary/40 hover:bg-primary/[0.02]",
+							hoverText: "group-hover:text-primary",
 							icon: (
 								<svg
 									className="h-6 w-6 text-primary"
@@ -91,6 +95,9 @@ export default function Home() {
 						{
 							title: "System Architecture",
 							desc: "Designing clean, decoupled, and pragmatic system architectures in Go, Python, or Rust built for long-term scalability.",
+							href: `mailto:${email}?subject=Inquiry regarding System Architecture • kjaniec.dev`,
+							hoverColor: "hover:border-secondary/40 hover:bg-secondary/[0.02]",
+							hoverText: "group-hover:text-secondary",
 							icon: (
 								<svg
 									className="h-6 w-6 text-secondary"
@@ -111,6 +118,9 @@ export default function Home() {
 						{
 							title: "Cloud & DevOps",
 							desc: "Setting up automated CI/CD pipelines, container orchestration (Docker/Kubernetes), and secure AWS/GCP cloud environments.",
+							href: `mailto:${email}?subject=Inquiry regarding Cloud %26 DevOps • kjaniec.dev`,
+							hoverColor: "hover:border-primary/40 hover:bg-primary/[0.02]",
+							hoverText: "group-hover:text-primary",
 							icon: (
 								<svg
 									className="h-6 w-6 text-primary"
@@ -131,6 +141,9 @@ export default function Home() {
 						{
 							title: "Technical Consulting",
 							desc: "Conducting technology evaluations, code audits, architecture reviews, and performance tuning to solve complex bottlenecks.",
+							href: `mailto:${email}?subject=Inquiry regarding Technical Consulting • kjaniec.dev`,
+							hoverColor: "hover:border-secondary/40 hover:bg-secondary/[0.02]",
+							hoverText: "group-hover:text-secondary",
 							icon: (
 								<svg
 									className="h-6 w-6 text-secondary"
@@ -149,20 +162,23 @@ export default function Home() {
 							),
 						},
 					].map((item) => (
-						<div
+						<Link
 							key={item.title}
-							className="rounded-kj-xl border border-border bg-card p-6 shadow-kj-sm hover:shadow-kj-md transition-all duration-300 font-sans"
+							href={item.href}
+							className={`group block rounded-kj-xl border border-border bg-card p-6 shadow-kj-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-kj-md font-sans ${item.hoverColor}`}
 						>
-							<div className="mb-4 rounded-kj-lg bg-background p-2.5 w-fit border border-border">
+							<div className="mb-4 rounded-kj-lg bg-background p-2.5 w-fit border border-border transition-colors duration-300 group-hover:border-current">
 								{item.icon}
 							</div>
-							<h3 className="text-lg font-bold text-foreground mb-2">
+							<h3
+								className={`text-lg font-bold text-foreground mb-2 transition-colors duration-300 ${item.hoverText}`}
+							>
 								{item.title}
 							</h3>
 							<p className="text-muted-foreground text-sm leading-relaxed font-sans">
 								{item.desc}
 							</p>
-						</div>
+						</Link>
 					))}
 				</div>
 			</section>
