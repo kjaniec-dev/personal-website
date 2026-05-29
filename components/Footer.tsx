@@ -1,4 +1,3 @@
-import Image from "@/components/Image";
 import Link from "@/components/Link";
 import SocialIcon from "@/components/social-icons";
 import headerNavLinks from "@/data/headerNavLinks";
@@ -34,14 +33,16 @@ export default function Footer() {
 					{/* Brand column */}
 					<div className="space-y-4">
 						<Link href="/" className="flex items-center gap-2 group">
-							<Image
+							{/* biome-ignore lint/performance/noImgElement: Native img is intentional to prevent Next.js responsive layout collapse at 1080px and optimize LCP */}
+							<img
 								src="/static/images/logo-light.png"
 								alt="KJ Logo"
 								width={120}
 								height={32}
 								className="h-8 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
 							/>
-							<Image
+							{/* biome-ignore lint/performance/noImgElement: Native img is intentional to prevent Next.js responsive layout collapse at 1080px and optimize LCP */}
+							<img
 								src="/static/images/logo-dark.png"
 								alt="KJ Logo"
 								width={120}
