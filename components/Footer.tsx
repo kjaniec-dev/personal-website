@@ -32,14 +32,17 @@ export default function Footer() {
 				<div className="grid gap-10 md:grid-cols-4">
 					{/* Brand column */}
 					<div className="space-y-4">
-						<Link href="/" className="flex items-center gap-2 group">
+						<Link
+							href="/"
+							className="flex items-center gap-2 group flex-shrink-0"
+						>
 							{/* biome-ignore lint/performance/noImgElement: Native img is intentional to prevent Next.js responsive layout collapse at 1080px and optimize LCP */}
 							<img
 								src="/static/images/logo-light.png"
 								alt="KJ Logo"
 								width={120}
 								height={32}
-								className="h-8 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+								className="h-9 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
 							/>
 							{/* biome-ignore lint/performance/noImgElement: Native img is intentional to prevent Next.js responsive layout collapse at 1080px and optimize LCP */}
 							<img
@@ -47,7 +50,7 @@ export default function Footer() {
 								alt="KJ Logo"
 								width={120}
 								height={32}
-								className="h-8 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+								className="h-9 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
 							/>
 						</Link>
 						<p className="text-sm leading-relaxed text-muted-foreground">

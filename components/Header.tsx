@@ -17,7 +17,7 @@ export default function Header() {
 				<Link
 					href="/"
 					aria-label={siteMetadata.headerTitle ?? "Home"}
-					className="group flex items-center gap-2"
+					className="group flex items-center gap-2 flex-shrink-0"
 				>
 					{/* biome-ignore lint/performance/noImgElement: Native img is intentional to prevent Next.js responsive layout collapse at 1080px and optimize LCP */}
 					<img
@@ -25,7 +25,7 @@ export default function Header() {
 						alt="KJ Logo"
 						width={120}
 						height={32}
-						className="h-8 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+						className="h-9 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
 					/>
 					{/* biome-ignore lint/performance/noImgElement: Native img is intentional to prevent Next.js responsive layout collapse at 1080px and optimize LCP */}
 					<img
@@ -33,7 +33,7 @@ export default function Header() {
 						alt="KJ Logo"
 						width={120}
 						height={32}
-						className="h-8 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+						className="h-9 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
 					/>
 				</Link>
 
