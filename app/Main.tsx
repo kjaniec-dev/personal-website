@@ -53,7 +53,7 @@ export default function Home() {
 			<Hero />
 
 			{/* Services Section */}
-			<section className="space-y-8 my-16">
+			<section className="space-y-8 mt-10 mb-16 md:mt-12">
 				<div className="space-y-2">
 					<p className="text-xs font-bold tracking-[0.2em] text-primary uppercase font-mono">
 						Services

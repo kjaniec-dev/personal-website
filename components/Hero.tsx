@@ -6,7 +6,7 @@ import techStackData from "@/data/techStackData";
 export default function Hero() {
 	return (
 		<HeroAnimationWrapper>
-			<section className="relative flex min-h-[70vh] items-center overflow-hidden py-12 md:py-20">
+			<section className="relative flex min-h-[70vh] items-center overflow-hidden pt-12 pb-8 md:pt-20 md:pb-10">
 				{/* Subtle background pattern of dots or grid */}
 				<div
 					className="pointer-events-none absolute inset-0 opacity-[0.025] dark:opacity-[0.04]"
