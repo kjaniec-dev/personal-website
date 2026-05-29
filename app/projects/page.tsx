@@ -15,7 +15,7 @@ export default function Projects() {
 			/>
 
 			<div className="grid gap-6 md:grid-cols-2">
-				{projectsData.map((p) => (
+				{projectsData.map((p, index) => (
 					<ProjectCard
 						key={p.title}
 						title={p.title}
@@ -25,6 +25,7 @@ export default function Projects() {
 						repoHref={p.repoHref}
 						tags={p.tags}
 						status={p.status}
+						priority={index < 2}
 					/>
 				))}
 			</div>

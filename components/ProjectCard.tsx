@@ -12,6 +12,7 @@ interface ProjectCardProps {
 	repoHref?: string;
 	tags?: string[];
 	status?: ProjectStatus;
+	priority?: boolean;
 }
 
 const statusLabel: Record<ProjectStatus, string> = {
@@ -34,6 +35,7 @@ export default function ProjectCard({
 	repoHref,
 	tags = [],
 	status = "shipped",
+	priority = false,
 }: ProjectCardProps) {
 	return (
 		<Card
@@ -50,6 +52,7 @@ export default function ProjectCard({
 						fill
 						sizes="(min-width: 768px) 50vw, 100vw"
 						className="object-cover"
+						priority={priority}
 					/>
 				) : (
 					<div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
