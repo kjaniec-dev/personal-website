@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
 import Card from "@/components/Card";
+import { PageHeader } from "@/components/ClientUI";
 import Link from "@/components/Link";
-import PageHeader from "@/components/PageHeader";
 import Pill from "@/components/Pill";
 import siteMetadata from "@/data/siteMetadata";
 

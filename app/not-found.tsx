@@ -1,5 +1,5 @@
+import { PageHeader } from "@/components/ClientUI";
 import Link from "@/components/Link";
-import PageHeader from "@/components/PageHeader";
 
 export default function NotFound() {
 	return (

@@ -1,7 +1,7 @@
 import { genPageMetadata } from "app/seo";
 import Card from "@/components/Card";
+import { PageHeader } from "@/components/ClientUI";
 import Link from "@/components/Link";
-import PageHeader from "@/components/PageHeader";
 import coursesData from "@/data/coursesData";
 
 export const metadata = genPageMetadata({ title: "Learning" });

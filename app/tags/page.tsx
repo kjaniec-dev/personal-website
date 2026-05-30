@@ -1,8 +1,8 @@
 import { genPageMetadata } from "app/seo";
 import tagData from "app/tag-data.json";
 import { slug } from "github-slugger";
+import { PageHeader } from "@/components/ClientUI";
 import Link from "@/components/Link";
-import PageHeader from "@/components/PageHeader";
 
 export const metadata = genPageMetadata({
 	title: "Tags",

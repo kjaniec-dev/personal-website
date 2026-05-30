@@ -1,6 +1,6 @@
 import { genPageMetadata } from "app/seo";
+import { PageHeader } from "@/components/ClientUI";
 import FAQAccordion from "@/components/FAQAccordion";
-import PageHeader from "@/components/PageHeader";
 import faqData from "@/data/faqData";
 
 export const metadata = genPageMetadata({ title: "FAQ" });

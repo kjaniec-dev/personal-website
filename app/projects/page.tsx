@@ -1,5 +1,5 @@
 import { genPageMetadata } from "app/seo";
-import PageHeader from "@/components/PageHeader";
+import { PageHeader } from "@/components/ClientUI";
 import ProjectCard from "@/components/ProjectCard";
 import projectsData from "@/data/projectsData";
 
