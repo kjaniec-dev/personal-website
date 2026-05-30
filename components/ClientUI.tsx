@@ -11,5 +11,10 @@ export {
 	PageHeader,
 	Progress,
 	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
 	TableWrap,
 } from "@kjaniec-dev/ui";
