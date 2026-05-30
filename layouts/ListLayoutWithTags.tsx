@@ -139,14 +139,35 @@ export default function ListLayoutWithTags({
 						<p className="text-muted-foreground">No posts found.</p>
 					) : null}
 					{displayPosts.map((post) => {
-						const { path, date, title, summary, tags } = post;
+						const { path, date, title, summary, tags, readingTime } = post;
 						return (
 							<Card key={path} as="article" interactive>
 								<Link href={`/${path}`} className="group block space-y-3">
-									<div className="flex flex-wrap items-center gap-2 font-mono text-[11px] text-muted-foreground">
+									<div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] text-muted-foreground">
 										<time dateTime={date}>
 											{formatDate(date, siteMetadata.locale)}
 										</time>
+										{readingTime && (
+											<>
+												<span>•</span>
+												<div className="flex items-center gap-1">
+													<svg
+														className="h-3 w-3 stroke-muted-foreground/80"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="currentColor"
+														strokeWidth="2.5"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														aria-hidden="true"
+													>
+														<circle cx="12" cy="12" r="10" />
+														<polyline points="12 6 12 12 16 14" />
+													</svg>
+													<span>{readingTime.text}</span>
+												</div>
+											</>
+										)}
 									</div>
 									<h2 className="font-sans text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
 										{title}

@@ -64,14 +64,20 @@ A design system is only as good as its documentation and ease of use. I invested
 
 ---
 
-## Real-World Rollout: Migrating This Website
+## Real-World Rollout: Ecosystem Adoption
 
-The ultimate test for any design system is integrating it into a production codebase. I recently undertook the task of migrating this website's legacy CSS and component layouts to the new `@kjaniec-dev` packages.
+The ultimate test for any design system is integrating it into production codebases. I recently undertook the task of rolling out this new system across my active web applications, and the results have been extremely satisfying.
 
-The rollout was incredibly satisfying and immediately reduced our local code footprint:
-1. **Cleaning up global CSS:** Over 50% of our local stylesheet was replaced by importing the design system's variables and scrollbar themes directly.
-2. **Deleting redundant wrappers:** Components like `PageHeader` that were previously duplicated in the local source tree were completely deleted. The pages now import these headers directly from the `@kjaniec-dev/ui` npm package, ensuring that any future design changes propagate instantly.
-3. **Elevating UI details:** Leveraging the UI-kit's variables allowed us to add gorgeous hover states (like the custom teal-glowing WebGL card in the Hero section) and robust, accessible focus rings across all links.
+### 1. Migrating This Website
+I migrated this website's legacy CSS and component layouts to the new `@kjaniec-dev` packages:
+* **Cleaning up global CSS:** Over 50% of our local stylesheet was replaced by importing the design system's variables and scrollbar themes directly.
+* **Deleting redundant wrappers:** Components like `PageHeader` that were previously duplicated in the local source tree were completely deleted. The pages now import these headers directly from the `@kjaniec-dev/ui` npm package, ensuring that any future design changes propagate instantly.
+* **Elevating UI details:** Leveraging the UI-kit's variables allowed us to add gorgeous hover states (like the custom teal-glowing WebGL card in the Hero section) and robust, accessible focus rings across all links.
+
+### 2. Upgrading Planning Poker
+In addition to this site, I have successfully migrated my real-time collaborative agile estimation tool, [Planning Poker](https://planning-poker.kjaniec.dev) ([GitHub repository](https://github.com/kjaniec-dev/planning-poker)), to the new system. Swapping out ad-hoc UI structures for the `@kjaniec-dev/ui` package unified the room management screens and the collaborative voting boards under the exact same premium glassmorphic visual language.
+
+Moving forward, all of my future web projects and tools will adopt the `@kjaniec-dev` packages from day one, guaranteeing visual cohesion by default.
 
 ## Looking Forward
 
