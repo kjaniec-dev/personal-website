@@ -1,8 +1,10 @@
 @import "tailwindcss";
 @import "@kjaniec-dev/design/tailwind.css";
+@import "@kjaniec-dev/ui/ui.css";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
 @source "../node_modules/pliny";
+@source "../node_modules/@kjaniec-dev/ui";
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Core theme configuration */
@@ -20,19 +22,6 @@
 	--animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 	--animate-gradient: gradient 8s linear infinite;
 	--animate-glow: glow 2s ease-in-out infinite alternate;
-
-	/* Amber primary scale — matches kj-design amber tokens */
-	--color-primary-50: oklch(0.987 0.022 95.277);
-	--color-primary-100: oklch(0.962 0.059 95.277);
-	--color-primary-200: oklch(0.924 0.12 84.523);
-	--color-primary-300: oklch(0.879 0.169 91.605);
-	--color-primary-400: oklch(0.828 0.189 84.429);
-	--color-primary-500: oklch(0.769 0.188 70.08);
-	--color-primary-600: oklch(0.666 0.179 58.318);
-	--color-primary-700: oklch(0.555 0.163 48.998);
-	--color-primary-800: oklch(0.473 0.137 46.201);
-	--color-primary-900: oklch(0.414 0.112 45.904);
-	--color-primary-950: oklch(0.279 0.077 45.635);
 
 	/* Accent colors for gradients */
 	--color-accent-cyan: oklch(0.79 0.171 192);
@@ -125,30 +114,6 @@
 	}
 	to {
 		box-shadow: 0 0 30px -10px var(--color-primary);
-	}
-}
-
-@keyframes typewriter {
-	from {
-		width: 0;
-	}
-	to {
-		width: 100%;
-	}
-}
-
-@keyframes blink {
-	50% {
-		border-color: transparent;
-	}
-}
-
-@keyframes progressAnimation {
-	from {
-		stroke-dashoffset: 100;
-	}
-	to {
-		stroke-dashoffset: var(--progress-offset, 0);
 	}
 }
 
@@ -335,177 +300,38 @@
 		}
 	}
 
-	/* Gradient text utility */
-	.gradient-text {
-		background: linear-gradient(
-			135deg,
-			var(--color-primary-500) 0%,
-			var(--color-accent-cyan) 50%,
-			var(--color-accent-pink) 100%
-		);
-		background-size: 200% 200%;
-		animation: gradient 8s linear infinite;
-		-webkit-background-clip: text;
-		background-clip: text;
-		-webkit-text-fill-color: transparent;
-		will-change: background-position;
+	/* Skill progress animation back-compatible support */
+	.skill-bar-animation {
+		transform-origin: left;
+		animation: skillBarIn 0.8s ease-out forwards;
+		animation-delay: var(--delay, 0s);
+		transform: scaleX(0);
 	}
 
-	/* Glassmorphism effect */
-	.glass {
-		background: rgba(255, 255, 255, 0.7);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		border: 1px solid rgba(255, 255, 255, 0.2);
+	/* Explicit overrides for library Accordion arbitrary classes in Tailwind v4 */
+	.\[grid-template-rows\:0fr\] {
+		grid-template-rows: 0fr;
 	}
 
-	.dark .glass {
-		background: rgba(15, 23, 42, 0.7);
-		border: 1px solid rgba(255, 255, 255, 0.1);
+	.\[grid-template-rows\:1fr\] {
+		grid-template-rows: 1fr;
 	}
 
-	/* Hover lift effect - optimized for GPU acceleration */
-	.hover-lift {
-		transition:
-			transform 0.3s ease,
-			box-shadow 0.3s ease;
-		will-change: transform;
-	}
-
-	.hover-lift:hover {
-		transform: translateY(-5px) translateZ(0);
+	/* Premium visual active state highlight for opened FAQ accordions */
+	div:has(> button[aria-expanded="true"]) {
+		border-color: var(--color-primary) !important;
 		box-shadow:
-			0 20px 25px -5px rgba(0, 0, 0, 0.1),
-			0 10px 10px -5px rgba(0, 0, 0, 0.04);
+			var(--shadow-kj-md),
+			0 0 15px -5px color-mix(in srgb, var(--color-primary) 30%, transparent) !important;
 	}
 
-	.dark .hover-lift:hover {
-		box-shadow:
-			0 20px 25px -5px rgba(0, 0, 0, 0.4),
-			0 10px 10px -5px rgba(0, 0, 0, 0.2);
-	}
-
-	/* Animated underline */
-	.animated-underline {
-		position: relative;
-		text-decoration: none;
-		display: inline-block;
-	}
-
-	.animated-underline::after {
-		content: "";
-		position: absolute;
-		width: 0;
-		height: 2px;
-		bottom: -2px;
-		left: 0;
-		background: linear-gradient(
-			90deg,
-			var(--color-primary-500),
-			var(--color-accent-cyan)
-		);
-		transition: width 0.3s ease;
-	}
-
-	.animated-underline:hover::after {
-		width: 100%;
-	}
-
-	/* Glow button effect */
-	.glow-button {
-		position: relative;
-		overflow: hidden;
-		transition: all 0.3s ease;
-	}
-
-	.glow-button::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(
-			90deg,
-			transparent,
-			rgba(255, 255, 255, 0.3),
-			transparent
-		);
-		transition: left 0.5s ease;
-	}
-
-	.glow-button:hover::before {
-		left: 100%;
-	}
-
-	/* Gradient border */
-	.gradient-border {
-		position: relative;
-		background: white;
-		z-index: 1;
-	}
-
-	.gradient-border::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		padding: 2px;
-		border-radius: inherit;
-		background: linear-gradient(
-			135deg,
-			var(--color-primary-500),
-			var(--color-accent-cyan)
-		);
-		-webkit-mask:
-			linear-gradient(#fff 0 0) content-box,
-			linear-gradient(#fff 0 0);
-		mask:
-			linear-gradient(#fff 0 0) content-box,
-			linear-gradient(#fff 0 0);
-		-webkit-mask-composite: xor;
-		mask-composite: exclude;
-		z-index: -1;
-	}
-
-	.dark .gradient-border {
-		background: var(--color-gray-950);
-	}
-
-	/* Dot pattern background */
-	.dot-pattern {
-		background-image: radial-gradient(
-			var(--color-gray-300) 1px,
-			transparent 1px
-		);
-		background-size: 20px 20px;
-	}
-
-	.dark .dot-pattern {
-		background-image: radial-gradient(
-			var(--color-gray-700) 1px,
-			transparent 1px
-		);
-	}
-
-	/* Mesh gradient background */
-	.mesh-gradient {
-		background: linear-gradient(
-			135deg,
-			var(--color-primary-50) 0%,
-			transparent 50%,
-			var(--color-accent-cyan) 100%
-		);
-		opacity: 0.1;
-	}
-
-	.dark .mesh-gradient {
-		background: linear-gradient(
-			135deg,
-			var(--color-primary-900) 0%,
-			transparent 50%,
-			var(--color-accent-cyan) 100%
-		);
-		opacity: 0.05;
+	button[aria-expanded="true"] {
+		background-color: color-mix(
+			in srgb,
+			var(--color-primary) 4%,
+			var(--color-card)
+		) !important;
+		color: var(--color-primary) !important;
 	}
 }
 

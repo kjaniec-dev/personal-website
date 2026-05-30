@@ -2,6 +2,7 @@ import { genPageMetadata } from "app/seo";
 import { allAuthors } from "contentlayer/generated";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
 import Card from "@/components/Card";
+import { Progress } from "@/components/ClientUI";
 import Image from "@/components/Image";
 import { components } from "@/components/MDXComponents";
 import PageHeader from "@/components/PageHeader";
@@ -139,17 +140,12 @@ export default function About() {
 											{s.percent}%
 										</span>
 									</div>
-									<div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
-										<div
-											className="h-full origin-left rounded-full bg-primary"
-											style={{
-												width: `${s.percent}%`,
-												animation: "skillBarIn 0.8s ease-out forwards",
-												animationDelay: `${i * 0.07}s`,
-												transform: "scaleX(0)",
-											}}
-										/>
-									</div>
+									<Progress
+										value={s.percent}
+										className="h-1.5"
+										barClassName="skill-bar-animation"
+										style={{ "--delay": `${i * 0.07}s` } as React.CSSProperties}
+									/>
 								</li>
 							))}
 						</ul>

@@ -2,6 +2,7 @@
 
 import { Comments as CommentsComponent } from "pliny/comments";
 import { useState } from "react";
+import { Button } from "@/components/ClientUI";
 import siteMetadata from "@/data/siteMetadata";
 
 export default function Comments({ slug }: { slug: string }) {
@@ -11,14 +12,18 @@ export default function Comments({ slug }: { slug: string }) {
 		return null;
 	}
 	return (
-		<>
+		<div className="flex justify-center py-6">
 			{loadComments ? (
 				<CommentsComponent commentsConfig={siteMetadata.comments} slug={slug} />
 			) : (
-				<button type="button" onClick={() => setLoadComments(true)}>
+				<Button
+					type="button"
+					variant="outline"
+					onClick={() => setLoadComments(true)}
+				>
 					Load Comments
-				</button>
+				</Button>
 			)}
-		</>
+		</div>
 	);
 }

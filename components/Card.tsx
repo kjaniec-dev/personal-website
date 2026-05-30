@@ -1,4 +1,5 @@
 import type { ElementType, ReactNode } from "react";
+import { Card as UICard } from "@/components/ClientUI";
 
 type CardProps = {
 	as?: ElementType;
@@ -9,10 +10,7 @@ type CardProps = {
 	children: ReactNode;
 };
 
-const baseClasses = "rounded-kj-2xl border border-border bg-card shadow-kj-sm";
 const paddedClasses = "p-6 sm:p-8";
-const interactiveClasses =
-	"transition-all duration-300 hover:-translate-y-1 hover:shadow-kj-md";
 const glowClasses = "shadow-kj-lg relative overflow-hidden";
 
 export default function Card({
@@ -24,9 +22,7 @@ export default function Card({
 	children,
 }: CardProps) {
 	const classes = [
-		baseClasses,
 		padded ? paddedClasses : "",
-		interactive ? interactiveClasses : "",
 		glow ? glowClasses : "",
 		className,
 	]
@@ -34,11 +30,11 @@ export default function Card({
 		.join(" ");
 
 	return (
-		<Component className={classes}>
+		<UICard as={Component} interactive={interactive} className={classes}>
 			{glow ? (
 				<div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
 			) : null}
 			{glow ? <div className="relative z-10">{children}</div> : children}
-		</Component>
+		</UICard>
 	);
 }

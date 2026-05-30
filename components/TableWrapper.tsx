@@ -1,9 +1,15 @@
-const TableWrapper = ({ children }) => {
-	return (
-		<div className="w-full overflow-x-auto">
-			<table>{children}</table>
-		</div>
-	);
-};
+"use client";
 
-export default TableWrapper;
+import { Table, TableWrap } from "@/components/ClientUI";
+
+interface TableWrapperProps {
+	children: React.ReactNode;
+}
+
+export default function TableWrapper({ children }: TableWrapperProps) {
+	return (
+		<TableWrap className="my-6 w-full overflow-x-auto">
+			<Table>{children}</Table>
+		</TableWrap>
+	);
+}
