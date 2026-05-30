@@ -34,6 +34,7 @@ export default function About() {
 							width={200}
 							height={200}
 							className="mx-auto rounded-kj-2xl border border-border shadow-kj-sm"
+							priority
 						/>
 					) : null}
 					<div className="space-y-4">

@@ -41,6 +41,7 @@ export default function PostBanner({
 									width={1600}
 									height={900}
 									className="h-64 w-full object-cover sm:h-80 md:h-96"
+									priority
 								/>
 							</div>
 						) : null}
