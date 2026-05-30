@@ -108,9 +108,12 @@ export default function Hero() {
 										<span className="h-3 w-3 rounded-full bg-yellow-500/80"></span>
 										<span className="h-3 w-3 rounded-full bg-green-500/80"></span>
 									</div>
-									<div className="text-xs font-semibold text-muted-foreground font-mono">
-										@kj/design • Activated
-									</div>
+									<Link
+										href="https://ui.kjaniec.dev"
+										className="text-xs font-semibold text-muted-foreground transition-colors hover:text-primary font-mono"
+									>
+										@kjaniec-dev/ui • Active
+									</Link>
 								</div>
 
 								{/* Mock content */}
