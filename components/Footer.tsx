@@ -27,8 +27,8 @@ export default function Footer() {
 	];
 
 	return (
-		<footer className="mt-24 border-t border-border bg-card/30 py-12">
-			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<footer className="mt-24 rounded-kj-2xl border border-border bg-card/30 p-8 sm:p-12 mb-8 shadow-kj-sm">
+			<div className="mx-auto max-w-7xl">
 				<div className="grid gap-10 md:grid-cols-4">
 					{/* Brand column */}
 					<div className="space-y-4">

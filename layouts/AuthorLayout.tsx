@@ -25,16 +25,16 @@ export default function AuthorLayout({ children, content }: Props) {
 		<div className="space-y-12">
 			{/* Header */}
 			<div className="space-y-4">
-				<h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-gray-100">
+				<h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
 					<span className="gradient-text">About Me</span>
 				</h1>
-				<p className="max-w-2xl text-lg text-gray-600 dark:text-gray-400">
+				<p className="max-w-2xl text-lg text-muted-foreground">
 					Get to know me, my background, and what I'm passionate about.
 				</p>
 			</div>
 
 			{/* Profile Card */}
-			<div className="relative overflow-hidden rounded-3xl border border-gray-200/60 bg-white/80 p-8 shadow-xl backdrop-blur-sm dark:border-gray-700/60 dark:bg-gray-900/80">
+			<div className="relative overflow-hidden rounded-kj-2xl border border-border bg-card/80 p-8 shadow-kj-lg backdrop-blur-sm">
 				{/* Decorative gradient */}
 				<div className="from-primary-500/20 to-accent-cyan/20 absolute -top-24 -right-24 h-48 w-48 rounded-full bg-gradient-to-br blur-3xl" />
 
@@ -50,7 +50,7 @@ export default function AuthorLayout({ children, content }: Props) {
 									width={192}
 									height={192}
 									priority={true}
-									className="relative h-48 w-48 rounded-full border-4 border-white object-cover shadow-2xl dark:border-gray-800"
+									className="relative h-48 w-48 rounded-full border-4 border-white object-cover shadow-2xl dark:border-border"
 								/>
 							</div>
 						)}
@@ -58,13 +58,13 @@ export default function AuthorLayout({ children, content }: Props) {
 
 					{/* Info */}
 					<div className="flex-1 text-center xl:text-left">
-						<h2 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+						<h2 className="mb-2 text-3xl font-bold tracking-tight text-foreground">
 							{name}
 						</h2>
 						<p className="text-primary-500 dark:text-primary-400 mb-1 text-lg font-medium">
 							{occupation}
 						</p>
-						<p className="mb-6 text-gray-600 dark:text-gray-400">{company}</p>
+						<p className="mb-6 text-muted-foreground">{company}</p>
 
 						{/* Social Icons */}
 						<div className="flex justify-center gap-4 xl:justify-start">
@@ -114,7 +114,7 @@ export default function AuthorLayout({ children, content }: Props) {
 			</div>
 
 			{/* Bio Content */}
-			<div className="prose dark:prose-invert max-w-none rounded-2xl border border-gray-200/60 bg-white/60 p-8 backdrop-blur-sm dark:border-gray-700/60 dark:bg-gray-900/60">
+			<div className="prose dark:prose-invert max-w-none rounded-kj-2xl border border-border bg-card/60 p-8 backdrop-blur-sm">
 				{children}
 			</div>
 		</div>

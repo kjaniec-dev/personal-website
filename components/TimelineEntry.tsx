@@ -18,7 +18,7 @@ const TimelineEntry = ({
 			<div className="flex h-full w-6 items-center justify-center">
 				<div className="from-primary-500 to-accent-cyan dark:from-primary-400 dark:to-accent-cyan pointer-events-none h-full w-0.5 bg-gradient-to-b"></div>
 			</div>
-			<div className="from-primary-500 to-accent-cyan shadow-primary-500/25 absolute top-4 left-0 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br shadow-lg ring-4 ring-white dark:ring-gray-950">
+			<div className="from-primary-500 to-accent-cyan shadow-primary-500/25 absolute top-4 left-0 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br shadow-lg ring-4 ring-white dark:ring-background">
 				<svg
 					className="h-3 w-3 text-white"
 					fill="currentColor"
@@ -35,11 +35,11 @@ const TimelineEntry = ({
 		</div>
 
 		{/* Content */}
-		<div className="hover:border-primary-200 dark:hover:border-primary-800 col-start-3 col-end-12 mr-auto mb-8 ml-2 w-full rounded-xl border border-gray-200/60 bg-white/60 p-5 shadow-sm backdrop-blur-sm transition-all hover:shadow-md md:ml-4 dark:border-gray-700/60 dark:bg-gray-900/60">
-			<h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-gray-100">
+		<div className="hover:border-primary-200 dark:hover:border-primary-800 col-start-3 col-end-12 mr-auto mb-8 ml-2 w-full rounded-kj-xl border border-border bg-card/60 p-5 shadow-kj-sm backdrop-blur-sm transition-all hover:shadow-kj-md md:ml-4">
+			<h3 className="mb-2 text-lg font-bold text-foreground">
 				{entry.primaryText}
 			</h3>
-			<p className="mb-3 leading-relaxed text-gray-600 dark:text-gray-400">
+			<p className="mb-3 leading-relaxed text-muted-foreground">
 				{entry.secondaryText}
 			</p>
 

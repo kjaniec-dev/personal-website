@@ -169,9 +169,12 @@
 		border-color: var(--color-gray-200, currentColor);
 	}
 
+	/* KBar search input styling */
 	:root input[aria-controls="kbar-listbox"][role="combobox"] {
-		border: 1px solid var(--color-gray-300);
-		border-radius: 0.5rem; /* optional: match your rounded-lg vibe */
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-kj-lg);
+		background-color: var(--color-background);
+		color: var(--color-foreground);
 	}
 
 	:root input[aria-controls="kbar-listbox"][role="combobox"]:focus {
@@ -180,6 +183,19 @@
 		box-shadow: none;
 		--tw-ring-shadow: 0 0 #0000;
 		--tw-ring-offset-shadow: 0 0 #0000;
+	}
+
+	/* KBar Dialog Panel: Override hardcoded pliny styles to match the card theme */
+	div:has(> div > input[aria-controls="kbar-listbox"]) {
+		background-color: var(--color-card) !important;
+		border-color: var(--color-border) !important;
+		border-radius: var(--radius-kj-2xl) !important;
+		box-shadow: var(--shadow-kj-lg) !important;
+	}
+
+	/* Divider lines in search modal */
+	div:has(> div > input[aria-controls="kbar-listbox"]) .border-t {
+		border-color: var(--color-border) !important;
 	}
 
 	/* KBar active item: amber tint instead of solid primary-600 fill */
@@ -192,9 +208,20 @@
 		color: var(--color-primary) !important;
 	}
 
-	/* KBar section headers: teal */
+	/* KBar section headers: secondary color (teal) */
 	#kbar-listbox .text-primary-600 {
 		color: var(--color-secondary) !important;
+	}
+
+	/* Subtitle items */
+	#kbar-listbox .text-gray-400 {
+		color: var(--color-muted-foreground) !important;
+	}
+
+	/* Active item subtitle text color */
+	#kbar-listbox .text-gray-200 {
+		color: var(--color-primary) !important;
+		opacity: 0.8;
 	}
 
 	/* Skill bar animation */
