@@ -10,6 +10,8 @@ import Card from "@/components/Card";
 import { PageHeader } from "@/components/ClientUI";
 import Link from "@/components/Link";
 import Pill from "@/components/Pill";
+import ProjectCard from "@/components/ProjectCard";
+import type { Project } from "@/data/projectsData";
 import siteMetadata from "@/data/siteMetadata";
 
 interface PaginationProps {
@@ -22,6 +24,7 @@ interface ListLayoutProps {
 	title: string;
 	initialDisplayPosts?: CoreContent<Blog>[];
 	pagination?: PaginationProps;
+	projects?: Project[];
 }
 
 function Pagination({ totalPages, currentPage }: PaginationProps) {
@@ -73,6 +76,7 @@ export default function ListLayoutWithTags({
 	title,
 	initialDisplayPosts = [],
 	pagination,
+	projects = [],
 }: ListLayoutProps) {
 	const pathname = usePathname();
 	const tagCounts = tagData as Record<string, number>;
@@ -134,72 +138,102 @@ export default function ListLayoutWithTags({
 					</Card>
 				</aside>
 
-				<section className="space-y-6">
-					{displayPosts.length === 0 ? (
-						<p className="text-muted-foreground">No posts found.</p>
+				<section className="space-y-8">
+					{projects && projects.length > 0 ? (
+						<div className="space-y-4">
+							<h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+								Related Projects ({projects.length})
+							</h3>
+							<div className="grid gap-4 md:grid-cols-2">
+								{projects.map((p) => (
+									<ProjectCard
+										key={p.title}
+										title={p.title}
+										description={p.description}
+										imgSrc={p.imgSrc}
+										href={p.href}
+										repoHref={p.repoHref}
+										tags={p.tags}
+										status={p.status}
+									/>
+								))}
+							</div>
+							<div className="border-b border-border/40 pb-2" />
+						</div>
 					) : null}
-					{displayPosts.map((post) => {
-						const { path, date, title, summary, tags, readingTime } = post;
-						return (
-							<Card key={path} as="article" interactive>
-								<Link href={`/${path}`} className="group block space-y-3">
-									<div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] text-muted-foreground">
-										<time dateTime={date}>
-											{formatDate(date, siteMetadata.locale)}
-										</time>
-										{readingTime && (
-											<>
-												<span>•</span>
-												<div className="flex items-center gap-1">
-													<svg
-														className="h-3 w-3 stroke-muted-foreground/80"
-														viewBox="0 0 24 24"
-														fill="none"
-														stroke="currentColor"
-														strokeWidth="2.5"
-														strokeLinecap="round"
-														strokeLinejoin="round"
-														aria-hidden="true"
-													>
-														<circle cx="12" cy="12" r="10" />
-														<polyline points="12 6 12 12 16 14" />
-													</svg>
-													<span>{readingTime.text}</span>
-												</div>
-											</>
-										)}
-									</div>
-									<h2 className="font-sans text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
-										{title}
-									</h2>
-									{summary ? (
-										<p className="text-sm leading-relaxed text-muted-foreground">
-											{summary}
-										</p>
-									) : null}
-									{tags && tags.length > 0 ? (
-										<div className="flex flex-wrap gap-1.5 pt-1">
-											{tags.map((t) => (
-												<Pill key={t} tone="secondary">
-													{t}
-												</Pill>
-											))}
-										</div>
-									) : null}
-									<div className="pt-2 font-mono text-xs font-semibold text-primary">
-										Read article →
-									</div>
-								</Link>
-							</Card>
-						);
-					})}
 
-					{pagination && pagination.totalPages > 1 ? (
-						<Pagination
-							currentPage={pagination.currentPage}
-							totalPages={pagination.totalPages}
-						/>
-					) : null}
+					<div className="space-y-6">
+						{projects && projects.length > 0 ? (
+							<h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+								Related Posts ({posts.length})
+							</h3>
+						) : null}
+						{displayPosts.length === 0 ? (
+							<p className="text-muted-foreground">No posts found.</p>
+						) : null}
+						{displayPosts.map((post) => {
+							const { path, date, title, summary, tags, readingTime } = post;
+							return (
+								<Card key={path} as="article" interactive>
+									<Link href={`/${path}`} className="group block space-y-3">
+										<div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] text-muted-foreground">
+											<time dateTime={date}>
+												{formatDate(date, siteMetadata.locale)}
+											</time>
+											{readingTime && (
+												<>
+													<span>•</span>
+													<div className="flex items-center gap-1">
+														<svg
+															className="h-3 w-3 stroke-muted-foreground/80"
+															viewBox="0 0 24 24"
+															fill="none"
+															stroke="currentColor"
+															strokeWidth="2.5"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															aria-hidden="true"
+														>
+															<circle cx="12" cy="12" r="10" />
+															<polyline points="12 6 12 12 16 14" />
+														</svg>
+														<span>{readingTime.text}</span>
+													</div>
+												</>
+											)}
+										</div>
+										<h2 className="font-sans text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
+											{title}
+										</h2>
+										{summary ? (
+											<p className="text-sm leading-relaxed text-muted-foreground">
+												{summary}
+											</p>
+										) : null}
+										{tags && tags.length > 0 ? (
+											<div className="flex flex-wrap gap-1.5 pt-1">
+												{tags.map((t) => (
+													<Pill key={t} tone="secondary">
+														{t}
+													</Pill>
+												))}
+											</div>
+										) : null}
+										<div className="pt-2 font-mono text-xs font-semibold text-primary">
+											Read article →
+										</div>
+									</Link>
+								</Card>
+							);
+						})}
+
+						{pagination && pagination.totalPages > 1 ? (
+							<Pagination
+								currentPage={pagination.currentPage}
+								totalPages={pagination.totalPages}
+							/>
+						) : null}
+					</div>
 				</section>
 			</div>
 		</div>
