@@ -144,7 +144,7 @@ export default function Hero() {
 										</div>
 									</div>
 
-									<div className="rounded-kj-lg border border-border bg-background p-4 space-y-2.5 transition-all duration-300 hover:border-primary/40">
+									<div className="rounded-kj-lg border border-border bg-background p-4 space-y-2.5 transition-all duration-300 hover:border-secondary/40">
 										<div className="flex justify-between items-center text-xs font-semibold text-muted-foreground font-mono">
 											<span>RICH FRONTEND &amp; WEBGL</span>
 											<span className="rounded-full bg-secondary/10 px-2 py-0.5 text-[9px] font-bold text-secondary tracking-wider uppercase">
