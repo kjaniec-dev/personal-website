@@ -12,6 +12,14 @@ export interface Project {
 
 const projectsData: Project[] = [
 	{
+		title: "UI Kit & Design System",
+		description: `A premium React + TypeScript component library and token-driven design system. Built as a monorepo containing @kjaniec-dev/design for design tokens and @kjaniec-dev/ui for accessible, interactive components. Configured with Tailwind CSS v4, Storybook previews, and a standalone gallery, powering a cohesive visual language across my personal web projects.`,
+		href: "https://ui.kjaniec.dev",
+		repoHref: "https://github.com/kjaniec-dev/ui-kit",
+		imgSrc: "/static/images/ui-kit.png",
+		tags: ["React", "TypeScript", "Tailwind CSS", "Storybook", "Monorepo"],
+	},
+	{
 		title: "Personal Website",
 		description: `My personal website and portfolio built with Next.js 15, TypeScript, and Tailwind CSS v4.
     Features a modern glassmorphic design, dark mode support, blog with MDX, and optimized performance
