@@ -34,7 +34,7 @@ export default function PostLayout({
 	prev,
 	children,
 }: LayoutProps) {
-	const { filePath, path, slug, date, title, tags } = content;
+	const { filePath, path, slug, date, title, tags, readingTime } = content;
 	const basePath = path.split("/")[0];
 
 	return (
@@ -59,6 +59,12 @@ export default function PostLayout({
 							<time dateTime={date}>
 								{formatDate(date, siteMetadata.locale)}
 							</time>
+							{readingTime && (
+								<>
+									<span>·</span>
+									<span>{readingTime.text}</span>
+								</>
+							)}
 							{authorDetails.map((author) => (
 								<span
 									key={author.name}

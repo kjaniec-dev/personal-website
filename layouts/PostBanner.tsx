@@ -24,7 +24,7 @@ export default function PostBanner({
 	prev,
 	children,
 }: LayoutProps) {
-	const { path, slug, date, title, tags, images } = content;
+	const { path, slug, date, title, tags, images, readingTime } = content;
 	const basePath = path.split("/")[0];
 
 	return (
@@ -56,12 +56,17 @@ export default function PostBanner({
 						<h1 className="font-sans text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
 							{title}
 						</h1>
-						<time
-							dateTime={date}
-							className="block font-mono text-xs text-muted-foreground"
-						>
-							{formatDate(date, siteMetadata.locale)}
-						</time>
+						<div className="flex flex-wrap items-center gap-2 font-mono text-xs text-muted-foreground">
+							<time dateTime={date}>
+								{formatDate(date, siteMetadata.locale)}
+							</time>
+							{readingTime && (
+								<>
+									<span>•</span>
+									<span>{readingTime.text}</span>
+								</>
+							)}
+						</div>
 					</div>
 				</Card>
 
