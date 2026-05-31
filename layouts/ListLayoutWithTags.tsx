@@ -145,7 +145,7 @@ export default function ListLayoutWithTags({
 								Related Projects ({projects.length})
 							</h3>
 							<div className="grid gap-4 md:grid-cols-2">
-								{projects.map((p) => (
+								{projects.map((p, index) => (
 									<ProjectCard
 										key={p.title}
 										title={p.title}
@@ -155,6 +155,7 @@ export default function ListLayoutWithTags({
 										repoHref={p.repoHref}
 										tags={p.tags}
 										status={p.status}
+										priority={index < 2}
 									/>
 								))}
 							</div>

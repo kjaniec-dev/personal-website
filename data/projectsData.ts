@@ -8,6 +8,7 @@ export interface Project {
 	imgSrc?: string;
 	tags?: string[];
 	status?: ProjectStatus;
+	featured?: boolean;
 }
 
 const projectsData: Project[] = [
@@ -28,6 +29,7 @@ const projectsData: Project[] = [
 		repoHref: "https://github.com/kjaniec-dev/personal-website",
 		imgSrc: "/static/images/personal-website.png",
 		tags: ["next-js", "TypeScript", "Tailwind CSS", "MDX"],
+		featured: false,
 	},
 	{
 		title: "Planning Poker",

@@ -25,7 +25,7 @@ export default function Projects() {
 						repoHref={p.repoHref}
 						tags={p.tags}
 						status={p.status}
-						priority={index < 2}
+						priority={index < 4}
 					/>
 				))}
 			</div>
