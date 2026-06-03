@@ -16,15 +16,20 @@ interface ProjectCardProps {
 }
 
 const statusLabel: Record<ProjectStatus, string> = {
-	shipped: "Shipped",
-	"in-progress": "In progress",
-	planned: "Planned",
+	"open-source": "Open Source",
+	"live-saas": "Live SaaS",
+	"client-work": "Client Work",
+	experiment: "Experiment",
 };
 
-const statusTone: Record<ProjectStatus, "secondary" | "primary" | "muted"> = {
-	shipped: "secondary",
-	"in-progress": "primary",
-	planned: "muted",
+const statusTone: Record<
+	ProjectStatus,
+	"secondary" | "success" | "primary" | "muted"
+> = {
+	"open-source": "secondary",
+	"live-saas": "success",
+	"client-work": "primary",
+	experiment: "muted",
 };
 
 export default function ProjectCard({
@@ -34,7 +39,7 @@ export default function ProjectCard({
 	href,
 	repoHref,
 	tags = [],
-	status = "shipped",
+	status = "open-source",
 	priority = false,
 }: ProjectCardProps) {
 	return (

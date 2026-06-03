@@ -159,6 +159,7 @@ export default async function Page(props: {
 				authorDetails={authorDetails}
 				next={next}
 				prev={prev}
+				toc={post.toc}
 			>
 				<MDXLayoutRenderer
 					code={post.body.code}

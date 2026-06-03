@@ -1,7 +1,9 @@
+"use client";
+
 import type { Authors, Blog } from "contentlayer/generated";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
-import type { ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import Card from "@/components/Card";
 import Comments from "@/components/Comments";
 import Image from "@/components/Image";
@@ -11,11 +13,18 @@ import ScrollTopAndComment from "@/components/ScrollTopAndComment";
 import SectionContainer from "@/components/SectionContainer";
 import siteMetadata from "@/data/siteMetadata";
 
+export interface TocItem {
+	value: string;
+	depth: number;
+	url: string;
+}
+
 interface LayoutProps {
 	content: CoreContent<Blog>;
 	authorDetails: CoreContent<Authors>[];
 	next?: { path: string; title: string };
 	prev?: { path: string; title: string };
+	toc?: TocItem[];
 	children: ReactNode;
 }
 
@@ -32,10 +41,40 @@ export default function PostLayout({
 	authorDetails,
 	next,
 	prev,
+	toc = [],
 	children,
 }: LayoutProps) {
 	const { filePath, path, slug, date, title, tags, readingTime } = content;
 	const basePath = path.split("/")[0];
+	const [activeId, setActiveId] = useState<string>("");
+
+	useEffect(() => {
+		if (!toc || toc.length === 0) return;
+
+		const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+			// Find headings that are visible in the viewport, prioritizing the one closest to top
+			const visibleHeadings = entries
+				.filter((entry) => entry.isIntersecting)
+				.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+			if (visibleHeadings.length > 0) {
+				setActiveId(visibleHeadings[0].target.id);
+			}
+		};
+
+		const observer = new IntersectionObserver(handleIntersection, {
+			rootMargin: "-80px 0px -70% 0px", // triggers when heading is in the upper part of screen
+		});
+
+		// Observe all elements that correspond to our TOC URLs
+		toc.forEach((item) => {
+			const id = item.url.replace(/^#/, "");
+			const el = document.getElementById(id);
+			if (el) observer.observe(el);
+		});
+
+		return () => observer.disconnect();
+	}, [toc]);
 
 	return (
 		<SectionContainer>
@@ -89,13 +128,47 @@ export default function PostLayout({
 					</div>
 				</Card>
 
-				<Card
-					as="section"
-					padded
-					className="prose dark:prose-invert max-w-none"
-				>
-					{children}
-				</Card>
+				<div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-8 items-start">
+					<div className="min-w-0 space-y-8 w-full">
+						<Card
+							as="section"
+							padded
+							className="prose dark:prose-invert max-w-none"
+						>
+							{children}
+						</Card>
+					</div>
+
+					{toc && toc.length > 0 ? (
+						<aside className="sticky top-24 hidden lg:block self-start w-full">
+							<Card padded className="space-y-4">
+								<p className="font-mono text-xs font-bold tracking-[0.2em] text-primary uppercase">
+									Spis treści
+								</p>
+								<nav className="space-y-2.5 max-h-[60vh] overflow-y-auto pr-1 scrollbar-thin">
+									{toc.map((item) => {
+										const id = item.url.replace(/^#/, "");
+										const isActive = activeId === id;
+										return (
+											<a
+												key={item.url}
+												href={item.url}
+												className={`block text-xs leading-relaxed transition-all duration-200 hover:text-foreground font-sans ${
+													isActive
+														? "text-primary font-bold translate-x-1"
+														: "text-muted-foreground font-medium hover:translate-x-0.5"
+												}`}
+												style={{ paddingLeft: `${(item.depth - 2) * 12}px` }}
+											>
+												{item.value}
+											</a>
+										);
+									})}
+								</nav>
+							</Card>
+						</aside>
+					) : null}
+				</div>
 
 				<Card padded>
 					<div className="flex flex-wrap items-center justify-between gap-4 text-sm">
