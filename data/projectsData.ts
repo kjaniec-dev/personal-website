@@ -35,6 +35,25 @@ const projectsData: Project[] = [
 		status: "live-saas",
 	},
 	{
+		title: "Glidepath Retirement Simulator",
+		description: `A Monte Carlo retirement simulator that runs thousands of randomized asset-return and inflation paths through custom, age-based equity allocation glidepaths. Features a vectorized NumPy simulation engine (Python) exposed via a FastAPI endpoint, with an interactive React + Recharts frontend showing success statistics, wealth fan bands, and terminal wealth distributions.`,
+		href: "https://glidepath.kjaniec.dev",
+		repoHref: "https://github.com/kjaniec-dev/glidepath",
+		imgSrc: "/static/images/glidepath-dark.png",
+		tags: ["python", "numpy", "react", "fastapi", "docker", "showcase"],
+		status: "open-source",
+	},
+	{
+		title: "VoxPad Voxel Editor",
+		description: `A web-native 3D voxel modeling workspace built with React, Three.js, and React Three Fiber. Allows interactive voxel drawing, painting, erasing, and layer-based scene organization in the browser. Powered by @kjaniec-dev/ui and @kjaniec-dev/design visual components and theme configurations, deployed to Netlify via Vite.`,
+		href: "https://voxpad.kjaniec.dev",
+		repoHref: "https://github.com/kjaniec-dev/voxpad",
+		imgSrc: "/static/images/voxpad.png",
+		tags: ["react", "three-js", "vite", "typescript", "design", "showcase"],
+		status: "open-source",
+		featured: false,
+	},
+	{
 		title: "MUI Greyscale Admin Dashboard",
 		description: `A comprehensive, production-ready admin dashboard template with a minimalist greyscale design. Covers 27 feature domains including CRM, finance, inventory, marketing, and security — all built with React 19, Material UI v9, and Vite 7. Fully open source and ready to use as a starting point for your next internal tool or admin panel.`,
 		href: "https://dashboard.kjaniec.dev",
@@ -42,6 +61,7 @@ const projectsData: Project[] = [
 		imgSrc: "/static/images/mui-dashboard-dark.png",
 		tags: ["react", "typescript", "design", "frontend", "showcase"],
 		status: "open-source",
+		featured: false,
 	},
 	{
 		title: "Cyberpunk Voxel City - Interactive Resume",

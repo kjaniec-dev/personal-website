@@ -1,0 +1,176 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link "kjaniec.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - text: KJ
+      - navigation [ref=e7]:
+        - link "Blog" [ref=e8] [cursor=pointer]:
+          - /url: /blog
+        - link "Tags" [ref=e9] [cursor=pointer]:
+          - /url: /tags
+        - link "Projects" [ref=e10] [cursor=pointer]:
+          - /url: /projects
+        - link "FAQ" [ref=e11] [cursor=pointer]:
+          - /url: /faq
+        - link "About" [ref=e12] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e13]:
+        - button "Search" [ref=e14] [cursor=pointer]:
+          - generic [ref=e15]:
+            - img "Search icon" [ref=e16]
+            - generic [ref=e18]: Search
+            - generic [ref=e19]: CtrlK
+        - link "Porozmawiajmy" [ref=e21] [cursor=pointer]:
+          - /url: mailto:contact@kjaniec.dev
+    - main [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: Continuous Growth
+          - heading "Learning" [level=1] [ref=e28]
+          - paragraph [ref=e29]: Courses and certifications I've completed to stay sharp across the stack.
+        - generic [ref=e30]:
+          - article [ref=e31]:
+            - generic [ref=e33]:
+              - heading "Math for Data Science Masterclass" [level=2] [ref=e34]
+              - paragraph [ref=e35]: Probability, statistics, normal distribution and other concepts used often in data science
+            - link "View certificate →" [ref=e37] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/math-for-data-science-masterclass/
+          - article [ref=e38]:
+            - generic [ref=e40]:
+              - heading "Mathematical Foundations of Machine Learning" [level=2] [ref=e41]
+              - paragraph [ref=e42]: Linear algebra and calculus used in machine learning
+            - link "View certificate →" [ref=e44] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/machine-learning-data-science-foundations-masterclass/
+          - article [ref=e45]:
+            - generic [ref=e47]:
+              - heading "Apache Kafka Series - Learn Apache Kafka for Beginners v3" [level=2] [ref=e48]
+              - paragraph [ref=e49]: Kafka fundamentals
+            - link "View certificate →" [ref=e51] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/apache-kafka/
+          - article [ref=e52]:
+            - generic [ref=e54]:
+              - heading "Deep Learning Academy" [level=2] [ref=e55]
+              - paragraph [ref=e56]: Polish course published in InfoShare Academy. There are two parts - Deep learning basics and Computer Vision
+            - link "View certificate →" [ref=e58] [cursor=pointer]:
+              - /url: https://www.akademiadeeplearning.pl/
+          - article [ref=e59]:
+            - generic [ref=e61]:
+              - heading "The Complete Python Bootcamp From Zero to Hero" [level=2] [ref=e62]
+              - paragraph [ref=e63]: Python language fundamentals
+            - link "View certificate →" [ref=e65] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/complete-python-bootcamp/
+          - article [ref=e66]:
+            - generic [ref=e68]:
+              - heading "The Complete Flutter Development Bootcamp with Dart" [level=2] [ref=e69]
+              - paragraph [ref=e70]: Flutter course, used by me to know the language and framework for my mobile application
+            - link "View certificate →" [ref=e72] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/flutter-bootcamp-with-dart/
+          - article [ref=e73]:
+            - generic [ref=e75]:
+              - 'heading "Affinity Photo: Master Photo Editing in Affinity Photo 2" [level=2] [ref=e76]'
+              - paragraph [ref=e77]: Affinity Photo 2 course - cheaper Photoshop alternative
+            - link "View certificate →" [ref=e79] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/affinity-photo
+          - article [ref=e80]:
+            - generic [ref=e82]:
+              - heading "Docker for Node.js" [level=2] [ref=e83]
+              - paragraph [ref=e84]: Dockerizing node.js app, best practices to do it
+            - link "View certificate →" [ref=e86] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/docker-mastery-for-nodejs
+          - article [ref=e87]:
+            - generic [ref=e89]:
+              - heading "RxJs 101" [level=2] [ref=e90]
+              - paragraph [ref=e91]: Reactive extensions for javascript
+            - link "View certificate →" [ref=e93] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/rxjs-101-course
+          - article [ref=e94]:
+            - generic [ref=e96]:
+              - heading "MobX In Depth With React" [level=2] [ref=e97]
+              - paragraph [ref=e98]: MobX fundamentals, principles and concepts
+            - link "View certificate →" [ref=e100] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/mobx-in-depth-with-react
+          - article [ref=e101]:
+            - generic [ref=e103]:
+              - heading "Progressive Web Apps (PWA) - The Complete Guide" [level=2] [ref=e104]
+              - paragraph [ref=e105]: PWA concepts - app manifest, service workers, caching, push notifications and so on.
+            - link "View certificate →" [ref=e107] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/progressive-web-app-pwa-the-complete-guide
+          - article [ref=e108]:
+            - generic [ref=e110]:
+              - heading "The Complete React Developer Course" [level=2] [ref=e111]
+              - paragraph [ref=e112]: Just React, some Redux and a bit of Firebase
+            - link "View certificate →" [ref=e114] [cursor=pointer]:
+              - /url: https://www.udemy.com/course/react-2nd-edition/
+    - generic [ref=e116]:
+      - generic [ref=e117]:
+        - generic [ref=e118]:
+          - link "KJ" [ref=e119] [cursor=pointer]:
+            - /url: /
+          - paragraph [ref=e120]: Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.
+          - generic [ref=e121]:
+            - link "mail Mail" [ref=e122] [cursor=pointer]:
+              - /url: mailto:contact@kjaniec.dev
+              - generic [ref=e123]: mail
+              - img "Mail" [ref=e124]
+            - link "github GitHub" [ref=e127] [cursor=pointer]:
+              - /url: https://github.com/kjaniec-dev
+              - generic [ref=e128]: github
+              - img "GitHub" [ref=e129]
+            - link "linkedin Linkedin" [ref=e131] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/kjaniec-dev
+              - generic [ref=e132]: linkedin
+              - img "Linkedin" [ref=e133]
+        - generic [ref=e135]:
+          - heading "Navigation" [level=3] [ref=e136]
+          - list [ref=e137]:
+            - listitem [ref=e138]:
+              - link "Home" [ref=e139] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e140]:
+              - link "Blog" [ref=e141] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e142]:
+              - link "Tags" [ref=e143] [cursor=pointer]:
+                - /url: /tags
+            - listitem [ref=e144]:
+              - link "Projects" [ref=e145] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e146]:
+              - link "FAQ" [ref=e147] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=e148]:
+              - link "About" [ref=e149] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e150]:
+          - heading "Services" [level=3] [ref=e151]
+          - list [ref=e152]:
+            - listitem [ref=e153]:
+              - link "Full-Stack Development" [ref=e154] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e155]:
+              - link "System Architecture" [ref=e156] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e157]:
+              - link "Cloud & DevOps" [ref=e158] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e159]:
+              - link "Technical Consulting" [ref=e160] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e161]:
+          - heading "Contact" [level=3] [ref=e162]
+          - list [ref=e163]:
+            - listitem [ref=e164]:
+              - link "contact@kjaniec.dev" [ref=e165] [cursor=pointer]:
+                - /url: mailto:contact@kjaniec.dev
+            - listitem [ref=e166]: Katowice, Polska
+      - generic [ref=e167]:
+        - generic [ref=e168]: © 2026 Krzysztof Janiec. Wszelkie prawa zastrzeżone.
+        - generic [ref=e169]:
+          - text: Built with
+          - link "Tailwind Nextjs Theme" [ref=e170] [cursor=pointer]:
+            - /url: https://github.com/timlrx/tailwind-nextjs-starter-blog
+  - button "Open Next.js Dev Tools" [ref=e176] [cursor=pointer]:
+    - img [ref=e177]

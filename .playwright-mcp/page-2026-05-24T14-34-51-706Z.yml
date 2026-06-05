@@ -1,0 +1,154 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link "kjaniec.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - text: KJ
+      - navigation [ref=e7]:
+        - link "Blog" [ref=e8] [cursor=pointer]:
+          - /url: /blog
+        - link "Tags" [ref=e9] [cursor=pointer]:
+          - /url: /tags
+        - link "Projects" [ref=e10] [cursor=pointer]:
+          - /url: /projects
+        - link "FAQ" [ref=e11] [cursor=pointer]:
+          - /url: /faq
+        - link "About" [ref=e12] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e13]:
+        - button "Search" [ref=e14] [cursor=pointer]:
+          - generic [ref=e15]:
+            - img "Search icon" [ref=e16]
+            - generic [ref=e18]: Search
+            - generic [ref=e19]: CtrlK
+        - link "Let's talk" [ref=e21] [cursor=pointer]:
+          - /url: mailto:contact@kjaniec.dev
+    - main [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: Portfolio
+          - heading "Projects" [level=1] [ref=e28]
+          - paragraph [ref=e29]: A collection of projects I've worked on. Each project represents different challenges and learning experiences.
+        - generic [ref=e30]:
+          - article [ref=e31]:
+            - generic [ref=e35]: Shipped
+            - generic [ref=e36]:
+              - generic [ref=e37]:
+                - generic [ref=e38]: next-js
+                - generic [ref=e39]: TypeScript
+                - generic [ref=e40]: Tailwind CSS
+                - generic [ref=e41]: MDX
+              - heading "Personal Website" [level=3] [ref=e42]
+              - paragraph [ref=e43]: My personal website and portfolio built with Next.js 15, TypeScript, and Tailwind CSS v4. Features a modern glassmorphic design, dark mode support, blog with MDX, and optimized performance with excellent Lighthouse scores. Showcases my work, skills, and thoughts on software development.
+              - generic [ref=e44]:
+                - link "Launch app →" [ref=e45] [cursor=pointer]:
+                  - /url: https://kjaniec.dev
+                - link "View source →" [ref=e46] [cursor=pointer]:
+                  - /url: https://github.com/kjaniec-dev/personal-website
+          - article [ref=e47]:
+            - generic [ref=e51]: Shipped
+            - generic [ref=e52]:
+              - generic [ref=e53]:
+                - generic [ref=e54]: React
+                - generic [ref=e55]: WebSocket
+                - generic [ref=e56]: Real-time
+                - generic [ref=e57]: Agile
+              - heading "Planning Poker" [level=3] [ref=e58]
+              - paragraph [ref=e59]: Real-time collaborative estimation tool for agile teams. Enables remote teams to conduct planning poker sessions with instant vote synchronization, room management, and intuitive card selection. Built with modern web technologies for seamless team collaboration during sprint planning.
+              - generic [ref=e60]:
+                - link "Launch app →" [ref=e61] [cursor=pointer]:
+                  - /url: https://planning-poker.kjaniec.dev
+                - link "View source →" [ref=e62] [cursor=pointer]:
+                  - /url: https://github.com/kjaniec-dev/planning-poker
+          - article [ref=e63]:
+            - generic [ref=e67]: Shipped
+            - generic [ref=e68]:
+              - generic [ref=e69]:
+                - generic [ref=e70]: React
+                - generic [ref=e71]: TypeScript
+                - generic [ref=e72]: Material UI
+                - generic [ref=e73]: Vite
+              - heading "MUI Greyscale Admin Dashboard" [level=3] [ref=e74]
+              - paragraph [ref=e75]: A comprehensive, production-ready admin dashboard template with a minimalist greyscale design. Covers 27 feature domains including CRM, finance, inventory, marketing, and security — all built with React 19, Material UI v9, and Vite 7. Fully open source and ready to use as a starting point for your next internal tool or admin panel.
+              - generic [ref=e76]:
+                - link "Launch app →" [ref=e77] [cursor=pointer]:
+                  - /url: https://dashboard.kjaniec.dev
+                - link "View source →" [ref=e78] [cursor=pointer]:
+                  - /url: https://github.com/kjaniec-dev/mui-greyscale-admin-dashboard
+          - article [ref=e79]:
+            - generic [ref=e83]: Shipped
+            - generic [ref=e84]:
+              - generic [ref=e85]:
+                - generic [ref=e86]: Babylon.js
+                - generic [ref=e87]: WebGL
+                - generic [ref=e88]: TypeScript
+                - generic [ref=e89]: Resume
+              - heading "Cyberpunk Voxel City - Interactive Resume" [level=3] [ref=e90]
+              - paragraph [ref=e91]: An interactive 3D resume disguised as a browser-based game. Explore a sprawling cyberpunk city rendered entirely from voxels, discovering skill boxes that represent technical expertise. Features custom voxel engine with greedy meshing, procedural city generation, dynamic lighting effects, and chunk-based streaming for smooth 60 FPS performance. Think Minecraft meets Blade Runner in your browser.
+              - link "Launch app →" [ref=e93] [cursor=pointer]:
+                - /url: https://3dresume.kjaniec.dev
+    - generic [ref=e96]:
+      - generic [ref=e97]:
+        - link "KJ" [ref=e98] [cursor=pointer]:
+          - /url: /
+        - paragraph [ref=e99]: Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.
+        - generic [ref=e100]:
+          - link "mail Mail" [ref=e101] [cursor=pointer]:
+            - /url: mailto:contact@kjaniec.dev
+            - generic [ref=e102]: mail
+            - img "Mail" [ref=e103]
+          - link "github GitHub" [ref=e106] [cursor=pointer]:
+            - /url: https://github.com/kjaniec-dev
+            - generic [ref=e107]: github
+            - img "GitHub" [ref=e108]
+          - link "linkedin Linkedin" [ref=e110] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/kjaniec-dev
+            - generic [ref=e111]: linkedin
+            - img "Linkedin" [ref=e112]
+      - generic [ref=e114]:
+        - heading "Navigation" [level=3] [ref=e115]
+        - list [ref=e116]:
+          - listitem [ref=e117]:
+            - link "Home" [ref=e118] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e119]:
+            - link "Blog" [ref=e120] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e121]:
+            - link "Tags" [ref=e122] [cursor=pointer]:
+              - /url: /tags
+          - listitem [ref=e123]:
+            - link "Projects" [ref=e124] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e125]:
+            - link "FAQ" [ref=e126] [cursor=pointer]:
+              - /url: /faq
+          - listitem [ref=e127]:
+            - link "About" [ref=e128] [cursor=pointer]:
+              - /url: /about
+      - generic [ref=e129]:
+        - heading "Services" [level=3] [ref=e130]
+        - list [ref=e131]:
+          - listitem [ref=e132]:
+            - link "Full-Stack Development" [ref=e133] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e134]:
+            - link "System Architecture" [ref=e135] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e136]:
+            - link "Cloud & DevOps" [ref=e137] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e138]:
+            - link "Technical Consulting" [ref=e139] [cursor=pointer]:
+              - /url: /about
+      - generic [ref=e140]:
+        - heading "Contact" [level=3] [ref=e141]
+        - list [ref=e142]:
+          - listitem [ref=e143]:
+            - link "contact@kjaniec.dev" [ref=e144] [cursor=pointer]:
+              - /url: mailto:contact@kjaniec.dev
+          - listitem [ref=e145]: Zielona Góra, Poland
+  - button "Open Next.js Dev Tools" [ref=e151] [cursor=pointer]:
+    - img [ref=e152]

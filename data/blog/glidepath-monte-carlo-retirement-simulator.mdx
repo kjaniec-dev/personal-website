@@ -1,0 +1,105 @@
+---
+title: 'Building Glidepath: A Monte Carlo Retirement Simulator'
+date: '2026-06-03T12:00:00Z'
+lastmod: '2026-06-03'
+tags: ['python', 'streamlit', 'numpy', 'retirement', 'finances', 'docker', 'open-source']
+draft: false
+summary: 'An exploration of Glidepath, an open-source Monte Carlo retirement simulator that runs thousands of return/inflation paths through dynamic asset allocation rules to model sequence-of-returns risk.'
+layout: PostSimple
+---
+
+<Image
+	src="/static/images/glidepath-dark.png"
+	alt="Glidepath Monte Carlo Retirement Simulator UI Dark Mode"
+	width={1280}
+	height={800}
+	priority
+/>
+
+## The Problem: The Illusion of Single-Number Financial Planning
+
+Most retirement calculators online suffer from what statisticians call **false precision**. You input your current savings, expected return (e.g., 7%), expected inflation (e.g., 2%), and it spits out a single graph showing your money growing smoothly forever. 
+
+But the real world is chaotic. Markets don't return a steady 7% every year. More importantly, **Sequence-of-Returns Risk** (the risk of experiencing poor returns early in retirement) can completely destroy a portfolio, even if the average return over 30 years matches your target. If you retire right before a market crash, your portfolio shrinks faster due to withdrawals, leaving less principal to recover when the market rebounds.
+
+To build a more honest model for my own financial planning, I built **Glidepath**: a small, open-source Monte Carlo retirement simulator.
+
+* **GitHub Repository:** [github.com/kjaniec-dev/glidepath](https://github.com/kjaniec-dev/glidepath)
+* **Live App:** [glidepath.kjaniec.dev](https://glidepath.kjaniec.dev/)
+
+---
+
+## What Glidepath Models
+
+Glidepath is deliberately kept generic and open-source-safe. Rather than building tax-account wrapper rules specific to one country, it acts as a pure mathematical sandbox:
+
+1. **Two-Asset World:** It models your portfolio as a mix of equities (stocks) and fixed-income (bonds) with correlated nominal returns.
+2. **Dynamic Equity Glidepaths:** A "glidepath" refers to the strategy of adjusting your asset allocation over time—typically sliding from stocks toward bonds as you approach and enter retirement. Glidepath supports:
+   - `linear`: Gradually moving between starting and ending percentages over a set age range.
+   - `age_rule`: Defining equity percentage as `Base - Age` (e.g., `110 - Age`).
+   - `constant`: Static allocation.
+   - `custom`: Fully custom allocation curves.
+3. **Stochastic Inflation:** Inflation is modeled as a random walk, inflating contribution amounts and spending requirements over time, then deflating the final values back to today's purchasing power.
+4. **Sequence-of-Returns Risk:** By running thousands of randomized market paths, it naturally surfaces the probability of portfolio ruin.
+
+---
+
+## Architecture: Core Reuse and Clean Layering
+
+A key goal of the project was separating the simulation mathematics from the presentation layers. The codebase lives in a Python `uv` workspace structured as follows:
+
+```
+glidepath/
+├── packages/
+│   └── core/       # glidepath-core (NumPy simulation engine)
+├── apps/
+│   ├── sim/        # Streamlit interactive dashboard
+│   ├── api/        # FastAPI POST /simulate endpoint
+│   └── web/        # React + Recharts client
+└── notebooks/
+    └── demo.ipynb  # Interactive Jupyter walkthrough
+```
+
+### 1. The NumPy Engine (`packages/core`)
+The simulation engine is built entirely on NumPy. Because retirement simulations are mathematically simple (e.g., 10,000 paths over 65 years), a vectorized NumPy implementation completes the entire simulation run in **~30 milliseconds**. This core package is the single source of truth for the mathematics, allowing it to be tested and shared.
+
+### 2. Streamlit Dashboard (`apps/sim`)
+For local exploration, the Streamlit app offers a reactive dashboard with Plotly charts. You can adjust contributions, spending rates, and glidepath slopes, instantly seeing the percentile bands update.
+
+### 3. FastAPI + React Full Stack (Phase 2)
+In Phase 2, I wrapped the core engine in a stateless FastAPI service exposing a single `POST /simulate` endpoint. I then built a modern React client using **Recharts** for rendering interactive area charts, percentile fan bands, and wealth distribution histograms. The entire stack runs under an Nginx reverse proxy using Docker Compose, removing the need for CORS headers in production.
+
+---
+
+## Quickstart
+
+If you have `uv` installed, you can spin up the interactive simulator locally:
+
+```bash
+# Clone the repository
+git clone https://github.com/kjaniec-dev/glidepath
+cd glidepath
+
+# Sync the monorepo packages
+uv sync --all-packages --all-extras
+
+# Run the unit tests
+uv run pytest
+
+# Launch the Streamlit dashboard
+uv run --package glidepath-sim streamlit run apps/sim/app.py
+```
+
+Or run the full multi-container React + FastAPI stack with Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+---
+
+## Key Takeaway
+
+Building Glidepath reinforced how powerful it is to write the core logic of a simulator in a language with a strong mathematical ecosystem (Python/NumPy) and expose it as a lightweight API. It keeps the frontend clean and fast while ensuring that the underlying science is perfectly testable.
+
+*Disclaimer: Glidepath is an educational tool and does not constitute financial advice.*

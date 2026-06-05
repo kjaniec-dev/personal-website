@@ -1,0 +1,181 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link "kjaniec.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - text: KJ
+      - navigation [ref=e7]:
+        - link "Blog" [ref=e8] [cursor=pointer]:
+          - /url: /blog
+        - link "Tags" [ref=e9] [cursor=pointer]:
+          - /url: /tags
+        - link "Projects" [ref=e10] [cursor=pointer]:
+          - /url: /projects
+        - link "FAQ" [ref=e11] [cursor=pointer]:
+          - /url: /faq
+        - link "About" [ref=e12] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e13]:
+        - button "Search" [ref=e14] [cursor=pointer]:
+          - generic [ref=e15]:
+            - img "Search icon" [ref=e16]
+            - generic [ref=e18]: Search
+            - generic [ref=e19]: CtrlK
+        - link "Porozmawiajmy" [ref=e21] [cursor=pointer]:
+          - /url: mailto:contact@kjaniec.dev
+    - main [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: FAQ
+          - heading "Frequently asked questions" [level=1] [ref=e28]
+          - paragraph [ref=e29]: Common questions about how I work, my preferences, and how to get in touch.
+        - generic [ref=e30]:
+          - heading "Technical Preferences" [level=2] [ref=e31]
+          - generic [ref=e32]:
+            - button "What's your preferred programming language?" [ref=e34]:
+              - generic [ref=e35]: What's your preferred programming language?
+              - img [ref=e36]
+            - button "Frontend or Backend?" [ref=e39]:
+              - generic [ref=e40]: Frontend or Backend?
+              - img [ref=e41]
+            - button "What's your go-to tech stack for a new project?" [ref=e44]:
+              - generic [ref=e45]: What's your go-to tech stack for a new project?
+              - img [ref=e46]
+            - button "Tabs or spaces?" [ref=e49]:
+              - generic [ref=e50]: Tabs or spaces?
+              - img [ref=e51]
+            - button "What IDE do you use?" [ref=e54]:
+              - generic [ref=e55]: What IDE do you use?
+              - img [ref=e56]
+            - button "Do you still learn new things?" [ref=e59]:
+              - generic [ref=e60]: Do you still learn new things?
+              - img [ref=e61]
+            - button "What's your experience with cloud platforms?" [ref=e64]:
+              - generic [ref=e65]: What's your experience with cloud platforms?
+              - img [ref=e66]
+            - button "Which frontend framework/library do you prefer?" [ref=e69]:
+              - generic [ref=e70]: Which frontend framework/library do you prefer?
+              - img [ref=e71]
+        - generic [ref=e73]:
+          - heading "Work & Experience" [level=2] [ref=e74]
+          - generic [ref=e75]:
+            - button "What kind of projects excite you most?" [ref=e77]:
+              - generic [ref=e78]: What kind of projects excite you most?
+              - img [ref=e79]
+            - button "Are you open to freelance or contract work?" [ref=e82]:
+              - generic [ref=e83]: Are you open to freelance or contract work?
+              - img [ref=e84]
+            - button "Remote or on-site preference?" [ref=e87]:
+              - generic [ref=e88]: Remote or on-site preference?
+              - img [ref=e89]
+            - button "How many years of experience do you have?" [ref=e92]:
+              - generic [ref=e93]: How many years of experience do you have?
+              - img [ref=e94]
+            - button "What's your most challenging project to date?" [ref=e97]:
+              - generic [ref=e98]: What's your most challenging project to date?
+              - img [ref=e99]
+            - button "Do you offer technical consulting or code reviews?" [ref=e102]:
+              - generic [ref=e103]: Do you offer technical consulting or code reviews?
+              - img [ref=e104]
+            - button "What's your notice period for new projects?" [ref=e107]:
+              - generic [ref=e108]: What's your notice period for new projects?
+              - img [ref=e109]
+        - generic [ref=e111]:
+          - heading "Personal" [level=2] [ref=e112]
+          - generic [ref=e113]:
+            - button "Why \"kjaniec.dev\"?" [ref=e115]:
+              - generic [ref=e116]: Why "kjaniec.dev"?
+              - img [ref=e117]
+            - button "What do you do outside of coding?" [ref=e120]:
+              - generic [ref=e121]: What do you do outside of coding?
+              - img [ref=e122]
+            - button "Coffee or tea while coding?" [ref=e125]:
+              - generic [ref=e126]: Coffee or tea while coding?
+              - img [ref=e127]
+            - button "What inspired you to become a developer?" [ref=e130]:
+              - generic [ref=e131]: What inspired you to become a developer?
+              - img [ref=e132]
+        - generic [ref=e134]:
+          - heading "Contact & Process" [level=2] [ref=e135]
+          - generic [ref=e136]:
+            - button "How can I reach you?" [ref=e138]:
+              - generic [ref=e139]: How can I reach you?
+              - img [ref=e140]
+            - button "Are you open to collaboration?" [ref=e143]:
+              - generic [ref=e144]: Are you open to collaboration?
+              - img [ref=e145]
+            - button "What timezone do you work in?" [ref=e148]:
+              - generic [ref=e149]: What timezone do you work in?
+              - img [ref=e150]
+    - generic [ref=e153]:
+      - generic [ref=e154]:
+        - generic [ref=e155]:
+          - link "KJ" [ref=e156] [cursor=pointer]:
+            - /url: /
+          - paragraph [ref=e157]: Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.
+          - generic [ref=e158]:
+            - link "mail Mail" [ref=e159] [cursor=pointer]:
+              - /url: mailto:contact@kjaniec.dev
+              - generic [ref=e160]: mail
+              - img "Mail" [ref=e161]
+            - link "github GitHub" [ref=e164] [cursor=pointer]:
+              - /url: https://github.com/kjaniec-dev
+              - generic [ref=e165]: github
+              - img "GitHub" [ref=e166]
+            - link "linkedin Linkedin" [ref=e168] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/kjaniec-dev
+              - generic [ref=e169]: linkedin
+              - img "Linkedin" [ref=e170]
+        - generic [ref=e172]:
+          - heading "Navigation" [level=3] [ref=e173]
+          - list [ref=e174]:
+            - listitem [ref=e175]:
+              - link "Home" [ref=e176] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e177]:
+              - link "Blog" [ref=e178] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e179]:
+              - link "Tags" [ref=e180] [cursor=pointer]:
+                - /url: /tags
+            - listitem [ref=e181]:
+              - link "Projects" [ref=e182] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e183]:
+              - link "FAQ" [ref=e184] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=e185]:
+              - link "About" [ref=e186] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e187]:
+          - heading "Services" [level=3] [ref=e188]
+          - list [ref=e189]:
+            - listitem [ref=e190]:
+              - link "Full-Stack Development" [ref=e191] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e192]:
+              - link "System Architecture" [ref=e193] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e194]:
+              - link "Cloud & DevOps" [ref=e195] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e196]:
+              - link "Technical Consulting" [ref=e197] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e198]:
+          - heading "Contact" [level=3] [ref=e199]
+          - list [ref=e200]:
+            - listitem [ref=e201]:
+              - link "contact@kjaniec.dev" [ref=e202] [cursor=pointer]:
+                - /url: mailto:contact@kjaniec.dev
+            - listitem [ref=e203]: Katowice, Polska
+      - generic [ref=e204]:
+        - generic [ref=e205]: © 2026 Krzysztof Janiec. Wszelkie prawa zastrzeżone.
+        - generic [ref=e206]:
+          - text: Built with
+          - link "Tailwind Nextjs Theme" [ref=e207] [cursor=pointer]:
+            - /url: https://github.com/timlrx/tailwind-nextjs-starter-blog
+  - button "Open Next.js Dev Tools" [ref=e213] [cursor=pointer]:
+    - img [ref=e214]

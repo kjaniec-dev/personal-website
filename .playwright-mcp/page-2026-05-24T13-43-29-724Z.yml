@@ -1,0 +1,355 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link "kjaniec.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - text: KJ
+      - navigation [ref=e7]:
+        - link "Blog" [ref=e8] [cursor=pointer]:
+          - /url: /blog
+        - link "Tags" [ref=e9] [cursor=pointer]:
+          - /url: /tags
+        - link "Projects" [ref=e10] [cursor=pointer]:
+          - /url: /projects
+        - link "FAQ" [ref=e11] [cursor=pointer]:
+          - /url: /faq
+        - link "About" [ref=e12] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e13]:
+        - button "Search" [ref=e14] [cursor=pointer]:
+          - generic [ref=e15]:
+            - img "Search icon" [ref=e16]
+            - generic [ref=e18]: Search
+            - generic [ref=e19]: ⌘K
+        - button "Switch to light mode" [ref=e20]:
+          - img "Sun icon" [ref=e21]
+          - img "Moon icon"
+        - link "Porozmawiajmy" [ref=e23] [cursor=pointer]:
+          - /url: mailto:contact@kjaniec.dev
+    - main [ref=e24]:
+      - article [ref=e26]:
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e31]: development
+            - generic [ref=e32]: productivity
+            - generic [ref=e33]: tools
+          - 'heading "My Daily Claude Code Toolkit: MCPs, Skills, and the Tools That Stick" [level=1] [ref=e34]'
+          - time [ref=e35]: March 23, 2026
+        - generic [ref=e36]:
+          - heading "The right tool for the job" [level=2] [ref=e37]:
+            - img [ref=e39] [cursor=pointer]
+            - text: The right tool for the job
+          - paragraph [ref=e42]:
+            - text: I wrote a post a while back about
+            - link "how to actually use AI for development" [ref=e43] [cursor=pointer]:
+              - /url: /blog/how-to-use-ai-for-development
+            - text: — principles like planning before prompting, managing context windows, and running parallel agents with git worktrees. That post is about mindset and workflow. This one is about the specific tools sitting underneath that workflow.
+          - paragraph [ref=e44]: Not all of these are MCPs. Some are MCP servers — plugins that give Claude access to external capabilities like browser control or live documentation. One is a skills framework that reshapes how Claude approaches the entire development process. They're different kinds of tools but they all live in the same daily workflow.
+          - paragraph [ref=e45]: After months of experimenting, I've settled on five that I use on almost every project. Here's what they are and what I actually use them for.
+          - heading "A quick note on setup" [level=2] [ref=e46]:
+            - img [ref=e48] [cursor=pointer]
+            - text: A quick note on setup
+          - paragraph [ref=e51]:
+            - strong [ref=e52]: MCPs
+            - text: (Model Context Protocol servers) are configured via the CLI (
+            - code [ref=e53]: "`claude mcp add`"
+            - text: ) or directly in
+            - code [ref=e54]: "`~/.claude/settings.json`"
+            - text: . Each runs as a server process Claude communicates with during a session. You can scope them globally or per-project.
+          - paragraph [ref=e55]:
+            - strong [ref=e56]: Skills frameworks
+            - text: like Superpowers work differently — they're installed as plugins and provide skill files (structured markdown documents) that Claude reads and follows automatically. No manual invocation needed; they trigger based on context.
+          - paragraph [ref=e57]: All five tools below are installed globally on my machine.
+          - separator [ref=e58]
+          - heading "Serena — code intelligence through language servers" [level=2] [ref=e59]:
+            - img [ref=e61] [cursor=pointer]
+            - text: Serena — code intelligence through language servers
+          - paragraph [ref=e64]: The most transformative tool in my stack. Serena is an MCP that wraps Language Server Protocol (LSP) — the same underlying technology that powers IDE features like go-to-definition, find-all-references, and symbol search.
+          - paragraph [ref=e65]: "Without Serena, Claude navigates your codebase the way a junior developer navigates an unfamiliar project on their first day: by grep-ing, reading directory listings, and making educated guesses. With Serena, it navigates the way someone who has been working in the codebase for months navigates it: by understanding symbols, types, and call graphs."
+          - heading "What it enables" [level=3] [ref=e66]:
+            - img [ref=e68] [cursor=pointer]
+            - text: What it enables
+          - list [ref=e71]:
+            - listitem [ref=e72]:
+              - strong [ref=e73]: Go to definition
+              - text: — Claude can jump directly to where a function, type, or variable is defined instead of searching for it
+            - listitem [ref=e74]:
+              - strong [ref=e75]: Find all references
+              - text: — instantly find every place a symbol is used across the entire project
+            - listitem [ref=e76]:
+              - strong [ref=e77]: Symbol search
+              - text: — locate any class, function, or type by name without knowing which file it's in
+            - listitem [ref=e78]:
+              - strong [ref=e79]: Hover types
+              - text: — understand what a value actually is at any point in the code
+          - heading "Where I actually use it" [level=3] [ref=e80]:
+            - img [ref=e82] [cursor=pointer]
+            - text: Where I actually use it
+          - paragraph [ref=e85]: The biggest win is cross-file refactors. Say I have a utility function that's been around for two years and I want to rename it or change its signature. With a normal Claude session, finding all the callers involves careful grepping and hoping nothing was missed. With Serena, Claude calls find-references and gets an exhaustive list — files, line numbers, exact call sites — before touching a single line of code.
+          - paragraph [ref=e86]: It also pays dividends on large codebases I don't fully know. When I join a client project and need to understand how a particular API route is wired up — what middleware runs, what services it calls, what types flow through it — Serena lets Claude trace that path accurately rather than piecing it together from file reads.
+          - paragraph [ref=e87]:
+            - text: The setup requires a language server compatible with your project (e.g.,
+            - code [ref=e88]: "`typescript-language-server`"
+            - text: for TypeScript projects,
+            - code [ref=e89]: "`gopls`"
+            - text: for Go). Once configured, it's transparent — Claude just uses it.
+          - separator [ref=e90]
+          - heading "Playwright MCP — Claude controlling a real browser" [level=2] [ref=e91]:
+            - img [ref=e93] [cursor=pointer]
+            - text: Playwright MCP — Claude controlling a real browser
+          - paragraph [ref=e96]: "Playwright MCP is exactly what it sounds like: it gives Claude the ability to drive a real browser. Navigate to a URL, take a screenshot, click buttons, fill in forms, read page content, run JavaScript — all of it."
+          - paragraph [ref=e97]: The official MCP is maintained by Microsoft alongside the Playwright project itself, which means it's well-maintained and keeps pace with Playwright updates.
+          - heading "What it enables" [level=3] [ref=e98]:
+            - img [ref=e100] [cursor=pointer]
+            - text: What it enables
+          - list [ref=e103]:
+            - listitem [ref=e104]:
+              - strong [ref=e105]: Screenshots on demand
+              - text: — Claude can capture a page at any point during a task
+            - listitem [ref=e106]:
+              - strong [ref=e107]: Interaction
+              - text: — click elements, type into inputs, submit forms, navigate between pages
+            - listitem [ref=e108]:
+              - strong [ref=e109]: Page state reading
+              - text: — access the DOM, read text content, check what's visible
+            - listitem [ref=e110]:
+              - strong [ref=e111]: Multi-step flows
+              - text: — execute sequences of actions (log in, navigate to dashboard, verify a value)
+          - heading "Where I actually use it" [level=3] [ref=e112]:
+            - img [ref=e114] [cursor=pointer]
+            - text: Where I actually use it
+          - paragraph [ref=e117]: The most frequent use case for me is visual verification after UI changes. I'll ask Claude to make a CSS adjustment, and instead of me alt-tabbing to a browser to check it, Claude screenshots the page before and after and tells me what changed. This is surprisingly effective for catching regressions — "the spacing on mobile got worse" — without me having to manually inspect every breakpoint.
+          - paragraph [ref=e118]: "The second use case is testing auth flows. When I'm working on an OAuth integration or a login flow, I can ask Claude to walk through the actual user journey: open the page, click sign in, complete the form, verify the redirect. It's not a replacement for proper E2E test suites, but for spot-checking during development it's fast and concrete."
+          - paragraph [ref=e119]: I also use it for quick scraping tasks. Instead of writing a scraper, describing what data I need and pointing Claude at the URL is often enough for one-off data extraction.
+          - paragraph [ref=e120]:
+            - text: "One thing worth knowing: the MCP launches a real browser process (with a"
+            - code [ref=e121]: "`--headed`"
+            - text: option to make it visible). For CI or automated runs you'll want headless mode; for local development, watching Claude click through your app in real time is genuinely useful for spotting UX issues.
+          - separator [ref=e122]
+          - heading "Sequential Thinking — structured reasoning for hard problems" [level=2] [ref=e123]:
+            - img [ref=e125] [cursor=pointer]
+            - text: Sequential Thinking — structured reasoning for hard problems
+          - paragraph [ref=e128]: This one from Anthropic's official MCP servers collection is less about external capabilities and more about how Claude reasons. The Sequential Thinking MCP provides a tool that lets Claude work through problems in explicit, tracked steps — thinking out loud in a structured way rather than jumping to conclusions.
+          - paragraph [ref=e129]: It's particularly useful for problems where the solution space is large, the dependencies between decisions matter, or getting the wrong first step means all subsequent steps are wrong.
+          - heading "What it enables" [level=3] [ref=e130]:
+            - img [ref=e132] [cursor=pointer]
+            - text: What it enables
+          - list [ref=e135]:
+            - listitem [ref=e136]:
+              - strong [ref=e137]: Step-by-step decomposition
+              - text: — Claude breaks a problem into a numbered sequence of reasoning steps before acting
+            - listitem [ref=e138]:
+              - strong [ref=e139]: Revision support
+              - text: — steps can be marked as needing revision; Claude can backtrack and correct earlier reasoning
+            - listitem [ref=e140]:
+              - strong [ref=e141]: Branching thoughts
+              - text: — different solution paths can be explored and compared before committing
+            - listitem [ref=e142]:
+              - strong [ref=e143]: Transparent reasoning
+              - text: — the chain of thought is visible and auditable, not hidden inside a single response
+          - heading "Where I actually use it" [level=3] [ref=e144]:
+            - img [ref=e146] [cursor=pointer]
+            - text: Where I actually use it
+          - paragraph [ref=e149]: Architecture decisions are the main use case. When I'm designing a new data model or choosing between two approaches for a service boundary, I'll explicitly invoke sequential thinking to walk through the trade-offs systematically. Claude stops treating it as a quick judgment call and actually evaluates each option against the constraints.
+          - paragraph [ref=e150]: The other high-value case is debugging complex issues — particularly cascade failures or race conditions where the cause is several layers removed from the symptom. I had a bug recently where a WebSocket client was occasionally missing messages during reconnection. The root cause turned out to be a combination of event handler registration timing and reconnection backoff behavior. With sequential thinking active, Claude worked through the possible failure modes one by one rather than immediately proposing the first fix that came to mind. It found the right cause on the first attempt.
+          - paragraph [ref=e151]: Trigger it explicitly when you know a problem warrants it — "use sequential thinking for this". It adds overhead, so it's worth reserving for problems that genuinely need it rather than applying it automatically across the board.
+          - separator [ref=e152]
+          - heading "Superpowers — a structured development workflow as a skill set" [level=2] [ref=e153]:
+            - img [ref=e155] [cursor=pointer]
+            - text: Superpowers — a structured development workflow as a skill set
+          - paragraph [ref=e158]:
+            - link "Superpowers" [ref=e159] [cursor=pointer]:
+              - /url: https://github.com/obra/superpowers
+            - text: "by Jesse Vincent is unlike the other tools on this list. It's not an MCP — it's a skills framework: a curated collection of structured workflow skills that Claude automatically follows when relevant. Installing it changes how Claude approaches software development at a process level, not just a capability level."
+          - paragraph [ref=e160]: "The core philosophy is four things: test-driven development, systematic processes over intuition, complexity reduction, and evidence-based verification. These aren't suggestions — they're enforced patterns built into the skills."
+          - heading "What it enforces" [level=3] [ref=e161]:
+            - img [ref=e163] [cursor=pointer]
+            - text: What it enforces
+          - paragraph [ref=e166]: "The framework shapes Claude's behaviour across the full development lifecycle:"
+          - list [ref=e167]:
+            - listitem [ref=e168]:
+              - strong [ref=e169]: Design phase
+              - text: — Claude asks clarifying questions before writing a single line, refines requirements through back-and-forth, and presents designs in digestible sections for approval before proceeding
+            - listitem [ref=e170]:
+              - strong [ref=e171]: Planning phase
+              - text: — approved designs get converted into bite-sized implementation tasks (2–5 minutes each), each with specific file paths, complete code context, and verification steps
+            - listitem [ref=e172]:
+              - strong [ref=e173]: Execution phase
+              - text: "— tasks are dispatched to fresh subagents with isolated git worktrees; each subagent gets a two-stage code review on completion: spec compliance first, then code quality"
+            - listitem [ref=e174]:
+              - strong [ref=e175]: TDD enforcement
+              - text: — the RED-GREEN-REFACTOR cycle is mandatory; if tests weren't written before implementation, the code gets deleted and redone correctly
+            - listitem [ref=e176]:
+              - strong [ref=e177]: Debugging methodology
+              - text: — systematic four-phase root cause analysis instead of "try things until something works"
+          - heading "Where I actually use it" [level=3] [ref=e178]:
+            - img [ref=e180] [cursor=pointer]
+            - text: Where I actually use it
+          - paragraph [ref=e183]: The biggest payoff is on non-trivial features where the temptation to just start coding is high. Superpowers forces a design conversation first. That conversation almost always reveals assumptions I hadn't examined — edge cases, integration points, constraints that change the implementation approach. Catching those before writing code is worth a lot.
+          - paragraph [ref=e184]: The planning phase output is also genuinely useful on its own. Even when I end up doing tasks manually rather than through subagents, having bite-sized chunks with explicit verification steps makes progress easier to track and review.
+          - paragraph [ref=e185]: The TDD enforcement is uncomfortable at first if you're not used to writing tests before implementation. After a while it's just how you work, and you notice the gap when it's absent.
+          - paragraph [ref=e186]:
+            - text: Install it via the Claude Code plugin marketplace by searching for "superpowers", or manually by following the instructions in the
+            - link "GitHub repo" [ref=e187] [cursor=pointer]:
+              - /url: https://github.com/obra/superpowers
+            - text: . Once installed, the skills activate automatically — you don't need to invoke them explicitly.
+          - separator [ref=e188]
+          - heading "Context7 — always-fresh library documentation" [level=2] [ref=e189]:
+            - img [ref=e191] [cursor=pointer]
+            - text: Context7 — always-fresh library documentation
+          - paragraph [ref=e194]: "The problem this solves is simple and serious: Claude's training data has a cutoff date. Libraries don't. Next.js is on version 15 with the App Router having changed significantly. Tailwind CSS is on version 4 with a completely different configuration model. React 19 introduced APIs that didn't exist when Claude's training ended."
+          - paragraph [ref=e195]: Without fresh documentation, Claude makes confident-sounding mistakes. It generates code that uses deprecated APIs, misses new patterns, or simply doesn't know about features that exist.
+          - paragraph [ref=e196]: Context7 fixes this by fetching live, up-to-date documentation for any library on demand. When Claude needs to know how something works in a current version, it queries Context7 instead of relying on training data.
+          - heading "What it enables" [level=3] [ref=e197]:
+            - img [ref=e199] [cursor=pointer]
+            - text: What it enables
+          - list [ref=e202]:
+            - listitem [ref=e203]:
+              - strong [ref=e204]: Current API reference
+              - text: — fetch the actual documentation for any library version
+            - listitem [ref=e205]:
+              - strong [ref=e206]: Migration guides
+              - text: — get the official guide for upgrading between major versions
+            - listitem [ref=e207]:
+              - strong [ref=e208]: Example code
+              - text: — pull real, current usage examples from official docs
+            - listitem [ref=e209]:
+              - strong [ref=e210]: On-demand lookup
+              - text: — no configuration needed per-library; just ask about what you need
+          - heading "Where I actually use it" [level=3] [ref=e211]:
+            - img [ref=e213] [cursor=pointer]
+            - text: Where I actually use it
+          - paragraph [ref=e216]: Every time I work with a library that's moved significantly in the last year. This is more often than I'd like — Next.js, Tailwind, shadcn/ui, Drizzle ORM, and Hono have all changed enough that relying on Claude's training data alone produces wrong answers regularly.
+          - paragraph [ref=e217]: "The workflow is simple: when Claude starts generating code that involves a library API I'm not sure is current, I tell it to check Context7 first. It fetches the relevant documentation, then generates code based on that. The difference in accuracy is night and day for fast-moving libraries."
+          - paragraph [ref=e218]: I've also found it valuable when working with internal or less-common libraries that wouldn't have much representation in Claude's training data at all. If the library has public docs, Context7 can fetch them.
+          - paragraph [ref=e219]: "One practical tip: mention the specific version you're targeting (\"use Context7 to check the Next.js 15 docs for this\"). The more specific you are, the more precise the documentation fetch."
+          - separator [ref=e220]
+          - heading "How they work together" [level=2] [ref=e221]:
+            - img [ref=e223] [cursor=pointer]
+            - text: How they work together
+          - paragraph [ref=e226]: "The real value comes when these tools combine in a single workflow. Here's what a realistic session looks like:"
+          - paragraph [ref=e227]: I'm adding a new API route to a Next.js project that's already running in production. The route needs to interface with an existing service layer, follow the project's auth patterns, and use some newer Next.js App Router features I'm less familiar with.
+          - list [ref=e228]:
+            - listitem [ref=e229]:
+              - strong [ref=e230]: Superpowers
+              - text: kicks in first — before any code gets written, Claude asks clarifying questions about the route's requirements, presents the design, and plans the implementation as discrete tasks
+            - listitem [ref=e231]:
+              - strong [ref=e232]: Serena
+              - text: navigates the existing service layer — go-to-definition on the relevant interfaces, find-references to understand how similar routes consume them
+            - listitem [ref=e233]:
+              - strong [ref=e234]: Context7
+              - text: fetches the Next.js 15 documentation for Route Handlers and the caching behaviour I need to configure correctly
+            - listitem [ref=e235]:
+              - strong [ref=e236]: Sequential Thinking
+              - text: works through edge cases — auth failure paths, caching invalidation, error response shapes
+            - listitem [ref=e237]:
+              - strong [ref=e238]: Playwright MCP
+              - text: verifies the finished route in a real browser — actually hits the endpoint, checks the response, confirms the auth middleware is behaving correctly
+          - paragraph [ref=e239]: None of these tools is doing something I couldn't do manually with enough effort. What they do is compress the time between "starting a task" and "having something correct" by removing friction at each step.
+          - separator [ref=e240]
+          - heading "Final thoughts" [level=2] [ref=e241]:
+            - img [ref=e243] [cursor=pointer]
+            - text: Final thoughts
+          - paragraph [ref=e246]: "These five tools are daily drivers, not experiments. Each one addresses a real gap:"
+          - list [ref=e247]:
+            - listitem [ref=e248]:
+              - strong [ref=e249]: Serena
+              - text: removes navigational guesswork in large codebases
+            - listitem [ref=e250]:
+              - strong [ref=e251]: Playwright MCP
+              - text: makes visual and E2E verification fast
+            - listitem [ref=e252]:
+              - strong [ref=e253]: Sequential Thinking
+              - text: improves reasoning on hard problems
+            - listitem [ref=e254]:
+              - strong [ref=e255]: Superpowers
+              - text: enforces a disciplined development process end-to-end
+            - listitem [ref=e256]:
+              - strong [ref=e257]: Context7
+              - text: keeps library documentation current
+          - paragraph [ref=e258]: If you're new to extending Claude Code, start with Context7 — it has the most immediate impact. Then Serena if you work in large codebases. Superpowers if you want your whole development process to tighten up.
+          - paragraph [ref=e259]: If you've got tools in your own Claude Code setup that aren't on this list, I'd genuinely like to hear about them.
+        - generic [ref=e261]:
+          - 'link "← Previous How to Actually Use AI for Development: A Practical Guide" [ref=e262] [cursor=pointer]':
+            - /url: /blog/how-to-use-ai-for-development
+            - generic [ref=e263]: ← Previous
+            - generic [ref=e264]: "How to Actually Use AI for Development: A Practical Guide"
+          - 'link "Next → Modernizing My Workflow: Migrating to Bun and Biome" [ref=e265] [cursor=pointer]':
+            - /url: /blog/migrating-to-bun-and-biome
+            - generic [ref=e266]: Next →
+            - generic [ref=e267]: "Modernizing My Workflow: Migrating to Bun and Biome"
+        - link "← Back to the blog" [ref=e269] [cursor=pointer]:
+          - /url: /blog
+    - generic [ref=e271]:
+      - generic [ref=e272]:
+        - generic [ref=e273]:
+          - link "KJ" [ref=e274] [cursor=pointer]:
+            - /url: /
+          - paragraph [ref=e275]: Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.
+          - generic [ref=e276]:
+            - link "mail Mail" [ref=e277] [cursor=pointer]:
+              - /url: mailto:contact@kjaniec.dev
+              - generic [ref=e278]: mail
+              - img "Mail" [ref=e279]
+            - link "github GitHub" [ref=e282] [cursor=pointer]:
+              - /url: https://github.com/kjaniec-dev
+              - generic [ref=e283]: github
+              - img "GitHub" [ref=e284]
+            - link "linkedin Linkedin" [ref=e286] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/kjaniec-dev
+              - generic [ref=e287]: linkedin
+              - img "Linkedin" [ref=e288]
+        - generic [ref=e290]:
+          - heading "Navigation" [level=3] [ref=e291]
+          - list [ref=e292]:
+            - listitem [ref=e293]:
+              - link "Home" [ref=e294] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e295]:
+              - link "Blog" [ref=e296] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e297]:
+              - link "Tags" [ref=e298] [cursor=pointer]:
+                - /url: /tags
+            - listitem [ref=e299]:
+              - link "Projects" [ref=e300] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e301]:
+              - link "FAQ" [ref=e302] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=e303]:
+              - link "About" [ref=e304] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e305]:
+          - heading "Services" [level=3] [ref=e306]
+          - list [ref=e307]:
+            - listitem [ref=e308]:
+              - link "Full-Stack Development" [ref=e309] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e310]:
+              - link "System Architecture" [ref=e311] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e312]:
+              - link "Cloud & DevOps" [ref=e313] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e314]:
+              - link "Technical Consulting" [ref=e315] [cursor=pointer]:
+                - /url: /about
+        - generic [ref=e316]:
+          - heading "Contact" [level=3] [ref=e317]
+          - list [ref=e318]:
+            - listitem [ref=e319]:
+              - link "contact@kjaniec.dev" [ref=e320] [cursor=pointer]:
+                - /url: mailto:contact@kjaniec.dev
+            - listitem [ref=e321]: Katowice, Polska
+      - generic [ref=e322]:
+        - generic [ref=e323]: © 2026 Krzysztof Janiec. Wszelkie prawa zastrzeżone.
+        - generic [ref=e324]:
+          - text: Built with
+          - link "Tailwind Nextjs Theme" [ref=e325] [cursor=pointer]:
+            - /url: https://github.com/timlrx/tailwind-nextjs-starter-blog
+  - button "Open Next.js Dev Tools" [ref=e331] [cursor=pointer]:
+    - img [ref=e332]
+  - alert [ref=e335]

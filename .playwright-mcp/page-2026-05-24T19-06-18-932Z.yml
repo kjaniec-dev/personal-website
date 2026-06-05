@@ -1,0 +1,212 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link "kjaniec.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - text: KJ
+      - navigation [ref=e7]:
+        - link "Blog" [ref=e8] [cursor=pointer]:
+          - /url: /blog
+        - link "Tags" [ref=e9] [cursor=pointer]:
+          - /url: /tags
+        - link "Projects" [ref=e10] [cursor=pointer]:
+          - /url: /projects
+        - link "FAQ" [ref=e11] [cursor=pointer]:
+          - /url: /faq
+        - link "About" [ref=e12] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e13]:
+        - button "Search" [ref=e14] [cursor=pointer]:
+          - generic [ref=e15]:
+            - img "Search icon" [ref=e16]
+            - generic [ref=e18]: Search
+            - generic [ref=e19]: CtrlK
+        - link "Let's talk" [ref=e21] [cursor=pointer]:
+          - /url: mailto:contact@kjaniec.dev
+    - main [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: About
+          - heading "Hi, I'm Krzysztof Janiec" [level=1] [ref=e28]
+          - paragraph [ref=e29]: Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.
+        - generic [ref=e32]:
+          - img "Krzysztof (Christopher) Janiec" [ref=e33]
+          - generic [ref=e34]:
+            - paragraph [ref=e35]: Fullstack Developer at Krzysztof Janiec kjaniec.dev.
+            - generic [ref=e36]:
+              - generic [ref=e37]:
+                - generic [ref=e38]: 12+
+                - generic [ref=e39]: Years experience
+              - generic [ref=e40]:
+                - generic [ref=e41]: ∞
+                - generic [ref=e42]: Always learning
+              - generic [ref=e43]:
+                - generic [ref=e44]: 100%
+                - generic [ref=e45]: Commitment
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - paragraph [ref=e48]: Experience
+            - heading "Where I've worked" [level=2] [ref=e49]
+          - generic [ref=e50]:
+            - generic [ref=e52]:
+              - paragraph [ref=e53]: 2024 - Present
+              - heading "AMB Software IT Services Sp. z o.o / REWE Digital Poland Sp. z o.o." [level=3] [ref=e54]
+              - generic [ref=e55]:
+                - generic [ref=e56]: Java
+                - generic [ref=e57]: Typescript
+                - generic [ref=e58]: Spring Boot
+                - generic [ref=e59]: Angular
+                - generic [ref=e60]: DB2
+                - generic [ref=e61]: Kafka
+                - generic [ref=e62]: Keycloak
+                - generic [ref=e63]: Docker
+                - generic [ref=e64]: Kubernetes
+            - generic [ref=e66]:
+              - paragraph [ref=e67]: 2019 - 2024
+              - heading "Biot Sp. z o.o" [level=3] [ref=e68]
+              - generic [ref=e69]:
+                - generic [ref=e70]: Typescript
+                - generic [ref=e71]: Node.JS
+                - generic [ref=e72]: Express.JS
+                - generic [ref=e73]: Nest.JS
+                - generic [ref=e74]: React
+                - generic [ref=e75]: GRPC
+                - generic [ref=e76]: PostgreSQL
+                - generic [ref=e77]: RabbitMQ
+                - generic [ref=e78]: Redis
+                - generic [ref=e79]: ElasticSearch
+                - generic [ref=e80]: Material.UI
+                - generic [ref=e81]: Mapbox.GL
+                - generic [ref=e82]: Deck.GL
+                - generic [ref=e83]: Docker
+                - generic [ref=e84]: Kubernetes
+              - link "biotcloud →" [ref=e85] [cursor=pointer]:
+                - /url: https://biotcloud.com
+            - generic [ref=e87]:
+              - paragraph [ref=e88]: 2015 - 2019
+              - heading "Cinkciarz.pl" [level=3] [ref=e89]
+              - generic [ref=e90]:
+                - generic [ref=e91]: Java
+                - generic [ref=e92]: Spring Boot
+                - generic [ref=e93]: Typescript
+                - generic [ref=e94]: Angular
+                - generic [ref=e95]: PostgreSQL
+                - generic [ref=e96]: Bootstrap
+                - generic [ref=e97]: Docker
+            - generic [ref=e99]:
+              - paragraph [ref=e100]: 2013 - 2015
+              - heading "Trax S.A. / Icomp Sp. z o.o." [level=3] [ref=e101]
+              - generic [ref=e102]:
+                - generic [ref=e103]: Infor Syteline
+                - generic [ref=e104]: Visual Basic
+                - generic [ref=e105]: T-SQL
+        - generic [ref=e106]:
+          - generic [ref=e108]:
+            - paragraph [ref=e109]: Education
+            - list [ref=e110]:
+              - listitem [ref=e111]:
+                - paragraph [ref=e112]: Second cycle of studies - Computer Science
+                - paragraph [ref=e113]: University of Zielona Góra, 2012 - 2014
+              - listitem [ref=e114]:
+                - paragraph [ref=e115]: First cycle of studies - Computer Science
+                - paragraph [ref=e116]: University of Zielona Góra, 2007 - 2011
+          - generic [ref=e118]:
+            - paragraph [ref=e119]: Skills
+            - list [ref=e120]:
+              - listitem [ref=e121]:
+                - generic [ref=e122]:
+                  - generic [ref=e123]: Java
+                  - generic [ref=e124]: 90%
+              - listitem [ref=e127]:
+                - generic [ref=e128]:
+                  - generic [ref=e129]: Typescript
+                  - generic [ref=e130]: 90%
+              - listitem [ref=e132]:
+                - generic [ref=e133]:
+                  - generic [ref=e134]: Spring Boot
+                  - generic [ref=e135]: 85%
+              - listitem [ref=e137]:
+                - generic [ref=e138]:
+                  - generic [ref=e139]: Node.JS
+                  - generic [ref=e140]: 90%
+              - listitem [ref=e142]:
+                - generic [ref=e143]:
+                  - generic [ref=e144]: PostgreSQL
+                  - generic [ref=e145]: 90%
+              - listitem [ref=e147]:
+                - generic [ref=e148]:
+                  - generic [ref=e149]: React
+                  - generic [ref=e150]: 95%
+              - listitem [ref=e152]:
+                - generic [ref=e153]:
+                  - generic [ref=e154]: Angular
+                  - generic [ref=e155]: 85%
+              - listitem [ref=e157]:
+                - generic [ref=e158]:
+                  - generic [ref=e159]: Docker
+                  - generic [ref=e160]: 90%
+    - generic [ref=e164]:
+      - generic [ref=e165]:
+        - link "KJ" [ref=e166] [cursor=pointer]:
+          - /url: /
+        - paragraph [ref=e167]: Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.
+        - generic [ref=e168]:
+          - link "mail Mail" [ref=e169] [cursor=pointer]:
+            - /url: mailto:contact@kjaniec.dev
+            - generic [ref=e170]: mail
+            - img "Mail" [ref=e171]
+          - link "github GitHub" [ref=e174] [cursor=pointer]:
+            - /url: https://github.com/kjaniec-dev
+            - generic [ref=e175]: github
+            - img "GitHub" [ref=e176]
+          - link "linkedin Linkedin" [ref=e178] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/kjaniec-dev
+            - generic [ref=e179]: linkedin
+            - img "Linkedin" [ref=e180]
+      - generic [ref=e182]:
+        - heading "Navigation" [level=3] [ref=e183]
+        - list [ref=e184]:
+          - listitem [ref=e185]:
+            - link "Home" [ref=e186] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e187]:
+            - link "Blog" [ref=e188] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e189]:
+            - link "Tags" [ref=e190] [cursor=pointer]:
+              - /url: /tags
+          - listitem [ref=e191]:
+            - link "Projects" [ref=e192] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e193]:
+            - link "FAQ" [ref=e194] [cursor=pointer]:
+              - /url: /faq
+          - listitem [ref=e195]:
+            - link "About" [ref=e196] [cursor=pointer]:
+              - /url: /about
+      - generic [ref=e197]:
+        - heading "Services" [level=3] [ref=e198]
+        - list [ref=e199]:
+          - listitem [ref=e200]:
+            - link "Full-Stack Development" [ref=e201] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e202]:
+            - link "System Architecture" [ref=e203] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e204]:
+            - link "Cloud & DevOps" [ref=e205] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e206]:
+            - link "Technical Consulting" [ref=e207] [cursor=pointer]:
+              - /url: /about
+      - generic [ref=e208]:
+        - heading "Contact" [level=3] [ref=e209]
+        - list [ref=e210]:
+          - listitem [ref=e211]:
+            - link "contact@kjaniec.dev" [ref=e212] [cursor=pointer]:
+              - /url: mailto:contact@kjaniec.dev
+          - listitem [ref=e213]: Zielona Góra, Poland
+  - button "Open Next.js Dev Tools" [ref=e219] [cursor=pointer]:
+    - img [ref=e220]
