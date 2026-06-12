@@ -12,7 +12,7 @@ const ThemeSwitch = () => {
 
 	if (!mounted) {
 		return (
-			<div className="h-9 w-9 rounded-kj-md border border-border bg-card/50" />
+			<div className="h-9 w-9 rounded-kj-md border border-border bg-surface/50" />
 		);
 	}
 
@@ -27,7 +27,7 @@ const ThemeSwitch = () => {
 			type="button"
 			onClick={toggleTheme}
 			aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
-			className="group relative inline-flex h-9 w-9 items-center justify-center rounded-kj-md border border-border bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:shadow-kj-sm"
+			className="group relative inline-flex h-9 w-9 items-center justify-center rounded-kj-md border border-border bg-surface/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:shadow-kj-sm"
 		>
 			{/* Sun icon (visible in dark mode) */}
 			<svg

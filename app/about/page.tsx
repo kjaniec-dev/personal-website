@@ -2,11 +2,10 @@ import { genPageMetadata } from "app/seo";
 import { allAuthors } from "contentlayer/generated";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
 import Card from "@/components/Card";
-import { PageHeader } from "@/components/ClientUI";
+import { MetricCard, PageHeader } from "@/components/ClientUI";
 import Image from "@/components/Image";
 import { components } from "@/components/MDXComponents";
 import Pill from "@/components/Pill";
-import StatBadge from "@/components/StatBadge";
 import educationData from "@/data/educationData";
 import experienceData from "@/data/experienceData";
 import siteMetadata from "@/data/siteMetadata";
@@ -47,13 +46,9 @@ export default function About() {
 							</p>
 						</div>
 						<div className="grid grid-cols-3 gap-4 pt-3 border-t border-border/40">
-							<StatBadge value="12+" label="Years of Exp." />
-							<StatBadge
-								value="B2B"
-								label="Contract Model"
-								accent="secondary"
-							/>
-							<StatBadge value="100%" label="Remote Focus" />
+							<MetricCard title="Years of Exp." value="12+" />
+							<MetricCard title="Contract Model" value="B2B" />
+							<MetricCard title="Remote Focus" value="100%" />
 						</div>
 					</div>
 				</div>
@@ -228,10 +223,10 @@ export default function About() {
 										.map((s) => (
 											<div
 												key={s.title}
-												className="group flex items-center gap-2 rounded-kj-xl border border-border/80 bg-card/40 px-3 py-1.5 text-sm font-sans text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/30 hover:text-foreground hover:shadow-kj-sm"
+												className="group flex items-center gap-2 rounded-kj-xl border border-border/80 bg-surface/40 px-3 py-1.5 text-sm font-sans text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/30 hover:text-foreground hover:shadow-kj-sm"
 											>
 												<span>{s.title}</span>
-												<span className="rounded-kj-md bg-muted px-2 py-0.5 font-mono text-[10px] font-bold text-muted-foreground group-hover:bg-border transition-colors">
+												<span className="rounded-kj-md bg-subtle px-2 py-0.5 font-mono text-[10px] font-bold text-muted-foreground group-hover:bg-border transition-colors">
 													{s.years}
 												</span>
 											</div>

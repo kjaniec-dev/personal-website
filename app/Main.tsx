@@ -165,9 +165,9 @@ export default function Home() {
 						<Link
 							key={item.title}
 							href={item.href}
-							className={`group block rounded-kj-xl border border-border bg-card p-6 shadow-kj-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-kj-md font-sans ${item.hoverColor}`}
+							className={`group block rounded-kj-xl border border-border bg-surface p-6 shadow-kj-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-kj-md font-sans ${item.hoverColor}`}
 						>
-							<div className="mb-4 rounded-kj-lg bg-background p-2.5 w-fit border border-border transition-colors duration-300 group-hover:border-current">
+							<div className="mb-4 rounded-kj-lg bg-subtle p-2.5 w-fit border border-border transition-colors duration-300 group-hover:border-current">
 								{item.icon}
 							</div>
 							<h3
@@ -223,7 +223,7 @@ export default function Home() {
 						.map((project) => (
 							<div
 								key={project.title}
-								className="group relative flex flex-col justify-between rounded-kj-2xl border border-border bg-card p-6 shadow-kj-sm transition-all duration-300 hover:shadow-kj-md hover:-translate-y-1"
+								className="group relative flex flex-col justify-between rounded-kj-2xl border border-border bg-surface p-6 shadow-kj-sm transition-all duration-300 hover:shadow-kj-md hover:-translate-y-1"
 							>
 								<div className="space-y-4">
 									<div className="flex flex-wrap gap-1.5">
@@ -293,7 +293,7 @@ export default function Home() {
 			</section>
 
 			{/* Contact CTA Section */}
-			<section className="my-16 rounded-kj-2xl border border-border bg-card p-8 text-center shadow-kj-lg relative overflow-hidden">
+			<section className="my-16 rounded-kj-2xl border border-border bg-surface p-8 text-center shadow-kj-lg relative overflow-hidden">
 				{/* Background mesh glow */}
 				<div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
 
@@ -337,7 +337,7 @@ export default function Home() {
 						{siteMetadata.linkedin && (
 							<Link
 								href={siteMetadata.linkedin}
-								className="inline-flex items-center gap-2 rounded-kj-lg border border-border bg-background hover:bg-muted px-6 py-3 font-semibold text-foreground shadow-kj-sm transition-all"
+								className="inline-flex items-center gap-2 rounded-kj-lg border border-border bg-subtle hover:bg-surface px-6 py-3 font-semibold text-foreground shadow-kj-sm transition-all"
 							>
 								<svg
 									className="h-4 w-4"

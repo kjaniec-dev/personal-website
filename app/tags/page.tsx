@@ -30,7 +30,7 @@ export default async function Page() {
 						<li key={t}>
 							<Link
 								href={`/tags/${slug(t)}`}
-								className="group flex items-center justify-between rounded-kj-xl border border-border bg-card px-4 py-3 shadow-kj-sm transition-all hover:-translate-y-0.5 hover:shadow-kj-md"
+								className="group flex items-center justify-between rounded-kj-xl border border-border bg-surface px-4 py-3 shadow-kj-sm transition-all hover:-translate-y-0.5 hover:shadow-kj-md"
 								aria-label={`View posts tagged ${t}`}
 							>
 								<span className="font-sans text-sm font-semibold text-foreground transition-colors group-hover:text-primary">

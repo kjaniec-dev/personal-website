@@ -141,7 +141,7 @@ export default function RootLayout({
 				content="width=device-width, initial-scale=1, viewport-fit=cover"
 			/>
 			<meta httpEquiv="x-ua-compatible" content="ie=edge" />
-			<body className="relative min-h-screen bg-background pl-[calc(100vw-100%)] text-foreground antialiased">
+			<body className="relative min-h-screen bg-canvas pl-[calc(100vw-100%)] text-foreground antialiased">
 				{/* Skip to main content link for accessibility */}
 				<a
 					href="#main-content"

@@ -41,7 +41,7 @@ const SearchButton = () => {
 	}, []);
 
 	const SearchContent = () => (
-		<div className="group relative inline-flex h-9 items-center gap-1.5 sm:gap-2 rounded-kj-lg border border-border bg-card/50 px-2.5 sm:px-3.5 xl:px-4 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:shadow-kj-sm">
+		<div className="group relative inline-flex h-9 items-center gap-1.5 sm:gap-2 rounded-kj-lg border border-border bg-surface/50 px-2.5 sm:px-3.5 xl:px-4 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:shadow-kj-sm">
 			{/* Search icon */}
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ const SearchButton = () => {
 			</span>
 
 			{/* Keyboard shortcut */}
-			<kbd className="hidden items-center gap-0.5 rounded-kj-sm border border-border bg-card px-1.5 py-0.5 font-mono text-xs font-medium text-muted-foreground shadow-sm transition-all duration-300 group-hover:border-primary/30 group-hover:text-primary xl:inline-flex">
+			<kbd className="hidden items-center gap-0.5 rounded-kj-sm border border-border bg-subtle px-1.5 py-0.5 font-mono text-xs font-medium text-muted-foreground shadow-sm transition-all duration-300 group-hover:border-primary/30 group-hover:text-primary xl:inline-flex">
 				{isMac ? "⌘" : "Ctrl"}K
 			</kbd>
 		</div>

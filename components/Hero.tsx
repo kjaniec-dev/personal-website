@@ -20,7 +20,7 @@ export default function Hero() {
 						{/* Left Column - Positioning and CTAs */}
 						<div className="space-y-8 lg:col-span-6 xl:col-span-7">
 							{/* Status Badge */}
-							<div className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card/60 px-3.5 py-1.5 shadow-kj-xs backdrop-blur-sm">
+							<div className="inline-flex items-center gap-2.5 rounded-full border border-border bg-surface/60 px-3.5 py-1.5 shadow-kj-xs backdrop-blur-sm">
 								<span className="relative flex h-2 w-2">
 									<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
 									<span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
@@ -77,7 +77,7 @@ export default function Hero() {
 
 								<Link
 									href="/blog"
-									className="group inline-flex items-center justify-center gap-2 rounded-kj-lg border border-border bg-card hover:bg-muted px-6 py-3.5 font-semibold text-foreground shadow-kj-sm transition-all duration-300 hover:-translate-y-0.5"
+									className="group inline-flex items-center justify-center gap-2 rounded-kj-lg border border-border bg-surface hover:bg-subtle px-6 py-3.5 font-semibold text-foreground shadow-kj-sm transition-all duration-300 hover:-translate-y-0.5"
 								>
 									<span>Read My Insights</span>
 									<svg
@@ -100,7 +100,7 @@ export default function Hero() {
 
 						{/* Right Column - Premium SaaS / Code sandbox Widget */}
 						<div className="hero-description-reveal lg:col-span-6 xl:col-span-5 max-w-xl lg:max-w-none mx-auto w-full">
-							<div className="relative rounded-kj-2xl border border-border bg-card p-6 shadow-kj-lg backdrop-blur-md">
+							<div className="relative rounded-kj-2xl border border-border bg-surface p-6 shadow-kj-lg backdrop-blur-md">
 								{/* Card browser header */}
 								<div className="flex items-center justify-between border-b border-border pb-4 mb-5">
 									<div className="flex gap-1.5">
@@ -118,7 +118,7 @@ export default function Hero() {
 
 								{/* Mock content */}
 								<div className="space-y-5">
-									<div className="rounded-kj-lg border border-border bg-background p-4 space-y-2.5 transition-all duration-300 hover:border-primary/40">
+									<div className="rounded-kj-lg border border-border bg-subtle p-4 space-y-2.5 transition-all duration-300 hover:border-primary/40">
 										<div className="flex justify-between items-center text-xs font-semibold text-muted-foreground font-mono">
 											<span>BACKEND ARCHITECTURE</span>
 											<span className="rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-bold text-primary tracking-wider uppercase">
@@ -147,7 +147,7 @@ export default function Hero() {
 										</div>
 									</div>
 
-									<div className="rounded-kj-lg border border-border bg-background p-4 space-y-2.5 transition-all duration-300 hover:border-secondary/40">
+									<div className="rounded-kj-lg border border-border bg-subtle p-4 space-y-2.5 transition-all duration-300 hover:border-secondary/40">
 										<div className="flex justify-between items-center text-xs font-semibold text-muted-foreground font-mono">
 											<span>RICH FRONTEND &amp; WEBGL</span>
 											<span className="rounded-full bg-secondary/10 px-2 py-0.5 text-[9px] font-bold text-secondary tracking-wider uppercase">
@@ -177,7 +177,7 @@ export default function Hero() {
 									</div>
 
 									<div className="grid grid-cols-3 gap-2">
-										<div className="group rounded-kj-lg border border-border bg-background p-2.5 text-center transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 cursor-default">
+										<div className="group rounded-kj-lg border border-border bg-subtle p-2.5 text-center transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 cursor-default">
 											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase transition-colors duration-300 group-hover:text-primary/70">
 												Experience
 											</p>
@@ -185,7 +185,7 @@ export default function Hero() {
 												12+ yrs
 											</p>
 										</div>
-										<div className="group rounded-kj-lg border border-border bg-background p-2.5 text-center transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 cursor-default">
+										<div className="group rounded-kj-lg border border-border bg-subtle p-2.5 text-center transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 cursor-default">
 											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase transition-colors duration-300 group-hover:text-primary/70">
 												Backend
 											</p>
@@ -193,7 +193,7 @@ export default function Hero() {
 												Java &amp; Node
 											</p>
 										</div>
-										<div className="group rounded-kj-lg border border-border bg-background p-2.5 text-center transition-all duration-300 hover:border-secondary/40 hover:bg-secondary/5 cursor-default">
+										<div className="group rounded-kj-lg border border-border bg-subtle p-2.5 text-center transition-all duration-300 hover:border-secondary/40 hover:bg-secondary/5 cursor-default">
 											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase transition-colors duration-300 group-hover:text-secondary/70">
 												Frontend
 											</p>
@@ -208,7 +208,7 @@ export default function Hero() {
 										{techStackData.map((item) => (
 											<span
 												key={item.name}
-												className="rounded-kj-sm border border-border bg-background px-2 py-0.5 font-mono text-[10px] font-semibold text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 hover:text-primary cursor-default"
+												className="rounded-kj-sm border border-border bg-subtle px-2 py-0.5 font-mono text-[10px] font-semibold text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 hover:text-primary cursor-default"
 											>
 												{item.short ?? item.name}
 											</span>

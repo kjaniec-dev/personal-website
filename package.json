@@ -18,8 +18,8 @@
 	"dependencies": {
 		"@algolia/client-search": "5.52.1",
 		"@headlessui/react": "2.2.10",
-		"@kjaniec-dev/design": "^0.3.1",
-		"@kjaniec-dev/ui": "^0.4.0",
+		"@kjaniec-dev/design": "^0.6.0",
+		"@kjaniec-dev/ui": "^0.6.0",
 		"@next/bundle-analyzer": "16.2.6",
 		"@tailwindcss/forms": "0.5.11",
 		"@tailwindcss/postcss": "4.3.0",

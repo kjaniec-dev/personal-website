@@ -12,7 +12,7 @@ export default function Header() {
 	const pathname = usePathname();
 
 	return (
-		<header className="sticky top-4 z-40 w-full rounded-full border border-border bg-card/65 shadow-kj-md backdrop-blur-lg transition-all duration-300">
+		<header className="sticky top-4 z-40 w-full rounded-full border border-border bg-surface/65 shadow-kj-md backdrop-blur-lg transition-all duration-300">
 			<div className="flex h-14 items-center justify-between gap-1.5 px-3 sm:px-4 md:gap-2.5 lg:gap-3 xl:gap-4 xl:px-6">
 				<Link
 					href="/"
@@ -50,7 +50,7 @@ export default function Header() {
 									className={`rounded-full px-2 py-1 md:px-2.5 md:py-1 lg:px-3 lg:py-1.5 xl:px-3.5 xl:py-1.5 font-sans text-xs md:text-sm font-medium transition-colors ${
 										active
 											? "bg-primary/10 text-primary font-semibold"
-											: "text-muted-foreground hover:bg-muted hover:text-foreground"
+											: "text-muted-foreground hover:bg-subtle hover:text-foreground"
 									}`}
 								>
 									{link.title}

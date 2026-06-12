@@ -45,7 +45,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 							? `/${basePath}`
 							: `/${basePath}/page/${currentPage - 1}`
 					}
-					className="rounded-kj-lg border border-border bg-card px-4 py-2 font-sans text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+					className="rounded-kj-lg border border-border bg-surface px-4 py-2 font-sans text-sm font-semibold text-foreground transition-colors hover:bg-subtle"
 					rel="prev"
 				>
 					← Previous
@@ -59,7 +59,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 			{nextPage ? (
 				<Link
 					href={`/${basePath}/page/${currentPage + 1}`}
-					className="rounded-kj-lg border border-border bg-card px-4 py-2 font-sans text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+					className="rounded-kj-lg border border-border bg-surface px-4 py-2 font-sans text-sm font-semibold text-foreground transition-colors hover:bg-subtle"
 					rel="next"
 				>
 					Next →
@@ -107,7 +107,7 @@ export default function ListLayoutWithTags({
 									className={`block rounded-kj-md px-2.5 py-1.5 font-sans text-sm transition-colors ${
 										pathname === "/blog"
 											? "bg-primary/10 text-primary font-semibold"
-											: "text-muted-foreground hover:bg-muted hover:text-foreground"
+											: "text-muted-foreground hover:bg-subtle hover:text-foreground"
 									}`}
 								>
 									All posts
@@ -123,7 +123,7 @@ export default function ListLayoutWithTags({
 											className={`flex items-center justify-between rounded-kj-md px-2.5 py-1.5 font-sans text-sm transition-colors ${
 												active
 													? "bg-primary/10 text-primary font-semibold"
-													: "text-muted-foreground hover:bg-muted hover:text-foreground"
+													: "text-muted-foreground hover:bg-subtle hover:text-foreground"
 											}`}
 										>
 											<span>#{tag.split(" ").join("-")}</span>
