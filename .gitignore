@@ -49,3 +49,13 @@ yarn-error.log*
 # IDE
 .idea
 tsconfig.tsbuildinfo
+
+# AI agents and local tools
+.antigravitycli/
+.claude/
+.codex/
+.junie/
+.playwright-mcp/
+.serena/
+.superpowers/
+
