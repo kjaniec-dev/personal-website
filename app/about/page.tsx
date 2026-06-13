@@ -45,10 +45,22 @@ export default function About() {
 								B2B Contractor • Remote Specialist
 							</p>
 						</div>
-						<div className="grid grid-cols-3 gap-4 pt-3 border-t border-border/40">
-							<MetricCard title="Years of Exp." value="12+" />
-							<MetricCard title="Contract Model" value="B2B" />
-							<MetricCard title="Remote Focus" value="100%" />
+						<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-border/40">
+							<MetricCard
+								title="Years of Exp."
+								value="12+"
+								className="p-4 sm:p-6"
+							/>
+							<MetricCard
+								title="Contract Model"
+								value="B2B"
+								className="p-4 sm:p-6"
+							/>
+							<MetricCard
+								title="Remote Focus"
+								value="100%"
+								className="p-4 sm:p-6"
+							/>
 						</div>
 					</div>
 				</div>
