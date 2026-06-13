@@ -8,7 +8,7 @@ interface TableWrapperProps {
 
 export default function TableWrapper({ children }: TableWrapperProps) {
 	return (
-		<TableWrap className="my-6 w-full overflow-x-auto">
+		<TableWrap className="my-6">
 			<Table>{children}</Table>
 		</TableWrap>
 	);
