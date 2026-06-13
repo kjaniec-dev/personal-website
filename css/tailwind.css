@@ -189,6 +189,28 @@
 		opacity: 0.8;
 	}
 
+	/* KBar shortcut keys (kbd) default state */
+	#kbar-listbox kbd {
+		border-color: var(--color-border) !important;
+		background-color: var(--color-subtle) !important;
+		color: var(--color-muted-foreground) !important;
+	}
+
+	/* KBar active item shortcut keys (kbd) */
+	#kbar-listbox .bg-primary-600 kbd {
+		border-color: color-mix(
+			in srgb,
+			var(--color-primary) 35%,
+			transparent
+		) !important;
+		color: var(--color-primary) !important;
+		background-color: color-mix(
+			in srgb,
+			var(--color-primary) 10%,
+			transparent
+		) !important;
+	}
+
 	/* Skill bar animation */
 	@keyframes skillBarIn {
 		from {
