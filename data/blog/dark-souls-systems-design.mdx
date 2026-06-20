@@ -30,19 +30,22 @@ That is crash-only design, and it changes where you spend effort. The temptation
 Concretely, that means a worker should be killable at any instant without leaving corruption behind. Don't mutate shared state mid-flight and hope you finish; do the work against a staging value and flip it atomically at the end:
 
 ```ts
-// Fragile: a crash between these lines leaves a half-written cache.
-cache.totals = {}
-for (const order of orders) {
-  cache.totals[order.userId] ??= 0
-  cache.totals[order.userId] += order.amount // killed here? corrupted.
+// Fragile: in-place mutation of a live map.
+// A reader mid-loop sees some products at old prices, some at new —
+// a mixed state that never existed in any real version of the catalog.
+// A crash leaves that impossible mix frozen in place.
+for (const { id, price } of priceUpdates) {
+  catalog[id] = price
 }
 
-// Crash-only: build aside, swap once. A crash mid-loop changes nothing.
-const next: Record<string, number> = {}
-for (const order of orders) {
-  next[order.userId] = (next[order.userId] ?? 0) + order.amount
+// Crash-only: build a new map from the current state, swap once.
+// Readers always see either the complete old catalog or the complete new one — never a mix.
+// A crash mid-loop leaves the original untouched; restart just re-runs it.
+const next = { ...catalog }
+for (const { id, price } of priceUpdates) {
+  next[id] = price
 }
-cache.totals = next // single atomic publish; restart just re-runs it
+catalog = next // reference swap; this is the checkpoint
 ```
 
 The souls you dropped sit where you died, recoverable on the next run — but only if you get back without dying again. That is the game being honest that in-flight state is at risk until it's committed. The code equivalent: bank early, and treat anything not yet committed as potentially lost.
