@@ -1,0 +1,162 @@
+---
+title: 'What Souls Games Taught Me About Systems Design'
+date: '2026-06-20T10:00:00Z'
+lastmod: '2026-06-20'
+tags: ['architecture', 'systems-design', 'reliability', 'gaming']
+summary: 'Not ten lessons, one: death is the default case, not the exception. It is the genre — Demon''s Souls through Elden Ring, plus the soulslikes that copied its homework — that taught me to design systems around failure instead of bolting it on at the end. Here is what that looks like in actual code.'
+draft: false
+layout: PostSimple
+authors: ['default']
+---
+
+## One thesis, not ten analogies
+
+There is a whole genre of "lessons from Dark Souls" posts, and most of them are listicles — ten loose analogies that fall apart the moment you press on one. I do not want to write that, and I do not want to pin it all on a single game either. It was the whole lineage that drilled this into me: Demon's Souls, the Dark Souls trilogy, Bloodborne, Sekiro, Elden Ring, and the soulslikes that copied the homework well — Nioh, Lies of P, Hollow Knight. Different combat, same spine.
+
+The spine is one sentence:
+
+**Death is the default case, not the exception.**
+
+That is also, almost exactly, the gap between a junior and a senior mental model. A junior writes the happy path and adds error handling at the end, as a chore. A senior assumes everything falls over and designs around that from the first line. Souls games are the best teacher of that shift I know, because the genre _opens_ with you dying and never pretends otherwise.
+
+So instead of stacking metaphors, let me walk through what that one idea actually looks like in code.
+
+## Checkpoints: design for cheap restart, not graceful shutdown
+
+In every one of these games, dying drops your in-flight currency — souls, blood echoes, runes, sen — and resets the world to the last checkpoint: bonfire, lantern, Sculptor's Idol, Site of Grace. You do not get a half-dead, partially-rolled-back state to reason about. You are progressing, or you are back at the checkpoint. Two states, one transition.
+
+That is crash-only design, and it changes where you spend effort. The temptation in a service is to write an elaborate graceful-shutdown path that tries to drain and unwind everything in flight. The genre's lesson is the opposite: make the restart cheap and the recovered state known-good, and you stop needing to handle the thousand broken in-between states, because you never linger in them.
+
+Concretely, that means a worker should be killable at any instant without leaving corruption behind. Don't mutate shared state mid-flight and hope you finish; do the work against a staging value and flip it atomically at the end:
+
+```ts
+// Fragile: in-place mutation of a live map.
+// A reader mid-loop sees some products at old prices, some at new —
+// a mixed state that never existed in any real version of the catalog.
+// A crash leaves that impossible mix frozen in place.
+for (const { id, price } of priceUpdates) {
+  catalog[id] = price
+}
+
+// Crash-only: build a new map from the current state, swap once.
+// Readers always see either the complete old catalog or the complete new one — never a mix.
+// A crash mid-loop leaves the original untouched; restart just re-runs it.
+const next = { ...catalog }
+for (const { id, price } of priceUpdates) {
+  next[id] = price
+}
+catalog = next // reference swap; this is the checkpoint
+```
+
+The souls you dropped sit where you died, recoverable on the next run — but only if you get back without dying again. That is the game being honest that in-flight state is at risk until it's committed. The code equivalent: bank early, and treat anything not yet committed as potentially lost.
+
+## Idempotency: the run can end at any moment
+
+Because death is constant, you internalize that any sequence can be interrupted and replayed. You will walk the same corridor to the boss fog twenty times. The game is fine with that; nothing breaks from repetition.
+
+Your operations need the same property. If a request can fail anywhere — and it can — the client retries, and a retry must not double-charge, double-ship, or double-anything. That is idempotency, and the genre trains the instinct: assume the corridor gets re-run.
+
+```ts
+async function charge(payment: Payment) {
+  // The key makes a retry a no-op instead of a second charge.
+  return paymentApi.charge(payment, {
+    idempotencyKey: payment.orderId, // stable across retries of the same intent
+  })
+}
+```
+
+Same idea on the data layer — an upsert keyed on a stable identity survives being replayed, where a blind `INSERT` would pile up duplicates on every retry:
+
+```sql
+INSERT INTO order_totals (order_id, total)
+VALUES ($1, $2)
+ON CONFLICT (order_id) DO UPDATE SET total = EXCLUDED.total;
+```
+
+Design the corridor so that walking it twice lands you in the same place. The retry is not the exception you patch around later; it is the normal case.
+
+## Telegraphs: difficulty is a lack of observability
+
+Bosses in this genre are not random. Every attack has a tell — a wind-up, a step shift, a glow before the grab. Sekiro lives and dies on this; the whole combat system is reading the telegraph and answering it on the right frame. The fight is hard, but it is _readable_, and the panic on attempt one is not because it's unfair — it's because you have no signal yet. By attempt ten nothing about the boss has changed. Your instrumentation has.
+
+Production incidents feel identical. A system under load is a maddening, unfair monster when you can't see what it's doing, and a tractable state machine the moment you can. The fix is not "make the code simpler"; it's read the wind-up. Emit the spans and metrics that tell you what the system is about to do, not just what it did:
+
+```ts
+const span = tracer.startSpan('checkout.charge')
+span.setAttributes({
+  'order.id': order.id,
+  'payment.provider': provider.name,
+  'retry.attempt': attempt, // the tell: retries climbing before latency spikes
+})
+try {
+  await charge(order)
+} catch (err) {
+  span.recordException(err)
+  throw err
+} finally {
+  span.end()
+}
+```
+
+The `retry.attempt` climbing, the queue depth creeping, p99 latency drifting before anything alarms — those are telegraphs. Most "this system is too complex to debug" is really "this system has no tells." Add the tells and the fight slows down.
+
+## Fail loud, because the alternative is silent corruption
+
+The reason these games feel fair despite being brutal: when you die, it's almost always your fault and you can see exactly why. Greedy on one more hit, rolled into the attack instead of away, didn't check the corner. The death is loud, immediate, and attributable. The only deaths that feel like a betrayal are the cheap ones — the offscreen ambush, the hitbox that lied — because the game stopped telling you the truth about its state.
+
+That maps straight onto fail-loud design. A service that crashes with a stack trace pointing at the cause is the honest death. The betrayal is **silent data corruption**: the code that doesn't throw, doesn't alert, just quietly writes the wrong thing and lets you find it three weeks later in a reconciliation report. Loud failure is the system being honest. Silent failure is the system lying.
+
+So make the invariant violation crash _at the source_, not three layers downstream where the context is gone:
+
+```ts
+function applyRefund(order: Order, amount: number) {
+  // Don't let a bad value flow on and corrupt the ledger silently.
+  if (amount <= 0 || amount > order.total) {
+    throw new Error(
+      `Refund ${amount} out of range for order ${order.id} (total ${order.total})`,
+    )
+  }
+  // ...
+}
+```
+
+A thrown error here is a death you can read. An `if (amount > order.total) amount = order.total` that silently clamps and moves on is the cheap hit you'll never see coming. Validate at the boundary, assert your invariants, and treat every silent failure mode as the actual emergency — it's worse than the crash, not better.
+
+## Earned shortcuts: optimize after you understand the path
+
+Dark Souls 1's interconnected world is the genre's design peak — you unlock the elevator back to Firelink _from the far side_, after making the hard journey on foot. You don't get the optimization until you've earned the understanding that justifies it.
+
+That is the cleanest argument against premature optimization I know. You add the cache, the denormalized read model, the precomputed index _after_ you've walked the slow path and the system has shown you where the real cost is — not before, guessing. And like a shortcut, a good optimization loops back to something you already understand; it doesn't introduce a new path nobody can reason about.
+
+The order matters. Build it the slow, legible way first:
+
+```ts
+// First: the honest, slow path. Correct and easy to reason about.
+const total = orders.filter((o) => o.userId === id).reduce((s, o) => s + o.amount, 0)
+```
+
+Then, once profiling proves this is hot, unlock the shortcut from the side you already know — and only then:
+
+```ts
+// Later: maintain a running total keyed on the same identity.
+// Justified by a real flamegraph, not a hunch.
+await redis.hincrby('user:totals', id, order.amount)
+```
+
+If you add the Redis layer on day one, you've built a shortcut to an area you haven't explored — and now you maintain two sources of truth to save time you never measured.
+
+## Where the metaphor breaks
+
+If I stopped here I'd be doing the thing I said I wouldn't: stretching one frame over everything and hiding the seams. So here's the seam, on purpose.
+
+Souls games have almost no documentation. The lore is buried in item descriptions, environmental detail, and things you only piece together on a second run or from a wiki someone else suffered to build. In a _game_, that's genius — the obscurity is the reward.
+
+In a production system, hidden knowledge is not magic, it's technical debt. The "lore in item descriptions" is the critical feature flag explained only in a four-year-old Slack thread, the deploy step living in one person's head, the undocumented invariant everyone's afraid to touch. What reads as delicious mystery in Lordran reads as a single point of failure and an onboarding nightmare in prod. The genre spends obscurity as a feature; your system pays for it as a cost.
+
+Naming that boundary is the point. The lineage is a magnificent teacher of designing around failure, cheap recovery, legibility, and earned optimization. It is a terrible teacher of documentation. Take the part that transfers; leave the part that doesn't.
+
+## The one thing to take away
+
+Strip away the bosses and the checkpoints and you're left with one discipline: **assume it dies.** Assume the request fails, the worker restarts, the deploy goes sideways, the dependency times out. Make that the foundation, not the afterthought — cheap restart, idempotent operations, real telegraphs, loud failure, earned optimization — and write down where the bodies are buried so the next person isn't reading item descriptions.
+
+Souls games make you feel that lesson by killing you until it sticks. Production systems do the same thing; they're just slower, more expensive, and far less honest about the wind-up. Learn it on the cheaper teacher first.
