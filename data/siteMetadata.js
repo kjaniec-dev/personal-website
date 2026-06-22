@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-	title: "kjaniec.dev blog",
+	title: "kjaniec.dev",
 	author: "Krzysztof Janiec",
 	headerTitle: "kjaniec.dev",
 	description: `Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.`,
