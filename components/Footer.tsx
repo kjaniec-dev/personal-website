@@ -81,6 +81,22 @@ export default function Footer() {
 									className="text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:text-primary"
 								/>
 							) : null}
+							{siteMetadata.docker ? (
+								<SocialIcon
+									kind="docker"
+									href={siteMetadata.docker}
+									size={5}
+									className="text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:text-primary"
+								/>
+							) : null}
+							{siteMetadata.npm ? (
+								<SocialIcon
+									kind="npm"
+									href={siteMetadata.npm}
+									size={5}
+									className="text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:text-primary"
+								/>
+							) : null}
 						</div>
 					</div>
 

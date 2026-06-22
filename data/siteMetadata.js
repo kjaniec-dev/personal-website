@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-	title: "kjaniec.dev blog",
+	title: "kjaniec.dev",
 	author: "Krzysztof Janiec",
 	headerTitle: "kjaniec.dev",
 	description: `Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.`,
@@ -13,6 +13,8 @@ const siteMetadata = {
 	email: "contact@kjaniec.dev",
 	github: "https://github.com/kjaniec-dev",
 	linkedin: "https://www.linkedin.com/in/kjaniec-dev",
+	docker: "https://hub.docker.com/u/kjaniec",
+	npm: "https://www.npmjs.com/~kjaniec-dev",
 	locale: "en-US",
 	mapboxToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
 	// title: 'Next.js Starter Blog',
