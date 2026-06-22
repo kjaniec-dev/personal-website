@@ -11,7 +11,12 @@ export default function Home() {
 		"@type": "Person",
 		name: siteMetadata.author,
 		url: siteMetadata.siteUrl,
-		sameAs: [siteMetadata.github, siteMetadata.linkedin].filter(Boolean),
+		sameAs: [
+			siteMetadata.github,
+			siteMetadata.linkedin,
+			siteMetadata.docker,
+			siteMetadata.npm,
+		].filter(Boolean),
 		jobTitle: "Software Engineer",
 		description: siteMetadata.description,
 		image: `${siteMetadata.siteUrl}${siteMetadata.siteLogo}`,

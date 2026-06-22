@@ -1,5 +1,6 @@
 import {
 	Bluesky,
+	Docker,
 	Facebook,
 	Github,
 	Instagram,
@@ -7,6 +8,7 @@ import {
 	Mail,
 	Mastodon,
 	Medium,
+	Npm,
 	Threads,
 	Twitter,
 	X,
@@ -26,6 +28,8 @@ const components = {
 	instagram: Instagram,
 	medium: Medium,
 	bluesky: Bluesky,
+	docker: Docker,
+	npm: Npm,
 };
 
 type SocialIconProps = {
