@@ -16,7 +16,7 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
-		"@algolia/client-search": "5.55.0",
+		"@algolia/client-search": "5.55.1",
 		"@headlessui/react": "2.2.10",
 		"@kjaniec-dev/design": "^0.7.2",
 		"@kjaniec-dev/ui": "^0.7.2",
@@ -24,7 +24,7 @@
 		"@tailwindcss/forms": "0.5.11",
 		"@tailwindcss/postcss": "4.3.1",
 		"@tailwindcss/typography": "0.5.20",
-		"algoliasearch": "5.55.0",
+		"algoliasearch": "5.55.1",
 		"contentlayer2": "0.5.8",
 		"esbuild": "0.28.1",
 		"github-slugger": "2.0.0",
