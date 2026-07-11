@@ -1,0 +1,73 @@
+---
+title: 'Protokolator: A Privacy-First Generator for Polish Handover Protocols'
+date: '2026-07-10T23:00:00Z'
+lastmod: '2026-07-10'
+tags: ['next-js', 'typescript', 'react', 'pdf', 'productivity']
+draft: false
+summary: 'A free, no-signup web app that generates property handover protocols (protokół zdawczo-odbiorczy) for Polish rentals and sales, with a standout return-protocol comparison mode and 100% browser-side data processing.'
+layout: PostSimple
+---
+
+## The Problem
+
+Every rental or sale of a flat, unit, or garage in Poland should be accompanied by a *protokół zdawczo-odbiorczy* — a handover protocol recording the condition of the property, meter readings, keys, equipment, and any existing defects at the moment it changes hands. In practice, most people either skip it entirely or hunt down a generic Word template, mangle the formatting, and fill it in by hand. None of that helps when a dispute over a security deposit shows up a year later.
+
+I built [protokolator.pl](https://protokolator.pl) to fix that: a focused, free tool that turns filling out a handover protocol into a five-minute guided form instead of a fight with a `.docx` file.
+
+## What Protokolator Does
+
+<Image
+  src="/static/images/protokolator.png"
+  alt="Protokolator landing page"
+  width={1256}
+  height={1084}
+/>
+
+The app is deliberately narrow in scope and free of friction — there's no account, no paywall, and no server-side storage. You open the generator, fill in a structured form (parties, address, meter readings, keys, equipment, defects, photos), and download a clean, ready-to-sign PDF. Everything happens in the browser: form state is persisted to `localStorage` as you type, so a refreshed tab or spotty connection never costs you your data.
+
+## The Standout Feature: Return Protocol Comparison
+
+The feature I'm most proud of is the **return protocol** mode. Rentals aren't one-off events — a tenant moves in with a handover protocol, and moves out a year (or several) later with a return protocol. Protokolator lets you load the original handover document and automatically generates a *diff* against it:
+
+- Meter consumption (kWh, m³) calculated as end minus start reading
+- New defects that weren't present at handover
+- Equipment or condition changes between the two documents
+
+I haven't found another free tool that does this comparison out of the box, and it's exactly the kind of pain point that matters most for landlords managing several properties.
+
+## Other Features Worth Mentioning
+
+- **Duplicate / templates** — clone an existing protocol (address, equipment list) and only tweak what changed, useful for landlords with multiple units.
+- **Protocol type awareness** — the form adapts based on whether it's a rental (deposit, lease period), a sale (price, notarial deed), or a general handover.
+- **Handwritten signatures** — both parties can sign directly on-screen (mouse or touch), and the signature is embedded into the generated PDF.
+- **JSON export / import** — a "download my data" button lets you back up or move a protocol between devices, since everything otherwise lives only in one browser's `localStorage`.
+- **DOCX export** alongside PDF, for people who'd rather edit the document afterwards.
+- A **poradniki** (guides) section with practical articles about handover protocols, deposits, and tenant/landlord rights in Poland.
+
+## Technical Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 16 (App Router) + React 19 |
+| Language | TypeScript |
+| Styling | Tailwind CSS + shadcn/ui-style components |
+| Forms | React Hook Form + Zod validation |
+| PDF generation | `@react-pdf/renderer` |
+| DOCX generation | `docx` |
+| Signatures | `react-signature-canvas` |
+| Local persistence | `localStorage` / `idb` (IndexedDB) |
+| Guides content | Markdown via `gray-matter` + `next-mdx-remote` |
+| Testing | Vitest + Testing Library |
+| Hosting | Netlify |
+
+## Privacy by Design
+
+Nothing about a handover protocol should end up on a server it doesn't need to be on — it typically contains PESEL numbers, addresses, and photos of someone's home. So the core rule for Protokolator is simple: **the browser is the only backend**. Form data, uploaded photos, and generated documents never leave the client. The site is monetized purely through display ads rather than accounts or subscriptions, which keeps the "no registration" promise honest.
+
+## What's Next
+
+There's a running backlog of ideas, and a few stand out as the next real differentiators: a bilingual Polish/Ukrainian document (a large share of tenants in Poland are Ukrainian, and almost nothing free covers this), a per-room equipment library to speed up filling in furnished flats, and a deposit settlement calculator that ties directly into the return-protocol diff. Smaller, cheap wins like dark mode and an explicit "saved ✓" indicator are on the list too.
+
+## Try It
+
+The app is live at [protokolator.pl](https://protokolator.pl) — free to use, no account required. If you're a landlord, tenant, or buyer in Poland who needs a handover protocol done properly (and wants proof of the property's condition if things go wrong later), give it a try.

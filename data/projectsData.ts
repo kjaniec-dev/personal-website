@@ -17,6 +17,14 @@ export interface Project {
 
 const projectsData: Project[] = [
 	{
+		title: "Protokolator — Property Handover Protocol Generator",
+		description: `A free, privacy-first Polish web app for generating property handover protocols (protokół zdawczo-odbiorczy) for rentals, sales, and garages. Fill in a guided form, attach photos and a handwritten signature, then export a polished PDF or DOCX — no account needed, with all data processed entirely in the browser via localStorage. Its standout feature is a return-protocol comparison mode that automatically diffs meter readings, equipment, and new defects against the original handover.`,
+		href: "https://protokolator.pl",
+		imgSrc: "/static/images/protokolator.png",
+		tags: ["next-js", "typescript", "react", "pdf", "productivity"],
+		status: "live-saas",
+	},
+	{
 		title: "UI Kit & Design System",
 		description: `A premium React + TypeScript component library and token-driven design system. Built as a monorepo containing @kjaniec-dev/design for design tokens and @kjaniec-dev/ui for accessible, interactive components. Configured with Tailwind CSS v4, Storybook previews, and a standalone gallery, powering a cohesive visual language across my personal web projects.`,
 		href: "https://ui.kjaniec.dev",
