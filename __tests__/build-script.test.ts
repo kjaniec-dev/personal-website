@@ -10,4 +10,12 @@ describe("production build pipeline", () => {
 		expect(contentlayerBuild).toBeGreaterThanOrEqual(0);
 		expect(nextBuild).toBeGreaterThan(contentlayerBuild);
 	});
+
+	it("enables static export for the Cloudflare deployment", () => {
+		const cloudflareBuild = packageJson.scripts["build:cloudflare"];
+
+		expect(cloudflareBuild).toContain("EXPORT=1");
+		expect(cloudflareBuild).toContain("UNOPTIMIZED=1");
+		expect(cloudflareBuild).toContain("bun run build");
+	});
 });

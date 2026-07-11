@@ -6,6 +6,7 @@
 		"start": "next dev",
 		"dev": "cross-env INIT_CWD=$PWD next dev",
 		"build": "bun x contentlayer2 build && cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
+		"build:cloudflare": "cross-env EXPORT=1 UNOPTIMIZED=1 bun run build",
 		"serve": "next start",
 		"sync-design": "node scripts/sync-design.mjs",
 		"analyze": "cross-env ANALYZE=true next build",
