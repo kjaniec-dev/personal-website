@@ -4,7 +4,7 @@ date: '2026-03-23T10:00:00Z'
 lastmod: '2026-03-30'
 tags: ['development', 'productivity']
 draft: false
-summary: 'Five tools I use every day with Claude Code — Serena, Playwright MCP, Sequential Thinking, Superpowers, and Context7 — what each does and why it earns its spot.'
+summary: 'Four tools I use every day with Claude Code — Serena, Playwright MCP, Superpowers, and Context7 — what each does and why it earns its spot.'
 layout: PostSimple
 authors: ['default']
 ---
@@ -139,8 +139,7 @@ I'm adding a new API route to a Next.js project that's already running in produc
 1. **Superpowers** kicks in first — before any code gets written, Claude asks clarifying questions about the route's requirements, presents the design, and plans the implementation as discrete tasks
 2. **Serena** navigates the existing service layer — go-to-definition on the relevant interfaces, find-references to understand how similar routes consume them
 3. **Context7** fetches the Next.js 15 documentation for Route Handlers and the caching behaviour I need to configure correctly
-4. **Sequential Thinking** works through edge cases — auth failure paths, caching invalidation, error response shapes
-5. **Playwright MCP** verifies the finished route in a real browser — actually hits the endpoint, checks the response, confirms the auth middleware is behaving correctly
+4. **Playwright MCP** verifies the finished route in a real browser — actually hits the endpoint, checks the response, confirms the auth middleware is behaving correctly
 
 None of these tools is doing something I couldn't do manually with enough effort. What they do is compress the time between "starting a task" and "having something correct" by removing friction at each step.
 
@@ -148,11 +147,10 @@ None of these tools is doing something I couldn't do manually with enough effort
 
 ## Final thoughts
 
-These five tools are daily drivers, not experiments. Each one addresses a real gap:
+These four tools are daily drivers, not experiments. Each one addresses a real gap:
 
 - **Serena** removes navigational guesswork in large codebases
 - **Playwright MCP** makes visual and E2E verification fast
-- **Sequential Thinking** improves reasoning on hard problems
 - **Superpowers** enforces a disciplined development process end-to-end
 - **Context7** keeps library documentation current
 
