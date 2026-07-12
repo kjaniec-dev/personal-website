@@ -75,29 +75,6 @@ One thing worth knowing: the MCP launches a real browser process (with a `--head
 
 ---
 
-## Sequential Thinking — structured reasoning for hard problems
-
-This one from Anthropic's official MCP servers collection is less about external capabilities and more about how Claude reasons. The Sequential Thinking MCP provides a tool that lets Claude work through problems in explicit, tracked steps — thinking out loud in a structured way rather than jumping to conclusions.
-
-It's particularly useful for problems where the solution space is large, the dependencies between decisions matter, or getting the wrong first step means all subsequent steps are wrong.
-
-### What it enables
-
-- **Step-by-step decomposition** — Claude breaks a problem into a numbered sequence of reasoning steps before acting
-- **Revision support** — steps can be marked as needing revision; Claude can backtrack and correct earlier reasoning
-- **Branching thoughts** — different solution paths can be explored and compared before committing
-- **Transparent reasoning** — the chain of thought is visible and auditable, not hidden inside a single response
-
-### Where I actually use it
-
-Architecture decisions are the main use case. When I'm designing a new data model or choosing between two approaches for a service boundary, I'll explicitly invoke sequential thinking to walk through the trade-offs systematically. Claude stops treating it as a quick judgment call and actually evaluates each option against the constraints.
-
-The other high-value case is debugging complex issues — particularly cascade failures or race conditions where the cause is several layers removed from the symptom. I had a bug recently where a WebSocket client was occasionally missing messages during reconnection. The root cause turned out to be a combination of event handler registration timing and reconnection backoff behavior. With sequential thinking active, Claude worked through the possible failure modes one by one rather than immediately proposing the first fix that came to mind. It found the right cause on the first attempt.
-
-Trigger it explicitly when you know a problem warrants it — "use sequential thinking for this". It adds overhead, so it's worth reserving for problems that genuinely need it rather than applying it automatically across the board.
-
----
-
 ## Superpowers — a structured development workflow as a skill set
 
 [Superpowers](https://github.com/obra/superpowers) by Jesse Vincent is unlike the other tools on this list. It's not an MCP — it's a skills framework: a curated collection of structured workflow skills that Claude automatically follows when relevant. Installing it changes how Claude approaches software development at a process level, not just a capability level.
