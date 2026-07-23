@@ -1,3 +1,4 @@
+import { Badge, SectionHeader } from "@/components/ClientUI";
 import Hero from "@/components/Hero";
 import Link from "@/components/Link";
 import projectsData from "@/data/projectsData";
@@ -59,18 +60,11 @@ export default function Home() {
 
 			{/* Services Section */}
 			<section className="space-y-8 mt-10 mb-16 md:mt-12">
-				<div className="space-y-2">
-					<p className="text-xs font-bold tracking-[0.2em] text-primary uppercase font-mono">
-						Services
-					</p>
-					<h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-sans">
-						What I Do & Deliver
-					</h2>
-					<p className="text-muted-foreground text-sm max-w-xl font-sans">
-						I partner with teams to design, build, and optimize high-performance
-						software systems. Here are the core services I provide.
-					</p>
-				</div>
+				<SectionHeader
+					kicker="Services"
+					title="What I Do & Deliver"
+					description="I partner with teams to design, build, and optimize high-performance software systems. Here are the core services I provide."
+				/>
 
 				<div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
 					{[
@@ -190,36 +184,32 @@ export default function Home() {
 
 			{/* Featured Projects Section */}
 			<section className="space-y-8 my-16">
-				<div className="flex items-end justify-between">
-					<div className="space-y-2">
-						<p className="text-xs font-bold tracking-[0.2em] text-primary uppercase font-mono">
-							Portfolio
-						</p>
-						<h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-sans">
-							Featured Work
-						</h2>
-					</div>
-					<Link
-						href="/projects"
-						className="group inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors font-mono"
-					>
-						<span>View all work</span>
-						<svg
-							className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
+				<SectionHeader
+					kicker="Portfolio"
+					title="Featured Work"
+					actions={
+						<Link
+							href="/projects"
+							className="group inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover transition-colors font-mono"
 						>
-							<title>Arrow right</title>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2.5}
-								d="M9 5l7 7-7 7"
-							/>
-						</svg>
-					</Link>
-				</div>
+							<span>View all work</span>
+							<svg
+								className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<title>Arrow right</title>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2.5}
+									d="M9 5l7 7-7 7"
+								/>
+							</svg>
+						</Link>
+					}
+				/>
 
 				<div className="grid gap-6 md:grid-cols-2">
 					{projectsData
@@ -233,12 +223,13 @@ export default function Home() {
 								<div className="space-y-4">
 									<div className="flex flex-wrap gap-1.5">
 										{project.tags?.map((tag) => (
-											<span
+											<Badge
 												key={tag}
-												className="rounded-full border border-secondary/30 bg-secondary/10 px-2.5 py-0.5 text-[10px] font-bold text-secondary uppercase font-mono"
+												variant="secondary"
+												className="uppercase font-mono tracking-wider text-[10px]"
 											>
 												{tag}
-											</span>
+											</Badge>
 										))}
 									</div>
 									<h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors font-sans">

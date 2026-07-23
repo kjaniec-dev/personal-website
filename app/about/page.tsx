@@ -2,7 +2,7 @@ import { genPageMetadata } from "app/seo";
 import { allAuthors } from "contentlayer/generated";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
 import Card from "@/components/Card";
-import { MetricCard, PageHeader } from "@/components/ClientUI";
+import { MetricCard, PageHeader, SectionHeader } from "@/components/ClientUI";
 import Image from "@/components/Image";
 import { components } from "@/components/MDXComponents";
 import Pill from "@/components/Pill";
@@ -71,14 +71,7 @@ export default function About() {
 			</div>
 
 			<section className="space-y-6">
-				<div className="space-y-2">
-					<p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-primary">
-						Experience
-					</p>
-					<h2 className="font-sans text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-						Where I&apos;ve worked
-					</h2>
-				</div>
+				<SectionHeader kicker="Experience" title="Where I've worked" />
 				<div className="space-y-6">
 					{experienceData.map((entry) => (
 						<Card key={`${entry.role}-${entry.company}`} padded>
@@ -169,14 +162,7 @@ export default function About() {
 
 			<div className="grid gap-8 md:grid-cols-2">
 				<div className="flex flex-col space-y-6">
-					<div className="space-y-2">
-						<p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-primary">
-							Education
-						</p>
-						<h2 className="font-sans text-3xl font-bold tracking-tight text-foreground">
-							Where I studied
-						</h2>
-					</div>
+					<SectionHeader kicker="Education" title="Where I studied" />
 					<Card padded className="flex-1">
 						<ul className="space-y-4">
 							{educationData.map((e) => (
@@ -194,14 +180,7 @@ export default function About() {
 				</div>
 
 				<div className="flex flex-col space-y-6">
-					<div className="space-y-2">
-						<p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-primary">
-							Skills
-						</p>
-						<h2 className="font-sans text-3xl font-bold tracking-tight text-foreground">
-							Tools of the trade
-						</h2>
-					</div>
+					<SectionHeader kicker="Skills" title="Tools of the trade" />
 					<Card padded className="flex-1">
 						<div className="space-y-5">
 							<div className="space-y-2.5">

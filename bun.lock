@@ -7,8 +7,8 @@
       "dependencies": {
         "@algolia/client-search": "5.55.1",
         "@headlessui/react": "2.2.10",
-        "@kjaniec-dev/design": "^0.7.2",
-        "@kjaniec-dev/ui": "^0.7.2",
+        "@kjaniec-dev/design": "^0.9.0",
+        "@kjaniec-dev/ui": "^0.9.0",
         "@next/bundle-analyzer": "16.2.10",
         "@tailwindcss/forms": "0.5.11",
         "@tailwindcss/postcss": "4.3.2",
@@ -338,9 +338,9 @@
 
     "@jsonjoy.com/util": ["@jsonjoy.com/util@1.5.0", "", { "peerDependencies": { "tslib": "2" } }, ""],
 
-    "@kjaniec-dev/design": ["@kjaniec-dev/design@0.7.2", "", {}, "sha512-mlJjnVJbrhLXdI04uJqefm+4KaW78pfcXrA1+g8vOFs5qxDW0xeBDnnqo1wDz3cfrECkV5X8+jctF026hgRyBg=="],
+    "@kjaniec-dev/design": ["@kjaniec-dev/design@0.9.0", "", {}, "sha512-3lwrLAajnlDSGnJ9a2kOX0u0lCgPxlxGxX0mBO1apBHrzclliLZ2YIrqGVPO9jizvLelDk7QphyuJzBcJgq5Hw=="],
 
-    "@kjaniec-dev/ui": ["@kjaniec-dev/ui@0.7.2", "", { "dependencies": { "class-variance-authority": "^0.7.0", "clsx": "^2.1.1", "tailwind-merge": "^2.5.4" }, "peerDependencies": { "@kjaniec-dev/design": ">=0.7.2", "react": ">=18", "react-dom": ">=18" } }, "sha512-gw44TKNK3jBBvP7yYKwKauD+c+SRPclkUuX7xlywrce91GTw4hK+PVuIOtlwyXB4XjbHeYmYNqn/KpKURKmqXg=="],
+    "@kjaniec-dev/ui": ["@kjaniec-dev/ui@0.9.0", "", { "dependencies": { "class-variance-authority": "^0.7.0", "clsx": "^2.1.1", "tailwind-merge": "^3.6.0" }, "peerDependencies": { "@kjaniec-dev/design": ">=0.9.0", "react": ">=18", "react-dom": ">=18" } }, "sha512-XreUtVF286V4hTFf9jk3jf8dz6xlMo2QC3cChseLS+28vpKz/wFVa28gurAjTgF7E/7hEAPnwpBxlTviqQR1VA=="],
 
     "@lit-labs/ssr-dom-shim": ["@lit-labs/ssr-dom-shim@1.3.0", "", {}, ""],
 
@@ -1474,7 +1474,7 @@
 
     "tabbable": ["tabbable@6.2.0", "", {}, ""],
 
-    "tailwind-merge": ["tailwind-merge@2.6.1", "", {}, "sha512-Oo6tHdpZsGpkKG88HJ8RR1rg/RdnEkQEfMoEk2x1XRI3F1AxeU+ijRXpiVUF4UbLfcxxRGw6TbUINKYdWVsQTQ=="],
+    "tailwind-merge": ["tailwind-merge@3.6.0", "", {}, "sha512-uxL7qAVQriqRQPAyK3pj66VqskWqoZ37PW94jwOTwNfq/z9oyu1V+eqrZqtR2+fCiXdYOZe/Modt8GtvqNzu+w=="],
 
     "tailwindcss": ["tailwindcss@4.3.2", "", {}, "sha512-WtctNNSH8A9jlMIqxzuYumOHU5uGZyRv0Q5svQl+oEPy5w84YpBxdb7MdqyiSPQge5jTJ6zFQLq0PFygdccSBA=="],
 
