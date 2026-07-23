@@ -11,8 +11,8 @@ vi.mock("next-themes", () => ({
 }));
 
 describe("ThemeSwitch Component", () => {
-	it("renders ThemeSwitch with tablist role and theme options", () => {
+	it("renders ThemeSwitch toggle trigger button", () => {
 		render(<ThemeSwitch />);
-		expect(screen.getByRole("tablist")).toBeDefined();
+		expect(screen.getByRole("button", { name: /toggle theme/i })).toBeDefined();
 	});
 });

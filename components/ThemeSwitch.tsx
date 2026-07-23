@@ -2,7 +2,13 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Segmented } from "@/components/ClientUI";
+import {
+	Button,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ClientUI";
 
 const SunIcon = () => (
 	<svg
@@ -11,7 +17,7 @@ const SunIcon = () => (
 		viewBox="0 0 24 24"
 		stroke="currentColor"
 	>
-		<title>Sun icon</title>
+		<title>Light theme</title>
 		<path
 			strokeLinecap="round"
 			strokeLinejoin="round"
@@ -28,7 +34,7 @@ const MoonIcon = () => (
 		viewBox="0 0 24 24"
 		stroke="currentColor"
 	>
-		<title>Moon icon</title>
+		<title>Dark theme</title>
 		<path
 			strokeLinecap="round"
 			strokeLinejoin="round"
@@ -45,12 +51,29 @@ const SystemIcon = () => (
 		viewBox="0 0 24 24"
 		stroke="currentColor"
 	>
-		<title>System icon</title>
+		<title>System theme</title>
 		<path
 			strokeLinecap="round"
 			strokeLinejoin="round"
 			strokeWidth={2}
 			d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+		/>
+	</svg>
+);
+
+const CheckIcon = () => (
+	<svg
+		className="h-3.5 w-3.5 text-primary ml-auto"
+		fill="none"
+		viewBox="0 0 24 24"
+		stroke="currentColor"
+	>
+		<title>Selected</title>
+		<path
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={2.5}
+			d="M5 13l4 4L19 7"
 		/>
 	</svg>
 );
@@ -64,21 +87,55 @@ export default function ThemeSwitch() {
 	}, []);
 
 	if (!mounted) {
-		return <div className="h-9 w-[120px]" />;
+		return <div className="h-9 w-9" />;
 	}
 
 	const currentTheme = theme || "system";
 
 	return (
-		<Segmented
-			aria-label="Theme selection"
-			value={currentTheme}
-			onChange={(newTheme) => setTheme(newTheme)}
-			options={[
-				{ value: "light", label: <SunIcon /> },
-				{ value: "dark", label: <MoonIcon /> },
-				{ value: "system", label: <SystemIcon /> },
-			]}
-		/>
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<Button
+					variant="ghost"
+					size="icon"
+					aria-label="Toggle theme"
+					className="rounded-full hover:bg-subtle text-foreground"
+				>
+					{currentTheme === "light" ? (
+						<SunIcon />
+					) : currentTheme === "dark" ? (
+						<MoonIcon />
+					) : (
+						<SystemIcon />
+					)}
+				</Button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent align="end" className="w-36">
+				<DropdownMenuItem
+					onClick={() => setTheme("light")}
+					className="flex items-center gap-2 cursor-pointer"
+				>
+					<SunIcon />
+					<span>Light</span>
+					{currentTheme === "light" && <CheckIcon />}
+				</DropdownMenuItem>
+				<DropdownMenuItem
+					onClick={() => setTheme("dark")}
+					className="flex items-center gap-2 cursor-pointer"
+				>
+					<MoonIcon />
+					<span>Dark</span>
+					{currentTheme === "dark" && <CheckIcon />}
+				</DropdownMenuItem>
+				<DropdownMenuItem
+					onClick={() => setTheme("system")}
+					className="flex items-center gap-2 cursor-pointer"
+				>
+					<SystemIcon />
+					<span>System</span>
+					{currentTheme === "system" && <CheckIcon />}
+				</DropdownMenuItem>
+			</DropdownMenuContent>
+		</DropdownMenu>
 	);
 }
