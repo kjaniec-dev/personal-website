@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ClientUI";
 import Link from "@/components/Link";
 import MobileNav from "@/components/MobileNav";
 import SearchButton from "@/components/SearchButton";
@@ -63,12 +64,14 @@ export default function Header() {
 					<SearchButton />
 					<ThemeSwitch />
 					{siteMetadata.email ? (
-						<Link
+						<Button
+							as={Link}
 							href={`mailto:${siteMetadata.email}`}
-							className="hidden h-9 items-center gap-1.5 rounded-full bg-primary px-3.5 font-sans text-xs font-semibold whitespace-nowrap text-primary-foreground shadow-kj-glow transition-all duration-300 hover:bg-primary-hover hover:-translate-y-0.5 md:inline-flex lg:px-4 lg:text-sm xl:px-5"
+							size="sm"
+							className="hidden rounded-full font-sans text-xs font-semibold md:inline-flex"
 						>
 							Let&apos;s talk
-						</Link>
+						</Button>
 					) : null}
 					<MobileNav />
 				</div>

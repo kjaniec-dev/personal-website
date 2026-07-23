@@ -1,90 +1,42 @@
 "use client";
 
-import { type ComponentType, useEffect, useState } from "react";
-import siteMetadata from "@/data/siteMetadata";
+import { useEffect, useState } from "react";
+import { Button, Kbd } from "@/components/ClientUI";
+import { useSearch } from "./SearchProvider";
 
-const SearchButton = () => {
-	const [SearchButtonComponent, setSearchButtonComponent] =
-		useState<ComponentType<{
-			"aria-label": string;
-			children: React.ReactNode;
-		}> | null>(null);
+export default function SearchButton() {
+	const { toggleSearch } = useSearch();
 	const [isMac, setIsMac] = useState(false);
 
 	useEffect(() => {
-		// Detect if user is on Mac
-		setIsMac(navigator.platform.toUpperCase().indexOf("MAC") >= 0);
-
-		// Only load search button component when component mounts
-		if (
-			siteMetadata.search &&
-			(siteMetadata.search.provider === "algolia" ||
-				siteMetadata.search.provider === "kbar")
-		) {
-			const loadSearchButton = async () => {
-				if (siteMetadata.search?.provider === "algolia") {
-					const { AlgoliaButton } = await import("pliny/search/AlgoliaButton");
-					setSearchButtonComponent(() => AlgoliaButton);
-				} else if (siteMetadata.search?.provider === "kbar") {
-					const { KBarButton } = await import("pliny/search/KBarButton");
-					setSearchButtonComponent(() => KBarButton);
-				}
-			};
-
-			// Defer loading until browser is idle
-			if ("requestIdleCallback" in window) {
-				requestIdleCallback(() => loadSearchButton());
-			} else {
-				setTimeout(() => loadSearchButton(), 1);
-			}
-		}
+		setIsMac(navigator.userAgent.includes("Mac"));
 	}, []);
 
-	const SearchContent = () => (
-		<div className="group relative inline-flex h-9 items-center gap-1.5 sm:gap-2 rounded-kj-lg border border-gray-300 dark:border-border bg-surface/50 px-2.5 sm:px-3.5 xl:px-4 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:shadow-kj-sm">
-			{/* Search icon */}
+	return (
+		<Button
+			variant="ghost"
+			onClick={toggleSearch}
+			aria-label="Search"
+			className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs text-muted-foreground hover:bg-subtle hover:text-foreground md:px-3.5"
+		>
 			<svg
-				xmlns="http://www.w3.org/2000/svg"
+				className="h-4 w-4 text-muted-foreground"
 				fill="none"
 				viewBox="0 0 24 24"
-				strokeWidth={1.5}
 				stroke="currentColor"
-				className="h-4 w-4 text-muted-foreground transition-colors duration-300 group-hover:text-primary"
 			>
 				<title>Search icon</title>
 				<path
 					strokeLinecap="round"
 					strokeLinejoin="round"
-					d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+					strokeWidth={2}
+					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 				/>
 			</svg>
-
-			{/* Search text */}
-			<span className="hidden text-sm font-medium text-muted-foreground transition-colors duration-300 group-hover:text-primary sm:inline-block">
-				Search
-			</span>
-
-			{/* Keyboard shortcut */}
-			<kbd className="hidden items-center gap-0.5 rounded-kj-sm border border-border bg-subtle px-1.5 py-0.5 font-mono text-xs font-medium text-muted-foreground shadow-sm transition-all duration-300 group-hover:border-primary/30 group-hover:text-primary xl:inline-flex">
-				{isMac ? "⌘" : "Ctrl"}K
-			</kbd>
-		</div>
+			<span className="hidden sm:inline">Search</span>
+			<Kbd className="hidden md:inline-flex text-[10px]">
+				{isMac ? "⌘K" : "Ctrl+K"}
+			</Kbd>
+		</Button>
 	);
-
-	if (!SearchButtonComponent) {
-		// Show placeholder button while loading
-		return (
-			<button type="button" aria-label="Search" className="cursor-pointer">
-				<SearchContent />
-			</button>
-		);
-	}
-
-	return (
-		<SearchButtonComponent aria-label="Search">
-			<SearchContent />
-		</SearchButtonComponent>
-	);
-};
-
-export default SearchButton;
+}

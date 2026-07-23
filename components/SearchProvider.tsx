@@ -1,8 +1,14 @@
 "use client";
 
+import { useKBar } from "kbar";
 import { useRouter } from "next/navigation";
 import { KBarSearchProvider } from "pliny/search/KBar";
 import type { ReactNode } from "react";
+
+export const useSearch = () => {
+	const { query } = useKBar();
+	return { toggleSearch: () => query?.toggle() };
+};
 
 interface SearchDocument {
 	title: string;
