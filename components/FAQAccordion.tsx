@@ -29,7 +29,7 @@ export default function FAQAccordion({ items, category }: FAQAccordionProps) {
 					<AccordionItem
 						key={item.question}
 						value={uniqueVal}
-						className="overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all"
+						className="overflow-hidden rounded-xl border border-border first:border-t bg-surface shadow-sm transition-all"
 					>
 						<AccordionTrigger className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left font-sans text-base font-semibold text-foreground sm:text-lg hover:bg-subtle/50">
 							{item.question}
