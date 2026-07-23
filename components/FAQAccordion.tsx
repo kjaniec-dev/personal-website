@@ -19,17 +19,14 @@ export default function FAQAccordion({ items, category }: FAQAccordionProps) {
 	if (filtered.length === 0) return null;
 
 	return (
-		<Accordion
-			type="single"
-			className="space-y-3 border-none bg-transparent overflow-visible rounded-none"
-		>
+		<Accordion type="single" className="space-y-3">
 			{filtered.map((item, index) => {
 				const uniqueVal = `${category}-${index}`;
 				return (
 					<AccordionItem
 						key={item.question}
 						value={uniqueVal}
-						className="overflow-hidden rounded-kj-2xl border border-border bg-surface shadow-kj-sm transition-all duration-300 hover:shadow-kj-md first:border-t"
+						className="overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all"
 					>
 						<AccordionTrigger className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left font-sans text-base font-semibold text-foreground sm:text-lg hover:bg-subtle/50">
 							{item.question}
