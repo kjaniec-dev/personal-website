@@ -1,7 +1,7 @@
 import Card from "@/components/Card";
+import { Badge } from "@/components/ClientUI";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
-import Pill from "@/components/Pill";
 import type { ProjectStatus } from "@/data/projectsData";
 
 interface ProjectCardProps {
@@ -22,14 +22,14 @@ const statusLabel: Record<ProjectStatus, string> = {
 	experiment: "Experiment",
 };
 
-const statusTone: Record<
+const statusVariant: Record<
 	ProjectStatus,
-	"secondary" | "success" | "primary" | "muted"
+	"secondary" | "success" | "primary" | "neutral"
 > = {
 	"open-source": "secondary",
 	"live-saas": "success",
 	"client-work": "primary",
-	experiment: "muted",
+	experiment: "neutral",
 };
 
 export default function ProjectCard({
@@ -63,7 +63,9 @@ export default function ProjectCard({
 					<div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
 				)}
 				<div className="absolute right-3 top-3">
-					<Pill tone={statusTone[status]}>{statusLabel[status]}</Pill>
+					<Badge variant={statusVariant[status]} dot={status === "live-saas"}>
+						{statusLabel[status]}
+					</Badge>
 				</div>
 			</div>
 
@@ -71,9 +73,9 @@ export default function ProjectCard({
 				{tags.length > 0 ? (
 					<div className="flex flex-wrap gap-1.5">
 						{tags.map((t) => (
-							<Pill key={t} tone="secondary">
+							<Badge key={t} variant="secondary">
 								{t}
-							</Pill>
+							</Badge>
 						))}
 					</div>
 				) : null}
