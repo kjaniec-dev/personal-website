@@ -96,10 +96,10 @@ export default function ThemeSwitch() {
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
-					variant="ghost"
+					variant="outline"
 					size="icon"
 					aria-label="Toggle theme"
-					className="rounded-full hover:bg-subtle text-foreground"
+					className="rounded-full bg-surface hover:bg-subtle text-foreground shadow-sm border-border"
 				>
 					{currentTheme === "light" ? (
 						<SunIcon />
