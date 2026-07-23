@@ -19,7 +19,10 @@ export default function FAQAccordion({ items, category }: FAQAccordionProps) {
 	if (filtered.length === 0) return null;
 
 	return (
-		<Accordion type="single" className="space-y-3">
+		<Accordion
+			type="single"
+			className="border-none bg-transparent rounded-none space-y-3"
+		>
 			{filtered.map((item, index) => {
 				const uniqueVal = `${category}-${index}`;
 				return (
