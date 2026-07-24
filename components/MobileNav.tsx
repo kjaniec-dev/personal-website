@@ -1,12 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Button, Drawer } from "@/components/ClientUI";
 import headerNavLinks from "@/data/headerNavLinks";
 import Link from "./Link";
 
 export default function MobileNav() {
 	const [open, setOpen] = useState(false);
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	return (
 		<>
@@ -32,22 +38,31 @@ export default function MobileNav() {
 				</svg>
 			</Button>
 
-			<Drawer open={open} onClose={() => setOpen(false)} side="right">
-				<div className="flex flex-col space-y-6 pt-6 px-4">
-					<nav className="flex flex-col space-y-4">
-						{headerNavLinks.map((link) => (
-							<Link
-								key={link.title}
-								href={link.href}
-								className="text-xl font-bold tracking-wider text-foreground hover:text-primary transition-colors py-2"
-								onClick={() => setOpen(false)}
-							>
-								{link.title}
-							</Link>
-						))}
-					</nav>
-				</div>
-			</Drawer>
+			{mounted &&
+				createPortal(
+					<Drawer
+						open={open}
+						onClose={() => setOpen(false)}
+						side="right"
+						title="Navigation"
+					>
+						<div className="flex flex-col space-y-6 pt-2">
+							<nav className="flex flex-col space-y-3">
+								{headerNavLinks.map((link) => (
+									<Link
+										key={link.title}
+										href={link.href}
+										className="text-lg font-bold tracking-wider text-foreground hover:text-primary transition-colors py-2"
+										onClick={() => setOpen(false)}
+									>
+										{link.title}
+									</Link>
+								))}
+							</nav>
+						</div>
+					</Drawer>,
+					document.body,
+				)}
 		</>
 	);
 }
