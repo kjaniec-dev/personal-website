@@ -2,7 +2,7 @@
 
 import { KBarButton } from "pliny/search/KBarButton";
 import { useEffect, useState } from "react";
-import { Button, Kbd } from "@/components/ClientUI";
+import { Kbd } from "@/components/ClientUI";
 
 export default function SearchButton() {
 	const [isMac, setIsMac] = useState(false);
@@ -13,11 +13,7 @@ export default function SearchButton() {
 
 	return (
 		<KBarButton aria-label="Search">
-			<Button
-				variant="ghost"
-				aria-label="Search"
-				className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs text-muted-foreground hover:bg-subtle hover:text-foreground md:px-3.5"
-			>
+			<div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs text-muted-foreground hover:bg-subtle hover:text-foreground md:px-3.5 transition-colors cursor-pointer select-none">
 				<svg
 					className="h-4 w-4 text-muted-foreground"
 					fill="none"
@@ -32,11 +28,11 @@ export default function SearchButton() {
 						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 					/>
 				</svg>
-				<span className="hidden sm:inline">Search</span>
+				<span className="hidden sm:inline font-sans font-semibold">Search</span>
 				<Kbd className="hidden md:inline-flex text-[10px]">
 					{isMac ? "⌘K" : "Ctrl+K"}
 				</Kbd>
-			</Button>
+			</div>
 		</KBarButton>
 	);
 }
