@@ -3,6 +3,11 @@ import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
 import type { ReactNode } from "react";
 import Card from "@/components/Card";
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	BreadcrumbSeparator,
+} from "@/components/ClientUI";
 import Comments from "@/components/Comments";
 import Link from "@/components/Link";
 import Pill from "@/components/Pill";
@@ -31,6 +36,13 @@ export default function PostSimple({
 			<ScrollTopAndComment />
 			<article className="space-y-8 py-8">
 				<Card glow padded>
+					<Breadcrumb className="mb-4">
+						<BreadcrumbItem href="/">Home</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem href="/blog">Blog</BreadcrumbItem>
+						<BreadcrumbSeparator />
+						<BreadcrumbItem>{title}</BreadcrumbItem>
+					</Breadcrumb>
 					<div className="space-y-4">
 						{tags && tags.length > 0 ? (
 							<div className="flex flex-wrap gap-1.5">

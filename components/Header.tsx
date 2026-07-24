@@ -64,14 +64,17 @@ export default function Header() {
 					<SearchButton />
 					<ThemeSwitch />
 					{siteMetadata.email ? (
-						<Button
-							as={Link}
+						<Link
 							href={`mailto:${siteMetadata.email}`}
-							size="sm"
-							className="hidden rounded-full font-sans text-xs font-semibold md:inline-flex"
+							className="hidden md:inline-flex"
 						>
-							Let&apos;s talk
-						</Button>
+							<Button
+								size="sm"
+								className="rounded-full font-sans text-xs font-semibold"
+							>
+								Let&apos;s talk
+							</Button>
+						</Link>
 					) : null}
 					<MobileNav />
 				</div>
