@@ -58,8 +58,11 @@ tsconfig.tsbuildinfo
 .playwright-mcp/
 .serena/
 .superpowers/
+.mcp.json
+.wrangler/
 
 # Root-level screenshots
 /*.png
+
 
 

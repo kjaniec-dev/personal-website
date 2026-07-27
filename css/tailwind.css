@@ -1,10 +1,10 @@
 @import "tailwindcss";
-@import "../node_modules/@kjaniec-dev/design/src/tailwind.css";
-@import "../node_modules/@kjaniec-dev/ui/dist/ui.css";
+@source "../node_modules/@kjaniec-dev/ui";
+@import "@kjaniec-dev/design/tailwind.css";
+@import "@kjaniec-dev/ui/ui.css";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
 @source "../node_modules/pliny";
-@source "../node_modules/@kjaniec-dev/ui";
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Core theme configuration */
