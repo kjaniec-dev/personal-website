@@ -48,8 +48,7 @@ app/               # Next.js App Router pages & API routes
   ├── tags/        # Tag pages
   ├── about/       # About page with experience/education/skills
   ├── projects/    # Portfolio projects
-  ├── faq/         # FAQ page
-  └── learning/    # Completed courses
+  └── faq/         # FAQ page
 
 components/        # Reusable React components
   ├── Hero.tsx     # Hero section with animations
@@ -65,7 +64,6 @@ data/              # Content and data files
   ├── experienceData.ts   # Experience timeline
   ├── educationData.ts    # Education timeline
   ├── skillsData.ts       # Skills with proficiency %
-  ├── coursesData.ts      # Learning history
   └── faqData.ts          # FAQ content
 
 layouts/           # Layout components for different page types
@@ -120,7 +118,6 @@ Edit TypeScript data files to update content:
 - **Experience:** `data/experienceData.ts`
 - **Education:** `data/educationData.ts`
 - **Skills:** `data/skillsData.ts`
-- **Courses:** `data/coursesData.ts`
 - **FAQ:** `data/faqData.ts`
 
 ### Site Configuration
