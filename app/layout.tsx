@@ -4,9 +4,7 @@ import "remark-github-blockquote-alert/alert.css";
 
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
-import type { AnalyticsConfig } from "pliny/analytics";
 import type { SearchConfig } from "pliny/search";
-import AnalyticsWrapper from "@/components/AnalyticsWrapper";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import SearchProviderWrapper from "@/components/SearchProviderWrapper";
@@ -170,9 +168,6 @@ export default function RootLayout({
 				</div>
 
 				<ThemeProviders>
-					<AnalyticsWrapper
-						analyticsConfig={siteMetadata.analytics as AnalyticsConfig}
-					/>
 					<WebVitalsReporter />
 					<SectionContainer>
 						<SearchProviderWrapper
