@@ -16,7 +16,6 @@ const siteMetadata = {
 	docker: "https://hub.docker.com/u/kjaniec",
 	npm: "https://www.npmjs.com/~kjaniec-dev",
 	locale: "en-US",
-	mapboxToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
 	// title: 'Next.js Starter Blog',
 	// author: 'Tails Azimuth',
 	// headerTitle: 'TailwindBlog',

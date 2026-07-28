@@ -7,12 +7,12 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.mapbox.com https://*.umami.is https://us.umami.is;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.umami.is https://us.umami.is https://static.cloudflareinsights.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https:;
-  media-src 'self' https://*.s3.amazonaws.com https://*.mapbox.com;
-  connect-src 'self' https://*.mapbox.com https://*.umami.is https://us.umami.is;
-  font-src 'self' data: https://*.mapbox.com;
+  media-src 'self' https://*.s3.amazonaws.com;
+  connect-src 'self' https://*.umami.is https://us.umami.is https://cloudflareinsights.com;
+  font-src 'self' data:;
   frame-src 'none';
   frame-ancestors 'none';
   object-src 'none';
