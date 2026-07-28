@@ -3,7 +3,6 @@ import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
 import type { ReactNode } from "react";
 import Card from "@/components/Card";
-import Comments from "@/components/Comments";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
 import Pill from "@/components/Pill";
@@ -24,7 +23,7 @@ export default function PostBanner({
 	prev,
 	children,
 }: LayoutProps) {
-	const { path, slug, date, title, tags, images, readingTime } = content;
+	const { path, date, title, tags, images, readingTime } = content;
 	const basePath = path.split("/")[0];
 
 	return (
@@ -78,12 +77,6 @@ export default function PostBanner({
 				>
 					{children}
 				</Card>
-
-				{siteMetadata.comments ? (
-					<Card padded>
-						<Comments slug={slug} />
-					</Card>
-				) : null}
 
 				{(prev || next) && (
 					<Card padded>

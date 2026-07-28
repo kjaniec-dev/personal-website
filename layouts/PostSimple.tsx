@@ -8,7 +8,6 @@ import {
 	BreadcrumbItem,
 	BreadcrumbSeparator,
 } from "@/components/ClientUI";
-import Comments from "@/components/Comments";
 import Link from "@/components/Link";
 import Pill from "@/components/Pill";
 import ScrollTopAndComment from "@/components/ScrollTopAndComment";
@@ -28,7 +27,7 @@ export default function PostSimple({
 	prev,
 	children,
 }: LayoutProps) {
-	const { path, slug, date, title, tags, readingTime } = content;
+	const { path, date, title, tags, readingTime } = content;
 	const basePath = path.split("/")[0];
 
 	return (
@@ -77,12 +76,6 @@ export default function PostSimple({
 				>
 					{children}
 				</Card>
-
-				{siteMetadata.comments ? (
-					<Card padded>
-						<Comments slug={slug} />
-					</Card>
-				) : null}
 
 				{(prev || next) && (
 					<Card padded>
