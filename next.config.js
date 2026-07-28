@@ -89,13 +89,7 @@ module.exports = () => {
 		},
 		// Experimental features for better performance
 		experimental: {
-			optimizePackageImports: [
-				"@headlessui/react",
-				"pliny",
-				"react-icons",
-				"@algolia/client-search",
-				"algoliasearch",
-			],
+			optimizePackageImports: ["pliny", "react-icons"],
 		},
 		async headers() {
 			return [
