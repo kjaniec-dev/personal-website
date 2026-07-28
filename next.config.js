@@ -7,13 +7,18 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.mapbox.com *.umami.is;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.mapbox.com https://*.umami.is https://us.umami.is;
   style-src 'self' 'unsafe-inline';
-  img-src * blob: data: *.mapbox.com;
-  media-src *.s3.amazonaws.com *.mapbox.com;
-  connect-src *;
-  font-src 'self' *.mapbox.com;
-  frame-src giscus.app
+  img-src 'self' blob: data: https:;
+  media-src 'self' https://*.s3.amazonaws.com https://*.mapbox.com;
+  connect-src 'self' https://*.mapbox.com https://*.umami.is https://us.umami.is;
+  font-src 'self' data: https://*.mapbox.com;
+  frame-src 'none';
+  frame-ancestors 'none';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+  upgrade-insecure-requests;
 `;
 
 const securityHeaders = [
@@ -45,12 +50,22 @@ const securityHeaders = [
 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
 	{
 		key: "Strict-Transport-Security",
-		value: "max-age=31536000; includeSubDomains",
+		value: "max-age=63072000; includeSubDomains; preload",
+	},
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy
+	{
+		key: "Cross-Origin-Opener-Policy",
+		value: "same-origin",
+	},
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy
+	{
+		key: "Cross-Origin-Resource-Policy",
+		value: "same-origin",
 	},
 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
 	{
 		key: "Permissions-Policy",
-		value: "camera=(), microphone=(), geolocation=()",
+		value: "camera=(), microphone=(), geolocation=(), payment=()",
 	},
 ];
 
