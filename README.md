@@ -4,10 +4,12 @@ A modern, high-performance personal portfolio website built with Next.js 16, fea
 
 ## Tech Stack
 
-- **Next.js 16** with App Router and React Server Components
-- **TypeScript** with strict null checks
-- **Tailwind CSS v4** for styling with dark/light theme support
+- **Next.js 16** with App Router and React 19 Server Components
+- **TypeScript** with strict type checking
+- **Tailwind CSS v4** with custom design system (`@kjaniec-dev/ui` & `@kjaniec-dev/design`)
 - **Contentlayer2** for type-safe MDX content management
+- **Biome** for fast linting and code formatting
+- **Vitest** for unit testing
 - **Pliny** library for blog utilities
 - **KBar** for command palette search
 - **next-themes** for theme management
@@ -30,7 +32,7 @@ A modern, high-performance personal portfolio website built with Next.js 16, fea
 
 ### Prerequisites
 
-- Node.js 18+ and npm
+- Node.js 18+ / Bun and npm
 
 ### Installation
 
@@ -53,13 +55,16 @@ npm run dev          # Start development server
 npm run build        # Production build
 npm run serve        # Start production server
 npm run analyze      # Bundle analysis
+npm run sync-design  # Sync design system tokens
 ```
 
-**Code Quality:**
+**Testing & Code Quality:**
 
 ```bash
-npm run lint         # ESLint check (must pass with 0 warnings)
-npm run lint:fix     # Auto-fix linting issues
+npm run lint         # Biome linter check
+npm run lint:fix     # Auto-fix linting issues with Biome
+npm run format       # Format code with Biome
+npm run test         # Run unit tests with Vitest
 ```
 
 ## Content Management
@@ -145,7 +150,7 @@ Umami Analytics integration for privacy-friendly visitor tracking and Web Vitals
 
 ## License
 
-[MIT License](https://github.com/kjaniec-dev/personal-site) © [Krzysztof Janiec](https://kjaniec.dev)
+[MIT License](https://github.com/kjaniec-dev/personal-website) © [Krzysztof Janiec](https://kjaniec.dev)
 
 ## Credits
 

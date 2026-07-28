@@ -7,7 +7,7 @@ const siteMetadata = {
 	language: "en-us",
 	theme: "dark", // system, dark or light
 	siteUrl: "https://kjaniec.dev",
-	siteRepo: "https://github.com/kjaniec-dev/personal-site",
+	siteRepo: "https://github.com/kjaniec-dev/personal-website",
 	siteLogo: "/static/images/logo.png",
 	socialBanner: "/static/images/twitter-card.png",
 	email: "contact@kjaniec.dev",
