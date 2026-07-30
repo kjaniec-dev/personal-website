@@ -3,6 +3,7 @@ import { allAuthors } from "contentlayer/generated";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
 import Card from "@/components/Card";
 import { MetricCard, PageHeader, SectionHeader } from "@/components/ClientUI";
+import DownloadCvButton from "@/components/DownloadCvButton";
 import Image from "@/components/Image";
 import { components } from "@/components/MDXComponents";
 import Pill from "@/components/Pill";
@@ -37,13 +38,20 @@ export default function About() {
 						/>
 					) : null}
 					<div className="space-y-4">
-						<div className="space-y-1">
-							<h3 className="font-sans text-2xl font-bold tracking-tight text-foreground">
-								Senior Software Engineer
-							</h3>
-							<p className="font-mono text-xs font-semibold text-primary uppercase tracking-wider">
-								B2B Contractor • Remote Specialist
-							</p>
+						<div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+							<div className="space-y-1">
+								<h3 className="font-sans text-2xl font-bold tracking-tight text-foreground">
+									Senior Software Engineer
+								</h3>
+								<p className="font-mono text-xs font-semibold text-primary uppercase tracking-wider">
+									B2B Contractor • Remote Specialist
+								</p>
+							</div>
+							<DownloadCvButton
+								variant="secondary"
+								size="sm"
+								className="shrink-0 self-start"
+							/>
 						</div>
 						<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-border/40">
 							<MetricCard
