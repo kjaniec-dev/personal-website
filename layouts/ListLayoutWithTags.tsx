@@ -3,18 +3,18 @@
 import tagData from "app/tag-data.json";
 import type { Blog } from "contentlayer/generated";
 import { slug } from "github-slugger";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
 import Card from "@/components/Card";
-import { PageHeader } from "@/components/ClientUI";
+import { PageHeader, Pagination } from "@/components/ClientUI";
 import Link from "@/components/Link";
 import Pill from "@/components/Pill";
 import ProjectCard from "@/components/ProjectCard";
 import type { Project } from "@/data/projectsData";
 import siteMetadata from "@/data/siteMetadata";
 
-interface PaginationProps {
+interface ListPaginationProps {
 	totalPages: number;
 	currentPage: number;
 }
@@ -23,51 +23,28 @@ interface ListLayoutProps {
 	posts: CoreContent<Blog>[];
 	title: string;
 	initialDisplayPosts?: CoreContent<Blog>[];
-	pagination?: PaginationProps;
+	pagination?: ListPaginationProps;
 	projects?: Project[];
 }
 
-function Pagination({ totalPages, currentPage }: PaginationProps) {
+function ListPagination({ totalPages, currentPage }: ListPaginationProps) {
 	const pathname = usePathname();
-	const basePath = pathname?.split("/")[1] ?? "blog";
-	const prevPage = currentPage - 1 > 0;
-	const nextPage = currentPage + 1 <= totalPages;
+	const router = useRouter();
+	const basePath = (pathname ?? "/blog").replace(/\/page\/\d+$/, "") || "/blog";
+
+	const hrefForPage = (page: number) =>
+		page <= 1 ? basePath : `${basePath}/page/${page}`;
 
 	return (
-		<nav
-			aria-label="Pagination"
-			className="mt-12 flex items-center justify-between"
-		>
-			{prevPage ? (
-				<Link
-					href={
-						currentPage - 1 === 1
-							? `/${basePath}`
-							: `/${basePath}/page/${currentPage - 1}`
-					}
-					className="rounded-kj-lg border border-border bg-surface px-4 py-2 font-sans text-sm font-semibold text-foreground transition-colors hover:bg-subtle"
-					rel="prev"
-				>
-					← Previous
-				</Link>
-			) : (
-				<span />
-			)}
-			<span className="font-mono text-xs text-muted-foreground">
-				Page {currentPage} of {totalPages}
-			</span>
-			{nextPage ? (
-				<Link
-					href={`/${basePath}/page/${currentPage + 1}`}
-					className="rounded-kj-lg border border-border bg-surface px-4 py-2 font-sans text-sm font-semibold text-foreground transition-colors hover:bg-subtle"
-					rel="next"
-				>
-					Next →
-				</Link>
-			) : (
-				<span />
-			)}
-		</nav>
+		<div className="mt-12 flex justify-center">
+			<Pagination
+				page={currentPage}
+				pageCount={totalPages}
+				onPageChange={(page) => {
+					router.push(hrefForPage(page));
+				}}
+			/>
+		</div>
 	);
 }
 
@@ -229,7 +206,7 @@ export default function ListLayoutWithTags({
 						})}
 
 						{pagination && pagination.totalPages > 1 ? (
-							<Pagination
+							<ListPagination
 								currentPage={pagination.currentPage}
 								totalPages={pagination.totalPages}
 							/>
