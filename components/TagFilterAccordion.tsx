@@ -89,7 +89,9 @@ export default function TagFilterAccordion({
 						className="space-y-2 rounded-none border-none bg-transparent overflow-visible"
 					>
 						{TAG_GROUPS.map((group) => {
-							const groupTags = group.tags.filter((tag) => tag in tagCounts);
+							const groupTags = group.tags
+								.filter((tag) => tag in tagCounts)
+								.sort((a, b) => tagCounts[b] - tagCounts[a]);
 
 							if (groupTags.length === 0) return null;
 

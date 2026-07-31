@@ -27,7 +27,6 @@ const tagCounts = Object.fromEntries(
 describe("TagFilterAccordion", () => {
 	it("renders mobile tag filter with five grouped sections", () => {
 		render(<TagFilterAccordion tagCounts={tagCounts} />);
-
 		const filterTrigger = screen.getByRole("button", {
 			name: /filtruj po tagach/i,
 		});
@@ -59,6 +58,17 @@ describe("TagFilterAccordion", () => {
 		expect(screen.getByText("7")).toBeDefined();
 	});
 
+	it("orders tags within each group by descending post count", () => {
+		navigation.pathname = "/tags/react";
+		render(<TagFilterAccordion tagCounts={tagCounts} />);
+
+		const links = screen.getAllByRole("link").map((link) => link.textContent);
+		expect(links.indexOf("#react11")).toBeLessThan(links.indexOf("#frontend1"));
+		expect(links.indexOf("#next-js7")).toBeLessThan(
+			links.indexOf("#frontend1"),
+		);
+	});
+
 	it("maps every generated tag to exactly one group", () => {
 		const mappedTags = TAG_GROUPS.flatMap((group) => group.tags);
 		const uniqueTags = new Set(mappedTags);
@@ -72,6 +82,7 @@ describe("TagFilterAccordion", () => {
 		const filterTrigger = screen.getByRole("button", {
 			name: /filtruj po tagach/i,
 		});
+
 		fireEvent.click(filterTrigger);
 		const categoryItem = container.querySelector(".bg-background");
 		const accordionRoot = container.querySelector(".border-none");
