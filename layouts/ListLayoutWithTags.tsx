@@ -11,12 +11,14 @@ import { PageHeader, Pagination } from "@/components/ClientUI";
 import Link from "@/components/Link";
 import Pill from "@/components/Pill";
 import ProjectCard from "@/components/ProjectCard";
+import TagFilterAccordion from "@/components/TagFilterAccordion";
 import type { Project } from "@/data/projectsData";
 import siteMetadata from "@/data/siteMetadata";
 
 interface ListPaginationProps {
 	totalPages: number;
 	currentPage: number;
+	className?: string;
 }
 
 interface ListLayoutProps {
@@ -27,7 +29,11 @@ interface ListLayoutProps {
 	projects?: Project[];
 }
 
-function ListPagination({ totalPages, currentPage }: ListPaginationProps) {
+function ListPagination({
+	totalPages,
+	currentPage,
+	className = "mt-12",
+}: ListPaginationProps) {
 	const pathname = usePathname();
 	const router = useRouter();
 	const basePath = (pathname ?? "/blog").replace(/\/page\/\d+$/, "") || "/blog";
@@ -36,7 +42,7 @@ function ListPagination({ totalPages, currentPage }: ListPaginationProps) {
 		page <= 1 ? basePath : `${basePath}/page/${page}`;
 
 	return (
-		<div className="mt-12 flex justify-center">
+		<div className={`${className} flex justify-center`}>
 			<Pagination
 				page={currentPage}
 				pageCount={totalPages}
@@ -71,8 +77,12 @@ export default function ListLayoutWithTags({
 				description={siteMetadata.description}
 			/>
 
+			<div className="lg:hidden">
+				<TagFilterAccordion tagCounts={tagCounts} />
+			</div>
+
 			<div className="grid gap-8 lg:grid-cols-[260px_1fr]">
-				<aside className="lg:sticky lg:top-24 lg:self-start">
+				<aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start">
 					<Card padded>
 						<h2 className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
 							Tags
@@ -137,6 +147,16 @@ export default function ListLayoutWithTags({
 								))}
 							</div>
 							<div className="border-b border-border/40 pb-2" />
+						</div>
+					) : null}
+
+					{pagination && pagination.totalPages > 1 ? (
+						<div data-testid="mobile-top-pagination" className="lg:hidden">
+							<ListPagination
+								className="mt-2"
+								currentPage={pagination.currentPage}
+								totalPages={pagination.totalPages}
+							/>
 						</div>
 					) : null}
 
@@ -206,10 +226,12 @@ export default function ListLayoutWithTags({
 						})}
 
 						{pagination && pagination.totalPages > 1 ? (
-							<ListPagination
-								currentPage={pagination.currentPage}
-								totalPages={pagination.totalPages}
-							/>
+							<div data-testid="bottom-pagination">
+								<ListPagination
+									currentPage={pagination.currentPage}
+									totalPages={pagination.totalPages}
+								/>
+							</div>
 						) : null}
 					</div>
 				</section>
