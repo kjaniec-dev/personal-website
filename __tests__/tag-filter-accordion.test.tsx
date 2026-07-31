@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import TagFilterAccordion from "@/components/TagFilterAccordion";
 import { TAG_GROUPS } from "@/data/tagGroups";
@@ -28,9 +28,12 @@ describe("TagFilterAccordion", () => {
 	it("renders mobile tag filter with five grouped sections", () => {
 		render(<TagFilterAccordion tagCounts={tagCounts} />);
 
-		expect(
-			screen.getByRole("button", { name: /filtruj po tagach/i }),
-		).toBeDefined();
+		const filterTrigger = screen.getByRole("button", {
+			name: /filtruj po tagach/i,
+		});
+
+		expect(filterTrigger).toBeDefined();
+		fireEvent.click(filterTrigger);
 		expect(screen.getByText("Frontend & UX")).toBeDefined();
 		expect(screen.getByText("Backend & Data")).toBeDefined();
 		expect(screen.getByText("Infrastructure & Reliability")).toBeDefined();
@@ -38,7 +41,18 @@ describe("TagFilterAccordion", () => {
 		expect(screen.getByText("Life & Productivity")).toBeDefined();
 	});
 
+	it("starts collapsed on the all-posts page", () => {
+		render(<TagFilterAccordion tagCounts={tagCounts} />);
+
+		expect(
+			screen
+				.getByRole("button", { name: /filtruj po tagach/i })
+				.getAttribute("aria-expanded"),
+		).toBe("false");
+	});
+
 	it("renders grouped tag links with their counts", () => {
+		navigation.pathname = "/tags/react";
 		render(<TagFilterAccordion tagCounts={tagCounts} />);
 
 		expect(screen.getByRole("link", { name: /#next-js/i })).toBeDefined();
@@ -58,12 +72,12 @@ describe("TagFilterAccordion", () => {
 		const filterTrigger = screen.getByRole("button", {
 			name: /filtruj po tagach/i,
 		});
+		fireEvent.click(filterTrigger);
 		const categoryItem = container.querySelector(".bg-background");
+		const accordionRoot = container.querySelector(".border-none");
 
 		expect(filterTrigger.className).toContain("px-3");
 		expect(filterTrigger.className).toContain("w-full");
-		const accordionRoot = container.querySelector(".border-none");
-
 		expect(categoryItem?.className).not.toContain("px-2");
 		expect(categoryItem?.className).toContain("overflow-hidden");
 		expect(accordionRoot?.className).toContain("overflow-visible");

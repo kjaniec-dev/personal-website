@@ -24,7 +24,7 @@ export default function TagFilterAccordion({
 	tagCounts,
 }: TagFilterAccordionProps) {
 	const pathname = usePathname();
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(pathname?.startsWith("/tags/") ?? false);
 	const activeTag = TAG_GROUPS.flatMap((group) => group.tags).find(
 		(tag) => pathname === `/tags/${slug(tag)}`,
 	);
