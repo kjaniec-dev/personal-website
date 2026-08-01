@@ -1,0 +1,163 @@
+---
+title: 'My VPS Has Zero Inbound Ports'
+date: '2026-08-01T10:00:00Z'
+lastmod: '2026-08-01'
+tags: ['cloudflare', 'security', 'devops', 'self-hosting']
+draft: false
+summary: 'Zero inbound ports on the VPS: outbound-only Cloudflare Tunnel, Access in front of admin panels, and the trade-offs people skip when they only move SSH to 2222.'
+layout: PostSimple
+---
+
+My VPS does not accept inbound connections.
+
+Not on port 22. Not on 80. Not on 443. Not on that clever non-standard SSH port people still treat like a security strategy.
+
+There is no public listener waiting for the internet. The only path in is an **outbound** tunnel started by the machine itself.
+
+That single architectural choice removes more attack surface than years of fiddling with `fail2ban`, UFW rule lists, and “security through obscurity” SSH ports.
+
+## The old model still assumes the internet can knock
+
+Most small-server security advice is still built on the same mental model:
+
+1. expose a service on a port,
+2. harden that port,
+3. monitor who knocks,
+4. ban the noisy ones.
+
+So people move SSH from 22 to 2222. They rate-limit logins. They install fail2ban. They feel safer.
+
+Some of that is still useful **if** you must expose a service. But it does not change the fundamental fact: something is listening. Scanners will find it. Credentials will get tested. A misconfigured panel will sit one bad day away from becoming an incident.
+
+Hardening an open door is not the same as not having a door on the street.
+
+## The tunnel model: only outbound traffic leaves the box
+
+[Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) (the daemon is `cloudflared`) flips the direction of trust.
+
+Roughly:
+
+```txt
+Internet → Cloudflare edge → (already-open tunnel) → your VPS service
+                ↑
+         cloudflared dials OUT
+```
+
+On the VPS you run `cloudflared`. It connects **out** to Cloudflare and keeps that channel alive. Public hostnames on your zone point at the tunnel, not at your server IP. Cloudflare terminates TLS at the edge and forwards traffic down the tunnel to a local service — `localhost:3000`, a Docker network alias, whatever you configure.
+
+From the outside, your provider IP does not need to advertise HTTP, HTTPS, or SSH. Firewall can default-deny inbound entirely. Scanners probing random IPs get nothing useful back.
+
+The “aha” is simple: **you stopped publishing a network surface**, instead of decorating the surface you already published.
+
+## What that looks like in practice
+
+I am not going to turn this into a full install walkthrough. Cloudflare’s docs cover install and token setup well. The shape of the config is what matters.
+
+A tunnel hostname maps to an origin that only the tunnel process can reach:
+
+```yaml
+# illustrative — not a full production file
+tunnel: <tunnel-id>
+credentials-file: /etc/cloudflared/credentials.json
+
+ingress:
+  - hostname: app.example.com
+    service: http://127.0.0.1:3000
+  - hostname: grafana.example.com
+    service: http://127.0.0.1:3001
+  - service: http_status:404
+```
+
+DNS for those hostnames is a CNAME (or Cloudflare-managed route) to the tunnel, not an A record to your VPS.
+
+Operationally you want `cloudflared` under systemd (or your process supervisor), auto-start on boot, logs somewhere you actually look, and a way to roll credentials if they leak.
+
+That is enough architecture for most side projects and small products: public apps on named hostnames, origins bound to loopback or private Docker networks, inbound firewall closed.
+
+## Cloudflare Access: identity before the origin
+
+Closing inbound ports is half the win. The other half is what sits **in front of** admin UIs.
+
+Portainer, Grafana, pgAdmin, custom admin routes, staging panels — these should not be “security by unknown URL.” With [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/policies/access/), you put an identity gate on the hostname **before** traffic ever reaches your app:
+
+- require login with your IdP / one-time PIN / GitHub / Google / whatever you trust,
+- optionally restrict by email domain or specific users,
+- optionally require a managed device posture policy if you go deeper into Zero Trust.
+
+So even if someone discovers `grafana.example.com`, they hit Cloudflare’s auth challenge, not your Grafana login form on a cold origin.
+
+That is a cleaner split of concerns:
+
+- **Tunnel** removes arbitrary inbound reachability to the machine.
+- **Access** removes anonymous reachability to sensitive hostnames.
+
+Your app can still have its own auth. Access is the outer door for things you would never put on the open internet on purpose.
+
+## Trade-offs (this is not free magic)
+
+Every strong architecture has a bill. This one does too.
+
+### Vendor coupling
+
+You are betting on Cloudflare’s edge, their tunnel control plane, and their Access product. Migrating off means redesigning ingress: reverse proxy, certificates, DNS, maybe a VPN. That is real lock-in. For many personal and small-business setups it is an acceptable trade. For some regulated or multi-cloud environments it is not.
+
+### When the tunnel dies, the public path dies
+
+If `cloudflared` crashes, the token is revoked, or Cloudflare has an incident on the path you depend on, your public hostnames go dark even if the VPS is healthy.
+
+Mitigations:
+
+- supervise the process properly (restart policies, health checks),
+- alert on tunnel disconnect,
+- keep a **break-glass** path that does not depend on the tunnel.
+
+### Break-glass access
+
+“No inbound SSH” is great until you need a shell and the tunnel is the thing that is broken.
+
+Plan the failure mode **before** you need it:
+
+- provider web console / serial console / recovery mode,
+- temporary firewall + SSH only from a known jump path if you must,
+- out-of-band secrets and runbooks stored somewhere other than “on the box you cannot reach.”
+
+Zero inbound is a production posture, not an excuse to skip recovery design.
+
+### You still secure the origin
+
+Tunnel and Access reduce who can talk to the machine and who can open admin hostnames. They do not patch your app, rotate your DB passwords, or fix a vulnerable container image. Defense in depth still applies **inside** the host and the stack.
+
+### Latency and features
+
+Traffic hairpins through Cloudflare. For most web apps that is fine and often a win (CDN, WAF, DDoS absorption). For weird protocols, raw TCP needs, or “I must own every packet path” constraints, evaluate carefully. HTTP(S) web apps and many TCP services are the sweet spot.
+
+## When this setup shines
+
+It is an excellent default when:
+
+- you run a single VPS or a small fleet of side-project boxes,
+- you self-host admin tools you refuse to leave open,
+- you want public HTTPS without opening 80/443 on the server,
+- you are tired of playing whack-a-mole with SSH noise in the logs,
+- you already use Cloudflare DNS and are fine depending on their edge.
+
+It is a weaker fit when:
+
+- you need fully provider-agnostic ingress with no third-party control plane,
+- compliance forbids this class of dependency,
+- you require exotic networking Cloudflare Tunnel does not model cleanly,
+- your team’s operational muscle is already built around classic reverse proxies and bastion hosts and switching would cost more than it saves.
+
+## The point is not “use Cloudflare”
+
+The point is the thesis:
+
+**Attack surface is an architecture choice.**
+
+Moving SSH to 2222 rearranges the surface. fail2ban mops the floor after people wipe their feet on it. Those tools still have roles in some designs.
+
+But if your threat model for a personal VPS is “random internet should not be able to connect to anything on this machine,” an outbound-only tunnel plus identity-aware Access is a cleaner answer than a prettier front door on a public port.
+
+My VPS has zero inbound ports on purpose. The internet talks to Cloudflare. Cloudflare talks down a tunnel my server opened. Admin panels ask who you are before my origin ever sees the request.
+
+That is the aha. Once you see it, going back to a publicly reachable SSH daemon feels strangely optional.

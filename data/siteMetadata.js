@@ -15,6 +15,7 @@ const siteMetadata = {
 	linkedin: "https://www.linkedin.com/in/kjaniec-dev",
 	docker: "https://hub.docker.com/u/kjaniec",
 	npm: "https://www.npmjs.com/~kjaniec-dev",
+	resume: "/static/files/resume.pdf",
 	locale: "en-US",
 	// title: 'Next.js Starter Blog',
 	// author: 'Tails Azimuth',
