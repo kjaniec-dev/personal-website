@@ -9,7 +9,7 @@ const siteMetadata = {
 	siteUrl: "https://kjaniec.dev",
 	siteRepo: "https://github.com/kjaniec-dev/personal-website",
 	siteLogo: "/static/images/logo.png",
-	socialBanner: "/static/images/twitter-card.png",
+	socialBanner: "/static/images/social-card.png",
 	email: "contact@kjaniec.dev",
 	github: "https://github.com/kjaniec-dev",
 	linkedin: "https://www.linkedin.com/in/kjaniec-dev",
