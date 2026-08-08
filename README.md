@@ -50,11 +50,12 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 **Development:**
 
 ```bash
-npm run dev          # Start development server
-npm run build        # Production build
-npm run serve        # Start production server
-npm run analyze      # Bundle analysis
-npm run sync-design  # Sync design system tokens
+npm run dev                # Start development server
+npm run build              # Production build
+npm run build:cloudflare   # Cloudflare production export build
+npm run serve              # Start production server
+npm run analyze            # Bundle analysis
+npm run sync-design        # Sync design system tokens
 ```
 
 **Testing & Code Quality:**
@@ -103,10 +104,12 @@ Global settings can be modified in `data/siteMetadata.js`.
 ```
 app/               # Next.js App Router pages & API routes
 components/        # Reusable React components
+css/               # Tailwind CSS v4 design tokens and styles
 data/              # Content and configuration files
   ├── blog/        # MDX blog posts
   ├── authors/     # Author profiles
   └── *.ts         # Data files for projects, experience, skills, etc.
+faq/               # FAQ markdown documents
 layouts/           # Page layout components
 scripts/           # Build and utility scripts
 public/            # Static assets
@@ -143,9 +146,9 @@ This site follows WCAG guidelines:
 - Open Graph and Twitter Card metadata
 - RSS feed generation
 
-## Analytics
+## Performance & Monitoring
 
-Umami Analytics integration for privacy-friendly visitor tracking and Web Vitals monitoring.
+Web Vitals integration for Core Web Vitals performance measurement and monitoring.
 
 ## License
 
