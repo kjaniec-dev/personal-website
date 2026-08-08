@@ -122,7 +122,7 @@ Edit TypeScript data files to update content:
 
 ### Site Configuration
 
-- **Global settings:** `data/siteMetadata.js` (title, author, URLs, analytics)
+- **Global settings:** `data/siteMetadata.js` (title, author, URLs, metadata)
 - **Navigation:** `data/headerNavLinks.ts`
 
 ## Contentlayer Pipeline
@@ -248,9 +248,6 @@ Edit `data/siteMetadata.js`
 - **Hero animation double-play (commit `caa5fa3`):** Fixed mobile remount issue with HeroAnimationWrapper
 - **Hero redesign (commit `d8e119e`):** Modern glassmorphic design, improved theme switch and search button
 
-## Analytics
+## Performance Monitoring
 
-- **Provider:** Umami Analytics
-- **Config:** `data/siteMetadata.js` (analytics.umamiAnalytics)
-- **Wrapper:** `components/AnalyticsWrapper.tsx` (dynamic import)
 - **Web Vitals:** Tracked via `components/WebVitals.tsx`

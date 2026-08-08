@@ -58,6 +58,7 @@ tsconfig.tsbuildinfo
 .playwright-mcp/
 .serena/
 .superpowers/
+.omo/
 .mcp.json
 .wrangler/
 
