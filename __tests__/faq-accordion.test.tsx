@@ -8,10 +8,10 @@ describe("FAQAccordion Component", () => {
 			{
 				question: "What is this?",
 				answer: "A test FAQ item.",
-				category: "general" as const,
+				category: "technical" as const,
 			},
 		];
-		render(<FAQAccordion items={mockItems} category="general" />);
+		render(<FAQAccordion items={mockItems} category="technical" />);
 		expect(screen.getByText("What is this?")).toBeDefined();
 	});
 });
