@@ -28,7 +28,7 @@ describe("TagFilterAccordion", () => {
 	it("renders mobile tag filter with five grouped sections", () => {
 		render(<TagFilterAccordion tagCounts={tagCounts} />);
 		const filterTrigger = screen.getByRole("button", {
-			name: /filtruj po tagach/i,
+			name: /filter by tags/i,
 		});
 
 		expect(filterTrigger).toBeDefined();
@@ -45,7 +45,7 @@ describe("TagFilterAccordion", () => {
 
 		expect(
 			screen
-				.getByRole("button", { name: /filtruj po tagach/i })
+				.getByRole("button", { name: /filter by tags/i })
 				.getAttribute("aria-expanded"),
 		).toBe("false");
 	});
@@ -80,7 +80,7 @@ describe("TagFilterAccordion", () => {
 	it("keeps filter trigger inset and grouped accordion full width", () => {
 		const { container } = render(<TagFilterAccordion tagCounts={tagCounts} />);
 		const filterTrigger = screen.getByRole("button", {
-			name: /filtruj po tagach/i,
+			name: /filter by tags/i,
 		});
 
 		fireEvent.click(filterTrigger);

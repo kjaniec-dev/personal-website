@@ -42,7 +42,7 @@ export default function TagFilterAccordion({
 				aria-controls={panelId}
 				onClick={() => setOpen((current) => !current)}
 			>
-				<span>Filtruj po tagach</span>
+				<span>Filter by tags</span>
 				<svg
 					className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
 					viewBox="0 0 24 24"
