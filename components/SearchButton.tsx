@@ -29,9 +29,10 @@ export default function SearchButton() {
 					/>
 				</svg>
 				<span className="hidden sm:inline font-sans font-semibold">Search</span>
-				<Kbd className="hidden md:inline-flex text-[10px]">
-					{isMac ? "⌘K" : "Ctrl+K"}
-				</Kbd>
+				<Kbd
+					keys={isMac ? ["⌘", "K"] : ["Ctrl", "K"]}
+					className="hidden md:inline-flex"
+				/>
 			</div>
 		</KBarButton>
 	);

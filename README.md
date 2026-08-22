@@ -55,7 +55,6 @@ npm run build              # Production build
 npm run build:cloudflare   # Cloudflare production export build
 npm run serve              # Start production server
 npm run analyze            # Bundle analysis
-npm run sync-design        # Sync design system tokens
 ```
 
 **Testing & Code Quality:**
