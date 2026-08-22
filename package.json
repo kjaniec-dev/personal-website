@@ -8,7 +8,6 @@
 		"build": "bun x contentlayer2 build && cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
 		"build:cloudflare": "cross-env EXPORT=1 UNOPTIMIZED=1 bun run build",
 		"serve": "next start",
-		"sync-design": "node scripts/sync-design.mjs",
 		"analyze": "cross-env ANALYZE=true next build",
 		"lint": "biome check .",
 		"lint:fix": "biome check --write .",
@@ -17,20 +16,20 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
-		"@kjaniec-dev/design": "0.9.2",
-		"@kjaniec-dev/ui": "0.9.2",
+		"@kjaniec-dev/design": "0.9.3",
+		"@kjaniec-dev/ui": "0.9.3",
 		"github-slugger": "2.0.0",
 		"kbar": "0.1.0-beta.48",
-		"next": "16.3.0",
+		"next": "16.3.2",
 		"next-themes": "0.4.6",
 		"pliny": "0.4.1",
 		"react": "19.2.8",
 		"react-dom": "19.2.8",
-		"web-vitals": "6.1.0"
+		"web-vitals": "6.1.1"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.7",
-		"@next/bundle-analyzer": "16.3.0",
+		"@biomejs/biome": "2.5.10",
+		"@next/bundle-analyzer": "16.3.2",
 		"@tailwindcss/forms": "0.5.11",
 		"@tailwindcss/postcss": "4.3.3",
 		"@tailwindcss/typography": "0.5.20",
@@ -38,7 +37,7 @@
 		"@testing-library/react": "16.3.2",
 		"@types/mdx": "2.0.14",
 		"@types/react": "19.2.18",
-		"@vitest/ui": "4.1.10",
+		"@vitest/ui": "4.1.11",
 		"contentlayer2": "0.5.8",
 		"cross-env": "10.1.0",
 		"hast-util-from-html-isomorphic": "2.0.0",
@@ -61,7 +60,7 @@
 		"sharp": "0.35.3",
 		"tailwindcss": "4.3.3",
 		"typescript": "7.0.2",
-		"vitest": "4.1.10"
+		"vitest": "4.1.11"
 	},
 	"overrides": {
 		"next-themes": "0.4.6"
