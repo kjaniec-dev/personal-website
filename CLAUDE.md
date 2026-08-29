@@ -7,24 +7,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Development:**
 
 ```bash
-npm run dev          # Start development server
-npm run build        # Production build (runs contentlayer + next build + postbuild script)
-npm run serve        # Start production server
-npm run analyze      # Bundle analysis with ANALYZE=true
+bun run dev          # Start development server
+bun run build        # Production build (runs contentlayer + next build + postbuild script)
+bun run serve        # Start production server
+bun run analyze      # Bundle analysis with ANALYZE=true
 ```
 
 **Code Quality:**
 
 ```bash
-npm run lint         # ESLint check (must pass with 0 warnings)
-npm run lint:fix     # Auto-fix linting issues
+bun run lint         # Biome check
+bun run lint:fix     # Auto-fix linting issues
+bun run test        # Run Vitest unit tests
 ```
 
 **Pre-commit:**
 
 - Husky runs lint-staged automatically on commit
-- Formats JS/JSX/TS/TSX/JSON/CSS/MD/MDX with Prettier
-- Lints and fixes JS/JSX/TS/TSX with ESLint
+- Checks and formats with Biome
 
 ## Architecture Overview
 

@@ -31,16 +31,16 @@ A modern, high-performance personal portfolio website built with Next.js 16, fea
 
 ### Prerequisites
 
-- Node.js 18+ / Bun and npm
+- Bun 1.0+ (or Node.js 18+)
 
 ### Installation
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Start development server
-npm run dev
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
@@ -50,20 +50,20 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 **Development:**
 
 ```bash
-npm run dev                # Start development server
-npm run build              # Production build
-npm run build:cloudflare   # Cloudflare production export build
-npm run serve              # Start production server
-npm run analyze            # Bundle analysis
+bun run dev                # Start development server
+bun run build              # Production build
+bun run build:cloudflare   # Cloudflare production export build
+bun run serve              # Start production server
+bun run analyze            # Bundle analysis
 ```
 
 **Testing & Code Quality:**
 
 ```bash
-npm run lint         # Biome linter check
-npm run lint:fix     # Auto-fix linting issues with Biome
-npm run format       # Format code with Biome
-npm run test         # Run unit tests with Vitest
+bun run lint         # Biome linter check
+bun run lint:fix     # Auto-fix linting issues with Biome
+bun run format       # Format code with Biome
+bun run test        # Run unit tests with Vitest
 ```
 
 ## Content Management

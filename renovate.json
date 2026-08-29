@@ -1,6 +1,12 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": ["config:recommended"],
+	"npm": {
+		"enabled": false
+	},
+	"bun": {
+		"enabled": true
+	},
 	"packageRules": [
 		{
 			"description": "Group all major updates together",
