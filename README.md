@@ -31,7 +31,7 @@ A modern, high-performance personal portfolio website built with Next.js 16, fea
 
 ### Prerequisites
 
-- Bun 1.0+ (or Node.js 18+)
+- Bun 1.0+ (or Node.js 24+)
 
 ### Installation
 
