@@ -26,8 +26,8 @@ If applicable, add screenshots to help explain your problem.
 **System Info (if dev / build issue):**
 
 - OS: [e.g. iOS]
-- Node version (please ensure you are using 18+)
-- Npm version
+- Bun / Node version (please ensure you are using Bun 1.0+ or Node.js 24+)
+- Package manager version
 
 **Browser Info (if display / formatting issue):**
 
