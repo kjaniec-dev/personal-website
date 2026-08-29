@@ -1,0 +1,102 @@
+---
+title: 'Docker Sandboxes for Claude Code and Codex'
+date: '2026-08-29T10:00:00Z'
+lastmod: '2026-08-29'
+tags: ['docker', 'security', 'devops', 'development']
+draft: false
+summary: 'A reusable Docker Sandbox setup for running Claude Code and Codex with a writable repository workspace while keeping the rest of the host outside the sandbox.'
+layout: PostSimple
+---
+
+AI coding agents are much more useful when they can inspect a real repository, run the project, install dependencies, execute tests, and make changes without asking for permission at every step.
+
+That also creates an obvious question:
+
+> What exactly can the agent access while it is doing all of that?
+
+I built [docker-sandboxes](https://github.com/kjaniec-dev/docker-sandboxes) to make that boundary explicit and repeatable for two tools I use: Claude Code and Codex.
+
+## Repository and documentation
+
+The project is available on [GitHub](https://github.com/kjaniec-dev/docker-sandboxes). The [usage guide](https://github.com/kjaniec-dev/docker-sandboxes/blob/main/docs/usage.md) covers authentication, ports, verification, rebuilds, and ways to extend the sandbox setup.
+
+## What the repository provides
+
+The repository contains two reusable Docker Sandbox harnesses:
+
+- `claude-sbx` for Claude Code,
+- `codex-sbx` for Codex.
+
+Both harnesses give the agent a writable workspace containing the selected Git repository. The rest of the host stays outside that workspace unless I explicitly add another path.
+
+The two harnesses use the same development toolchain, including:
+
+- Node.js and npm,
+- Go,
+- Python and uv,
+- Docker Engine and Compose,
+- Git and common shell/search tools,
+- Serena,
+- Playwright CLI,
+- OpenJDK, Maven, and Gradle.
+
+The Codex image also bootstraps Serena and Context7 as MCP servers, installs Superpowers into native Codex skill discovery, and includes the Playwright CLI skills for Codex.
+
+The goal is not to create a different development environment for every project. It is to have a known, disposable environment that is ready to work when I open a repository.
+
+## Why Docker?
+
+An AI agent can run commands just like a developer can. That is precisely why it should have a clear operating boundary.
+
+The selected repository is mounted read/write, because the agent needs to edit code, run tests, and update project files. Other host paths are not exposed by default. When the sandbox is running against another repository, the infrastructure repository itself is mounted read-only, so the bootstrap scripts remain available without making the harness source writable from inside the target environment.
+
+This is not a promise that Docker makes every operation harmless. A mounted repository can still be changed or deleted by the agent. It is a narrower and easier-to-understand boundary: give the agent the project it needs, and keep unrelated host data out of reach.
+
+Authentication and session state are managed outside the images. Credentials should not be copied into the image or committed to the repository.
+
+## Building the sandbox images
+
+After cloning the repository, the templates can be built with:
+
+```bash
+./bin/claude-sbx-rebuild
+./bin/codex-sbx-rebuild
+```
+
+The commands are intentionally separate. Claude Code and Codex can then use distinct sandbox environments and sessions without overlapping their agent configuration.
+
+To make the commands available globally, I can add symlinks to a directory on my `PATH`:
+
+```bash
+mkdir -p "$HOME/.local/bin"
+ln -sfn "$PWD/bin/claude-sbx" "$HOME/.local/bin/claude-sbx"
+ln -sfn "$PWD/bin/codex-sbx" "$HOME/.local/bin/codex-sbx"
+ln -sfn "$PWD/bin/claude-sbx-rebuild" "$HOME/.local/bin/claude-sbx-rebuild"
+ln -sfn "$PWD/bin/codex-sbx-rebuild" "$HOME/.local/bin/codex-sbx-rebuild"
+```
+
+## Starting a sandbox from a repository
+
+The harness uses a project-local `.worktrees/` directory. That directory should be ignored by the target repository before starting:
+
+```bash
+grep -qxF '.worktrees/' .gitignore || echo '.worktrees/' >> .gitignore
+```
+
+Then I can start the environment I need:
+
+```bash
+claude-sbx
+# or
+codex-sbx
+```
+
+From there, the agent can work in the repository with the development tools already available. Ports, authentication, verification, rebuilds, and extension points are covered in the [usage guide](https://github.com/kjaniec-dev/docker-sandboxes/blob/main/docs/usage.md).
+
+## A small project with a long tail
+
+This repository started from a practical need: I wanted agent sessions to have enough freedom to be useful without turning the whole host into their workspace.
+
+It is deliberately a starting point rather than a finished platform. I plan to keep expanding this repository as more ideas and useful sandboxing patterns appear. New projects will bring new requirements, and those requirements should become reusable improvements to the harnesses instead of one-off setup instructions copied between machines.
+
+If you work with Claude Code or Codex and want a repeatable Docker-based workspace, take a look at [github.com/kjaniec-dev/docker-sandboxes](https://github.com/kjaniec-dev/docker-sandboxes).
