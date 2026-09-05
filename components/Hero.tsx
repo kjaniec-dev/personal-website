@@ -1,225 +1,141 @@
-import HeroAnimationWrapper from "@/components/HeroAnimationWrapper";
+import HeroArtwork from "@/components/HeroArtwork";
 import Link from "@/components/Link";
 import siteMetadata from "@/data/siteMetadata";
-import techStackData from "@/data/techStackData";
 
 export default function Hero() {
 	return (
-		<HeroAnimationWrapper>
-			<section className="relative flex min-h-[70vh] items-center overflow-hidden pt-12 pb-8 md:pt-20 md:pb-10">
-				{/* Subtle background pattern of dots or grid */}
-				<div
-					className="pointer-events-none absolute inset-0 opacity-[0.025] dark:opacity-[0.04]"
-					style={{
-						backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm20 20h20v20H20V20z' fill='%23000' fill-opacity='.15' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-					}}
-				/>
-
-				<div className="mx-auto w-full max-w-7xl">
-					<div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-16">
-						{/* Left Column - Positioning and CTAs */}
-						<div className="space-y-8 lg:col-span-6 xl:col-span-7">
-							{/* Status Badge */}
-							<div className="inline-flex items-center gap-2.5 rounded-full border border-border bg-surface/60 px-3.5 py-1.5 shadow-kj-xs backdrop-blur-sm">
-								<span className="relative flex h-2 w-2">
-									<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-									<span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-								</span>
-								<span className="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
-									Available for senior contract roles
-								</span>
-							</div>
-
-							{/* Hero Headline */}
-							<div className="space-y-4">
-								<h1 className="hero-title-reveal font-sans text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
-									Crafting{" "}
-									<span className="text-primary font-extrabold">robust</span>{" "}
-									systems,
-									<br />
-									building elegant products.
-								</h1>
-							</div>
-
-							{/* Short bio / Positioning statement */}
-							<p className="hero-subtitle-reveal text-lg leading-relaxed text-muted-foreground max-w-2xl">
-								I'm{" "}
-								<span className="font-semibold text-foreground">
-									{siteMetadata.author}
-								</span>
-								, a Senior Software Engineer specializing in backend
-								architecture, performant full-stack development, and
-								developer-first design systems.
-							</p>
-
-							{/* Actions */}
-							<div className="hero-cta-reveal flex flex-wrap gap-4 pt-2">
-								<Link
-									href="/projects"
-									className="group inline-flex items-center justify-center gap-2 rounded-kj-lg bg-primary hover:bg-primary-hover px-6 py-3.5 font-semibold text-primary-foreground shadow-kj-glow transition-all duration-300 hover:-translate-y-0.5"
-								>
-									<span>Explore My Work</span>
-									<svg
-										className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<title>Arrow right icon</title>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											strokeWidth={2}
-											d="M17 8l4 4m0 0l-4 4m4-4H3"
-										/>
-									</svg>
-								</Link>
-
-								<Link
-									href="/blog"
-									className="group inline-flex items-center justify-center gap-2 rounded-kj-lg border border-border bg-surface hover:bg-subtle px-6 py-3.5 font-semibold text-foreground shadow-kj-sm transition-all duration-300 hover:-translate-y-0.5"
-								>
-									<span>Read My Insights</span>
-									<svg
-										className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<title>Arrow right icon</title>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											strokeWidth={2}
-											d="M17 8l4 4m0 0l-4 4m4-4H3"
-										/>
-									</svg>
-								</Link>
-							</div>
-						</div>
-
-						{/* Right Column - Premium SaaS / Code sandbox Widget */}
-						<div className="hero-description-reveal lg:col-span-6 xl:col-span-5 max-w-xl lg:max-w-none mx-auto w-full">
-							<div className="relative rounded-kj-2xl border border-border bg-surface p-6 shadow-kj-lg backdrop-blur-md">
-								{/* Card browser header */}
-								<div className="flex items-center justify-between border-b border-border pb-4 mb-5">
-									<div className="flex gap-1.5">
-										<span className="h-3 w-3 rounded-full bg-red-500/80"></span>
-										<span className="h-3 w-3 rounded-full bg-yellow-500/80"></span>
-										<span className="h-3 w-3 rounded-full bg-green-500/80"></span>
-									</div>
-									<Link
-										href="https://ui.kjaniec.dev"
-										className="text-xs font-semibold text-muted-foreground transition-colors hover:text-primary font-mono"
-									>
-										@kjaniec-dev/ui • Active
-									</Link>
-								</div>
-
-								{/* Mock content */}
-								<div className="space-y-5">
-									<div className="rounded-kj-lg border border-border bg-subtle p-4 space-y-2.5 transition-all duration-300 hover:border-primary/40">
-										<div className="flex justify-between items-center text-xs font-semibold text-muted-foreground font-mono">
-											<span>BACKEND ARCHITECTURE</span>
-											<span className="rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-bold text-primary tracking-wider uppercase">
-												ROBUST
-											</span>
-										</div>
-										<p className="text-lg font-bold text-foreground leading-tight">
-											Distributed &amp; Event-Driven Systems
-										</p>
-										<p className="text-xs leading-relaxed text-muted-foreground">
-											Designed enterprise microservices at REWE Digital,
-											Cinkciarz.pl, and Biot. Expert in transactional event
-											streams (Kafka, RabbitMQ) and high-scale Java/Spring Boot
-											&amp; TypeScript/Node.js backends.
-										</p>
-										<div className="flex flex-wrap items-center gap-2 pt-2 border-t border-border/40 text-[10px] font-semibold text-muted-foreground font-mono">
-											<div className="flex items-center gap-1">
-												<span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-												<span>Kafka Cluster: Healthy</span>
-											</div>
-											<span className="text-border/60">•</span>
-											<div className="flex items-center gap-1">
-												<span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-												<span>JVM / TS: Scaled</span>
-											</div>
-										</div>
-									</div>
-
-									<div className="rounded-kj-lg border border-border bg-subtle p-4 space-y-2.5 transition-all duration-300 hover:border-secondary/40">
-										<div className="flex justify-between items-center text-xs font-semibold text-muted-foreground font-mono">
-											<span>RICH FRONTEND &amp; WEBGL</span>
-											<span className="rounded-full bg-secondary/10 px-2 py-0.5 text-[9px] font-bold text-secondary tracking-wider uppercase">
-												ACTIVE
-											</span>
-										</div>
-										<p className="text-lg font-bold text-foreground leading-tight">
-											Performant UIs &amp; Interactive Graphics
-										</p>
-										<p className="text-xs leading-relaxed text-muted-foreground">
-											Created a custom 3D WebGL voxel engine in Babylon.js with
-											chunk streaming (60 FPS), real-time collaborative
-											workspace synchronization via WebSockets, and heavy
-											analytical React &amp; Angular UIs.
-										</p>
-										<div className="flex flex-wrap items-center gap-2 pt-2 border-t border-border/40 text-[10px] font-semibold text-muted-foreground font-mono">
-											<div className="flex items-center gap-1">
-												<span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-												<span>WebGL Render: 60 FPS</span>
-											</div>
-											<span className="text-border/60">•</span>
-											<div className="flex items-center gap-1">
-												<span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-												<span>WebSockets: Synchronized</span>
-											</div>
-										</div>
-									</div>
-
-									<div className="grid grid-cols-3 gap-2">
-										<div className="group rounded-kj-lg border border-border bg-subtle p-2.5 text-center transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 cursor-default">
-											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase transition-colors duration-300 group-hover:text-primary/70">
-												Experience
-											</p>
-											<p className="text-xs font-bold text-foreground mt-0.5 transition-colors duration-300 group-hover:text-primary">
-												12+ yrs
-											</p>
-										</div>
-										<div className="group rounded-kj-lg border border-border bg-subtle p-2.5 text-center transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 cursor-default">
-											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase transition-colors duration-300 group-hover:text-primary/70">
-												Backend
-											</p>
-											<p className="text-xs font-bold text-foreground mt-0.5 transition-colors duration-300 group-hover:text-primary">
-												Java &amp; Node
-											</p>
-										</div>
-										<div className="group rounded-kj-lg border border-border bg-subtle p-2.5 text-center transition-all duration-300 hover:border-secondary/40 hover:bg-secondary/5 cursor-default">
-											<p className="text-[9px] font-bold text-muted-foreground tracking-wider uppercase transition-colors duration-300 group-hover:text-secondary/70">
-												Frontend
-											</p>
-											<p className="text-xs font-bold text-foreground mt-0.5 transition-colors duration-300 group-hover:text-secondary">
-												React &amp; Angular
-											</p>
-										</div>
-									</div>
-
-									{/* Tech stack */}
-									<div className="flex flex-wrap gap-1.5 pt-1">
-										{techStackData.map((item) => (
-											<span
-												key={item.name}
-												className="rounded-kj-sm border border-border bg-subtle px-2 py-0.5 font-mono text-[10px] font-semibold text-muted-foreground transition-all duration-300 hover:border-primary/40 hover:bg-primary/5 hover:text-primary cursor-default"
-											>
-												{item.short ?? item.name}
-											</span>
-										))}
-									</div>
-								</div>
-							</div>
-						</div>
+		<section
+			aria-labelledby="hero-title"
+			className="relative isolate pt-12 pb-4 sm:pt-16 sm:pb-6"
+		>
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,var(--color-primary),transparent)] opacity-[0.035] lg:left-[20%] dark:opacity-[0.045]"
+			/>
+			<div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-5 pr-4 sm:pr-6">
+				<div className="flex items-center gap-3">
+					<span aria-hidden="true" className="h-8 w-px bg-primary/70" />
+					<div className="space-y-1">
+						<p className="text-sm font-semibold text-foreground">
+							{siteMetadata.author}
+						</p>
+						<p className="font-mono text-xs text-muted-foreground">
+							Senior Software Engineer
+						</p>
 					</div>
 				</div>
-			</section>
-		</HeroAnimationWrapper>
+				<p className="flex items-center gap-2.5 rounded-full border border-border bg-surface/60 px-3.5 py-2 font-mono text-[10px] tracking-wide text-muted-foreground sm:text-[11px]">
+					<span
+						aria-hidden="true"
+						className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary ring-4 ring-primary/10"
+					/>
+					Available for contract work
+				</p>
+			</div>
+
+			<div className="mt-10 grid items-center gap-8 sm:mt-12 lg:mt-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-2">
+				<div className="relative z-10 min-w-0">
+					<p className="font-mono text-[10px] font-medium tracking-[0.08em] text-muted-foreground uppercase sm:text-[11px] sm:tracking-[0.14em]">
+						Full-stack · Architecture · DevOps
+					</p>
+					<h1
+						id="hero-title"
+						className="mt-5 text-[clamp(2.375rem,6.2vw,4.5rem)] leading-[1.06] font-medium tracking-[-0.055em] text-foreground"
+					>
+						<span className="block">From first idea</span>{" "}
+						<span className="block bg-linear-to-r from-primary via-primary to-primary-hover bg-clip-text text-transparent">
+							to production.
+						</span>
+					</h1>
+
+					<p className="mt-6 max-w-[29rem] text-base leading-relaxed text-muted-foreground sm:text-lg">
+						I design the architecture, build the product, and shape the
+						infrastructure — connecting every layer, from interface to
+						deployment.
+					</p>
+
+					<div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+						<Link
+							href={`mailto:${siteMetadata.email}`}
+							target="_self"
+							className="group inline-flex min-h-12 items-center justify-center gap-5 rounded-kj-lg border border-primary/50 bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-kj-glow transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+						>
+							Let's talk
+							<svg
+								aria-hidden="true"
+								className="h-4 w-4 motion-safe:transition-transform motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth={1.75}
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							>
+								<path d="M7 17 17 7M7 7h10v10" />
+							</svg>
+						</Link>
+						<Link
+							href="#selected-work"
+							className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-kj-sm px-1 py-3 text-sm font-medium text-foreground transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+						>
+							View selected work
+							<svg
+								aria-hidden="true"
+								className="h-4 w-4 motion-safe:transition-transform motion-safe:group-hover:translate-y-0.5"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth={1.75}
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							>
+								<path d="M12 5v14m-5-5 5 5 5-5" />
+							</svg>
+						</Link>
+					</div>
+				</div>
+				<div
+					className="pointer-events-none relative w-full max-w-[20rem] justify-self-center select-none sm:max-w-[22rem] lg:max-w-[25rem] lg:justify-self-end"
+					aria-hidden="true"
+				>
+					<p className="absolute top-0 left-4 font-mono text-[9px] tracking-[0.18em] text-muted-foreground uppercase sm:left-8">
+						Every layer. One engineer.
+					</p>
+					<HeroArtwork />
+					<div className="mx-2 mt-2 flex justify-between gap-2 border-t border-border/70 pt-4 font-mono text-[9px] text-muted-foreground sm:mx-8 sm:gap-3">
+						<span>
+							<span className="text-primary">01</span> Interface
+						</span>
+						<span>
+							<span className="text-primary">02</span> Systems
+						</span>
+						<span>
+							<span className="text-primary">03</span> Infrastructure
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div className="mt-10 grid gap-5 border-y border-border py-5 pr-4 sm:mt-14 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-10 sm:py-6 sm:pr-6">
+				<p className="flex items-baseline gap-3 sm:border-r sm:border-border sm:pr-10">
+					<span className="text-xl font-medium tracking-tight text-foreground">
+						12+ years
+					</span>
+					<span className="text-xs text-muted-foreground">
+						building software
+					</span>
+				</p>
+				<div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:justify-end sm:gap-x-8">
+					<p className="font-mono text-[10px] tracking-wide text-muted-foreground">
+						Experience at
+					</p>
+					<ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium tracking-tight text-foreground/80 sm:gap-x-8 sm:text-base">
+						<li>REWE Digital</li>
+						<li>Cinkciarz.pl</li>
+						<li>Biot</li>
+					</ul>
+				</div>
+			</div>
+		</section>
 	);
 }
