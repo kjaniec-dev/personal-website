@@ -87,7 +87,9 @@ export default function ThemeSwitch() {
 	}, []);
 
 	if (!mounted) {
-		return <div className="h-9 w-9" />;
+		return (
+			<div aria-hidden="true" className="h-12 w-12 shrink-0 md:h-10 md:w-10" />
+		);
 	}
 
 	const currentTheme = theme || "system";
@@ -96,10 +98,11 @@ export default function ThemeSwitch() {
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
-					variant="outline"
+					variant="ghost"
 					size="icon"
 					aria-label="Toggle theme"
-					className="rounded-full bg-surface hover:bg-subtle text-foreground shadow-sm border-border"
+					title="Change theme"
+					className="h-12 w-12 shrink-0 rounded-full text-muted-foreground hover:bg-subtle hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring md:h-10 md:w-10 [&_svg]:h-5 [&_svg]:w-5"
 				>
 					{currentTheme === "light" ? (
 						<SunIcon />

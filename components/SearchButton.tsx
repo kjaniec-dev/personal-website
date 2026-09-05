@@ -1,10 +1,10 @@
 "use client";
 
-import { KBarButton } from "pliny/search/KBarButton";
+import { useKBar } from "kbar";
 import { useEffect, useState } from "react";
-import { Kbd } from "@/components/ClientUI";
 
 export default function SearchButton() {
+	const { query } = useKBar();
 	const [isMac, setIsMac] = useState(false);
 
 	useEffect(() => {
@@ -12,28 +12,27 @@ export default function SearchButton() {
 	}, []);
 
 	return (
-		<KBarButton aria-label="Search">
-			<div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs text-muted-foreground hover:bg-subtle hover:text-foreground md:px-3.5 transition-colors cursor-pointer select-none">
-				<svg
-					className="h-4 w-4 text-muted-foreground"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<title>Search icon</title>
-					<path
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						strokeWidth={2}
-						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-					/>
-				</svg>
-				<span className="hidden sm:inline font-sans font-semibold">Search</span>
-				<Kbd
-					keys={isMac ? ["⌘", "K"] : ["Ctrl", "K"]}
-					className="hidden md:inline-flex"
+		<button
+			type="button"
+			onClick={() => query?.toggle()}
+			aria-label="Search"
+			title={`Search (${isMac ? "⌘" : "Ctrl"}+K)`}
+			className="inline-flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-subtle hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:h-10 md:w-10"
+		>
+			<svg
+				className="h-5 w-5"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
+				<title>Search icon</title>
+				<path
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					strokeWidth={2}
+					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 				/>
-			</div>
-		</KBarButton>
+			</svg>
+		</button>
 	);
 }

@@ -37,5 +37,10 @@ describe("ListLayoutWithTags pagination", () => {
 			"lg:hidden",
 		);
 		expect(screen.getByTestId("bottom-pagination")).toBeDefined();
+		expect(
+			screen
+				.getByRole("link", { name: "Browse all tags" })
+				.getAttribute("href"),
+		).toBe("/tags");
 	});
 });

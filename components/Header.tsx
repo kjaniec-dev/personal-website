@@ -1,7 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { Button } from "@/components/ClientUI";
+import HeaderNavLink from "@/components/HeaderNavLink";
 import Link from "@/components/Link";
 import MobileNav from "@/components/MobileNav";
 import SearchButton from "@/components/SearchButton";
@@ -10,11 +9,9 @@ import headerNavLinks from "@/data/headerNavLinks";
 import siteMetadata from "@/data/siteMetadata";
 
 export default function Header() {
-	const pathname = usePathname();
-
 	return (
-		<header className="sticky top-4 z-40 w-full rounded-full border border-border bg-surface/65 shadow-kj-md backdrop-blur-lg transition-all duration-300">
-			<div className="flex h-14 items-center justify-between gap-1.5 px-3 sm:px-4 md:gap-2.5 lg:gap-3 xl:gap-4 xl:px-6">
+		<header className="sticky top-4 z-40 w-full rounded-full border border-border bg-surface/65 backdrop-blur-lg">
+			<div className="flex h-14 items-center justify-between gap-1 px-4 md:gap-2.5 lg:gap-3 xl:gap-4 xl:px-6">
 				<Link
 					href="/"
 					aria-label={siteMetadata.headerTitle ?? "Home"}
@@ -26,7 +23,7 @@ export default function Header() {
 						alt="KJ Logo"
 						width={120}
 						height={32}
-						className="h-8 xl:h-9 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+						className="h-7 sm:h-8 xl:h-9 w-auto block dark:hidden object-contain transition-transform duration-300 group-hover:scale-[1.03]"
 					/>
 					{/* biome-ignore lint/performance/noImgElement: Native img is intentional to prevent Next.js responsive layout collapse at 1080px and optimize LCP */}
 					<img
@@ -34,47 +31,31 @@ export default function Header() {
 						alt="KJ Logo"
 						width={120}
 						height={32}
-						className="h-8 xl:h-9 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+						className="h-7 sm:h-8 xl:h-9 w-auto hidden dark:block object-contain transition-transform duration-300 group-hover:scale-[1.03]"
 					/>
 				</Link>
 
-				<nav className="hidden items-center gap-0.5 lg:gap-1 xl:gap-1.5 md:flex">
+				<nav
+					aria-label="Main navigation"
+					className="hidden items-center gap-0.5 lg:gap-1 xl:gap-1.5 md:flex"
+				>
 					{headerNavLinks
 						.filter((link) => link.href !== "/")
-						.map((link) => {
-							const active =
-								pathname === link.href || pathname?.startsWith(`${link.href}/`);
-							return (
-								<Link
-									key={link.title}
-									href={link.href}
-									className={`rounded-full px-2 py-1 md:px-2.5 md:py-1 lg:px-3 lg:py-1.5 xl:px-3.5 xl:py-1.5 font-sans text-xs md:text-sm font-medium transition-colors ${
-										active
-											? "bg-primary/10 text-primary font-semibold"
-											: "text-muted-foreground hover:bg-subtle hover:text-foreground"
-									}`}
-								>
-									{link.title}
-								</Link>
-							);
-						})}
+						.map((link) => (
+							<HeaderNavLink key={link.href} {...link} />
+						))}
 				</nav>
 
-				<div className="flex items-center gap-1 sm:gap-1.5 xl:gap-2">
+				<div className="flex shrink-0 items-center gap-0 sm:gap-1 xl:gap-2">
 					<SearchButton />
 					<ThemeSwitch />
 					{siteMetadata.email ? (
-						<Link
+						<a
 							href={`mailto:${siteMetadata.email}`}
-							className="hidden md:inline-flex"
+							className="hidden min-h-10 items-center justify-center gap-2 rounded-full bg-primary px-4 font-sans text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface md:inline-flex"
 						>
-							<Button
-								size="sm"
-								className="rounded-full font-sans text-xs font-semibold"
-							>
-								Let&apos;s talk
-							</Button>
-						</Link>
+							Let&apos;s talk <span aria-hidden="true">↗</span>
+						</a>
 					) : null}
 					<MobileNav />
 				</div>
