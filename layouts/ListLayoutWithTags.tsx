@@ -77,6 +77,15 @@ export default function ListLayoutWithTags({
 				description={siteMetadata.description}
 			/>
 
+			<nav aria-label="Blog navigation">
+				<Link
+					href="/tags"
+					className="inline-flex min-h-11 items-center gap-2 rounded-kj-md font-sans text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+				>
+					Browse all tags <span aria-hidden="true">→</span>
+				</Link>
+			</nav>
+
 			<div className="lg:hidden">
 				<TagFilterAccordion tagCounts={tagCounts} />
 			</div>

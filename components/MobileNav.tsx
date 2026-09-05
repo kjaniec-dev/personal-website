@@ -1,18 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button, Drawer } from "@/components/ClientUI";
+import HeaderNavLink from "@/components/HeaderNavLink";
 import headerNavLinks from "@/data/headerNavLinks";
-import Link from "./Link";
+import siteMetadata from "@/data/siteMetadata";
 
 export default function MobileNav() {
 	const [open, setOpen] = useState(false);
 	const [mounted, setMounted] = useState(false);
+	const panelId = useId();
+	const closeMenu = useCallback(() => setOpen(false), []);
 
 	useEffect(() => {
 		setMounted(true);
 	}, []);
+
+	useEffect(() => {
+		const closeOnDesktop = () => {
+			if (window.innerWidth >= 768) closeMenu();
+		};
+		window.addEventListener("resize", closeOnDesktop);
+		return () => window.removeEventListener("resize", closeOnDesktop);
+	}, [closeMenu]);
 
 	return (
 		<>
@@ -20,8 +31,11 @@ export default function MobileNav() {
 				variant="ghost"
 				size="icon"
 				aria-label="Toggle Menu"
+				aria-expanded={open}
+				aria-controls={mounted ? panelId : undefined}
+				aria-haspopup="dialog"
 				onClick={() => setOpen(true)}
-				className="md:hidden text-foreground hover:bg-subtle"
+				className="h-12 w-12 shrink-0 rounded-full text-muted-foreground hover:bg-subtle hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring md:hidden"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -40,27 +54,47 @@ export default function MobileNav() {
 
 			{mounted &&
 				createPortal(
-					<Drawer
-						open={open}
-						onClose={() => setOpen(false)}
-						side="right"
-						title="Navigation"
+					<div
+						id={panelId}
+						aria-hidden={!open}
+						inert={!open}
+						className="[&_[id=drawer-title]]:sr-only"
 					>
-						<div className="flex flex-col space-y-6 pt-2">
-							<nav className="flex flex-col space-y-3">
-								{headerNavLinks.map((link) => (
-									<Link
-										key={link.title}
-										href={link.href}
-										className="text-lg font-bold tracking-wider text-foreground hover:text-primary transition-colors py-2"
-										onClick={() => setOpen(false)}
-									>
-										{link.title}
-									</Link>
-								))}
-							</nav>
-						</div>
-					</Drawer>,
+						<Drawer
+							open={open}
+							onClose={closeMenu}
+							side="right"
+							title="Menu"
+							width="max-w-sm"
+						>
+							<div className="flex min-h-full flex-col gap-8">
+								<nav
+									aria-label="Mobile navigation"
+									className="flex flex-col gap-2"
+								>
+									{headerNavLinks.map((link) => (
+										<HeaderNavLink
+											key={link.href}
+											{...link}
+											mobile
+											onClick={closeMenu}
+										/>
+									))}
+								</nav>
+								{siteMetadata.email ? (
+									<div className="mt-auto border-t border-border pt-6 pb-[env(safe-area-inset-bottom)]">
+										<a
+											href={`mailto:${siteMetadata.email}`}
+											onClick={closeMenu}
+											className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-4 font-sans text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+										>
+											Let&apos;s talk <span aria-hidden="true">↗</span>
+										</a>
+									</div>
+								) : null}
+							</div>
+						</Drawer>
+					</div>,
 					document.body,
 				)}
 		</>
