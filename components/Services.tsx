@@ -43,7 +43,7 @@ export default function Services({ email }: { email: string }) {
 						>
 							<span
 								aria-hidden="true"
-								className="pt-1 font-mono text-lg leading-none tracking-tight text-muted-foreground"
+								className="pt-1 font-mono text-lg leading-none tracking-tight text-primary"
 							>
 								{String(index + 1).padStart(2, "0")}
 							</span>
