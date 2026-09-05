@@ -64,7 +64,7 @@ export default function Home() {
 			<Services email={email} />
 
 			{/* Featured Projects Section */}
-			<section className="space-y-8 my-16">
+			<section id="selected-work" className="space-y-8 my-16 scroll-mt-28">
 				<SectionHeader
 					kicker="Portfolio"
 					title="Featured Work"
