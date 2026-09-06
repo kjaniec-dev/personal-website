@@ -284,15 +284,18 @@
 		grid-template-rows: 1fr;
 	}
 
-	/* Premium visual active state highlight for opened FAQ accordions */
-	div:has(> button[aria-expanded="true"]) {
+	/* Keep the compact blog filter neutral while preserving existing accordion highlights. */
+	div:has(> button[aria-expanded="true"]):not(
+		[data-tag-filter],
+		[data-tag-filter] *
+	) {
 		border-color: var(--color-primary) !important;
 		box-shadow:
 			var(--shadow-kj-md),
 			0 0 15px -5px color-mix(in srgb, var(--color-primary) 30%, transparent) !important;
 	}
 
-	button[aria-expanded="true"] {
+	button[aria-expanded="true"]:not([data-tag-filter] *) {
 		background-color: color-mix(
 			in srgb,
 			var(--color-primary) 4%,

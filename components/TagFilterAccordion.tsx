@@ -8,7 +8,6 @@ import {
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-	Badge,
 	Button,
 } from "@/components/ClientUI";
 import Link from "@/components/Link";
@@ -24,20 +23,24 @@ export default function TagFilterAccordion({
 	tagCounts,
 }: TagFilterAccordionProps) {
 	const pathname = usePathname();
+	const basePath = pathname?.replace(/\/page\/\d+$/, "");
 	const [open, setOpen] = useState(pathname?.startsWith("/tags/") ?? false);
 	const activeTag = TAG_GROUPS.flatMap((group) => group.tags).find(
-		(tag) => pathname === `/tags/${slug(tag)}`,
+		(tag) => basePath === `/tags/${slug(tag)}`,
 	);
 	const activeGroup = TAG_GROUPS.find((group) =>
 		activeTag ? group.tags.includes(activeTag) : false,
 	);
 
 	return (
-		<div className="rounded-kj-lg border border-border/60 bg-surface p-4 lg:hidden">
+		<div
+			data-tag-filter=""
+			className="rounded-kj-lg border border-border bg-surface p-2 lg:hidden"
+		>
 			<Button
 				variant="ghost"
 				size="sm"
-				className="flex w-full items-center justify-between px-3 text-left font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground hover:bg-transparent"
+				className="flex min-h-11 w-full items-center justify-between px-3 text-left font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground hover:bg-subtle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
 				aria-expanded={open}
 				aria-controls={panelId}
 				onClick={() => setOpen((current) => !current)}
@@ -56,12 +59,13 @@ export default function TagFilterAccordion({
 			</Button>
 
 			{open ? (
-				<div id={panelId} className="mt-3">
+				<div id={panelId} className="mt-2">
 					<Link
 						href="/blog"
-						className={`mb-2 block rounded-kj-md px-2.5 py-2 font-sans text-sm transition-colors ${
-							pathname === "/blog"
-								? "bg-primary/10 font-semibold text-primary"
+						aria-current={basePath === "/blog" ? "page" : undefined}
+						className={`mb-2 flex min-h-11 items-center rounded-kj-md px-3 py-2 font-sans text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+							basePath === "/blog"
+								? "font-semibold text-primary underline underline-offset-4"
 								: "text-muted-foreground hover:bg-subtle hover:text-foreground"
 						}`}
 					>
@@ -69,15 +73,16 @@ export default function TagFilterAccordion({
 					</Link>
 
 					{activeTag ? (
-						<div className="mb-2 flex items-center justify-between gap-3 rounded-kj-md bg-primary/5 px-2.5 py-1.5">
+						<div className="mb-2 flex flex-wrap items-center justify-between gap-x-3 px-3">
 							<span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
 								Selected tag
 							</span>
 							<Link
 								href={`/tags/${slug(activeTag)}`}
 								aria-label={`Selected tag: #${activeTag}`}
+								className="inline-flex min-h-11 items-center rounded-sm font-mono text-xs text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
 							>
-								<Badge variant="primary">#{activeTag}</Badge>
+								#{activeTag}
 							</Link>
 						</div>
 					) : null}
@@ -86,7 +91,7 @@ export default function TagFilterAccordion({
 						key={pathname}
 						type="single"
 						defaultValue={activeGroup ? [activeGroup.id] : []}
-						className="space-y-2 rounded-none border-none bg-transparent overflow-visible"
+						className="rounded-none border-none bg-transparent overflow-visible"
 					>
 						{TAG_GROUPS.map((group) => {
 							const groupTags = group.tags
@@ -99,29 +104,30 @@ export default function TagFilterAccordion({
 								<AccordionItem
 									key={group.id}
 									value={group.id}
-									className="overflow-hidden rounded-kj-md border border-border/60 bg-background"
+									className="border-t border-border/60 first:border-t"
 								>
-									<AccordionTrigger className="py-2.5 text-left font-sans text-sm font-semibold text-foreground hover:no-underline">
+									<AccordionTrigger className="min-h-11 bg-transparent px-3 py-3 text-left font-sans text-sm font-medium text-foreground hover:bg-subtle hover:no-underline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary">
 										<span className="flex w-full items-center justify-between gap-3">
 											<span>{group.label}</span>
-											<span className="font-mono text-[11px] font-normal text-muted-foreground">
+											<span className="shrink-0 font-mono text-[11px] font-normal text-muted-foreground">
 												{groupTags.length} tags
 											</span>
 										</span>
 									</AccordionTrigger>
-									<AccordionContent className="pb-2">
-										<ul className="space-y-1 border-t border-border/40 pt-2">
+									<AccordionContent className="px-3 pb-3">
+										<ul className="space-y-1">
 											{groupTags.map((tag) => {
 												const tagSlug = slug(tag);
-												const active = pathname === `/tags/${tagSlug}`;
+												const active = basePath === `/tags/${tagSlug}`;
 
 												return (
 													<li key={tag}>
 														<Link
 															href={`/tags/${tagSlug}`}
-															className={`flex items-center justify-between rounded-kj-md px-2.5 py-1.5 font-sans text-sm transition-colors ${
+															aria-current={active ? "page" : undefined}
+															className={`flex min-h-11 items-center justify-between gap-3 rounded-kj-md px-3 py-2 font-sans text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
 																active
-																	? "bg-primary/10 font-semibold text-primary"
+																	? "bg-primary/5 font-semibold text-primary underline underline-offset-4"
 																	: "text-muted-foreground hover:bg-subtle hover:text-foreground"
 															}`}
 														>

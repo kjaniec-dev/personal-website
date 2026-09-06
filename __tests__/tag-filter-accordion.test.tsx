@@ -25,6 +25,24 @@ const tagCounts = Object.fromEntries(
 );
 
 describe("TagFilterAccordion", () => {
+	it("preserves the selected tag and expanded group on later tag pages", () => {
+		navigation.pathname = "/tags/react/page/2";
+		render(<TagFilterAccordion tagCounts={tagCounts} />);
+		expect(
+			screen.getByRole("link", { name: /selected tag: #react/i }),
+		).toBeDefined();
+		expect(
+			screen
+				.getByRole("link", { name: "#react11" })
+				.getAttribute("aria-current"),
+		).toBe("page");
+		expect(
+			screen
+				.getByRole("button", { name: /frontend & ux/i })
+				.getAttribute("aria-expanded"),
+		).toBe("true");
+	});
+
 	it("renders mobile tag filter with five grouped sections", () => {
 		render(<TagFilterAccordion tagCounts={tagCounts} />);
 		const filterTrigger = screen.getByRole("button", {
@@ -77,20 +95,25 @@ describe("TagFilterAccordion", () => {
 		expect([...uniqueTags].sort()).toEqual(Object.keys(tagData).sort());
 	});
 
-	it("keeps filter trigger inset and grouped accordion full width", () => {
-		const { container } = render(<TagFilterAccordion tagCounts={tagCounts} />);
+	it("keeps inset controls and separators without nested card frames", () => {
+		render(<TagFilterAccordion tagCounts={tagCounts} />);
 		const filterTrigger = screen.getByRole("button", {
 			name: /filter by tags/i,
 		});
 
 		fireEvent.click(filterTrigger);
-		const categoryItem = container.querySelector(".bg-background");
-		const accordionRoot = container.querySelector(".border-none");
+		const categoryItem = screen.getByRole("button", {
+			name: /frontend & ux/i,
+		}).parentElement;
+		const accordionRoot = categoryItem?.parentElement;
 
 		expect(filterTrigger.className).toContain("px-3");
 		expect(filterTrigger.className).toContain("w-full");
 		expect(categoryItem?.className).not.toContain("px-2");
-		expect(categoryItem?.className).toContain("overflow-hidden");
+		expect(categoryItem?.classList.contains("border")).toBe(false);
+		expect(categoryItem?.classList.contains("rounded-kj-md")).toBe(false);
+		expect(categoryItem?.classList.contains("first:border-t-0")).toBe(false);
+		expect(categoryItem?.classList.contains("first:border-t")).toBe(true);
 		expect(accordionRoot?.className).toContain("overflow-visible");
 	});
 
