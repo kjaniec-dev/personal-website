@@ -284,10 +284,12 @@
 		grid-template-rows: 1fr;
 	}
 
-	/* Keep the compact blog filter neutral while preserving existing accordion highlights. */
+	/* Portfolio accordions use local, neutral separators instead of glowing cards. */
 	div:has(> button[aria-expanded="true"]):not(
 		[data-tag-filter],
-		[data-tag-filter] *
+		[data-tag-filter] *,
+		[data-faq-accordion],
+		[data-faq-accordion] *
 	) {
 		border-color: var(--color-primary) !important;
 		box-shadow:
@@ -295,7 +297,10 @@
 			0 0 15px -5px color-mix(in srgb, var(--color-primary) 30%, transparent) !important;
 	}
 
-	button[aria-expanded="true"]:not([data-tag-filter] *) {
+	button[aria-expanded="true"]:not(
+		[data-tag-filter] *,
+		[data-faq-accordion] *
+	) {
 		background-color: color-mix(
 			in srgb,
 			var(--color-primary) 4%,
