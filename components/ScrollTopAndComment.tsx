@@ -35,6 +35,7 @@ const ScrollTopAndComment = () => {
 			}
 			label="Scroll to top"
 			variant="secondary"
+			className="border border-border bg-surface text-muted-foreground shadow-sm hover:bg-subtle hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
 			onClick={() => window.scrollTo({ top: 0 })}
 		/>
 	);

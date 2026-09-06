@@ -1,247 +1,198 @@
-"use client";
-
 import type { Authors, Blog } from "contentlayer/generated";
+import { slug } from "github-slugger";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
-import { type ReactNode, useEffect, useState } from "react";
-import Card from "@/components/Card";
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbSeparator,
-} from "@/components/ClientUI";
+import type { ReactNode } from "react";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
-import Pill from "@/components/Pill";
+import PostTableOfContents, {
+	type TocItem,
+} from "@/components/PostTableOfContents";
 import ScrollTopAndComment from "@/components/ScrollTopAndComment";
-import SectionContainer from "@/components/SectionContainer";
 import siteMetadata from "@/data/siteMetadata";
 
-export interface TocItem {
-	value: string;
-	depth: number;
-	url: string;
-}
+export type { TocItem } from "@/components/PostTableOfContents";
 
-interface LayoutProps {
+export interface PostLayoutProps {
 	content: CoreContent<Blog>;
-	authorDetails: CoreContent<Authors>[];
+	authorDetails?: CoreContent<Authors>[];
 	next?: { path: string; title: string };
 	prev?: { path: string; title: string };
 	toc?: TocItem[];
 	children: ReactNode;
+	showBanner?: boolean;
+	showSourceLinks?: boolean;
 }
 
-const editUrl = (path: string) =>
-	`${siteMetadata.siteRepo}/blob/main/data/${path}`;
-
-const discussUrl = (path: string) =>
-	`https://mobile.twitter.com/search?q=${encodeURIComponent(
-		`${siteMetadata.siteUrl}/${path}`,
-	)}`;
+const focus =
+	"focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary";
 
 export default function PostLayout({
 	content,
-	authorDetails,
+	authorDetails = [],
 	next,
 	prev,
 	toc = [],
 	children,
-}: LayoutProps) {
-	const { filePath, path, date, title, tags, readingTime } = content;
-	const basePath = path.split("/")[0];
-	const [activeId, setActiveId] = useState<string>("");
-
-	useEffect(() => {
-		if (!toc || toc.length === 0) return;
-
-		const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-			// Find headings that are visible in the viewport, prioritizing the one closest to top
-			const visibleHeadings = entries
-				.filter((entry) => entry.isIntersecting)
-				.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-
-			if (visibleHeadings.length > 0) {
-				setActiveId(visibleHeadings[0].target.id);
-			}
-		};
-
-		const observer = new IntersectionObserver(handleIntersection, {
-			rootMargin: "-80px 0px -70% 0px", // triggers when heading is in the upper part of screen
-		});
-
-		// Observe all elements that correspond to our TOC URLs
-		toc.forEach((item) => {
-			const id = item.url.replace(/^#/, "");
-			const el = document.getElementById(id);
-			if (el) observer.observe(el);
-		});
-
-		return () => observer.disconnect();
-	}, [toc]);
+	showBanner = false,
+	showSourceLinks = true,
+}: PostLayoutProps) {
+	const { filePath, path, date, title, summary, tags, images, readingTime } =
+		content;
+	const sections = toc.filter((item) => item.depth >= 2 && item.depth <= 3);
+	const banner = showBanner ? images?.[0] : undefined;
 
 	return (
-		<SectionContainer>
+		<article className="pt-12 pb-8 font-sans sm:pt-16">
 			<ScrollTopAndComment />
-			<article className="space-y-8 py-8">
-				<Card glow padded>
-					<Breadcrumb className="mb-4">
-						<BreadcrumbItem href="/">Home</BreadcrumbItem>
-						<BreadcrumbSeparator />
-						<BreadcrumbItem href="/blog">Blog</BreadcrumbItem>
-						<BreadcrumbSeparator />
-						<BreadcrumbItem>{title}</BreadcrumbItem>
-					</Breadcrumb>
-					<div className="space-y-4">
-						{tags && tags.length > 0 ? (
-							<div className="flex flex-wrap gap-1.5">
-								{tags.map((t) => (
-									<Pill key={t} tone="primary">
-										{t}
-									</Pill>
-								))}
-							</div>
-						) : null}
-						<h1 className="font-sans text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-							{title}
-						</h1>
-						<div className="flex flex-wrap items-center gap-3 font-mono text-xs text-muted-foreground">
-							<time dateTime={date}>
-								{formatDate(date, siteMetadata.locale)}
-							</time>
-							{readingTime && (
-								<>
-									<span>·</span>
-									<span>{readingTime.text}</span>
-								</>
-							)}
-							{authorDetails.map((author) => (
-								<span
-									key={author.name}
-									className="inline-flex items-center gap-2"
-								>
-									<span>·</span>
-									{author.avatar ? (
-										<Image
-											src={author.avatar}
-											width={20}
-											height={20}
-											alt="avatar"
-											className="rounded-full"
-										/>
-									) : null}
-									<span className="font-sans text-sm font-semibold text-foreground">
-										{author.name}
-									</span>
-								</span>
-							))}
-						</div>
-					</div>
-				</Card>
-
-				<div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-8 items-start">
-					<div className="min-w-0 space-y-8 w-full">
-						<Card
-							as="section"
-							padded
-							className="prose dark:prose-invert max-w-none"
-						>
-							{children}
-						</Card>
-					</div>
-
-					{toc && toc.length > 0 ? (
-						<aside className="sticky top-24 hidden lg:block self-start w-full">
-							<Card padded className="space-y-4">
-								<p className="font-mono text-xs font-bold tracking-[0.2em] text-primary uppercase">
-									Spis treści
-								</p>
-								<nav className="space-y-2.5 max-h-[60vh] overflow-y-auto pr-1 scrollbar-thin">
-									{toc.map((item) => {
-										const id = item.url.replace(/^#/, "");
-										const isActive = activeId === id;
-										return (
-											<a
-												key={item.url}
-												href={item.url}
-												className={`block text-xs leading-relaxed transition-all duration-200 hover:text-foreground font-sans ${
-													isActive
-														? "text-primary font-bold translate-x-1"
-														: "text-muted-foreground font-medium hover:translate-x-0.5"
-												}`}
-												style={{ paddingLeft: `${(item.depth - 2) * 12}px` }}
-											>
-												{item.value}
-											</a>
-										);
-									})}
-								</nav>
-							</Card>
-						</aside>
-					) : null}
-				</div>
-
-				<Card padded>
-					<div className="flex flex-wrap items-center justify-between gap-4 text-sm">
-						<Link
-							href={discussUrl(path)}
-							rel="nofollow"
-							className="font-mono font-semibold text-muted-foreground transition-colors hover:text-primary"
-						>
-							Discuss on Twitter
-						</Link>
-						<Link
-							href={editUrl(filePath)}
-							className="font-mono font-semibold text-muted-foreground transition-colors hover:text-primary"
-						>
-							View on GitHub
-						</Link>
-					</div>
-				</Card>
-
-				{(prev || next) && (
-					<Card padded>
-						<div className="flex flex-wrap items-stretch justify-between gap-4">
-							{prev ? (
-								<Link href={`/${prev.path}`} className="group flex flex-col">
-									<span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-										← Previous
-									</span>
-									<span className="font-sans text-base font-semibold text-foreground transition-colors group-hover:text-primary">
-										{prev.title}
-									</span>
-								</Link>
-							) : (
-								<span />
-							)}
-							{next ? (
-								<Link
-									href={`/${next.path}`}
-									className="group flex flex-col items-end text-right"
-								>
-									<span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
-										Next →
-									</span>
-									<span className="font-sans text-base font-semibold text-foreground transition-colors group-hover:text-primary">
-										{next.title}
-									</span>
-								</Link>
-							) : (
-								<span />
-							)}
-						</div>
-					</Card>
+			<header className="border-b border-border pb-8 sm:pb-10">
+				<Link
+					href="/blog"
+					className={`mb-6 inline-flex min-h-11 items-center gap-2 rounded-sm font-mono text-xs uppercase tracking-[0.2em] text-primary transition-colors hover:text-primary-hover ${focus}`}
+				>
+					<span aria-hidden="true">←</span> Back to the blog
+				</Link>
+				<h1 className="max-w-4xl text-balance break-words text-3xl font-medium leading-[1.15] tracking-tight text-foreground sm:text-5xl xl:text-6xl">
+					{title}
+				</h1>
+				{summary && (
+					<p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+						{summary}
+					</p>
 				)}
-
-				<div className="pt-2">
-					<Link
-						href={`/${basePath}`}
-						className="font-mono text-sm font-semibold text-primary transition-colors hover:text-primary-hover"
-					>
-						← Back to the blog
-					</Link>
+				<div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-muted-foreground">
+					{authorDetails.map((author) => (
+						<span
+							key={author.slug}
+							className="inline-flex items-center gap-2.5 text-foreground"
+						>
+							{author.avatar && (
+								<Image
+									src={author.avatar}
+									width={28}
+									height={28}
+									alt=""
+									className="h-7 w-7 rounded-full border border-border object-cover"
+								/>
+							)}
+							{author.name}
+						</span>
+					))}
+					<div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs">
+						<time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+						{readingTime && (
+							<>
+								<span aria-hidden="true">·</span>
+								<span>{readingTime.text}</span>
+							</>
+						)}
+					</div>
 				</div>
-			</article>
-		</SectionContainer>
+				{tags && tags.length > 0 && (
+					<ul
+						aria-label="Post tags"
+						className="mt-5 flex flex-wrap gap-x-4 gap-y-1"
+					>
+						{tags.map((tag) => (
+							<li key={tag}>
+								<Link
+									href={`/tags/${slug(tag)}`}
+									className={`inline-flex min-h-11 items-center rounded-sm font-mono text-xs text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary ${focus}`}
+								>
+									#{tag}
+								</Link>
+							</li>
+						))}
+					</ul>
+				)}
+				{banner && (
+					<Image
+						src={banner}
+						alt={title}
+						width={1600}
+						height={900}
+						sizes="(min-width: 1280px) 1024px, 100vw"
+						className="mt-8 aspect-video w-full rounded-2xl border border-border object-cover"
+						priority
+					/>
+				)}
+			</header>
+			<div
+				className={`grid min-w-0 gap-8 py-8 sm:py-10 ${sections.length > 0 ? "lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-10 xl:gap-14" : ""}`}
+			>
+				{sections.length > 0 && (
+					<PostTableOfContents key={path} toc={sections} />
+				)}
+				<div className="post-prose prose min-w-0 w-full dark:prose-invert lg:col-start-1 lg:row-start-1">
+					{children}
+				</div>
+			</div>
+			<footer className="border-t border-border">
+				{showSourceLinks && (
+					<div className="flex flex-wrap gap-x-6 gap-y-2 border-b border-border py-4">
+						<Link
+							href={`https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`}
+							rel="nofollow"
+							className={`inline-flex min-h-11 items-center rounded-sm text-sm text-muted-foreground hover:text-primary ${focus}`}
+						>
+							Discuss on Twitter{" "}
+							<span className="ml-2" aria-hidden="true">
+								↗
+							</span>
+						</Link>
+						<Link
+							href={`${siteMetadata.siteRepo}/blob/main/data/${filePath}`}
+							className={`inline-flex min-h-11 items-center rounded-sm text-sm text-muted-foreground hover:text-primary ${focus}`}
+						>
+							View on GitHub{" "}
+							<span className="ml-2" aria-hidden="true">
+								↗
+							</span>
+						</Link>
+					</div>
+				)}
+				{(prev || next) && (
+					<nav
+						aria-label="More posts"
+						className="grid divide-y divide-border border-b border-border sm:grid-cols-2 sm:divide-x sm:divide-y-0"
+					>
+						{prev && (
+							<Link
+								href={`/${prev.path}`}
+								rel="prev"
+								className={`group flex min-w-0 flex-col gap-3 py-6 sm:pr-6 ${focus}`}
+							>
+								<span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+									← Previous
+								</span>
+								<span className="text-lg font-medium leading-snug text-foreground transition-colors group-hover:text-primary">
+									{prev.title}
+								</span>
+							</Link>
+						)}
+						{next && (
+							<Link
+								href={`/${next.path}`}
+								rel="next"
+								className={`group flex min-w-0 flex-col gap-3 py-6 sm:col-start-2 sm:pl-6 ${focus}`}
+							>
+								<span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+									Next →
+								</span>
+								<span className="text-lg font-medium leading-snug text-foreground transition-colors group-hover:text-primary">
+									{next.title}
+								</span>
+							</Link>
+						)}
+					</nav>
+				)}
+				<Link
+					href="/blog"
+					className={`mt-5 inline-flex min-h-11 items-center rounded-sm text-sm font-medium text-primary transition-colors hover:text-primary-hover ${focus}`}
+				>
+					← Back to the blog
+				</Link>
+			</footer>
+		</article>
 	);
 }
