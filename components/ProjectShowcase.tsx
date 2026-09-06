@@ -1,7 +1,7 @@
-import { Badge } from "@/components/ClientUI";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
 import ProjectStack from "@/components/ProjectStack";
+import TechnologyBadge from "@/components/TechnologyBadge";
 import type { Project } from "@/data/projectsData";
 
 const panelAccents = [
@@ -50,13 +50,7 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
 							{project.tags?.length ? (
 								<div className="flex flex-wrap gap-1.5">
 									{project.tags.map((tag) => (
-										<Badge
-											key={tag}
-											variant="neutral"
-											className="font-mono text-[10px] uppercase tracking-wider"
-										>
-											{tag}
-										</Badge>
+										<TechnologyBadge key={tag}>{tag}</TechnologyBadge>
 									))}
 								</div>
 							) : null}

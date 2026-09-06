@@ -8,6 +8,7 @@ import type { CoreContent } from "pliny/utils/contentlayer";
 import BlogPostCard from "@/components/BlogPostCard";
 import { Pagination } from "@/components/ClientUI";
 import Link from "@/components/Link";
+import PortfolioPageHeader from "@/components/PortfolioPageHeader";
 import ProjectCard from "@/components/ProjectCard";
 import TagFilterAccordion from "@/components/TagFilterAccordion";
 import type { Project } from "@/data/projectsData";
@@ -75,22 +76,15 @@ export default function ListLayoutWithTags({
 
 	return (
 		<div className="pt-12 pb-8 font-sans sm:pt-16">
-			<header className="pb-10 sm:pb-14">
-				<p className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-primary">
-					Writing
-				</p>
-				<div className="grid gap-6 md:grid-cols-2 md:items-end md:gap-10">
-					<h1 className="min-w-0 break-words text-5xl font-medium leading-none tracking-tight text-foreground sm:text-6xl xl:text-7xl">
-						{heading}
-						<span className="text-primary">.</span>
-					</h1>
-					<p className="max-w-lg text-base leading-relaxed text-muted-foreground">
-						{activeTag
-							? `Notes, guides, and lessons learned while working with ${activeTag}.`
-							: "Notes on building software. Practical guides, tools I use, and lessons from projects along the way."}
-					</p>
-				</div>
-			</header>
+			<PortfolioPageHeader
+				eyebrow="Writing"
+				title={heading}
+				description={
+					activeTag
+						? `Notes, guides, and lessons learned while working with ${activeTag}.`
+						: "Notes on building software. Practical guides, tools I use, and lessons from projects along the way."
+				}
+			/>
 
 			<div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-y border-border py-2">
 				<p className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">

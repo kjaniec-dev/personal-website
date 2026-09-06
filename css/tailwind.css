@@ -320,7 +320,7 @@
 			content: none;
 		}
 		& blockquote {
-			border-left-color: var(--color-primary);
+			border-left-color: var(--color-secondary);
 			color: var(--color-muted-foreground);
 		}
 	}

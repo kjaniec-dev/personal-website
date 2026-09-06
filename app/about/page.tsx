@@ -1,10 +1,13 @@
 import { genPageMetadata } from "app/seo";
 import { allAuthors } from "contentlayer/generated";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
+import ContactCTA from "@/components/ContactCTA";
 import DownloadCvButton from "@/components/DownloadCvButton";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
 import { components } from "@/components/MDXComponents";
+import PortfolioPageHeader from "@/components/PortfolioPageHeader";
+import TechnologyBadge from "@/components/TechnologyBadge";
 import educationData from "@/data/educationData";
 import experienceData from "@/data/experienceData";
 import siteMetadata from "@/data/siteMetadata";
@@ -65,20 +68,11 @@ export default function About() {
 
 	return (
 		<div className="pt-12 pb-8 font-sans sm:pt-16">
-			<header className="pb-10 sm:pb-14">
-				<p className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-primary">
-					Behind the work
-				</p>
-				<div className="grid gap-6 md:grid-cols-2 md:items-end md:gap-10">
-					<h1 className="text-5xl font-medium leading-none tracking-tight text-foreground sm:text-6xl xl:text-7xl">
-						About<span className="text-primary">.</span>
-					</h1>
-					<p className="max-w-lg text-base leading-relaxed text-muted-foreground">
-						Senior software engineer based in Poland. Full-stack development,
-						systems architecture, and a product mindset.
-					</p>
-				</div>
-			</header>
+			<PortfolioPageHeader
+				eyebrow="Behind the work"
+				title="About"
+				description="Senior software engineer based in Poland. Full-stack development, systems architecture, and a product mindset."
+			/>
 
 			<dl className="grid grid-cols-3 gap-3 border-y border-border py-5 sm:gap-8 sm:py-6">
 				{[
@@ -126,7 +120,7 @@ export default function About() {
 						<DownloadCvButton
 							variant="outline"
 							size="md"
-							className="mt-5 min-h-11 rounded-full border-border bg-transparent px-5 text-foreground shadow-none hover:bg-subtle focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+							className="mt-5 min-h-11 rounded-full px-5"
 						/>
 					</div>
 				</div>
@@ -195,11 +189,8 @@ export default function About() {
 										className="mt-6 flex flex-wrap gap-2"
 									>
 										{entry.tags.map((tag) => (
-											<li
-												key={tag}
-												className="rounded-md border border-border px-2.5 py-1 font-mono text-[11px] leading-relaxed text-muted-foreground"
-											>
-												{tag}
+											<li key={tag} className="min-w-0 max-w-full">
+												<TechnologyBadge>{tag}</TechnologyBadge>
 											</li>
 										))}
 									</ul>
@@ -266,31 +257,12 @@ export default function About() {
 				</section>
 			</div>
 
-			{siteMetadata.email && (
-				<section
-					aria-labelledby="about-contact-heading"
-					className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:p-8"
-				>
-					<div className="space-y-2">
-						<h2
-							id="about-contact-heading"
-							className="text-2xl font-medium tracking-tight text-foreground"
-						>
-							Let's build something together.
-						</h2>
-						<p className="text-sm leading-relaxed text-muted-foreground">
-							Remote collaboration, on a B2B basis.
-						</p>
-					</div>
-					<Link
-						href={`mailto:${siteMetadata.email}`}
-						target="_self"
-						className="inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-					>
-						Let's talk <span aria-hidden="true">↗</span>
-					</Link>
-				</section>
-			)}
+			<ContactCTA
+				headingId="about-contact-heading"
+				title="Let's build something together."
+				description="Remote collaboration, on a B2B basis."
+				email={siteMetadata.email}
+			/>
 		</div>
 	);
 }
