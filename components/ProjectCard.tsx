@@ -1,5 +1,6 @@
 import Image from "@/components/Image";
 import Link from "@/components/Link";
+import TechnologyBadge from "@/components/TechnologyBadge";
 import type { ProjectStatus } from "@/data/projectsData";
 
 interface ProjectCardProps {
@@ -86,12 +87,7 @@ export default function ProjectCard({
 				{tags.length > 0 ? (
 					<div className="flex flex-wrap gap-1.5">
 						{tags.map((t) => (
-							<span
-								key={t}
-								className="rounded-md border border-border bg-surface px-2 py-1 font-mono text-[10px] text-muted-foreground"
-							>
-								{t}
-							</span>
+							<TechnologyBadge key={t}>{t}</TechnologyBadge>
 						))}
 					</div>
 				) : null}

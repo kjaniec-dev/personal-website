@@ -1,5 +1,4 @@
 import type { Authors, Blog } from "contentlayer/generated";
-import { slug } from "github-slugger";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
 import type { ReactNode } from "react";
@@ -9,6 +8,7 @@ import PostTableOfContents, {
 	type TocItem,
 } from "@/components/PostTableOfContents";
 import ScrollTopAndComment from "@/components/ScrollTopAndComment";
+import TopicLink from "@/components/TopicLink";
 import siteMetadata from "@/data/siteMetadata";
 
 export type { TocItem } from "@/components/PostTableOfContents";
@@ -94,13 +94,8 @@ export default function PostLayout({
 						className="mt-5 flex flex-wrap gap-x-4 gap-y-1"
 					>
 						{tags.map((tag) => (
-							<li key={tag}>
-								<Link
-									href={`/tags/${slug(tag)}`}
-									className={`inline-flex min-h-11 items-center rounded-sm font-mono text-xs text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary ${focus}`}
-								>
-									#{tag}
-								</Link>
+							<li key={tag} className="min-w-0 max-w-full">
+								<TopicLink tag={tag} />
 							</li>
 						))}
 					</ul>

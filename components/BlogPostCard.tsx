@@ -1,7 +1,7 @@
 import type { Blog } from "contentlayer/generated";
-import { slug } from "github-slugger";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import Link from "@/components/Link";
+import TopicLink from "@/components/TopicLink";
 import siteMetadata from "@/data/siteMetadata";
 
 export default function BlogPostCard({ post }: { post: CoreContent<Blog> }) {
@@ -43,13 +43,8 @@ export default function BlogPostCard({ post }: { post: CoreContent<Blog> }) {
 					className="mt-4 flex flex-wrap gap-x-4 gap-y-1"
 				>
 					{tags.map((tag) => (
-						<li key={tag}>
-							<Link
-								href={`/tags/${slug(tag)}`}
-								className="inline-flex min-h-9 items-center rounded-sm font-mono text-xs text-muted-foreground transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-							>
-								#{tag}
-							</Link>
+						<li key={tag} className="min-w-0 max-w-full">
+							<TopicLink tag={tag} />
 						</li>
 					))}
 				</ul>
