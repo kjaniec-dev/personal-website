@@ -65,9 +65,9 @@ const faqData: FAQItem[] = [
 		category: "work",
 	},
 	{
-		question: "Are you open to freelance or contract work?",
+		question: "Are you open to part-time freelance or contract work?",
 		answer:
-			"I'm open to discussing future freelance and contract work, with at least 3 months before starting a new project. Reach out via email or LinkedIn to discuss the scope and timing. I'm particularly interested in modern web technologies and system architecture.",
+			"I'm open to discussing part-time freelance and contract work. My availability can be shorter than the notice needed for a new full-time role, depending on the scope and timing. Reach out via email or LinkedIn to discuss the details. I'm particularly interested in modern web technologies and system architecture.",
 		category: "work",
 	},
 	{
@@ -96,7 +96,7 @@ const faqData: FAQItem[] = [
 	{
 		question: "What's your notice period for new projects?",
 		answer:
-			"At least 3 months. Reach out early if you have specific timelines so we can plan accordingly.",
+			"For a new full-time role, I need at least 3 months' notice. Part-time work may be possible sooner, depending on the scope and my availability at the time. Reach out early if you have specific timelines so we can plan accordingly.",
 		category: "work",
 	},
 

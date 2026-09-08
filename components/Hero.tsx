@@ -30,10 +30,10 @@ export default function Hero() {
 							aria-hidden="true"
 							className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary ring-4 ring-primary/10"
 						/>
-						Open to future contracts
+						Open to part-time opportunities
 					</p>
 					<p className="text-xs text-muted-foreground">
-						Minimum 3 months before starting
+						Availability depends on scope and timing
 					</p>
 				</div>
 			</div>
