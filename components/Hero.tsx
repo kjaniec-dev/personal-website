@@ -24,13 +24,18 @@ export default function Hero() {
 						</p>
 					</div>
 				</div>
-				<p className="flex items-center gap-2.5 rounded-full border border-border bg-surface/60 px-3.5 py-2 font-mono text-[10px] tracking-wide text-muted-foreground sm:text-[11px]">
-					<span
-						aria-hidden="true"
-						className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary ring-4 ring-primary/10"
-					/>
-					Available for contract work
-				</p>
+				<div className="space-y-2 sm:text-right">
+					<p className="inline-flex items-center gap-2.5 rounded-full border border-border bg-surface/60 px-3.5 py-2 font-mono text-[10px] tracking-wide text-muted-foreground sm:text-[11px]">
+						<span
+							aria-hidden="true"
+							className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary ring-4 ring-primary/10"
+						/>
+						Open to future contracts
+					</p>
+					<p className="text-xs text-muted-foreground">
+						Minimum 3 months before starting
+					</p>
+				</div>
 			</div>
 
 			<div className="mt-10 grid items-center gap-8 sm:mt-12 lg:mt-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-2">

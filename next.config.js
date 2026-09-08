@@ -81,6 +81,7 @@ module.exports = () => {
 	return plugins.reduce((acc, next) => next(acc), {
 		output,
 		basePath,
+		env: { BASE_PATH: basePath || "" },
 		reactStrictMode: true,
 		trailingSlash: false,
 		// Enable Turbopack explicitly to avoid Next 16 warning when a legacy webpack

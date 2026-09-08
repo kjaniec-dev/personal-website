@@ -22,6 +22,9 @@ public/sitemap.xml
 /build
 *.xml
 
+# Generated responsive screenshots
+/public/static/images/optimized/
+
 # rss feed
 /public/feed.xml
 
@@ -64,6 +67,4 @@ tsconfig.tsbuildinfo
 
 # Root-level screenshots
 /*.png
-
-
 

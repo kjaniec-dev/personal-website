@@ -92,6 +92,17 @@ Edit the `data/projectsData.ts` file to add or modify projects.
 
 Update career history in `data/experienceData.ts`.
 
+### Optimizing Screenshots
+
+Large screenshots listed in `data/image-variants.json` are converted to responsive
+WebP files before development and production builds. The shared `Image` component
+uses these files through `<picture>`, including on static hosting where the Next.js
+image optimization API is unavailable. Original images remain unchanged.
+
+Add a screenshot filename and its desired widths to the list (no larger than the
+original). Run `bun run images:optimize` to regenerate variants manually. Generated
+files live in `public/static/images/optimized/` and are excluded from Git.
+
 ### Site Configuration
 
 Global settings can be modified in `data/siteMetadata.js`.

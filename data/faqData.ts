@@ -67,7 +67,7 @@ const faqData: FAQItem[] = [
 	{
 		question: "Are you open to freelance or contract work?",
 		answer:
-			"I'm always open to interesting opportunities! Feel free to reach out via email or LinkedIn to discuss potential collaborations. I'm particularly interested in modern web technologies and system architecture — anything non‑trivial.",
+			"I'm open to discussing future freelance and contract work, with at least 3 months before starting a new project. Reach out via email or LinkedIn to discuss the scope and timing. I'm particularly interested in modern web technologies and system architecture.",
 		category: "work",
 	},
 	{

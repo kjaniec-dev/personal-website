@@ -193,6 +193,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
 	contentDirPath: "data",
+	contentDirExclude: ["image-variants.json"],
 	disableImportAliasWarning: true,
 	documentTypes: [Blog, Authors],
 	mdx: {
