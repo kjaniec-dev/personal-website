@@ -18,6 +18,10 @@ describe("Hero Component", () => {
 		expect(screen.getByText(siteMetadata.author)).toBeDefined();
 		expect(screen.getByText("Senior Software Engineer")).toBeDefined();
 		expect(screen.getByText("12+ years")).toBeDefined();
+		expect(screen.getByText("Open to part-time opportunities")).toBeDefined();
+		expect(
+			screen.getByText("Availability depends on scope and timing"),
+		).toBeDefined();
 		expect(
 			screen.getByText("Full-stack · Architecture · DevOps"),
 		).toBeDefined();
