@@ -68,3 +68,4 @@ tsconfig.tsbuildinfo
 # Root-level screenshots
 /*.png
 
+.worktrees/

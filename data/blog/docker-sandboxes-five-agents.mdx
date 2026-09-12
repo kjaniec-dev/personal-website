@@ -1,0 +1,120 @@
+---
+title: 'One Docker Sandbox Boundary for Five AI Coding Agents'
+date: '2026-09-14T10:00:00Z'
+lastmod: '2026-09-14'
+tags: ['docker', 'security', 'devops', 'development']
+draft: false
+summary: "OpenCode, Antigravity, and Junie share Claude and Codex's Docker Sandbox workspace: one skills store, native kits, and a host boundary I can still explain."
+layout: PostSimple
+---
+
+In late August I published [Docker Sandboxes for Claude Code and Codex](/blog/docker-sandboxes). The point of that post still stands: an agent is useful when it can work in a real repository, and it should do that inside a boundary I can explain.
+
+The workspace model did not change. The duplicated setup around it did, once I stopped treating each agent as a private snowflake.
+
+The repository is still [docker-sandboxes](https://github.com/kjaniec-dev/docker-sandboxes). The [usage guide](https://github.com/kjaniec-dev/docker-sandboxes/blob/main/docs/usage.md) remains the operational source of truth.
+
+## Five agents, same workspace
+
+The same workspace model covers five agents:
+
+- `claude-sbx` for Claude Code,
+- `codex-sbx` for Codex,
+- `opencode-sbx` for OpenCode,
+- `agy-sbx` for Antigravity CLI (short name so the command stays easy to type),
+- `junie-sbx` for Junie.
+
+Each command creates a distinct sandbox for the same repository. Sessions, credentials, and agent config do not overlap. The selected Git repository is still mounted read/write. The rest of the host stays outside unless I add another path.
+
+The toolchain is shared on purpose. All five images currently pin Node.js 24.19.0 and Go 1.26.6, and they include Python with uv, Serena, Docker Engine and Compose, Playwright CLI, OpenJDK 25, Maven, Gradle, and the usual Git, database, shell, and search tools. Serena and Playwright are no longer Codex extras. They are part of the shared image, and Superpowers lives in the shared skills store.
+
+The interesting differences are at the edge of each agent:
+
+- OpenCode can bind several provider secrets on the host, or run in OpenCode Go-only mode with a host-side `OPENCODE_API_KEY`.
+- Antigravity uses a pinned CLI on a neutral shell base image. The first start uses Google Sign-In or a Gemini API key. Inside the sandbox, tool and artifact approvals always proceed. That is a trust decision: an isolated workspace should not keep asking for permission to do the work I launched it to do.
+- Junie also uses the shell base image and installs its CLI during bootstrap. It registers Serena and Context7 in `~/.junie/mcp/mcp.json`. A `JUNIE_API_KEY` is passed only into the session attachment command, not baked into the image or kit.
+
+Credentials still live outside the images. Nothing in this repository should contain API keys, OAuth state, or agent session files.
+
+## Let Docker Sandboxes own the launcher
+
+Adding agents was the easy part. The cost was five copies of launcher logic, so I let Docker Sandboxes own that job.
+
+These harnesses need Docker Sandboxes **0.42.1** or newer. 0.42.0 introduced the kit and credential-binding model this setup depends on. 0.42.1 is the floor because 0.42.0 could break agent and tool traffic through the proxy instead of failing the install cleanly.
+
+A kit is the sandbox definition: image, mounts, credentials, and the command that starts the agent. Kits use `kind: sandbox`. Claude, Codex, and OpenCode inherit Docker Sandboxes' native agent defaults. Antigravity and Junie declare their own entrypoints. There are no generated environment files and no argument interpolation.
+
+The shared launcher in `shared/launcher.sh` does a small amount of work:
+
+1. look up the existing instance with `sbx ls --json`,
+2. call `sbx create` only when that sandbox is missing, with the kit, template, and workspace mounts,
+3. attach with `sbx run --name` and forward agent arguments.
+
+Bootstrap runs once, synchronously, as user 1000 through the kit's `setup.install`. It does not rerun on every reattach. If the first bootstrap fails, I fix the cause and recreate the sandbox, or run the idempotent bootstrap with `sbx exec`.
+
+On first creation, `sbx` asks which credentials a custom v2 kit may use. A stored login is not enough by itself. For Codex, that means approving the OpenAI OAuth binding even when ChatGPT is already signed in on the host. Non-interactive creation cannot ask, and it may start without usable credentials.
+
+Launcher-only updates apply the next time I start an existing sandbox. Kit and image changes still need a recreate, and Dockerfile or toolchain changes still need a rebuild.
+
+## One skills store, five discovery paths
+
+Skills were the next duplication I wanted gone.
+
+All five kits mount one host-side `sbx` skills store read/write and link their discovery directories to it:
+
+- Claude: `~/.claude/skills`
+- Codex: `~/.agents/skills`
+- OpenCode: `~/.config/opencode/skills`
+- Antigravity: `~/.gemini/config/skills`
+- Junie: `~/.junie/skills`
+
+Native automatic skill mounting is disabled. That avoids duplicate mounts and gives custom agents the same layout as the native ones.
+
+The first launcher run installs Superpowers and Playwright CLI through `sbx skills add`. Caveman stays pinned to a known commit and is copied into the same store, because 0.42.1 cannot pin Git revisions through the native install command.
+
+```bash
+./bin/sbx-skills          # ensure the required skills exist
+./bin/sbx-skills --update # refresh Superpowers and Playwright; keep Caveman pinned
+```
+
+A skill change is therefore visible to every sandbox. Reload or restart the agent if it caches skills. Claude plugins remain in the Claude bootstrap, because they provide hooks and integrations beyond a skill directory.
+
+This is an intentional sharing boundary. The target repository is still the writable project. The skills store is also writable, and a change made by one agent affects the others.
+
+## Verification I can reuse
+
+Once the launchers and kits were shared, the remaining copy-paste was verification.
+
+Toolchain checks live in one script. Each harness still checks its own agent, MCP setup, and skill paths. Chromium is installed as `agent`, in that user's browser cache, using the Playwright version bundled with the global CLI.
+
+One rebuild target covers all five images. Single-harness rebuilds are still there when I only need one.
+
+Two host tools followed from that shape:
+
+- `./bin/sbx-policy-audit` reads `sbx policy log`, reports blocked network requests per sandbox, compares them with the matching kit allowlist, and prints scoped `sbx policy allow` suggestions plus the kit file to update.
+- `./bin/sbx-new-harness <name>` scaffolds a new harness — Dockerfile, kit, launcher, bootstrap, verify, root delegates, and a layout test — without overwriting existing files.
+
+Starting a sandbox is still one command from a Git repository. The original two still work the same way, and the three new ones follow the same pattern:
+
+```bash
+grep -qxF '.worktrees/' .gitignore || echo '.worktrees/' >> .gitignore
+claude-sbx
+# or
+codex-sbx
+# or
+opencode-sbx
+# or
+agy-sbx
+# or
+junie-sbx
+```
+
+If you are migrating from the old launchers, remove each old sandbox once with `sbx rm <sandbox-name>` and start it again. That discards sessions and sandbox-local configuration, not the mounted repository. Existing toolchain images can be reused for this migration; it does not require a rebuild by itself.
+
+## Still a boundary, not a platform
+
+Five harnesses made the original design cheaper to keep, not bigger on purpose.
+
+The agent still gets the repository it needs. It can still modify or delete files in that repository. Docker still does not make every operation harmless. What I wanted was one repeatable way to add the next coding agent without copying another private setup between machines.
+
+If you already used the Claude or Codex harnesses, the new commands are the same idea with a newer `sbx` runtime underneath. If you are starting now, take a look at [github.com/kjaniec-dev/docker-sandboxes](https://github.com/kjaniec-dev/docker-sandboxes). The [usage guide](https://github.com/kjaniec-dev/docker-sandboxes/blob/main/docs/usage.md) is still the operational source of truth.
