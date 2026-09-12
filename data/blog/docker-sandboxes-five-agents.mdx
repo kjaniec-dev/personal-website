@@ -1,7 +1,7 @@
 ---
 title: 'One Docker Sandbox Boundary for Five AI Coding Agents'
-date: '2026-09-14T10:00:00Z'
-lastmod: '2026-09-14'
+date: '2026-09-12T10:00:00Z'
+lastmod: '2026-09-12'
 tags: ['docker', 'security', 'devops', 'development']
 draft: false
 summary: "OpenCode, Antigravity, and Junie share Claude and Codex's Docker Sandbox workspace: one skills store, native kits, and a host boundary I can still explain."
@@ -32,7 +32,7 @@ The interesting differences are at the edge of each agent:
 
 - OpenCode can bind several provider secrets on the host, or run in OpenCode Go-only mode with a host-side `OPENCODE_API_KEY`.
 - Antigravity uses a pinned CLI on a neutral shell base image. The first start uses Google Sign-In or a Gemini API key. Inside the sandbox, tool and artifact approvals always proceed. That is a trust decision: an isolated workspace should not keep asking for permission to do the work I launched it to do.
-- Junie also uses the shell base image and installs its CLI during bootstrap. It registers Serena and Context7 in `~/.junie/mcp/mcp.json`. A `JUNIE_API_KEY` is passed only into the session attachment command, not baked into the image or kit.
+- Junie also uses the shell base image and installs its CLI during bootstrap. It registers Serena and Context7 in `~/.junie/mcp/mcp.json`. Like Antigravity, it runs in brave mode so commands do not require manual approvals inside the sandbox. A `JUNIE_API_KEY` is passed only into the session attachment command, not baked into the image or kit.
 
 Credentials still live outside the images. Nothing in this repository should contain API keys, OAuth state, or agent session files.
 
