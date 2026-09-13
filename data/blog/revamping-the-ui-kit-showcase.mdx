@@ -1,10 +1,10 @@
 ---
-title: 'Revamping the UI-Kit Showcase: Modularity, Command Palette, and AI Tooling'
+title: 'Revamping the UI-Kit Showcase: Data Visualization, Modularity, and the v1.0.0 Milestone'
 date: '2026-09-14T10:00:00Z'
 lastmod: '2026-09-14'
 tags: ['design', 'react', 'tailwind-css', 'typescript', 'dx', 'frontend', 'showcase']
 draft: false
-summary: 'An inside look at the major evolution of the KJ Product Kit showcase (ui.kjaniec.dev) in v0.9.3: modular tabbed views, a global Command Palette (⌘K) with power-user shortcuts, live OKLCH token inspection, and dedicated MCP guidance for AI coding agents.'
+summary: 'Exploring the KJ Product Kit v1.0.0 release: zero-dependency data visualization charts, modular showcase views, ⌘K navigation, and native AI MCP tooling.'
 layout: PostSimple
 ---
 
@@ -16,123 +16,172 @@ layout: PostSimple
 	priority
 />
 
-A few months ago, I introduced my custom monorepo design system in [Introducing My Custom UI-Kit and Design System](/blog/introducing-ui-kit-and-design-system). Since then, **KJ Product Kit** (`@kjaniec-dev/*`) has grown significantly—powering this personal website, my agile estimation platform [Planning Poker](https://planning-poker.kjaniec.dev), and new internal developer tools.
+A few months ago, I introduced my custom monorepo design system in [Introducing My Custom UI-Kit and Design System](/blog/introducing-ui-kit-and-design-system). What began as an experimental UI monorepo has evolved into a production-hardened design system powering this personal website, my agile estimation platform [Planning Poker](https://planning-poker.kjaniec.dev), and internal developer tools.
 
-However, rapid growth came with a clear problem: **showcase scalability**.
+Today marks a major milestone for the project: the official [**KJ Product Kit v1.0.0 Release**](https://github.com/kjaniec-dev/ui-kit/releases/tag/v1.0.0).
 
-Originally, [ui.kjaniec.dev](https://ui.kjaniec.dev) was a single continuous scrolling page displaying every component back-to-back. As the library grew past 50 components, 140 variant combinations, and complex B2B workflow patterns, navigating that single canvas became cumbersome. On desktop, locating a specific component required heavy manual scrolling. On mobile devices, layout thrashing and header detachment degraded the experience.
-
-With the release of **KJ Product Kit v0.9.3**, I completely overhauled the showcase application. Here is a breakdown of what changed, why it matters, and how modern frontend patterns transformed the showcase into an interactive developer workbench.
+Alongside this milestone comes a complete overhaul of the showcase application at [ui.kjaniec.dev](https://ui.kjaniec.dev) and the introduction of a zero-dependency **Data Visualization Suite**. Here is a comprehensive deep dive into what was built, how the architecture evolved, and why reaching v1.0.0 transforms this library into a complete developer workbench.
 
 ---
 
-## 1. Architectural Shift: Modular Tabbed Views
+## 1. The Scaling Challenge: From Single Page to Modular Tabs
 
-Rather than forcing every token, component, pattern, and documentation block onto a single viewport, the showcase was decoupled into five dedicated, hash-routed tab views (`#overview`, `#components`, `#patterns`, `#tokens`, `#mcp`).
+Originally, [ui.kjaniec.dev](https://ui.kjaniec.dev) lived as a continuous single-page gallery rendering every component sequentially. As the component catalog expanded past 60 primitives, 140 variant combinations, and complex B2B workflow patterns, navigating that single viewport became sluggish. On desktop, locating specific components required excessive manual scrolling; on mobile devices, header detachment and layout thrashing compromised responsiveness.
+
+To solve this, the showcase was refactored into five dedicated, hash-routed views (`#overview`, `#components`, `#patterns`, `#tokens`, `#mcp`):
 
 ```
 site/src/views/
 ├── overview-view.tsx    # Value props, core pillars & interactive hero demo
-├── components-view.tsx  # Categorized 50+ component gallery with live props
+├── components-view.tsx  # Categorized 66-component gallery with live props
 ├── patterns-view.tsx    # Composed B2B flows (invoices, tenants, audit logs)
 ├── tokens-view.tsx      # Perceptual OKLCH palettes, radius, & shadow scales
 └── mcp-view.tsx         # AI coding agent integration & turnkey configurations
 ```
 
-This modular split keeps the DOM lightweight, prevents unnecessary re-renders across distant sections, and enables clean deep-linking directly to specific components or token palettes.
+This modular split keeps the initial DOM lightweight, isolates state updates to the active section, and enables instant deep-linking directly to individual component documentation and token ramps.
 
-* **Overview:** Summarizes the design philosophy, quickstart installation commands, and an interactive live sandbox showing how tokens and primitives compose together.
-* **Components Catalog:** Replaces the endless list with a structured sidebar grouping components into Foundations, Feedback, Inputs & Forms, Data Display, Navigation, and Overlays—complete with active category badges and instant filtering.
-* **B2B Patterns:** Demonstrates real-world application layouts, such as multi-tenant management drawers, financial invoice tables with bulk actions, and developer console status panes.
-* **Tokens Inspector:** Offers visual ramps for primary amber and teal secondary colors in modern perceptual OKLCH color spaces, with click-to-copy CSS variable helpers and real-time contrast feedback.
-* **MCP Hub:** Provides a dedicated space explaining how AI coding assistants can leverage `@kjaniec-dev/ui-mcp` via the Model Context Protocol.
+* **Overview:** Features core design pillars, package installation commands, and an interactive sandbox illustrating how primitives and tokens compose together.
+* **Components Catalog:** Replaces the flat list with a filterable sidebar organizing components into Foundations, Feedback, Inputs & Forms, Data Display, Navigation, and Overlays.
+* **B2B Patterns:** Demonstrates enterprise layouts, such as multi-tenant workspaces, filterable billing tables, and system diagnostics panels.
+* **Tokens Inspector:** Visualizes OKLCH color ramps (primary amber and teal secondary) with real-time contrast ratios and one-click CSS variable copying.
+* **MCP Hub:** Provides copy-paste configurations and an in-browser tool runner for AI assistants interacting with `@kjaniec-dev/ui-mcp`.
 
 ---
 
 ## 2. Power-User Navigation: Command Palette & Global Shortcuts
 
-As developers, we rarely want to hunt through nested sidebars when we already know the component or token we need. Inspired by macOS Spotlight and IDE command palettes, I built a global `CommandPalette` component directly into `@kjaniec-dev/ui` and integrated it as the primary navigation engine of the showcase.
+Modern developer documentation needs to be navigable without touching the mouse. Inspired by IDE quick-open dialogues, I built an accessible `CommandPalette` component directly into `@kjaniec-dev/ui` and wired it into the showcase header.
+
+### Global Command Palette (`⌘K` / `Ctrl+K`)
+Triggered via `⌘K` or the header search trigger, the command palette opens a backdrop-blurred modal that provides fuzzy searching across:
+* All navigation views and subsections,
+* All 66 individual components and their functional groups,
+* OKLCH color tokens, spacing scales, and shadow elevations,
+* MCP server instructions and configuration snippets,
+* Quick actions like theme toggling and repository links.
+
+### Single-Key Shortcuts
+When focus is outside text inputs, the showcase listens for productivity shortcuts:
+* `/` — Focuses the search input in the component catalog sidebar.
+* `t` — Toggles between light and dark themes immediately.
+* `1` through `5` — Jumps directly between views (`1` Overview, `2` Components, `3` Patterns, `4` Tokens, `5` MCP).
+* `?` — Opens the keyboard shortcut cheat sheet.
+
+### Dynamic "Back to Top" Floating Control
+To make long catalogs painless to navigate, a glassmorphic floating action button fades in once scroll depth exceeds `400px`, returning users smoothly to the top filter controls.
+
+---
+
+## 3. Data Visualization Suite: Zero-Dependency Pure SVG Charts
+
+The centerpiece of the **v1.0.0** release is the brand-new **Data Visualization Suite**.
 
 <Image
-	src="/static/images/ui-kit-showcase-components.png"
-	alt="Revamped Components Catalog with Filterable Sidebar and Live Interactive Previews"
+	src="/static/images/ui-kit-showcase-charts.png"
+	alt="Data Visualization Suite featuring interactive KPI cards, multi-series line and area charts, and responsive donut metrics"
 	width={1440}
 	height={900}
 />
 
-### Global Command Palette (`⌘K` / `Ctrl+K`)
-Pressing `⌘K` (or clicking the search trigger in the header) invokes a backdrop-blurred dialog that indexes:
-* All navigation tabs and subsections,
-* Over 50 individual components and their functional categories,
-* OKLCH color token scales and typography ramps,
-* MCP tools and quickstart configuration steps,
-* Theme switching and external repository links.
+### Why Build Custom Charts Without Third-Party Bloat?
+Most charting solutions in the React ecosystem (such as D3 wrappers, Recharts, or Chart.js) introduce heavy runtime bundles, complicated server-rendering hurdles, and styling layers that fight against design tokens.
 
-Results update in real-time with fuzzy matching, and keyboard arrow navigation (`↑` / `↓`) paired with `Enter` triggers instant route transitions without lifting hands from the keyboard.
+For KJ Product Kit, I wanted data visualization components that:
+1. **Zero External Dependencies:** Built purely with React 19, native SVG, and TypeScript math algorithms.
+2. **First-Class Token Integration:** Direct adherence to the `@kjaniec-dev/design` OKLCH color palette and theme variables.
+3. **Responsive by Default:** Automatically adapting viewBox coordinate scaling without layout jumps.
+4. **Accessible to Screen Readers:** Providing semantic WCAG AA tabular fallbacks for visually impaired users.
 
-### Keyboard Shortcuts Suite
-To elevate navigation velocity even further, the showcase now listens for single-key shortcuts when no inputs are focused:
-* `/` — Immediately focuses the search input in the component catalog sidebar.
-* `t` — Instantly toggles between light and dark themes.
-* `1` through `5` — Directly switches active views (`1` for Overview, `2` for Components, `3` for Patterns, `4` for Tokens, and `5` for MCP).
-* `?` — Opens an on-screen shortcut reference modal.
+### The Chart Math Engine (`chart-math.ts`)
+Under the hood, all visualization components rely on a custom pure TypeScript math module. It handles:
+* **"Nice" Tick Intervals:** Human-readable axis ticks (e.g., 0, 25k, 50k, 75k, 100k) using logarithmic step normalization.
+* **Linear & Proportional Scales:** Mapping domain values directly to SVG viewport coordinates.
+* **Bézier & Catmull-Rom Interpolation:** Generating smooth SVG path curves (`d="M... C..."`) with tension controls.
+* **Arc Trigonometry:** Computing polar-to-Cartesian angles for pie and donut segments with gap padding.
 
-### Scroll-to-Top ("Back to Top")
-With extensive views like the component catalog containing detailed prop tables, code snippets, and live interactive previews, navigating back to top filters previously required long swipes. A discrete, glassmorphic "Back to top" button now fades in dynamically once scroll depth exceeds `400px`, providing a smooth animated return to the controls.
+### The Core Visualization Components
+* **`Sparkline`:** Ultra-compact trendlines designed for metric cards and dense data tables. Supports `line`, `area`, and `bar` modes, curve smoothing, and highlighted end-dot indicators.
+* **`LineChart` & `AreaChart`:** Multi-series trend charts featuring Bézier interpolation (`smooth`, `linear`, `step`), interactive hover crosshairs, floating HTML tooltips, timeframe toggling (7D, 30D, 90D), and series toggle legends.
+* **`BarChart`:** Categorical comparisons supporting both `grouped` (side-by-side) and `stacked` modes in vertical or horizontal layouts, with rounded caps and active hover states.
+* **`DonutChart`:** Proportional ring charts with interactive slice expansion, active legend synchronization, and a flexible `centerLabel` slot for primary KPI metrics.
+* **Accessible Primitives:** Modular SVG primitives (`ChartContainer`, `ChartGrid`, `ChartXAxis`, `ChartYAxis`, `ChartTooltip`, `ChartLegend`) paired with `ChartA11yTable` for automated screen reader compliance.
 
 ---
 
-## 3. Design Tokens in OKLCH: Interactive Inspection
+## 4. Components Catalog & Interactive Props Explorer
 
-A major strength of `@kjaniec-dev/design` is its use of the `oklch` color model. Unlike legacy RGB or HSL color spaces, OKLCH provides uniform perceptual lightness, preventing colors from shifting perceived brightness as hue changes.
+<Image
+	src="/static/images/ui-kit-showcase-components.png"
+	alt="Components Catalog with PropsTable explorer and interactive component variants"
+	width={1440}
+	height={900}
+/>
 
-The new **Tokens View** turns abstract CSS variables into a live visual workbench:
+A documentation site is only as helpful as its API clarity. In v1.0.0, the component catalog introduced the **`PropsTable`** component.
+
+Instead of hunting through TypeScript `.d.ts` declaration files or guessing component APIs, every component documentation block now includes an interactive table detailing:
+* Prop names and descriptions extracted from JSDoc comments,
+* Exact TypeScript type definitions with union variants,
+* Default fallback values,
+* Visual indicators denoting required vs. optional props.
+
+---
+
+## 5. Design Tokens in OKLCH: Interactive Inspection
+
+A cornerstone of `@kjaniec-dev/design` is its adherence to the modern `oklch` color model. Unlike legacy RGB or HSL, OKLCH ensures uniform perceptual lightness across hue transitions, eliminating uneven visual weight in dark and light modes.
+
+The **Tokens View** turns CSS variables into an interactive workbench:
 * **Perceptual Swatch Ramps:** Displays both `--kj-primary-*` (warm amber) and `--kj-secondary-*` (vibrant teal) across 50–950 tonal stops with exact OKLCH values and sRGB hex fallbacks.
 * **One-Click Variable Copying:** Clicking any swatch copies its corresponding CSS variable or Tailwind utility class directly to the clipboard.
 * **Geometry & Elevation:** Interactive previews of border radius tokens (`--kj-radius-*`) and layered glassmorphic shadow elevations (`--kj-shadow-*`).
 
 ---
 
-## 4. AI-Native Development: The MCP Integration Guide
+## 6. AI-Native Development: The Model Context Protocol (MCP)
 
-One of the standout additions in v0.9.3 is native support for the **Model Context Protocol (MCP)**. 
+As AI coding assistants become central to frontend engineering, design systems must communicate their specifications directly to language models. 
 
-When building software with AI coding agents (such as Claude Code, Cursor, Antigravity, or Junie), models often hallucinate component props, invent non-existent CSS utility classes, or guess token names. To eliminate this friction, I developed and published [`@kjaniec-dev/ui-mcp`](https://www.npmjs.com/package/@kjaniec-dev/ui-mcp).
+Without structured context, AI models hallucinate component props, invent non-existent CSS utility classes, or guess token names. To eliminate this friction, the monorepo includes [`@kjaniec-dev/ui-mcp`](https://www.npmjs.com/package/@kjaniec-dev/ui-mcp)—a dedicated Model Context Protocol server.
 
-The showcase now features a dedicated **MCP View** serving as an interactive implementation guide:
+The showcase's **MCP View** offers:
 * **1-Click Client Configurations:** Turnkey configuration snippets for Cursor (`.cursor/mcp.json`), Claude Desktop (`claude_desktop_config.json`), and CLI environments (`npx -y @kjaniec-dev/ui-mcp`).
 * **Live Tool Tester:** An in-browser playground demonstrating MCP tool responses—such as querying component specifications, validating prop schemas, and inspecting design token definitions.
 
-When an AI agent connects to the MCP server, it gains deterministic ground truth about component signatures, CVA variants, and theme tokens, drastically improving code generation quality.
+Connecting an AI agent to `@kjaniec-dev/ui-mcp` gives it deterministic ground truth about component signatures, CVA variants, and theme tokens, drastically improving code generation quality.
 
 ---
 
-## 5. Mobile UX Polish & Full SEO Suite
+## 7. Enterprise Hardening: 100% Test Coverage & Accessibility
 
-In addition to desktop workflows, mobile responsiveness received significant attention:
+The v1.0.0 milestone represents a commitment to software reliability:
+
+* **100% Component Test Coverage:** Every one of the 66 components is backed by unit tests, totaling **1,179 passing tests** across the monorepo running under Vitest.
+* **Tested Primitive Controls:** Full test suites cover all 34 primitive form controls, badges, indicators, feedback disclosures, cards, navigation shells, and modal dialogs.
+* **Accessibility Enhancements:** Added proper `aria-checked` states and keyboard navigation to `Switch`, semantic button dismissal with keyboard handlers to `Toast`, and focus trap management to `BottomSheet`.
+* **Zero Lint Diagnostics:** Complete compliance with the Biome linter across all packages and demo sites.
+
+---
+
+## 8. Mobile UX Polish, Full SEO Suite, and Storybook
+
+In addition to desktop workflows, mobile responsiveness and developer tooling received extensive polish:
 
 * **Eliminating Layout Scroll Detachment:** Previous versions suffered from iOS Safari scroll detachment where the sticky header would desynchronize from the page scroll container. By restructuring header containers to use clean CSS sticky positioning and standard viewport units, scrolling remains butter-smooth across mobile browsers.
-* **Mobile Floating Action Button (FAB):** On compact screens, browsing through 50+ components via a standard menu is tedious. A floating action button provides thumb-friendly access to a bottom sheet drawer containing the full component index.
+* **Mobile Floating Action Button (FAB):** On compact screens, browsing through 66 components via a standard menu is tedious. A floating action button provides thumb-friendly access to a bottom sheet drawer containing the full component index.
 * **Comprehensive SEO Suite:** The showcase now ships with a complete metadata layer, including OpenGraph cards, Twitter preview cards, structured JSON-LD Schema.org data, auto-generated `sitemap.xml`, `robots.txt`, and a PWA-ready `site.webmanifest`.
-
----
-
-## 6. Storybook & Chromatic Ecosystem Connection
-
-While the showcase provides a curated, consumer-facing gallery of the design system, isolated component development happens in **Storybook** alongside visual regression testing via **Chromatic**.
-
-To unify the developer experience:
-* Storybook links and status badges are now embedded directly in the showcase header and overview.
-* Developers can jump effortlessly from high-level pattern previews in the showcase to isolated component edge-case testing in Storybook with a single click.
+* **Storybook & Chromatic Integration:** Direct links to Storybook are integrated into the header and overview, allowing developers to switch between showcase patterns and isolated visual regression testing in Chromatic.
 
 ---
 
 ## Summary & What's Next
 
-The evolution of [ui.kjaniec.dev](https://ui.kjaniec.dev) in v0.9.3 highlights how a design system showcase can be more than a static documentation site. By combining modular architecture, keyboard-driven navigation, deep design token inspection, and native AI tooling, it bridges the gap between human developers and AI assistants.
+Reaching **v1.0.0** marks the transition of KJ Product Kit from a personal experiment to an enterprise-grade design system. With zero-dependency data visualization charts, modular showcase architecture, keyboard-driven navigation, 100% test coverage, and native AI tooling, it provides a comprehensive foundation for modern web applications.
 
+* **GitHub Release:** [v1.0.0 — KJ Product Kit (Official Release)](https://github.com/kjaniec-dev/ui-kit/releases/tag/v1.0.0)
 * **Live Showcase:** [ui.kjaniec.dev](https://ui.kjaniec.dev)
 * **GitHub Monorepo:** [github.com/kjaniec-dev/ui-kit](https://github.com/kjaniec-dev/ui-kit)
-* **NPM Packages:** `@kjaniec-dev/design`, `@kjaniec-dev/ui`, and `@kjaniec-dev/ui-mcp` (v0.9.3)
+* **NPM Packages:** `@kjaniec-dev/design`, `@kjaniec-dev/ui`, and `@kjaniec-dev/ui-mcp` (v1.0.0)
 
-Feel free to explore the new showcase, try out the `⌘K` command palette, and connect the MCP server to your local AI coding workflow!
+Explore the new showcase at [ui.kjaniec.dev](https://ui.kjaniec.dev), test out the charts and `⌘K` command palette, and integrate the MCP server into your local AI coding workflow!
