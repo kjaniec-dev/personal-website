@@ -12,6 +12,7 @@ import {
 	useRegisterActions,
 } from "kbar";
 import { useLayoutEffect, useRef } from "react";
+import { Kbd } from "@/components/ClientUI";
 
 type SearchStatus = "loading" | "ready" | "error";
 
@@ -141,19 +142,12 @@ function SearchPanel({ status }: { status: SearchStatus }) {
 										)}
 									</div>
 									{item.shortcut?.length ? (
-										<div
+										<Kbd
+											keys={item.shortcut}
+											size="md"
 											aria-hidden="true"
-											className="hidden shrink-0 gap-1 sm:flex"
-										>
-											{item.shortcut.map((key) => (
-												<kbd
-													key={key}
-													className="flex h-6 min-w-6 items-center justify-center rounded-md border border-border bg-subtle px-1 font-mono text-[11px] text-muted-foreground"
-												>
-													{key}
-												</kbd>
-											))}
-										</div>
+											className="hidden shrink-0 sm:inline-flex"
+										/>
 									) : null}
 								</div>
 							)

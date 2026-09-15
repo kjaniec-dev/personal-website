@@ -5,8 +5,8 @@
     "": {
       "name": "tailwind-nextjs-starter-blog",
       "dependencies": {
-        "@kjaniec-dev/design": "0.9.3",
-        "@kjaniec-dev/ui": "0.9.3",
+        "@kjaniec-dev/design": "1.0.0",
+        "@kjaniec-dev/ui": "1.0.0",
         "github-slugger": "2.0.0",
         "kbar": "1.0.0",
         "next": "16.3.4",
@@ -321,9 +321,9 @@
 
     "@jsonjoy.com/util": ["@jsonjoy.com/util@1.5.0", "", { "peerDependencies": { "tslib": "2" } }, ""],
 
-    "@kjaniec-dev/design": ["@kjaniec-dev/design@0.9.3", "", {}, "sha512-+XuQ6n70ERYoxGf6ImwxfPwBVcmU9uw9Suj4sPTVZ8H+5IpQZcGhFuySe62OiTze0IduLiiaxcQBlk+cDNDIMw=="],
+    "@kjaniec-dev/design": ["@kjaniec-dev/design@1.0.0", "", {}, "sha512-41jJMtSr7aDLI7dw40LUlO9C8DFwTzsnVCbnxtXzgjYsgcoUHRX7Ukcjhlg2YjMuzknLzq699ChR1eTkfg0kgw=="],
 
-    "@kjaniec-dev/ui": ["@kjaniec-dev/ui@0.9.3", "", { "dependencies": { "class-variance-authority": "^0.7.0", "clsx": "^2.1.1", "tailwind-merge": "^3.6.0" }, "peerDependencies": { "@kjaniec-dev/design": ">=0.9.0", "react": ">=18", "react-dom": ">=18" } }, "sha512-e+rN3hHr6zpcDjgtueAn9wcXP2JAl8n/dlGFZHpCKTkmLzeysGhKj9IO/m/xpEWeT4g5u8FQ8WYsY8CxCgo6rw=="],
+    "@kjaniec-dev/ui": ["@kjaniec-dev/ui@1.0.0", "", { "dependencies": { "class-variance-authority": "^0.7.0", "clsx": "^2.1.1", "tailwind-merge": "^3.6.0" }, "peerDependencies": { "@kjaniec-dev/design": ">=1.0.0", "react": ">=18", "react-dom": ">=18" } }, "sha512-N96fqS+UwMvl1y+CbC+iaX0soMlPnPxwEg04EDCmaTBBJTx4TRGcm4MB8WhddA4PpYY3EBXTVcw71pbgC5wggA=="],
 
     "@lit-labs/ssr-dom-shim": ["@lit-labs/ssr-dom-shim@1.3.0", "", {}, ""],
 

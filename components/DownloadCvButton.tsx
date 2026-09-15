@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ClientUI";
+import { Button, type ButtonProps } from "@/components/ClientUI";
 import siteMetadata from "@/data/siteMetadata";
 
 const DownloadIcon = (
@@ -20,9 +20,7 @@ const DownloadIcon = (
 	</svg>
 );
 
-type DownloadCvButtonProps = {
-	variant?: "primary" | "secondary" | "outline" | "ghost" | "danger";
-	size?: "sm" | "md" | "lg" | "icon" | "icon-sm";
+type DownloadCvButtonProps = Pick<ButtonProps, "variant" | "size"> & {
 	className?: string;
 	onClick?: () => void;
 };
@@ -32,7 +30,7 @@ export default function DownloadCvButton({
 	size = "sm",
 	className,
 	onClick,
-}: DownloadCvButtonProps) {
+}: DownloadCvButtonProps): React.JSX.Element {
 	return (
 		<Button
 			variant={variant}
