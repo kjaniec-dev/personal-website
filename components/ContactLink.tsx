@@ -1,10 +1,14 @@
 "use client";
 
-import { buttonVariants, cn } from "@kjaniec-dev/ui";
+import { buttonVariants, cn } from "@/components/ClientUI";
 import Link from "@/components/Link";
 
 // The kit's Button renders <button>; use its variants on a semantic email link.
-export default function ContactLink({ email }: { email: string }) {
+export default function ContactLink({
+	email,
+}: {
+	email: string;
+}): React.JSX.Element {
 	return (
 		<Link
 			href={`mailto:${email}`}
