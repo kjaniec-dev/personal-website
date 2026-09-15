@@ -1,6 +1,6 @@
 # Portfolio UI conventions
 
-The website uses `@kjaniec-dev/ui` and `@kjaniec-dev/design` (currently 0.9.3).
+The website uses `@kjaniec-dev/ui` and `@kjaniec-dev/design` (currently 1.0.0).
 Import theme tokens from the design package; do not introduce a parallel brand palette.
 
 ## Color roles
