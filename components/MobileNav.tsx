@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
-import { Button, Drawer } from "@/components/ClientUI";
+import { Button, buttonVariants, cn, Drawer } from "@/components/ClientUI";
 import HeaderNavLink from "@/components/HeaderNavLink";
 import headerNavLinks from "@/data/headerNavLinks";
 import siteMetadata from "@/data/siteMetadata";
@@ -86,7 +86,10 @@ export default function MobileNav() {
 										<a
 											href={`mailto:${siteMetadata.email}`}
 											onClick={closeMenu}
-											className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-4 font-sans text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+											className={cn(
+												buttonVariants({ variant: "primary", size: "md" }),
+												"flex min-h-12 w-full rounded-full font-sans text-sm font-semibold",
+											)}
 										>
 											Let&apos;s talk <span aria-hidden="true">↗</span>
 										</a>

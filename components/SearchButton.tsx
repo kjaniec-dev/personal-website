@@ -2,6 +2,7 @@
 
 import { useKBar } from "kbar";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ClientUI";
 
 export default function SearchButton() {
 	const { query } = useKBar();
@@ -12,12 +13,13 @@ export default function SearchButton() {
 	}, []);
 
 	return (
-		<button
-			type="button"
+		<Button
+			variant="ghost"
+			size="icon"
 			onClick={() => query?.toggle()}
 			aria-label="Search"
 			title={`Search (${isMac ? "⌘" : "Ctrl"}+K)`}
-			className="inline-flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-subtle hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:h-10 md:w-10"
+			className="h-12 w-12 shrink-0 rounded-full text-muted-foreground hover:bg-subtle hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring md:h-10 md:w-10 [&_svg]:h-5 [&_svg]:w-5"
 		>
 			<svg
 				className="h-5 w-5"
@@ -33,6 +35,6 @@ export default function SearchButton() {
 					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
 				/>
 			</svg>
-		</button>
+		</Button>
 	);
 }

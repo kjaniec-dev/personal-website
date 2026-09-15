@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonVariants, cn } from "@/components/ClientUI";
 import HeaderNavLink from "@/components/HeaderNavLink";
 import Link from "@/components/Link";
 import MobileNav from "@/components/MobileNav";
@@ -52,7 +53,10 @@ export default function Header() {
 					{siteMetadata.email ? (
 						<a
 							href={`mailto:${siteMetadata.email}`}
-							className="hidden min-h-10 items-center justify-center gap-2 rounded-full bg-primary px-4 font-sans text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface md:inline-flex"
+							className={cn(
+								buttonVariants({ variant: "primary", size: "sm" }),
+								"hidden min-h-10 rounded-full px-4 font-sans text-xs font-semibold md:inline-flex",
+							)}
 						>
 							Let&apos;s talk <span aria-hidden="true">↗</span>
 						</a>

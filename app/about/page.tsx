@@ -1,6 +1,7 @@
 import { genPageMetadata } from "app/seo";
 import { allAuthors } from "contentlayer/generated";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
+import { Stat } from "@/components/ClientUI";
 import ContactCTA from "@/components/ContactCTA";
 import DownloadCvButton from "@/components/DownloadCvButton";
 import Image from "@/components/Image";
@@ -74,22 +75,11 @@ export default function About() {
 				description="Senior software engineer based in Poland. Full-stack development, systems architecture, and a product mindset."
 			/>
 
-			<dl className="grid grid-cols-3 gap-3 border-y border-border py-5 sm:gap-8 sm:py-6">
-				{[
-					{ value: "12+", label: "Years of experience" },
-					{ value: "B2B", label: "Contract model" },
-					{ value: "100%", label: "Remote work" },
-				].map((metric) => (
-					<div key={metric.label} className="flex flex-col gap-2">
-						<dt className="order-2 font-mono text-[10px] uppercase leading-relaxed tracking-wider text-muted-foreground sm:text-[11px]">
-							{metric.label}
-						</dt>
-						<dd className="text-2xl font-medium tracking-tight text-primary sm:text-3xl">
-							{metric.value}
-						</dd>
-					</div>
-				))}
-			</dl>
+			<div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+				<Stat label="Years of experience" value="12+" />
+				<Stat label="Contract model" value="B2B" />
+				<Stat label="Remote work" value="100%" />
+			</div>
 
 			<section
 				aria-labelledby="about-profile-heading"
