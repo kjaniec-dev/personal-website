@@ -66,7 +66,7 @@ export default function Hero() {
 							target="_self"
 							className={cn(
 								buttonVariants({ variant: "primary", size: "lg" }),
-								"min-h-12 gap-5 rounded-kj-lg shadow-kj-glow",
+								"group min-h-12 gap-5 rounded-kj-lg shadow-kj-glow",
 							)}
 						>
 							Let's talk
@@ -87,7 +87,7 @@ export default function Hero() {
 							href="#selected-work"
 							className={cn(
 								buttonVariants({ variant: "ghost", size: "lg" }),
-								"min-h-12 gap-3 rounded-kj-sm text-foreground hover:text-primary",
+								"group min-h-12 gap-3 rounded-kj-sm text-foreground hover:text-primary",
 							)}
 						>
 							View selected work
