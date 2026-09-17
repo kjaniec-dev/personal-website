@@ -1,6 +1,7 @@
 import { genPageMetadata } from "app/seo";
 import tagData from "app/tag-data.json";
 import { slug } from "github-slugger";
+import { EmptyState } from "@/components/ClientUI";
 import Link from "@/components/Link";
 import PortfolioPageHeader from "@/components/PortfolioPageHeader";
 import { TAG_GROUPS } from "@/data/tagGroups";
@@ -53,7 +54,11 @@ export default async function Page() {
 			</div>
 
 			{tagKeys.length === 0 ? (
-				<p className="py-10 text-muted-foreground">No tags found.</p>
+				<EmptyState
+					title="No tags found"
+					description="There are currently no tagged articles."
+					className="my-8 min-h-[220px]"
+				/>
 			) : (
 				<div className="divide-y divide-border">
 					{groups.map((group, index) => (

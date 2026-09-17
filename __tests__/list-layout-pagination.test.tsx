@@ -133,4 +133,14 @@ describe("ListLayoutWithTags pagination", () => {
 				.getAttribute("href"),
 		).toBe("/tags");
 	});
+
+	it("renders EmptyState when posts list is empty", () => {
+		render(<ListLayoutWithTags title="All Posts" posts={[]} />);
+		expect(
+			screen.getByRole("heading", { level: 3, name: "No posts found" }),
+		).toBeDefined();
+		expect(
+			screen.getByText("No articles matched your current filter criteria."),
+		).toBeDefined();
+	});
 });
