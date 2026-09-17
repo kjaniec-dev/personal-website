@@ -1,13 +1,13 @@
 import { genPageMetadata } from "app/seo";
 import { allAuthors } from "contentlayer/generated";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
-import { Stat } from "@/components/ClientUI";
 import ContactCTA from "@/components/ContactCTA";
 import DownloadCvButton from "@/components/DownloadCvButton";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
 import { components } from "@/components/MDXComponents";
 import PortfolioPageHeader from "@/components/PortfolioPageHeader";
+import StatCard from "@/components/StatCard";
 import TechnologyBadge from "@/components/TechnologyBadge";
 import educationData from "@/data/educationData";
 import experienceData from "@/data/experienceData";
@@ -76,9 +76,25 @@ export default function About() {
 			/>
 
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-				<Stat label="Years of experience" value="12+" />
-				<Stat label="Contract model" value="B2B" />
-				<Stat label="Remote work" value="100%" />
+				<StatCard
+					index={0}
+					label="Years of experience"
+					value={
+						<>
+							12<span className="text-primary">+</span>
+						</>
+					}
+				/>
+				<StatCard index={1} label="Contract model" value="B2B" />
+				<StatCard
+					index={2}
+					label="Remote work"
+					value={
+						<>
+							100<span className="text-primary">%</span>
+						</>
+					}
+				/>
 			</div>
 
 			<section
