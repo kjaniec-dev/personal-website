@@ -1,8 +1,5 @@
-"use client";
-
-import { buttonVariants, cn } from "@/components/ClientUI";
+import ButtonLink from "@/components/ButtonLink";
 import HeroArtwork from "@/components/HeroArtwork";
-import Link from "@/components/Link";
 import siteMetadata from "@/data/siteMetadata";
 
 export default function Hero() {
@@ -63,13 +60,12 @@ export default function Hero() {
 					</p>
 
 					<div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-						<Link
+						<ButtonLink
 							href={`mailto:${siteMetadata.email}`}
 							target="_self"
-							className={cn(
-								buttonVariants({ variant: "primary", size: "lg" }),
-								"group min-h-12 gap-5 rounded-kj-lg shadow-kj-glow",
-							)}
+							variant="primary"
+							size="lg"
+							className="group min-h-12 gap-5 rounded-kj-lg shadow-kj-glow"
 						>
 							Let's talk
 							<svg
@@ -84,13 +80,12 @@ export default function Hero() {
 							>
 								<path d="M7 17 17 7M7 7h10v10" />
 							</svg>
-						</Link>
-						<Link
+						</ButtonLink>
+						<ButtonLink
 							href="#selected-work"
-							className={cn(
-								buttonVariants({ variant: "ghost", size: "lg" }),
-								"group min-h-12 gap-3 rounded-kj-sm text-foreground hover:text-primary",
-							)}
+							variant="ghost"
+							size="lg"
+							className="group min-h-12 gap-3 rounded-kj-sm text-foreground hover:text-primary"
 						>
 							View selected work
 							<svg
@@ -105,7 +100,7 @@ export default function Hero() {
 							>
 								<path d="M12 5v14m-5-5 5 5 5-5" />
 							</svg>
-						</Link>
+						</ButtonLink>
 					</div>
 				</div>
 				<div

@@ -1,7 +1,5 @@
-"use client";
-
-import { buttonVariants, cn, PageHeader } from "@/components/ClientUI";
-import Link from "@/components/Link";
+import ButtonLink from "@/components/ButtonLink";
+import { PageHeader } from "@/components/ClientUI";
 
 export default function NotFound() {
 	return (
@@ -11,15 +9,14 @@ export default function NotFound() {
 				title="Page not found"
 				description="The page you're looking for doesn't exist or has been moved."
 			/>
-			<Link
+			<ButtonLink
 				href="/"
-				className={cn(
-					buttonVariants({ variant: "primary", size: "lg" }),
-					"rounded-kj-lg shadow-kj-glow",
-				)}
+				variant="primary"
+				size="lg"
+				className="rounded-kj-lg shadow-kj-glow"
 			>
 				← Back to home
-			</Link>
+			</ButtonLink>
 		</div>
 	);
 }
