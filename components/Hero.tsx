@@ -1,3 +1,4 @@
+import { buttonVariants, cn } from "@/components/ClientUI";
 import HeroArtwork from "@/components/HeroArtwork";
 import Link from "@/components/Link";
 import siteMetadata from "@/data/siteMetadata";
@@ -63,7 +64,10 @@ export default function Hero() {
 						<Link
 							href={`mailto:${siteMetadata.email}`}
 							target="_self"
-							className="group inline-flex min-h-12 items-center justify-center gap-5 rounded-kj-lg border border-primary/50 bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-kj-glow transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+							className={cn(
+								buttonVariants({ variant: "primary", size: "lg" }),
+								"min-h-12 gap-5 rounded-kj-lg shadow-kj-glow",
+							)}
 						>
 							Let's talk
 							<svg
@@ -81,7 +85,10 @@ export default function Hero() {
 						</Link>
 						<Link
 							href="#selected-work"
-							className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-kj-sm px-1 py-3 text-sm font-medium text-foreground transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+							className={cn(
+								buttonVariants({ variant: "ghost", size: "lg" }),
+								"min-h-12 gap-3 rounded-kj-sm text-foreground hover:text-primary",
+							)}
 						>
 							View selected work
 							<svg
