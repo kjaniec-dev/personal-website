@@ -166,9 +166,18 @@ function SearchPanel({ status }: { status: SearchStatus }) {
 				aria-hidden="true"
 				className="hidden items-center gap-4 border-t border-border px-5 py-3 font-mono text-[11px] text-muted-foreground sm:flex"
 			>
-				<span>↑ ↓ navigate</span>
-				<span>↵ open</span>
-				<span className="ml-auto">esc close</span>
+				<span className="inline-flex items-center gap-1.5">
+					<Kbd keys={["↑", "↓"]} size="sm" />
+					<span>navigate</span>
+				</span>
+				<span className="inline-flex items-center gap-1.5">
+					<Kbd keys={["↵"]} size="sm" />
+					<span>open</span>
+				</span>
+				<span className="ml-auto inline-flex items-center gap-1.5">
+					<Kbd keys={["esc"]} size="sm" />
+					<span>close</span>
+				</span>
 			</div>
 		</div>
 	);
