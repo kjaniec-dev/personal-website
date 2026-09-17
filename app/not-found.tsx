@@ -1,3 +1,5 @@
+"use client";
+
 import { buttonVariants, cn, PageHeader } from "@/components/ClientUI";
 import Link from "@/components/Link";
 
