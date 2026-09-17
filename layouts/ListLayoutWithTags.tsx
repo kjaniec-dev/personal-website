@@ -6,7 +6,7 @@ import { slug } from "github-slugger";
 import { usePathname, useRouter } from "next/navigation";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import BlogPostCard from "@/components/BlogPostCard";
-import { Pagination } from "@/components/ClientUI";
+import { EmptyState, Pagination } from "@/components/ClientUI";
 import Link from "@/components/Link";
 import PortfolioPageHeader from "@/components/PortfolioPageHeader";
 import ProjectCard from "@/components/ProjectCard";
@@ -124,7 +124,11 @@ export default function ListLayoutWithTags({
 					)}
 					<div className="divide-y divide-border">
 						{displayPosts.length === 0 && (
-							<p className="py-10 text-muted-foreground">No posts found.</p>
+							<EmptyState
+								title="No posts found"
+								description="No articles matched your current filter criteria."
+								className="my-8 min-h-[220px]"
+							/>
 						)}
 						{displayPosts.map((post) => (
 							<BlogPostCard key={post.path} post={post} />
