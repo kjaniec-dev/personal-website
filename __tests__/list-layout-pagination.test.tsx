@@ -10,6 +10,29 @@ import type { CoreContent } from "pliny/utils/contentlayer";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import ListLayoutWithTags from "@/layouts/ListLayoutWithTags";
 
+interface CustomMatchers<R = unknown> {
+	toBeInTheDocument(): R;
+}
+
+declare module "vitest" {
+	// biome-ignore lint/suspicious/noExplicitAny: match Vitest assertion signature
+	interface Assertion<T = any> extends CustomMatchers<T> {}
+	interface AsymmetricMatchersContaining extends CustomMatchers {}
+}
+
+expect.extend({
+	toBeInTheDocument(received: Element | null) {
+		const pass = received !== null && document.body.contains(received);
+		return {
+			pass,
+			message: () =>
+				pass
+					? "expected element not to be in the document"
+					: "expected element to be in the document",
+		};
+	},
+});
+
 const navigation = vi.hoisted(() => ({
 	pathname: "/blog/page/2",
 	push: vi.fn(),
@@ -138,9 +161,9 @@ describe("ListLayoutWithTags pagination", () => {
 		render(<ListLayoutWithTags title="All Posts" posts={[]} />);
 		expect(
 			screen.getByRole("heading", { level: 3, name: "No posts found" }),
-		).toBeDefined();
+		).toBeInTheDocument();
 		expect(
 			screen.getByText("No articles matched your current filter criteria."),
-		).toBeDefined();
+		).toBeInTheDocument();
 	});
 });
