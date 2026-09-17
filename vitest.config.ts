@@ -12,6 +12,10 @@ export default defineConfig({
 			"@/data": path.resolve(__dirname, "./data"),
 			"@/layouts": path.resolve(__dirname, "./layouts"),
 			"@/css": path.resolve(__dirname, "./css"),
+			"contentlayer/generated": path.resolve(
+				__dirname,
+				"./.contentlayer/generated",
+			),
 		},
 	},
 });
