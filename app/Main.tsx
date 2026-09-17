@@ -1,4 +1,4 @@
-import { SectionHeader } from "@/components/ClientUI";
+import { buttonVariants, cn, SectionHeader } from "@/components/ClientUI";
 import Hero from "@/components/Hero";
 import Link from "@/components/Link";
 import ProjectShowcase from "@/components/ProjectShowcase";
@@ -117,7 +117,10 @@ export default function Home() {
 						{siteMetadata.email && (
 							<Link
 								href={`mailto:${siteMetadata.email}`}
-								className="inline-flex items-center gap-2 rounded-kj-lg bg-primary hover:bg-primary-hover px-6 py-3 font-semibold text-primary-foreground shadow-kj-glow transition-all"
+								className={cn(
+									buttonVariants({ variant: "primary", size: "md" }),
+									"rounded-kj-lg shadow-kj-glow",
+								)}
 							>
 								<svg
 									className="h-4 w-4"
@@ -140,7 +143,10 @@ export default function Home() {
 						{siteMetadata.linkedin && (
 							<Link
 								href={siteMetadata.linkedin}
-								className="inline-flex items-center gap-2 rounded-kj-lg border border-border bg-subtle hover:bg-surface px-6 py-3 font-semibold text-foreground shadow-kj-sm transition-all"
+								className={cn(
+									buttonVariants({ variant: "outline", size: "md" }),
+									"rounded-kj-lg shadow-kj-sm",
+								)}
 							>
 								<svg
 									className="h-4 w-4"

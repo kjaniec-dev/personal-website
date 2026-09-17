@@ -1,4 +1,4 @@
-import { PageHeader } from "@/components/ClientUI";
+import { buttonVariants, cn, PageHeader } from "@/components/ClientUI";
 import Link from "@/components/Link";
 
 export default function NotFound() {
@@ -11,7 +11,10 @@ export default function NotFound() {
 			/>
 			<Link
 				href="/"
-				className="inline-flex items-center gap-2 rounded-kj-lg bg-primary px-6 py-3 font-sans text-sm font-semibold text-primary-foreground shadow-kj-glow transition-colors hover:bg-primary-hover"
+				className={cn(
+					buttonVariants({ variant: "primary", size: "lg" }),
+					"rounded-kj-lg shadow-kj-glow",
+				)}
 			>
 				← Back to home
 			</Link>
