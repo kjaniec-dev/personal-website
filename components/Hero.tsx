@@ -1,3 +1,5 @@
+"use client";
+
 import { buttonVariants, cn } from "@/components/ClientUI";
 import HeroArtwork from "@/components/HeroArtwork";
 import Link from "@/components/Link";
