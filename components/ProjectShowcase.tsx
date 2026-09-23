@@ -1,5 +1,5 @@
+import ButtonLink from "@/components/ButtonLink";
 import Image from "@/components/Image";
-import Link from "@/components/Link";
 import ProjectStack from "@/components/ProjectStack";
 import TechnologyBadge from "@/components/TechnologyBadge";
 import type { Project } from "@/data/projectsData";
@@ -40,7 +40,7 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
 							</div>
 							<h3
 								id={`featured-project-${index}`}
-								className="text-balance font-sans text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl xl:text-4xl"
+								className="text-balance font-sans text-2xl font-medium leading-tight tracking-[-0.035em] text-foreground sm:text-3xl xl:text-4xl"
 							>
 								{project.title}
 							</h3>
@@ -56,26 +56,30 @@ export default function ProjectShowcase({ projects }: { projects: Project[] }) {
 							) : null}
 							<div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-1">
 								{project.href && (
-									<Link
+									<ButtonLink
 										href={project.href}
-										className="inline-flex min-h-11 items-center gap-2 rounded-kj-md bg-primary px-4 font-mono text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+										variant="outline"
+										size="md"
+										className="min-h-11 gap-2 rounded-kj-lg"
 									>
 										Launch App <span aria-hidden="true">↗</span>
 										<span className="sr-only">
 											: {project.title} (opens in a new tab)
 										</span>
-									</Link>
+									</ButtonLink>
 								)}
 								{project.repoHref && (
-									<Link
+									<ButtonLink
 										href={project.repoHref}
-										className="inline-flex min-h-11 items-center gap-2 rounded-kj-md font-mono text-sm font-bold text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+										variant="ghost"
+										size="md"
+										className="min-h-11 gap-2 rounded-kj-lg text-muted-foreground hover:text-foreground"
 									>
 										View Source <span aria-hidden="true">↗</span>
 										<span className="sr-only">
 											: {project.title} (opens in a new tab)
 										</span>
-									</Link>
+									</ButtonLink>
 								)}
 							</div>
 						</div>

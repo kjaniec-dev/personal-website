@@ -27,8 +27,8 @@ export const viewport: Viewport = {
 	initialScale: 1,
 	viewportFit: "cover",
 	themeColor: [
-		{ media: "(prefers-color-scheme: light)", color: "#fff" },
-		{ media: "(prefers-color-scheme: dark)", color: "#000" },
+		{ media: "(prefers-color-scheme: light)", color: "#f5f5f4" },
+		{ media: "(prefers-color-scheme: dark)", color: "#0c0c0d" },
 	],
 };
 
@@ -95,19 +95,13 @@ export default function RootLayout({
 		>
 			<link
 				rel="apple-touch-icon"
-				sizes="76x76"
+				sizes="144x144"
 				href={`${basePath}/static/images/logo-light.png`}
 			/>
 			<link
 				rel="icon"
 				type="image/png"
-				sizes="32x32"
-				href={`${basePath}/static/images/logo-light.png`}
-			/>
-			<link
-				rel="icon"
-				type="image/png"
-				sizes="16x16"
+				sizes="144x144"
 				href={`${basePath}/static/images/logo-light.png`}
 			/>
 			<link
@@ -117,9 +111,9 @@ export default function RootLayout({
 			<link
 				rel="mask-icon"
 				href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
-				color="#5bbad5"
+				color="#0c0c0d"
 			/>
-			<meta name="msapplication-TileColor" content="#000000" />
+			<meta name="msapplication-TileColor" content="#0c0c0d" />
 			<link
 				rel="alternate"
 				type="application/rss+xml"
@@ -129,28 +123,19 @@ export default function RootLayout({
 				{/* Skip to main content link for accessibility */}
 				<a
 					href="#main-content"
-					className="bg-primary-500 absolute top-0 left-0 z-50 -translate-y-full transform px-4 py-3 text-white transition-transform duration-200 focus:translate-y-0"
+					className="absolute top-0 left-0 z-50 -translate-y-full transform rounded-br-kj-md bg-primary px-4 py-3 font-medium text-primary-foreground transition-transform duration-200 focus:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
 				>
 					Skip to main content
 				</a>
 
-				{/* Decorative background elements - optimized for GPU acceleration */}
+				{/* Decorative background elements */}
 				<div
 					className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
 					aria-hidden="true"
 				>
-					<div
-						className="absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full bg-primary/10 blur-2xl"
-						style={{ willChange: "opacity" }}
-					/>
-					<div
-						className="absolute top-1/2 -left-1/4 h-96 w-96 rounded-full bg-secondary/10 blur-2xl"
-						style={{ willChange: "opacity" }}
-					/>
-					<div
-						className="absolute right-1/3 -bottom-1/4 h-96 w-96 rounded-full bg-primary/8 blur-2xl"
-						style={{ willChange: "opacity" }}
-					/>
+					<div className="absolute -top-1/4 -right-1/4 h-96 w-96 rounded-full bg-primary/10 blur-2xl" />
+					<div className="absolute top-1/2 -left-1/4 h-96 w-96 rounded-full bg-secondary/10 blur-2xl" />
+					<div className="absolute right-1/3 -bottom-1/4 h-96 w-96 rounded-full bg-primary/8 blur-2xl" />
 				</div>
 
 				<ThemeProviders>

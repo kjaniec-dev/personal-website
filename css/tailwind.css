@@ -18,10 +18,6 @@
 	--animate-fade-in: fadeIn 0.6s ease-out forwards;
 	--animate-slide-up: slideUp 0.6s ease-out forwards;
 	--animate-slide-in-right: slideInRight 0.6s ease-out forwards;
-	--animate-float: float 6s ease-in-out infinite;
-	--animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-	--animate-gradient: gradient 8s linear infinite;
-	--animate-glow: glow 2s ease-in-out infinite alternate;
 
 	/* Accent colors for gradients */
 	--color-accent-cyan: oklch(0.79 0.171 192);
@@ -96,37 +92,6 @@
 	}
 }
 
-@keyframes float {
-	0%,
-	100% {
-		transform: translateY(0px) translateZ(0);
-	}
-	50% {
-		transform: translateY(-20px) translateZ(0);
-	}
-}
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
-@keyframes glow {
-	from {
-		box-shadow: 0 0 20px -10px var(--color-primary);
-	}
-	to {
-		box-shadow: 0 0 30px -10px var(--color-primary);
-	}
-}
-
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -141,7 +106,7 @@
 	::before,
 	::backdrop,
 	::file-selector-button {
-		border-color: var(--color-gray-200, currentColor);
+		border-color: var(--color-border, currentColor);
 	}
 
 	/* Skill bar animation */
@@ -385,7 +350,7 @@
 }
 
 .footnotes {
-	@apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+	@apply mt-12 border-t border-border pt-8;
 }
 
 .data-footnote-backref {
@@ -440,27 +405,26 @@ input:-webkit-autofill:focus {
 }
 
 ::-webkit-scrollbar-track {
-	background: var(--color-gray-100);
+	background: var(--color-canvas);
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--color-gray-300);
+	background: var(--color-border-strong);
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--color-gray-400);
+	background: var(--color-muted-foreground);
 }
 
-.dark ::-webkit-scrollbar-track {
-	background: var(--color-gray-900);
-}
-
-.dark ::-webkit-scrollbar-thumb {
-	background: var(--color-gray-700);
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-	background: var(--color-gray-600);
+/* Stack only when every panel fits, without hiding keyboard-focused content. */
+@media (min-width: 64rem) and (min-height: 50rem) and (
+		prefers-reduced-motion: no-preference
+	) {
+	.project-showcase[data-stackable="true"]:not(:has(:focus-visible))
+		.project-panel {
+		position: sticky;
+		top: 7rem;
+	}
 }

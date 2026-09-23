@@ -1,4 +1,5 @@
 import ContactLink from "@/components/ContactLink";
+import CopyEmailButton from "@/components/CopyEmailButton";
 
 interface ContactCTAProps {
 	headingId: string;
@@ -33,7 +34,14 @@ export default function ContactCTA({
 					{description}
 				</p>
 			</div>
-			<ContactLink email={email} />
+			<div className="flex flex-wrap items-center gap-3">
+				<ContactLink email={email} />
+				<CopyEmailButton
+					email={email}
+					size="lg"
+					className="min-h-12 rounded-full px-5 text-sm"
+				/>
+			</div>
 		</section>
 	);
 }

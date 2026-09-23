@@ -27,6 +27,7 @@ export default function Services({ email }: { email: string }) {
 			className="mt-10 mb-16 space-y-8 wrap-anywhere md:mt-12"
 		>
 			<SectionHeader
+				className="[&_h2]:font-medium [&_h2]:tracking-[-0.035em]"
 				kicker="Services"
 				title={<span id="services-heading">What I Do &amp; Deliver</span>}
 				description="I partner with teams to design, build, and optimize high-performance software systems. Here are the core services I provide."
@@ -48,7 +49,7 @@ export default function Services({ email }: { email: string }) {
 								{String(index + 1).padStart(2, "0")}
 							</span>
 							<div className="min-w-0 space-y-3">
-								<h3 className="text-xl font-bold leading-snug tracking-tight text-foreground sm:text-2xl xl:text-3xl">
+								<h3 className="text-xl font-medium leading-snug tracking-[-0.035em] text-foreground sm:text-2xl xl:text-3xl">
 									{item.title}
 								</h3>
 								<p
