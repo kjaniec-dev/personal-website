@@ -1,4 +1,5 @@
 import ButtonLink from "@/components/ButtonLink";
+import CopyEmailButton from "@/components/CopyEmailButton";
 import HeroArtwork from "@/components/HeroArtwork";
 import siteMetadata from "@/data/siteMetadata";
 
@@ -25,7 +26,7 @@ export default function Hero() {
 					</div>
 				</div>
 				<div className="space-y-2 sm:text-right">
-					<p className="inline-flex items-center gap-2.5 rounded-full border border-border bg-surface/60 px-3.5 py-2 font-mono text-[10px] tracking-wide text-muted-foreground sm:text-[11px]">
+					<p className="inline-flex items-center gap-2.5 rounded-full border border-border bg-surface/60 px-3.5 py-2 font-mono text-[11px] tracking-wide text-muted-foreground sm:text-xs">
 						<span
 							aria-hidden="true"
 							className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary ring-4 ring-primary/10"
@@ -40,7 +41,7 @@ export default function Hero() {
 
 			<div className="mt-10 grid items-center gap-8 sm:mt-12 lg:mt-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-2">
 				<div className="relative z-10 min-w-0">
-					<p className="font-mono text-[10px] font-medium tracking-[0.08em] text-muted-foreground uppercase sm:text-[11px] sm:tracking-[0.14em]">
+					<p className="font-mono text-[11px] font-medium tracking-[0.08em] text-muted-foreground uppercase sm:text-xs sm:tracking-[0.14em]">
 						Full-stack · Architecture · DevOps
 					</p>
 					<h1
@@ -59,7 +60,7 @@ export default function Hero() {
 						deployment.
 					</p>
 
-					<div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+					<div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
 						<ButtonLink
 							href={`mailto:${siteMetadata.email}`}
 							target="_self"
@@ -81,6 +82,11 @@ export default function Hero() {
 								<path d="M7 17 17 7M7 7h10v10" />
 							</svg>
 						</ButtonLink>
+						<CopyEmailButton
+							email={siteMetadata.email}
+							size="lg"
+							className="min-h-12 rounded-kj-lg px-5"
+						/>
 						<ButtonLink
 							href="#selected-work"
 							variant="ghost"
@@ -107,11 +113,11 @@ export default function Hero() {
 					className="pointer-events-none relative w-full max-w-[20rem] justify-self-center select-none sm:max-w-[22rem] lg:max-w-[25rem] lg:justify-self-end"
 					aria-hidden="true"
 				>
-					<p className="absolute top-0 left-4 font-mono text-[9px] tracking-[0.18em] text-muted-foreground uppercase sm:left-8">
+					<p className="absolute top-0 left-4 font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase sm:left-8">
 						Every layer. One engineer.
 					</p>
 					<HeroArtwork />
-					<div className="mx-2 mt-2 flex justify-between gap-2 border-t border-border/70 pt-4 font-mono text-[9px] text-muted-foreground sm:mx-8 sm:gap-3">
+					<div className="mx-2 mt-2 flex justify-between gap-2 border-t border-border/70 pt-4 font-mono text-[11px] text-muted-foreground sm:mx-8 sm:gap-3">
 						<span>
 							<span className="text-primary">01</span> Interface
 						</span>
@@ -135,7 +141,7 @@ export default function Hero() {
 					</span>
 				</p>
 				<div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:justify-end sm:gap-x-8">
-					<p className="font-mono text-[10px] tracking-wide text-muted-foreground">
+					<p className="font-mono text-[11px] tracking-wide text-muted-foreground">
 						Experience at
 					</p>
 					<ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium tracking-tight text-foreground/80 sm:gap-x-8 sm:text-base">

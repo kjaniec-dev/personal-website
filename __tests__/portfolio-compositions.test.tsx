@@ -20,8 +20,10 @@ describe("portfolio compositions", () => {
 		).toBeDefined();
 		const link = screen.getByRole("link", { name: "Let's talk" });
 		expect(link.getAttribute("href")).toBe("mailto:hello@example.com");
-		expect(link.getAttribute("target")).toBe("_self");
-		expect(screen.queryByRole("button")).toBeNull();
+		const copyButton = screen.getByRole("button", {
+			name: /copy.*hello@example\.com/i,
+		});
+		expect(copyButton).toBeDefined();
 	});
 
 	it("omits the contact panel when no email is configured", () => {

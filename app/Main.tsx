@@ -1,12 +1,12 @@
 import ButtonLink from "@/components/ButtonLink";
 import { SectionHeader } from "@/components/ClientUI";
+import CopyEmailButton from "@/components/CopyEmailButton";
 import Hero from "@/components/Hero";
 import Link from "@/components/Link";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import Services from "@/components/Services";
 import projectsData from "@/data/projectsData";
 import siteMetadata from "@/data/siteMetadata";
-import "./layout.css";
 
 export default function Home() {
 	const email = siteMetadata.email || "contact@kjaniec.dev";
@@ -36,14 +36,6 @@ export default function Home() {
 			"@type": "Person",
 			name: siteMetadata.author,
 		},
-		potentialAction: {
-			"@type": "SearchAction",
-			target: {
-				"@type": "EntryPoint",
-				urlTemplate: `${siteMetadata.siteUrl}/tags/{search_term_string}`,
-			},
-			"query-input": "required name=search_term_string",
-		},
 	};
 
 	return (
@@ -67,6 +59,7 @@ export default function Home() {
 			{/* Featured Projects Section */}
 			<section id="selected-work" className="space-y-8 my-16 scroll-mt-28">
 				<SectionHeader
+					className="[&_h2]:font-medium [&_h2]:tracking-[-0.035em]"
 					kicker="Portfolio"
 					title="Featured Work"
 					actions={
@@ -97,68 +90,76 @@ export default function Home() {
 			</section>
 
 			{/* Contact CTA Section */}
-			<section className="my-16 rounded-kj-2xl border border-border bg-surface p-8 text-center shadow-kj-lg relative overflow-hidden">
-				{/* Background mesh glow */}
-				<div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
-
-				<div className="relative z-10 max-w-2xl mx-auto space-y-6">
-					<p className="text-xs font-bold tracking-[0.2em] text-primary uppercase font-mono">
+			<section
+				aria-labelledby="contact-heading"
+				className="my-16 grid gap-8 border-t border-border pt-12 sm:pt-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-16"
+			>
+				<div className="min-w-0 space-y-5">
+					<p className="font-mono text-xs font-bold tracking-[0.2em] text-primary uppercase">
 						Get in touch
 					</p>
-					<h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl font-sans">
-						Let's Build Something Extraordinary
+					<h2
+						id="contact-heading"
+						className="text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.05em] text-foreground"
+					>
+						<span className="block">Have a product in mind?</span>{" "}
+						<span className="block bg-linear-to-r from-primary via-primary to-primary-hover bg-clip-text text-transparent">
+							Let's build it.
+						</span>
 					</h2>
-					<p className="text-muted-foreground text-sm leading-relaxed max-w-xl mx-auto font-sans">
-						Whether you're looking for a senior software consultant, backend
-						architecture design, or a full-stack engineer to scale your SaaS
-						product, I'm ready to collaborate.
+					<p className="max-w-xl text-base leading-relaxed text-muted-foreground">
+						Senior consulting, backend architecture, or a full-stack engineer to
+						scale your product — tell me what you're working on.
 					</p>
+				</div>
 
-					<div className="flex flex-wrap justify-center gap-4 pt-4">
-						{siteMetadata.email && (
-							<ButtonLink
-								href={`mailto:${siteMetadata.email}`}
-								variant="primary"
-								size="md"
-								className="rounded-kj-lg shadow-kj-glow"
-							>
-								<svg
-									aria-hidden="true"
-									className="h-4 w-4"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-									/>
-								</svg>
-								<span>Say Hello</span>
-							</ButtonLink>
-						)}
+				<div className="flex flex-wrap items-center gap-3 sm:gap-4">
+					<ButtonLink
+						href={`mailto:${email}`}
+						target="_self"
+						variant="primary"
+						size="lg"
+						className="group min-h-12 gap-5 rounded-kj-lg shadow-kj-glow"
+					>
+						Say hello
+						<svg
+							aria-hidden="true"
+							className="h-4 w-4 motion-safe:transition-transform motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth={1.75}
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path d="M7 17 17 7M7 7h10v10" />
+						</svg>
+					</ButtonLink>
 
-						{siteMetadata.linkedin && (
-							<ButtonLink
-								href={siteMetadata.linkedin}
-								variant="outline"
-								size="md"
-								className="rounded-kj-lg shadow-kj-sm"
+					<CopyEmailButton
+						email={email}
+						size="lg"
+						className="min-h-12 rounded-kj-lg px-5"
+					/>
+
+					{siteMetadata.linkedin && (
+						<ButtonLink
+							href={siteMetadata.linkedin}
+							variant="ghost"
+							size="lg"
+							className="min-h-12 gap-3 rounded-kj-sm text-foreground hover:text-primary"
+						>
+							<svg
+								aria-hidden="true"
+								className="h-4 w-4"
+								fill="currentColor"
+								viewBox="0 0 24 24"
 							>
-								<svg
-									aria-hidden="true"
-									className="h-4 w-4"
-									fill="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-								</svg>
-								<span>LinkedIn</span>
-							</ButtonLink>
-						)}
-					</div>
+								<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+							</svg>
+							LinkedIn
+						</ButtonLink>
+					)}
 				</div>
 			</section>
 		</>

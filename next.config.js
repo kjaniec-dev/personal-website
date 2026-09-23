@@ -101,11 +101,11 @@ module.exports = () => {
 			unoptimized,
 			// Add image optimization settings
 			formats: ["image/avif", "image/webp"],
-			minimumCacheTTL: 60,
+			minimumCacheTTL: 31536000,
 		},
 		// Experimental features for better performance
 		experimental: {
-			optimizePackageImports: ["pliny", "react-icons"],
+			optimizePackageImports: ["pliny"],
 		},
 		async headers() {
 			return [
