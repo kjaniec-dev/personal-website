@@ -1,5 +1,4 @@
 import type { MDXComponents } from "mdx/types";
-import Pre from "pliny/ui/Pre";
 import TOCInline from "pliny/ui/TOCInline";
 import {
 	Table,
@@ -10,6 +9,7 @@ import {
 	TableRow,
 	TableWrap,
 } from "@/components/ClientUI";
+import CodeBlock from "./CodeBlock";
 import Image from "./Image";
 import CustomLink from "./Link";
 
@@ -30,7 +30,7 @@ export const components: MDXComponents = {
 	Image,
 	TOCInline,
 	a: CustomLink,
-	pre: Pre,
+	pre: CodeBlock,
 	table: TableWrapper,
 	thead: TableHeader,
 	tbody: TableBody,
