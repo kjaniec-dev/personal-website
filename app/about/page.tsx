@@ -14,7 +14,11 @@ import experienceData from "@/data/experienceData";
 import siteMetadata from "@/data/siteMetadata";
 import skillsData, { type Skill } from "@/data/skillsData";
 
-export const metadata = genPageMetadata({ title: "About" });
+export const metadata = genPageMetadata({
+	title: "About",
+	description:
+		"Senior software engineer based in Poland. Full-stack development, systems architecture, and a product mindset.",
+});
 
 function ExperienceDetails({
 	title,

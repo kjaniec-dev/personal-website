@@ -1,9 +1,22 @@
+import { genPageMetadata } from "app/seo";
 import { allBlogs } from "contentlayer/generated";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { allCoreContent, sortPosts } from "pliny/utils/contentlayer";
 import ListLayout from "@/layouts/ListLayoutWithTags";
 
 const POSTS_PER_PAGE = 6;
+
+export async function generateMetadata(props: {
+	params: Promise<{ page: string }>;
+}): Promise<Metadata> {
+	const params = await props.params;
+	return genPageMetadata({
+		title: `Blog - Page ${params.page}`,
+		description:
+			"Notes on building software. Practical guides, tools I use, and lessons from projects along the way.",
+	});
+}
 
 export const generateStaticParams = async () => {
 	const totalPages = Math.ceil(allBlogs.length / POSTS_PER_PAGE);

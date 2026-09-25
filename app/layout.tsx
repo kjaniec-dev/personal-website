@@ -2,7 +2,7 @@ import "css/tailwind.css";
 import "css/prism.css";
 import "remark-github-blockquote-alert/alert.css";
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import type { SearchConfig } from "pliny/search";
 import Footer from "@/components/Footer";
@@ -21,6 +21,16 @@ const space_grotesk = Space_Grotesk({
 	adjustFontFallback: true,
 	fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
 });
+
+export const viewport: Viewport = {
+	width: "device-width",
+	initialScale: 1,
+	viewportFit: "cover",
+	themeColor: [
+		{ media: "(prefers-color-scheme: light)", color: "#fff" },
+		{ media: "(prefers-color-scheme: dark)", color: "#000" },
+	],
+};
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteMetadata.siteUrl),
@@ -109,36 +119,12 @@ export default function RootLayout({
 				href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
 				color="#5bbad5"
 			/>
-			{/* Resource hints for performance */}
-			<link rel="preconnect" href="https://fonts.googleapis.com" />
-			<link
-				rel="preconnect"
-				href="https://fonts.gstatic.com"
-				crossOrigin="anonymous"
-			/>
-			<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 			<meta name="msapplication-TileColor" content="#000000" />
-			<meta
-				name="theme-color"
-				media="(prefers-color-scheme: light)"
-				content="#fff"
-			/>
-			<meta
-				name="theme-color"
-				media="(prefers-color-scheme: dark)"
-				content="#000"
-			/>
 			<link
 				rel="alternate"
 				type="application/rss+xml"
 				href={`${basePath}/feed.xml`}
 			/>
-			{/* Performance optimizations */}
-			<meta
-				name="viewport"
-				content="width=device-width, initial-scale=1, viewport-fit=cover"
-			/>
-			<meta httpEquiv="x-ua-compatible" content="ie=edge" />
 			<body className="relative min-h-screen bg-canvas pl-[calc(100vw-100%)] text-foreground antialiased">
 				{/* Skip to main content link for accessibility */}
 				<a

@@ -5,7 +5,11 @@ import PortfolioPageHeader from "@/components/PortfolioPageHeader";
 import faqData from "@/data/faqData";
 import siteMetadata from "@/data/siteMetadata";
 
-export const metadata = genPageMetadata({ title: "FAQ" });
+export const metadata = genPageMetadata({
+	title: "FAQ",
+	description:
+		"Common questions about how I work, my preferences, and how to get in touch.",
+});
 
 const categories: {
 	id: "technical" | "work" | "personal" | "contact";

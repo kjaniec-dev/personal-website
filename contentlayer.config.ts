@@ -46,6 +46,9 @@ const icon = fromHtmlIsomorphic(
 	{ fragment: true },
 );
 
+const absoluteUrl = (url: string) =>
+	url.startsWith("http") ? url : `${siteMetadata.siteUrl}${url}`;
+
 const computedFields: ComputedFields = {
 	readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
 	slug: {
@@ -163,7 +166,11 @@ export const Blog = defineDocumentType(() => ({
 				datePublished: doc.date,
 				dateModified: doc.lastmod || doc.date,
 				description: doc.summary,
-				image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+				image: absoluteUrl(
+					typeof doc.images === "string"
+						? doc.images
+						: (doc.images?.[0] ?? siteMetadata.socialBanner),
+				),
 				url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
 			}),
 		},
