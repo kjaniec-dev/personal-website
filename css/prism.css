@@ -45,7 +45,8 @@
 .token.comment,
 .token.prolog,
 .token.cdata {
-	color: #6b7280;
+	/* #8b95a3 keeps WCAG AA (≥4.5:1) on both light and dark code backgrounds */
+	color: #8b95a3;
 	font-style: italic;
 }
 

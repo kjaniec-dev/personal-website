@@ -102,9 +102,9 @@ export default function Footer() {
 
 					{/* Navigation column */}
 					<div className="space-y-4">
-						<h3 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+						<h2 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
 							Navigation
-						</h3>
+						</h2>
 						<ul className="space-y-2">
 							{headerNavLinks.map((link) => (
 								<li key={link.href}>
@@ -121,9 +121,9 @@ export default function Footer() {
 
 					{/* Services column */}
 					<div className="space-y-4">
-						<h3 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+						<h2 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
 							Services
-						</h3>
+						</h2>
 						<ul className="space-y-2">
 							{services.map((s) => (
 								<li key={s.label}>
@@ -140,9 +140,9 @@ export default function Footer() {
 
 					{/* Contact column */}
 					<div className="space-y-4">
-						<h3 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+						<h2 className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground">
 							Contact
-						</h3>
+						</h2>
 						<ul className="space-y-2 text-sm text-muted-foreground">
 							{siteMetadata.email ? (
 								<li>

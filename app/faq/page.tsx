@@ -57,7 +57,7 @@ export default function FAQ() {
 			</div>
 
 			<ContactCTA
-				headingId="faq-contact-heading"
+				headingId="faq-cta-heading"
 				title="Still have questions?"
 				description="Get in touch to talk about your project or working together."
 				email={siteMetadata.email}
