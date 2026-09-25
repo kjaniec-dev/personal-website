@@ -52,6 +52,16 @@
 	--z-80: 80;
 }
 
+/*
+  The design kit sets `html { font-family: var(--kj-font-sans) }`, which is Inter.
+  This site never loads Inter, so anything outside a `font-sans` wrapper (e.g. the
+  home page) fell back to the visitor's system font. Point it at Space Grotesk.
+*/
+:root {
+	--kj-font-sans:
+		var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Keyframe animations - optimized for GPU acceleration using transform and opacity only */
 @keyframes fadeIn {
 	from {
