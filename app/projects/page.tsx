@@ -5,7 +5,11 @@ import ProjectCard from "@/components/ProjectCard";
 import projectsData from "@/data/projectsData";
 import siteMetadata from "@/data/siteMetadata";
 
-export const metadata = genPageMetadata({ title: "Projects" });
+export const metadata = genPageMetadata({
+	title: "Projects",
+	description:
+		"Products, developer tools, and experiments. A closer look at the software I design, build, and ship.",
+});
 
 export default function Projects() {
 	return (

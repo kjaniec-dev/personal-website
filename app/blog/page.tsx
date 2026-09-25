@@ -5,7 +5,11 @@ import ListLayout from "@/layouts/ListLayoutWithTags";
 
 const POSTS_PER_PAGE = 6;
 
-export const metadata = genPageMetadata({ title: "Blog" });
+export const metadata = genPageMetadata({
+	title: "Blog",
+	description:
+		"Notes on building software. Practical guides, tools I use, and lessons from projects along the way.",
+});
 
 export default async function BlogPage(_props: {
 	searchParams: Promise<{ page: string }>;
