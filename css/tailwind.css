@@ -314,31 +314,6 @@
 	.\[grid-template-rows\:1fr\] {
 		grid-template-rows: 1fr;
 	}
-
-	/* Portfolio accordions use local, neutral separators instead of glowing cards. */
-	div:has(> button[aria-expanded="true"]):not(
-		[data-tag-filter],
-		[data-tag-filter] *,
-		[data-faq-accordion],
-		[data-faq-accordion] *
-	) {
-		border-color: var(--color-primary) !important;
-		box-shadow:
-			var(--shadow-kj-md),
-			0 0 15px -5px color-mix(in srgb, var(--color-primary) 30%, transparent) !important;
-	}
-
-	button[aria-expanded="true"]:not(
-		[data-tag-filter] *,
-		[data-faq-accordion] *
-	) {
-		background-color: color-mix(
-			in srgb,
-			var(--color-primary) 4%,
-			var(--color-card)
-		) !important;
-		color: var(--color-primary) !important;
-	}
 }
 
 .task-list-item::before {
