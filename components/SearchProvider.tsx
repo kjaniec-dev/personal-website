@@ -24,6 +24,18 @@ interface SearchProviderProps {
 	children: ReactNode;
 }
 
+function SearchModalTrigger() {
+	const { query } = useKBar();
+	useEffect(() => {
+		const handleOpen = () => {
+			query?.toggle();
+		};
+		window.addEventListener("open-search", handleOpen);
+		return () => window.removeEventListener("open-search", handleOpen);
+	}, [query]);
+	return null;
+}
+
 export const SearchProvider = ({ children }: SearchProviderProps) => {
 	const router = useRouter();
 	const [documents, setDocuments] = useState<SearchDocument[]>([]);
@@ -93,6 +105,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
 
 	return (
 		<KBarProvider>
+			<SearchModalTrigger />
 			<SearchDialog actions={actions} status={status} />
 			{children}
 		</KBarProvider>

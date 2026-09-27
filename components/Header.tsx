@@ -1,6 +1,4 @@
-"use client";
-
-import { buttonVariants, cn } from "@/components/ClientUI";
+import ButtonLink from "@/components/ButtonLink";
 import HeaderNavLink from "@/components/HeaderNavLink";
 import Link from "@/components/Link";
 import MobileNav from "@/components/MobileNav";
@@ -51,15 +49,14 @@ export default function Header() {
 					<SearchButton />
 					<ThemeSwitch />
 					{siteMetadata.email ? (
-						<a
+						<ButtonLink
 							href={`mailto:${siteMetadata.email}`}
-							className={cn(
-								buttonVariants({ variant: "primary", size: "sm" }),
-								"hidden min-h-10 rounded-full px-4 font-sans text-xs font-semibold md:inline-flex",
-							)}
+							variant="primary"
+							size="sm"
+							className="hidden min-h-10 rounded-full px-4 font-sans text-xs font-semibold md:inline-flex"
 						>
 							Let&apos;s talk <span aria-hidden="true">↗</span>
-						</a>
+						</ButtonLink>
 					) : null}
 					<MobileNav />
 				</div>
