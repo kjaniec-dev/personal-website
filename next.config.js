@@ -105,7 +105,7 @@ module.exports = () => {
 		},
 		// Experimental features for better performance
 		experimental: {
-			optimizePackageImports: ["pliny"],
+			optimizePackageImports: ["pliny", "@kjaniec-dev/ui"],
 		},
 		async headers() {
 			return [
