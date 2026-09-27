@@ -5,7 +5,7 @@ import {
 	screen,
 	waitFor,
 } from "@testing-library/react";
-import { useMatches } from "kbar";
+import { useKBar, useMatches } from "kbar";
 import { AppRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SearchProvider } from "@/components/SearchProvider";
@@ -47,7 +47,16 @@ function SearchActions() {
 	);
 }
 
-beforeEach(() => push.mockClear());
+beforeEach(() => {
+	push.mockClear();
+	if (!Element.prototype.animate) {
+		Element.prototype.animate = vi.fn().mockReturnValue({
+			finished: Promise.resolve(),
+			cancel: vi.fn(),
+			addEventListener: vi.fn(),
+		}) as unknown as typeof Element.prototype.animate;
+	}
+});
 afterEach(() => {
 	cleanup();
 	vi.unstubAllGlobals();
@@ -84,5 +93,69 @@ describe("Search document registration", () => {
 		await waitFor(() => expect(fetchIndex).toHaveBeenCalled());
 		fireEvent.click(await screen.findByRole("button", { name: "Projects" }));
 		expect(push).toHaveBeenCalledWith("/projects");
+	});
+});
+
+function VisualStateInspector() {
+	const { visualState } = useKBar((state) => ({
+		visualState: state.visualState,
+	}));
+	return <div data-testid="visual-state">{visualState}</div>;
+}
+
+describe("Search modal triggering", () => {
+	it("opens when open-search event is dispatched", async () => {
+		render(
+			<AppRouterContext.Provider value={router}>
+				<SearchProvider>
+					<VisualStateInspector />
+				</SearchProvider>
+			</AppRouterContext.Provider>,
+		);
+
+		expect(screen.getByTestId("visual-state").textContent).toBe("hidden");
+
+		fireEvent(window, new CustomEvent("open-search"));
+
+		await waitFor(() => {
+			expect(screen.getByTestId("visual-state").textContent).toBe(
+				"animating-in",
+			);
+		});
+	});
+
+	it("remains open when open-search event is dispatched multiple times (idempotent)", async () => {
+		render(
+			<AppRouterContext.Provider value={router}>
+				<SearchProvider>
+					<VisualStateInspector />
+				</SearchProvider>
+			</AppRouterContext.Provider>,
+		);
+
+		fireEvent(window, new CustomEvent("open-search"));
+		fireEvent(window, new CustomEvent("open-search"));
+
+		await waitFor(() => {
+			expect(screen.getByTestId("visual-state").textContent).toBe(
+				"animating-in",
+			);
+		});
+	});
+
+	it("opens immediately when initialOpen is true", async () => {
+		render(
+			<AppRouterContext.Provider value={router}>
+				<SearchProvider initialOpen={true}>
+					<VisualStateInspector />
+				</SearchProvider>
+			</AppRouterContext.Provider>,
+		);
+
+		await waitFor(() => {
+			expect(screen.getByTestId("visual-state").textContent).toBe(
+				"animating-in",
+			);
+		});
 	});
 });
