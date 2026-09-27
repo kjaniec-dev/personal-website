@@ -70,220 +70,269 @@ function SkillList({ title, skills }: { title: string; skills: Skill[] }) {
 
 export default function About() {
 	const author = allAuthors.find((a) => a.slug === "default") ?? allAuthors[0];
+	const authorImage = author.avatar
+		? author.avatar.startsWith("http")
+			? author.avatar
+			: `${siteMetadata.siteUrl}${author.avatar}`
+		: `${siteMetadata.siteUrl}${siteMetadata.siteLogo}`;
+
+	const profilePageSchema = {
+		"@context": "https://schema.org",
+		"@type": "ProfilePage",
+		"@id": `${siteMetadata.siteUrl}/about/#profile`,
+		url: `${siteMetadata.siteUrl}/about`,
+		name: `About ${siteMetadata.author}`,
+		description:
+			"Senior software engineer based in Poland. Full-stack development, systems architecture, and a product mindset.",
+		mainEntity: {
+			"@type": "Person",
+			"@id": `${siteMetadata.siteUrl}/#person`,
+			name: siteMetadata.author,
+			url: siteMetadata.siteUrl,
+			jobTitle: author.occupation || "Senior Software Engineer",
+			worksFor: author.company
+				? {
+						"@type": "Organization",
+						name: author.company,
+					}
+				: undefined,
+			sameAs: [
+				author.github || siteMetadata.github,
+				author.linkedin || siteMetadata.linkedin,
+				author.twitter || siteMetadata.twitter,
+				author.bluesky || siteMetadata.bluesky,
+				author.docker || siteMetadata.docker,
+				author.npm || siteMetadata.npm,
+			].filter(Boolean),
+			image: authorImage,
+		},
+	};
 
 	return (
-		<div className="pt-12 pb-8 font-sans sm:pt-16">
-			<PortfolioPageHeader
-				eyebrow="Behind the work"
-				title="About"
-				description="Senior software engineer based in Poland. Full-stack development, systems architecture, and a product mindset."
+		<>
+			<script
+				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify(profilePageSchema) is safe
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
 			/>
+			<div className="pt-12 pb-8 font-sans sm:pt-16">
+				<PortfolioPageHeader
+					eyebrow="Behind the work"
+					title="About"
+					description="Senior software engineer based in Poland. Full-stack development, systems architecture, and a product mindset."
+				/>
 
-			<div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-				<MetricCard
-					className="rounded-2xl transition-colors hover:border-primary/40"
-					title="Years of experience"
-					icon={
-						<span className="font-mono text-xs font-medium text-primary">
-							01
-						</span>
-					}
-					value="12+"
-				/>
-				<MetricCard
-					className="rounded-2xl transition-colors hover:border-primary/40"
-					title="Contract model"
-					icon={
-						<span className="font-mono text-xs font-medium text-primary">
-							02
-						</span>
-					}
-					value="B2B"
-				/>
-				<MetricCard
-					className="rounded-2xl transition-colors hover:border-primary/40"
-					title="Remote work"
-					icon={
-						<span className="font-mono text-xs font-medium text-primary">
-							03
-						</span>
-					}
-					value="100%"
-				/>
-			</div>
-
-			<section
-				aria-labelledby="about-profile-heading"
-				className="grid gap-8 py-10 md:grid-cols-[220px_minmax(0,1fr)] md:gap-12 sm:py-14 lg:gap-16"
-			>
-				<div className="grid grid-cols-[112px_minmax(0,1fr)] items-start gap-5 self-start sm:grid-cols-[160px_minmax(0,1fr)] sm:gap-6 md:sticky md:top-28 md:block">
-					{author.avatar && (
-						<Image
-							src={author.avatar}
-							alt={author.name}
-							width={220}
-							height={220}
-							sizes="(min-width: 768px) 220px, (min-width: 640px) 160px, 112px"
-							className="h-28 w-28 rounded-2xl border border-border object-cover sm:h-40 sm:w-40 md:mb-6 md:h-55 md:w-55"
-							priority
-						/>
-					)}
-					<div>
-						<h2
-							id="about-profile-heading"
-							className="text-2xl font-medium tracking-tight text-foreground"
-						>
-							{siteMetadata.author}
-						</h2>
-						<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-							Senior Software Engineer
-						</p>
-						<DownloadCvButton
-							variant="outline"
-							size="md"
-							className="mt-5 min-h-11 rounded-full px-5"
-						/>
-					</div>
+				<div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+					<MetricCard
+						className="rounded-2xl transition-colors hover:border-primary/40"
+						title="Years of experience"
+						icon={
+							<span className="font-mono text-xs font-medium text-primary">
+								01
+							</span>
+						}
+						value="12+"
+					/>
+					<MetricCard
+						className="rounded-2xl transition-colors hover:border-primary/40"
+						title="Contract model"
+						icon={
+							<span className="font-mono text-xs font-medium text-primary">
+								02
+							</span>
+						}
+						value="B2B"
+					/>
+					<MetricCard
+						className="rounded-2xl transition-colors hover:border-primary/40"
+						title="Remote work"
+						icon={
+							<span className="font-mono text-xs font-medium text-primary">
+								03
+							</span>
+						}
+						value="100%"
+					/>
 				</div>
-				<div className="prose prose-sm max-w-none min-w-0 text-muted-foreground dark:prose-invert sm:prose-base prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground prose-h3:mt-8 prose-h3:text-xl prose-strong:font-medium prose-strong:text-foreground prose-ul:pl-5 prose-li:my-3 prose-li:leading-relaxed prose-li:marker:text-primary [&>p:first-child]:mt-0 [&>p:last-child]:mb-0">
-					<MDXLayoutRenderer code={author.body.code} components={components} />
-				</div>
-			</section>
 
-			<section
-				aria-labelledby="experience-heading"
-				className="border-t border-border pt-8 sm:pt-10"
-			>
-				<p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
-					Experience
-				</p>
-				<h2
-					id="experience-heading"
-					className="text-3xl font-medium tracking-tight text-foreground sm:text-4xl"
+				<section
+					aria-labelledby="about-profile-heading"
+					className="grid gap-8 py-10 md:grid-cols-[220px_minmax(0,1fr)] md:gap-12 sm:py-14 lg:gap-16"
 				>
-					Where I've worked
-				</h2>
-				<div className="mt-8 divide-y divide-border">
-					{experienceData.map((entry, index) => (
-						<article
-							key={`${entry.role}-${entry.company}`}
-							className="grid gap-5 py-8 md:grid-cols-[190px_minmax(0,1fr)] md:gap-10 sm:py-10"
-						>
-							<div className="flex items-baseline gap-4 md:flex-col md:gap-3">
-								<span
-									aria-hidden="true"
-									className="font-mono text-xs text-primary"
-								>
-									{String(index + 1).padStart(2, "0")}
-								</span>
-								<p className="font-mono text-xs leading-relaxed text-muted-foreground">
-									{entry.period}
-								</p>
-							</div>
-							<div className="min-w-0">
-								<h3 className="text-2xl font-medium leading-tight tracking-tight text-foreground">
-									{entry.role}
-								</h3>
-								<p className="mt-2 text-base leading-relaxed text-primary">
-									{entry.company}
-								</p>
-								{entry.context && (
-									<p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-										{entry.context}
-									</p>
-								)}
-
-								<div className="mt-6 grid gap-6 lg:grid-cols-2 lg:gap-8">
-									<ExperienceDetails
-										title="Responsibilities"
-										items={entry.responsibilities}
-									/>
-									<ExperienceDetails
-										title="Key deliverables"
-										items={entry.deliverables}
-									/>
-								</div>
-
-								{entry.tags && entry.tags.length > 0 && (
-									<ul
-										aria-label="Technologies used"
-										className="mt-6 flex flex-wrap gap-2"
-									>
-										{entry.tags.map((tag) => (
-											<li key={tag} className="min-w-0 max-w-full">
-												<TechnologyBadge>{tag}</TechnologyBadge>
-											</li>
-										))}
-									</ul>
-								)}
-								{entry.link && (
-									<Link
-										href={entry.link.href}
-										className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-sm text-sm font-medium text-primary transition-colors hover:text-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-									>
-										{entry.link.text}
-										<span aria-hidden="true">↗</span>
-									</Link>
-								)}
-							</div>
-						</article>
-					))}
-				</div>
-			</section>
-
-			<div className="grid gap-12 border-t border-border py-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16">
-				<section aria-labelledby="education-heading">
-					<p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
-						Education
-					</p>
-					<h2
-						id="education-heading"
-						className="text-3xl font-medium tracking-tight text-foreground"
-					>
-						Where I studied
-					</h2>
-					<ul className="mt-6 divide-y divide-border">
-						{educationData.map((entry) => (
-							<li key={entry.primaryText} className="py-5">
-								<h3 className="text-lg font-medium leading-snug text-foreground">
-									{entry.primaryText}
-								</h3>
-								<p className="mt-2 font-mono text-xs leading-relaxed text-muted-foreground">
-									{entry.secondaryText}
-								</p>
-							</li>
-						))}
-					</ul>
-				</section>
-				<section aria-labelledby="skills-heading">
-					<p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
-						Skills
-					</p>
-					<h2
-						id="skills-heading"
-						className="text-3xl font-medium tracking-tight text-foreground"
-					>
-						Tools of the trade
-					</h2>
-					<div className="mt-8 grid gap-8 sm:grid-cols-2">
-						<SkillList
-							title="Primary stack"
-							skills={skillsData.filter((skill) => skill.level === "primary")}
-						/>
-						<SkillList
-							title="Secondary stack"
-							skills={skillsData.filter((skill) => skill.level === "secondary")}
+					<div className="grid grid-cols-[112px_minmax(0,1fr)] items-start gap-5 self-start sm:grid-cols-[160px_minmax(0,1fr)] sm:gap-6 md:sticky md:top-28 md:block">
+						{author.avatar && (
+							<Image
+								src={author.avatar}
+								alt={author.name}
+								width={220}
+								height={220}
+								sizes="(min-width: 768px) 220px, (min-width: 640px) 160px, 112px"
+								className="h-28 w-28 rounded-2xl border border-border object-cover sm:h-40 sm:w-40 md:mb-6 md:h-55 md:w-55"
+								priority
+							/>
+						)}
+						<div>
+							<h2
+								id="about-profile-heading"
+								className="text-2xl font-medium tracking-tight text-foreground"
+							>
+								{siteMetadata.author}
+							</h2>
+							<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+								Senior Software Engineer
+							</p>
+							<DownloadCvButton
+								variant="outline"
+								size="md"
+								className="mt-5 min-h-11 rounded-full px-5"
+							/>
+						</div>
+					</div>
+					<div className="prose prose-sm max-w-none min-w-0 text-muted-foreground dark:prose-invert sm:prose-base prose-p:leading-relaxed prose-headings:font-medium prose-headings:tracking-tight prose-headings:text-foreground prose-h3:mt-8 prose-h3:text-xl prose-strong:font-medium prose-strong:text-foreground prose-ul:pl-5 prose-li:my-3 prose-li:leading-relaxed prose-li:marker:text-primary [&>p:first-child]:mt-0 [&>p:last-child]:mb-0">
+						<MDXLayoutRenderer
+							code={author.body.code}
+							components={components}
 						/>
 					</div>
 				</section>
-			</div>
 
-			<ContactCTA
-				headingId="about-contact-heading"
-				title="Let's build something together."
-				description="Remote collaboration, on a B2B basis."
-				email={siteMetadata.email}
-			/>
-		</div>
+				<section
+					aria-labelledby="experience-heading"
+					className="border-t border-border pt-8 sm:pt-10"
+				>
+					<p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+						Experience
+					</p>
+					<h2
+						id="experience-heading"
+						className="text-3xl font-medium tracking-tight text-foreground sm:text-4xl"
+					>
+						Where I've worked
+					</h2>
+					<div className="mt-8 divide-y divide-border">
+						{experienceData.map((entry, index) => (
+							<article
+								key={`${entry.role}-${entry.company}`}
+								className="grid gap-5 py-8 md:grid-cols-[190px_minmax(0,1fr)] md:gap-10 sm:py-10"
+							>
+								<div className="flex items-baseline gap-4 md:flex-col md:gap-3">
+									<span
+										aria-hidden="true"
+										className="font-mono text-xs text-primary"
+									>
+										{String(index + 1).padStart(2, "0")}
+									</span>
+									<p className="font-mono text-xs leading-relaxed text-muted-foreground">
+										{entry.period}
+									</p>
+								</div>
+								<div className="min-w-0">
+									<h3 className="text-2xl font-medium leading-tight tracking-tight text-foreground">
+										{entry.role}
+									</h3>
+									<p className="mt-2 text-base leading-relaxed text-primary">
+										{entry.company}
+									</p>
+									{entry.context && (
+										<p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+											{entry.context}
+										</p>
+									)}
+
+									<div className="mt-6 grid gap-6 lg:grid-cols-2 lg:gap-8">
+										<ExperienceDetails
+											title="Responsibilities"
+											items={entry.responsibilities}
+										/>
+										<ExperienceDetails
+											title="Key deliverables"
+											items={entry.deliverables}
+										/>
+									</div>
+
+									{entry.tags && entry.tags.length > 0 && (
+										<ul
+											aria-label="Technologies used"
+											className="mt-6 flex flex-wrap gap-2"
+										>
+											{entry.tags.map((tag) => (
+												<li key={tag} className="min-w-0 max-w-full">
+													<TechnologyBadge>{tag}</TechnologyBadge>
+												</li>
+											))}
+										</ul>
+									)}
+									{entry.link && (
+										<Link
+											href={entry.link.href}
+											className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-sm text-sm font-medium text-primary transition-colors hover:text-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+										>
+											{entry.link.text}
+											<span aria-hidden="true">↗</span>
+										</Link>
+									)}
+								</div>
+							</article>
+						))}
+					</div>
+				</section>
+
+				<div className="grid gap-12 border-t border-border py-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-16">
+					<section aria-labelledby="education-heading">
+						<p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+							Education
+						</p>
+						<h2
+							id="education-heading"
+							className="text-3xl font-medium tracking-tight text-foreground"
+						>
+							Where I studied
+						</h2>
+						<ul className="mt-6 divide-y divide-border">
+							{educationData.map((entry) => (
+								<li key={entry.primaryText} className="py-5">
+									<h3 className="text-lg font-medium leading-snug text-foreground">
+										{entry.primaryText}
+									</h3>
+									<p className="mt-2 font-mono text-xs leading-relaxed text-muted-foreground">
+										{entry.secondaryText}
+									</p>
+								</li>
+							))}
+						</ul>
+					</section>
+					<section aria-labelledby="skills-heading">
+						<p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+							Skills
+						</p>
+						<h2
+							id="skills-heading"
+							className="text-3xl font-medium tracking-tight text-foreground"
+						>
+							Tools of the trade
+						</h2>
+						<div className="mt-8 grid gap-8 sm:grid-cols-2">
+							<SkillList
+								title="Primary stack"
+								skills={skillsData.filter((skill) => skill.level === "primary")}
+							/>
+							<SkillList
+								title="Secondary stack"
+								skills={skillsData.filter(
+									(skill) => skill.level === "secondary",
+								)}
+							/>
+						</div>
+					</section>
+				</div>
+
+				<ContactCTA
+					headingId="about-contact-heading"
+					title="Let's build something together."
+					description="Remote collaboration, on a B2B basis."
+					email={siteMetadata.email}
+				/>
+			</div>
+		</>
 	);
 }

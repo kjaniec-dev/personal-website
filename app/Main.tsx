@@ -13,6 +13,7 @@ export default function Home() {
 	const personSchema = {
 		"@context": "https://schema.org",
 		"@type": "Person",
+		"@id": `${siteMetadata.siteUrl}/#person`,
 		name: siteMetadata.author,
 		url: siteMetadata.siteUrl,
 		sameAs: [
@@ -29,12 +30,12 @@ export default function Home() {
 	const websiteSchema = {
 		"@context": "https://schema.org",
 		"@type": "WebSite",
+		"@id": `${siteMetadata.siteUrl}/#website`,
 		name: siteMetadata.title,
 		url: siteMetadata.siteUrl,
 		description: siteMetadata.description,
 		author: {
-			"@type": "Person",
-			name: siteMetadata.author,
+			"@id": `${siteMetadata.siteUrl}/#person`,
 		},
 	};
 

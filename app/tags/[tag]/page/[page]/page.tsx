@@ -1,11 +1,25 @@
+import { genPageMetadata } from "app/seo";
 import tagData from "app/tag-data.json";
 import { allBlogs } from "contentlayer/generated";
 import { slug } from "github-slugger";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { allCoreContent, sortPosts } from "pliny/utils/contentlayer";
+import siteMetadata from "@/data/siteMetadata";
 import ListLayout from "@/layouts/ListLayoutWithTags";
 
 const POSTS_PER_PAGE = 5;
+
+export async function generateMetadata(props: {
+	params: Promise<{ tag: string; page: string }>;
+}): Promise<Metadata> {
+	const params = await props.params;
+	const tag = decodeURI(params.tag);
+	return genPageMetadata({
+		title: `${tag} - Page ${params.page}`,
+		description: `Articles, notes, and projects tagged with #${tag} (Page ${params.page}) by ${siteMetadata.author}.`,
+	});
+}
 
 export const generateStaticParams = async () => {
 	const tagCounts = tagData as Record<string, number>;
