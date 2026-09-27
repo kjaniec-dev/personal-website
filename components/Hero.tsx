@@ -31,11 +31,9 @@ export default function Hero() {
 							aria-hidden="true"
 							className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary ring-4 ring-primary/10"
 						/>
-						Open to part-time opportunities
+						Available for new projects
 					</p>
-					<p className="text-xs text-muted-foreground">
-						Availability depends on scope and timing
-					</p>
+					<p className="text-xs text-muted-foreground">Contract & consulting</p>
 				</div>
 			</div>
 

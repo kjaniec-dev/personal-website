@@ -37,6 +37,29 @@ describe("portfolio compositions", () => {
 		expect(container.childElementCount).toBe(0);
 	});
 
+	it("renders large variant with eyebrow, title, say hello button and linkedin link", () => {
+		render(
+			<ContactCTA
+				variant="large"
+				headingId="main-contact"
+				eyebrow="Get in touch"
+				title="Have a product in mind?"
+				description="Tell me what you're working on."
+				email="hello@example.com"
+				linkedinHref="https://linkedin.com/in/example"
+			/>,
+		);
+		expect(
+			screen.getByRole("region", { name: "Have a product in mind?" }),
+		).toBeDefined();
+		expect(screen.getByText("Get in touch")).toBeDefined();
+		expect(screen.getByRole("link", { name: "Say hello" })).toBeDefined();
+		expect(screen.getByRole("link", { name: "LinkedIn" })).toBeDefined();
+		expect(
+			screen.getByRole("button", { name: /copy.*hello@example\.com/i }),
+		).toBeDefined();
+	});
+
 	it.each([
 		["React", "/tags/react"],
 		["System Design", "/tags/system-design"],
