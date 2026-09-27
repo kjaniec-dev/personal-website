@@ -1,8 +1,8 @@
 "use client";
 
-import { type Action, KBarProvider, useKBar } from "kbar";
+import { type Action, KBarProvider, useKBar, VisualState } from "kbar";
 import { useRouter } from "next/navigation";
-import { type ReactNode, useEffect, useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import SearchDialog from "@/components/SearchDialog";
 import headerNavLinks from "@/data/headerNavLinks";
 import siteMetadata from "@/data/siteMetadata";
@@ -20,15 +20,33 @@ interface SearchDocument {
 	type: "blog" | "project";
 }
 
-interface SearchProviderProps {
+export interface SearchProviderProps {
 	children: ReactNode;
+	initialOpen?: boolean;
 }
 
-function SearchModalTrigger() {
+function SearchModalTrigger({ initialOpen }: { initialOpen?: boolean }) {
 	const { query } = useKBar();
+	const hasOpenedRef = useRef(false);
+
+	useEffect(() => {
+		if (initialOpen && !hasOpenedRef.current) {
+			hasOpenedRef.current = true;
+			query?.setVisualState((vs) =>
+				vs === VisualState.hidden || vs === VisualState.animatingOut
+					? VisualState.animatingIn
+					: vs,
+			);
+		}
+	}, [initialOpen, query]);
+
 	useEffect(() => {
 		const handleOpen = () => {
-			query?.toggle();
+			query?.setVisualState((vs) =>
+				vs === VisualState.hidden || vs === VisualState.animatingOut
+					? VisualState.animatingIn
+					: vs,
+			);
 		};
 		window.addEventListener("open-search", handleOpen);
 		return () => window.removeEventListener("open-search", handleOpen);
@@ -36,7 +54,10 @@ function SearchModalTrigger() {
 	return null;
 }
 
-export const SearchProvider = ({ children }: SearchProviderProps) => {
+export const SearchProvider = ({
+	children,
+	initialOpen = false,
+}: SearchProviderProps) => {
 	const router = useRouter();
 	const [documents, setDocuments] = useState<SearchDocument[]>([]);
 	const [status, setStatus] = useState<"loading" | "ready" | "error">(
@@ -105,7 +126,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
 
 	return (
 		<KBarProvider>
-			<SearchModalTrigger />
+			<SearchModalTrigger initialOpen={initialOpen} />
 			<SearchDialog actions={actions} status={status} />
 			{children}
 		</KBarProvider>
