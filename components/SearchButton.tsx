@@ -1,22 +1,24 @@
 "use client";
 
-import { useKBar } from "kbar";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ClientUI";
 
 export default function SearchButton() {
-	const { query } = useKBar();
 	const [isMac, setIsMac] = useState(false);
 
 	useEffect(() => {
 		setIsMac(navigator.userAgent.includes("Mac"));
 	}, []);
 
+	const handleClick = () => {
+		window.dispatchEvent(new CustomEvent("open-search"));
+	};
+
 	return (
 		<Button
 			variant="ghost"
 			size="icon"
-			onClick={() => query?.toggle()}
+			onClick={handleClick}
 			aria-label="Search"
 			title={`Search (${isMac ? "⌘" : "Ctrl"}+K)`}
 			className="h-12 w-12 shrink-0 rounded-full text-muted-foreground hover:bg-subtle hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring md:h-10 md:w-10 [&_svg]:h-5 [&_svg]:w-5"
