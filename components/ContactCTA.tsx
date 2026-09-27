@@ -23,7 +23,7 @@ export default function ContactCTA({
 			aria-labelledby={headingId}
 			className={`flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-surface p-6 sm:flex-row sm:items-center sm:p-8 ${className}`}
 		>
-			<div className="space-y-2">
+			<div className="min-w-0 space-y-2">
 				<h2
 					id={headingId}
 					className="text-2xl font-medium tracking-tight text-foreground"
@@ -34,12 +34,12 @@ export default function ContactCTA({
 					{description}
 				</p>
 			</div>
-			<div className="flex flex-wrap items-center gap-3">
+			<div className="flex shrink-0 flex-wrap items-center gap-3 sm:flex-nowrap">
 				<ContactLink email={email} />
 				<CopyEmailButton
 					email={email}
 					size="lg"
-					className="min-h-12 rounded-full px-5 text-sm"
+					className="min-h-12 shrink-0 rounded-full px-5 text-sm"
 				/>
 			</div>
 		</section>
