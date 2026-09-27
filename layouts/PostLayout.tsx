@@ -2,6 +2,7 @@ import type { Authors, Blog } from "contentlayer/generated";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
 import type { ReactNode } from "react";
+import ContactCTA from "@/components/ContactCTA";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
 import PostTableOfContents, {
@@ -123,6 +124,15 @@ export default function PostLayout({
 				</div>
 			</div>
 			<footer className="border-t border-border">
+				{siteMetadata.email && (
+					<ContactCTA
+						headingId="post-contact-heading"
+						title="Working on a technical challenge?"
+						description="I partner with teams on architecture, performance, and full-stack development. Let's discuss your project."
+						email={siteMetadata.email}
+						className="my-8"
+					/>
+				)}
 				{showSourceLinks && (
 					<div className="flex flex-wrap gap-x-6 gap-y-2 border-b border-border py-4">
 						<Link
