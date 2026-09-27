@@ -8,7 +8,8 @@ import { TAG_GROUPS } from "@/data/tagGroups";
 
 export const metadata = genPageMetadata({
 	title: "Tags",
-	description: "Things I blog about",
+	description:
+		"Browse articles and technical notes by topic, from frontend development and systems architecture to DevOps and tooling.",
 });
 
 export default async function Page() {

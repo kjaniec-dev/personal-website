@@ -29,9 +29,11 @@ export function genPageMetadata({
 		},
 		twitter: {
 			title: `${title} | ${siteMetadata.title}`,
+			description: description || siteMetadata.description,
 			card: "summary_large_image",
 			images: image ? [image] : [siteMetadata.socialBanner],
 		},
+
 		...rest,
 	};
 }

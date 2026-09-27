@@ -106,13 +106,14 @@ export default async function Page(props: {
 		return coreContent(authorResults as Authors);
 	});
 	const mainContent = coreContent(post);
-	const jsonLd = post.structuredData;
-	jsonLd.author = authorDetails.map((author) => {
-		return {
+	const jsonLd = {
+		...post.structuredData,
+		author: authorDetails.map((author) => ({
 			"@type": "Person",
 			name: author.name,
-		};
-	});
+			url: siteMetadata.siteUrl,
+		})),
+	};
 
 	// BreadcrumbList schema for better SEO
 	const breadcrumbSchema = {
