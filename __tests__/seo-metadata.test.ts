@@ -81,4 +81,34 @@ describe("SEO metadata & structured data", () => {
 			url: `${siteMetadata.siteUrl}${siteMetadata.siteLogo}`,
 		});
 	});
+
+	it("blog post metadata allows Next.js opengraph-image when post.images is not specified", async () => {
+		const postWithoutImage = allBlogs.find((p) => !p.images);
+		expect(postWithoutImage).toBeDefined();
+
+		const { generateMetadata: generateBlogMetadata } = await import(
+			"../app/blog/[slug]/page"
+		);
+		const meta = await generateBlogMetadata({
+			params: Promise.resolve({
+				slug: postWithoutImage?.slug || "",
+			}),
+		});
+
+		expect(meta).toBeDefined();
+		expect(meta?.title).toBe(postWithoutImage?.title);
+		// openGraph.images should not be explicitly set to allow Next.js opengraph-image to take effect
+		expect(meta?.openGraph?.images).toBeUndefined();
+		expect(meta?.twitter?.images).toBeUndefined();
+	});
+
+	it("opengraph-image generateStaticParams covers all published blogs", async () => {
+		const { generateStaticParams } = await import(
+			"../app/blog/[slug]/opengraph-image"
+		);
+		const params = generateStaticParams();
+
+		expect(params).toHaveLength(allBlogs.length);
+		expect(params[0]).toHaveProperty("slug");
+	});
 });
