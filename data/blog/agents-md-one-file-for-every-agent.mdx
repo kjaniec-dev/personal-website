@@ -1,0 +1,100 @@
+---
+title: "Pin Your AI Agent's Context: One AGENTS.md That Works Across Claude, Codex and Junie"
+date: '2026-10-17T10:00:00Z'
+lastmod: '2026-10-17'
+tags: ['ai', 'development', 'docker', 'productivity']
+draft: false
+summary: 'One canonical AGENTS.md plus a few relative symlinks keeps Claude Code, Codex, Junie and the rest following the same repo rules, including inside a Docker Sandbox.'
+layout: PostSimple
+---
+
+In my last two posts I wrapped [Claude Code and Codex](/blog/docker-sandboxes) and then [five agents in total](/blog/docker-sandboxes-five-agents) in the same Docker Sandbox workspace. The boundary is shared. The instructions were not.
+
+Every agent wants to be told how the repository works, and each one looks for that in a different file. This post is the small fix: one file, a few symlinks, and a template you can copy.
+
+## The problem: five agents, five config formats
+
+Left alone, a repo that I touch with several agents ends up with a pile like this:
+
+- `CLAUDE.md` for Claude Code,
+- `AGENTS.md` for Codex,
+- `.junie/AGENTS.md` for Junie,
+- `GEMINI.md` for Antigravity,
+- and whatever OpenCode finds first.
+
+They start as copies. Then I fix a command in one, forget the others, and a week later one agent runs the old test command while another follows the new one. The failure is quiet: nothing errors, the agents just disagree about the rules.
+
+[AGENTS.md](https://agents.md) is the closest thing to a common format. The simplest fix is to treat it as the only file I edit and make everything else point at it.
+
+## One canonical AGENTS.md, plus links for the others
+
+`AGENTS.md` in the repository root is the source of truth. Everything else is a pointer:
+
+```bash
+# from the repository root
+ln -s AGENTS.md CLAUDE.md
+ln -s AGENTS.md GEMINI.md
+
+# optional: Junie's preferred location
+mkdir -p .junie && ln -s ../AGENTS.md .junie/AGENTS.md
+```
+
+Three details matter:
+
+- **Keep the links relative.** `ln -s AGENTS.md CLAUDE.md` stores the target as a path next to the link. An absolute path like `/home/me/project/AGENTS.md` works on one machine and breaks everywhere else, including in a sandbox.
+- **Commit them.** Git stores symlinks as symlinks, so a fresh clone gets the same layout. On Windows, symlinks need Developer Mode or `core.symlinks`, which is one more reason I work in WSL.
+- **Know who needs which pointer.** Codex and OpenCode read `AGENTS.md` directly. Junie looks for `.junie/AGENTS.md` first and then falls back to the project root, so the `.junie` link is optional. Claude Code historically reads only `CLAUDE.md`. Newer versions are reported to fall back to `AGENTS.md` when there is no `CLAUDE.md`, but I would not bet a workflow on that, and the link costs nothing. Antigravity picks up `AGENTS.md` in recent versions and `GEMINI.md` in older ones. Support has been moving quickly, so check what your installed version does.
+
+If Claude needs a few extra notes of its own, replace the symlink with a real `CLAUDE.md` that starts with one line:
+
+```markdown
+@AGENTS.md
+
+## Claude Code only
+- Use plan mode before touching more than three files.
+```
+
+The `@AGENTS.md` import pulls the shared file in, and the Claude-specific part stays separate. Prefer this over a symlink the moment the agents genuinely need to differ.
+
+## What to put in it
+
+Short and specific beats long and thorough. Agents load this file into every session, so each line costs context on every task. I keep three sections:
+
+- **Commands.** The exact install, build, test, lint, and dev commands. This is the part agents get wrong most often, and the part that gets stale first.
+- **Conventions.** Only the rules that cannot be inferred from the code: where new files go, naming, which library wins when two are available, how commits are written.
+- **Don'ts.** The hard limits. Never edit generated files, never commit `.env`, never run migrations against anything but the local database, never skip a failing test to get green.
+
+What I leave out: a tour of the folder structure the agent can read itself, general programming advice, and anything the linter already enforces.
+
+## Mounting it into your Docker Sandbox
+
+This is where the setup pays off with the sandbox harnesses. The selected Git repository is mounted read/write, and `AGENTS.md` and its symlinks live inside it. There is nothing extra to mount or configure: every sandbox that opens the repository sees the same rules.
+
+The one way to break it is an absolute or out-of-repo link. The sandbox mounts the repository, not the rest of the host, so a symlink pointing at `~/dotfiles/AGENTS.md` dangles inside the container. A relative link to a file in the same repository always resolves.
+
+I also keep a quick check in the repo so a broken link does not go unnoticed:
+
+```bash
+for f in CLAUDE.md GEMINI.md; do
+  [ "$(readlink "$f")" = "AGENTS.md" ] || echo "$f is not linked to AGENTS.md"
+done
+```
+
+Note the difference from the skills store from the last post. That store is shared across all sandboxes and writable by all of them, so it is global. `AGENTS.md` is per repository and travels with the code, which is exactly where project rules belong. Personal preferences stay in each agent's own global config, outside the repo.
+
+Since the file is writable from inside the sandbox, an agent can edit it. I treat that like any other change: it shows up in the diff, and I review it before it lands.
+
+## A 5-line template to copy
+
+```markdown
+# AGENTS.md
+- Commands: `bun install`, `bun run dev`, `bun run test`, `bun run lint`; run test and lint before saying you are done.
+- Layout: app code in `app/`, shared UI in `components/`, content in `data/`; match the style of the file you are editing.
+- Conventions: TypeScript strict, no `any`; conventional commit messages; keep changes small and focused.
+- Don't: edit generated files, commit secrets or `.env`, add dependencies without asking, or skip failing tests.
+- When unsure: read the code first, then ask; do not guess at project rules.
+```
+
+Swap in your own commands and paths, save it as `AGENTS.md`, run the three `ln -s` lines, and commit. Five agents, one file to maintain.
+
+When a rule keeps getting ignored, I fix the sentence in `AGENTS.md`, not the prompt, and every agent benefits at once.
