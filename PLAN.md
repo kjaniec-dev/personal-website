@@ -62,7 +62,7 @@ Not in `data/projectsData.ts` yet.
 
 1. Owner collects 2-3 numbers from tests (extraction accuracy, time per invoice, cost per document) - **required before writing**
 2. One flow diagram: input -> OCR/LLM -> validation -> KSeF
-3. Featured Work card (tags: `gcp` `gemini` `ocr` `ksef` `python` `automation`), no "Launch App" button
+3. Featured Work card (tags: `gcp` `gemini` `ocr` `ksef` `go` `automation`), no "Launch App" button
 4. Case study page: problem, decisions (Google Vision vs Gemini multimodal evaluation, FA(2)/FA(3) schema mapping), numbers
 5. Link it as the first proof on `/services/ai-automation`
 

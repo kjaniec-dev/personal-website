@@ -82,7 +82,7 @@ const projectsData: Project[] = [
 	{
 		title: "dokufakt — Invoice Intake & KSeF Automation",
 		description: `An invoice-intake pipeline that turns scanned or emailed invoices into validated, KSeF-ready documents instead of manual retyping. OCR approaches were evaluated head to head (Google Cloud Vision vs Gemini multimodal), extracted data is mapped to the FA(2) and FA(3) schemas, and a Stripe to KSeF spike explores pushing documents on to accounting and payment systems. Case study only: there is no public demo, so nobody can run up the AI bill.`,
-		tags: ["python", "gcp", "gemini", "ocr", "ksef", "automation"],
+		tags: ["go", "gcp", "gemini", "ocr", "ksef", "automation"],
 		status: "experiment",
 		featured: false,
 	},
