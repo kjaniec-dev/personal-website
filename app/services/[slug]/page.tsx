@@ -1,14 +1,21 @@
 import { genPageMetadata } from "app/seo";
+import { allBlogs } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { allCoreContent, sortPosts } from "pliny/utils/contentlayer";
 import ServicePage from "@/components/ServicePage";
-import { getPublishedServices, getServiceBySlug } from "@/data/servicesData";
+import {
+	buildServiceSchema,
+	getPublishedServices,
+	getRelatedPosts,
+	getServiceBySlug,
+} from "@/data/servicesData";
 import siteMetadata from "@/data/siteMetadata";
 
 export const dynamicParams = false;
 
-// Static export rejects an empty list, so while every service is still a
-// draft we emit one placeholder param; the page 404s for it.
+// Static export rejects an empty list, so while every service is a draft we
+// emit one placeholder param; the page 404s for it.
 const NO_SERVICES_SLUG = "_";
 
 export function generateStaticParams() {
@@ -38,5 +45,26 @@ export default async function Page(props: {
 	const service = getServiceBySlug(slug);
 	if (!service) notFound();
 
-	return <ServicePage service={service} email={siteMetadata.email} />;
+	const posts = getRelatedPosts(
+		service,
+		allCoreContent(sortPosts(allBlogs.filter((post) => !post.draft))),
+	).map((post) => ({
+		title: post.title,
+		path: post.path,
+		date: post.date,
+		summary: post.summary,
+	}));
+
+	return (
+		<>
+			<script
+				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify of a plain object built from our own data
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify(buildServiceSchema(service, siteMetadata)),
+				}}
+			/>
+			<ServicePage service={service} email={siteMetadata.email} posts={posts} />
+		</>
+	);
 }

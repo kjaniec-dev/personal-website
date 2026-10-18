@@ -3,10 +3,14 @@ import { afterEach, describe, expect, it } from "vitest";
 import ServicePage from "@/components/ServicePage";
 import projectsData from "@/data/projectsData";
 import servicesData, {
+	buildServiceSchema,
 	getProofProjects,
 	getPublishedServices,
+	getRelatedPosts,
 	getServiceBySlug,
 	getServiceEmailSubject,
+	getServiceForTags,
+	getServicesForProject,
 	type Service,
 } from "@/data/servicesData";
 
@@ -15,6 +19,8 @@ afterEach(cleanup);
 const service: Service = {
 	slug: "demo",
 	title: "Demo Service",
+	cardDescription: "Card text.",
+	blogTags: ["react", "docker"],
 	headline: "Ship the demo",
 	summary: "A demo service for tests.",
 	audience: ["You have a demo"],
@@ -68,6 +74,59 @@ describe("servicesData", () => {
 	});
 });
 
+describe("service relations", () => {
+	const other: Service = {
+		...service,
+		slug: "other",
+		blogTags: ["docker"],
+		proofProjects: [],
+	};
+
+	it("finds related posts by shared tags, best match first", () => {
+		const posts = [
+			{ id: 1, tags: ["react"] },
+			{ id: 2, tags: ["vue"] },
+			{ id: 3, tags: ["react", "docker"] },
+		];
+		expect(getRelatedPosts(service, posts).map((p) => p.id)).toEqual([3, 1]);
+		expect(getRelatedPosts(service, posts, 1).map((p) => p.id)).toEqual([3]);
+	});
+
+	it("picks the service that fits a post best", () => {
+		expect(getServiceForTags(["docker"], [service, other])?.slug).toBe("demo");
+		expect(getServiceForTags(["react", "docker"], [other, service])?.slug).toBe(
+			"demo",
+		);
+		expect(getServiceForTags(["go"], [service, other])).toBeUndefined();
+		expect(getServiceForTags(undefined, [service])).toBeUndefined();
+	});
+
+	it("links a project back to the services that use it as proof", () => {
+		expect(
+			getServicesForProject("Planning Poker Backend & App", [
+				service,
+				other,
+			]).map((s) => s.slug),
+		).toEqual(["demo"]);
+		expect(getServicesForProject("Nope", [service])).toEqual([]);
+	});
+
+	it("builds Service structured data", () => {
+		expect(
+			buildServiceSchema(service, {
+				siteUrl: "https://example.com",
+				author: "Jane Doe",
+			}),
+		).toMatchObject({
+			"@type": "Service",
+			name: "Demo Service",
+			description: "A demo service for tests.",
+			url: "https://example.com/services/demo",
+			provider: { "@id": "https://example.com/#person", name: "Jane Doe" },
+		});
+	});
+});
+
 describe("ServicePage", () => {
 	it("renders the template sections in order", () => {
 		render(<ServicePage service={service} email="hello@example.com" />);
@@ -116,6 +175,40 @@ describe("ServicePage", () => {
 			.map((heading) => heading.textContent);
 		expect(headings).not.toContain("Proof");
 		expect(headings).not.toContain("FAQ");
+	});
+
+	it("shows related reading and a custom CTA when provided", () => {
+		render(
+			<ServicePage
+				service={{
+					...service,
+					audienceTitle: "Problems I solve",
+					whyMe: ["Senior engineer"],
+					cta: {
+						title: "Book a call",
+						description: "Pick a slot.",
+						buttonText: "Book now",
+						subject: "Call • kjaniec.dev",
+					},
+				}}
+				email="hello@example.com"
+				posts={[{ title: "A post", path: "blog/a-post", date: "2026-01-01" }]}
+			/>,
+		);
+
+		const headings = screen
+			.getAllByRole("heading", { level: 2 })
+			.map((heading) => heading.textContent);
+		expect(headings).toContain("Problems I solve");
+		expect(headings).toContain("Why me");
+		expect(headings).toContain("Related reading");
+		expect(
+			screen.getByRole("link", { name: "A post" }).getAttribute("href"),
+		).toBe("/blog/a-post");
+		const cta = screen.getByRole("link", { name: "Book now" });
+		expect(cta.getAttribute("href")).toBe(
+			`mailto:hello@example.com?subject=${encodeURIComponent("Call • kjaniec.dev")}`,
+		);
 	});
 
 	it("opens an email with a per-service subject", () => {

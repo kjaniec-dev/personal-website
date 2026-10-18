@@ -18,7 +18,7 @@
   "reliability": 1,
   "gaming": 1,
   "kubernetes": 3,
-  "python": 2,
+  "python": 3,
   "streamlit": 1,
   "numpy": 2,
   "retirement": 1,
@@ -30,5 +30,10 @@
   "pdf": 2,
   "three-js": 2,
   "vite": 2,
-  "fastapi": 1
+  "fastapi": 1,
+  "gcp": 1,
+  "gemini": 1,
+  "ocr": 1,
+  "ksef": 1,
+  "automation": 1
 }

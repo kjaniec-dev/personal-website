@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import ButtonLink from "@/components/ButtonLink";
 import FAQAccordion from "@/components/FAQAccordion";
+import Link from "@/components/Link";
 import PortfolioPageHeader from "@/components/PortfolioPageHeader";
 import ProjectCard from "@/components/ProjectCard";
 import type { FAQItem } from "@/data/faqData";
@@ -10,9 +11,17 @@ import {
 	type Service,
 } from "@/data/servicesData";
 
+export interface RelatedPost {
+	title: string;
+	path: string;
+	date: string;
+	summary?: string;
+}
+
 interface ServicePageProps {
 	service: Service;
 	email: string;
+	posts?: RelatedPost[];
 }
 
 function Section({
@@ -47,19 +56,29 @@ function Section({
 	);
 }
 
-export default function ServicePage({ service, email }: ServicePageProps) {
+export default function ServicePage({
+	service,
+	email,
+	posts = [],
+}: ServicePageProps) {
 	const proofProjects = getProofProjects(service);
 	const faqItems: FAQItem[] = service.faq.map((item) => ({
 		...item,
 		category: "work",
 	}));
-	const mailto = `mailto:${email}?subject=${encodeURIComponent(getServiceEmailSubject(service))}`;
+	const mailto = `mailto:${email}?subject=${encodeURIComponent(service.cta?.subject ?? getServiceEmailSubject(service))}`;
 	const prefix = `service-${service.slug}`;
+	const cta = service.cta ?? {
+		title: `Let's talk about ${service.title}`,
+		description:
+			"Tell me what you're working on and I'll reply with next steps.",
+		buttonText: "Get in touch",
+	};
 
 	const sections = [
 		{
 			id: `${prefix}-audience`,
-			title: "Who it's for",
+			title: service.audienceTitle ?? "Who it's for",
 			content: (
 				<ul className="space-y-3 text-base leading-relaxed text-muted-foreground">
 					{service.audience.map((item) => (
@@ -105,6 +124,21 @@ export default function ServicePage({ service, email }: ServicePageProps) {
 				</ol>
 			),
 		},
+		...(service.whyMe?.length
+			? [
+					{
+						id: `${prefix}-why`,
+						title: "Why me",
+						content: (
+							<ul className="space-y-3 text-base leading-relaxed text-muted-foreground">
+								{service.whyMe.map((item) => (
+									<li key={item}>{item}</li>
+								))}
+							</ul>
+						),
+					},
+				]
+			: []),
 		...(proofProjects.length > 0
 			? [
 					{
@@ -122,9 +156,37 @@ export default function ServicePage({ service, email }: ServicePageProps) {
 										repoHref={project.repoHref}
 										tags={project.tags}
 										status={project.status}
+										showServices={false}
 									/>
 								))}
 							</div>
+						),
+					},
+				]
+			: []),
+		...(posts.length > 0
+			? [
+					{
+						id: `${prefix}-reading`,
+						title: "Related reading",
+						content: (
+							<ul className="space-y-4">
+								{posts.map((post) => (
+									<li key={post.path}>
+										<Link
+											href={`/${post.path}`}
+											className="text-base font-medium text-foreground transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+										>
+											{post.title}
+										</Link>
+										{post.summary ? (
+											<p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+												{post.summary}
+											</p>
+										) : null}
+									</li>
+								))}
+							</ul>
 						),
 					},
 				]
@@ -173,10 +235,10 @@ export default function ServicePage({ service, email }: ServicePageProps) {
 						id={`${prefix}-cta`}
 						className="text-2xl font-medium tracking-tight text-foreground"
 					>
-						Let's talk about {service.title}
+						{cta.title}
 					</h2>
 					<p className="text-sm leading-relaxed text-muted-foreground">
-						Tell me what you're working on and I'll reply with next steps.
+						{cta.description}
 					</p>
 				</div>
 				<ButtonLink
@@ -186,7 +248,7 @@ export default function ServicePage({ service, email }: ServicePageProps) {
 					size="lg"
 					className="min-h-12 shrink-0 rounded-kj-lg"
 				>
-					Get in touch
+					{cta.buttonText}
 				</ButtonLink>
 			</section>
 		</div>

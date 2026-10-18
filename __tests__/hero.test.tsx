@@ -21,7 +21,7 @@ describe("Hero Component", () => {
 		expect(screen.getByText("Available for new projects")).toBeDefined();
 		expect(screen.getByText("Contract & consulting")).toBeDefined();
 		expect(
-			screen.getByText("Full-stack · Architecture · DevOps"),
+			screen.getByText("Full-stack · Architecture · DevOps · AI Automation"),
 		).toBeDefined();
 		expect(
 			screen.getByRole("button", { name: /copy.*clipboard/i }),

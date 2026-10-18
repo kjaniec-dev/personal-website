@@ -40,7 +40,7 @@ export default function Hero() {
 			<div className="mt-10 grid items-center gap-8 sm:mt-12 lg:mt-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-2">
 				<div className="relative z-10 min-w-0">
 					<p className="font-mono text-[11px] font-medium tracking-[0.08em] text-muted-foreground uppercase sm:text-xs sm:tracking-[0.14em]">
-						Full-stack · Architecture · DevOps
+						Full-stack · Architecture · DevOps · AI Automation
 					</p>
 					<h1
 						id="hero-title"

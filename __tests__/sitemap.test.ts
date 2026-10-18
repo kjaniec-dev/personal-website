@@ -15,6 +15,15 @@ describe("sitemap", () => {
 		expect(urls).toContain(`${siteMetadata.siteUrl}/tags`);
 	});
 
+	it("includes the service pages", () => {
+		const urls = sitemap().map((entry) => entry.url);
+
+		expect(urls).toContain(`${siteMetadata.siteUrl}/services/ai-automation`);
+		expect(urls).toContain(
+			`${siteMetadata.siteUrl}/services/technical-audits-advisory`,
+		);
+	});
+
 	it("includes tag pages from tag data", () => {
 		const entries = sitemap();
 		const urls = entries.map((entry) => entry.url);

@@ -42,15 +42,15 @@ AI page outline: hero, problems I solve (invoice/document intake, email and tick
 ## Sprints
 
 - [x] **1. `ServicePage` component** with data in one file, no real copy yet (placeholder data for one service, one unit test for the data/slug lookup)
-- [ ] **2. AI & Process Automation page** at `/services/ai-automation`, to test the template. Copy needs owner approval.
-- [ ] **3. Home cards link to pages**: `components/Services.tsx` gets a "Learn more" button; `mailto` stays as a smaller secondary button. Check the grid with 5 entries.
-- [ ] **4. Full-Stack Development** page
-- [ ] **5. System Architecture** page
-- [ ] **6. Cloud & DevOps** page
-- [ ] **7. Technical Consulting repackaged** into 2-3 fixed offers (Technical Audits & Advisory)
-- [ ] **8. Per-page metadata**: own title, description and Schema.org `Service` JSON-LD for each page; add the pages to `app/sitemap.ts` and the search index
-- [ ] **9. Internal links**: projects link to services and services link to projects
-- [ ] **10. Blog posts linked** to the relevant services
+- [x] **2. AI & Process Automation page** at `/services/ai-automation`, to test the template. Draft copy: review before relying on it.
+- [x] **3. Home cards link to pages**: `components/Services.tsx` gets a "Learn more" button; `mailto` stays as a smaller secondary button. Check the grid with 5 entries.
+- [x] **4. Full-Stack Development** page
+- [x] **5. System Architecture** page
+- [x] **6. Cloud & DevOps** page
+- [x] **7. Technical Consulting repackaged** into 2-3 fixed offers (Technical Audits & Advisory)
+- [x] **8. Per-page metadata**: own title, description and Schema.org `Service` JSON-LD for each page; add the pages to `app/sitemap.ts` and the search index
+- [x] **9. Internal links**: projects link to services and services link to projects
+- [x] **10. Blog posts linked** to the relevant services (tag-based, both directions; no new post written)
 
 If time is short: do sprints 1-3, then only the AI page. Add the other services one at a time.
 

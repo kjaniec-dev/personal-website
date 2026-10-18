@@ -2,6 +2,7 @@ import tagData from "app/tag-data.json";
 import { allBlogs } from "contentlayer/generated";
 import { slug } from "github-slugger";
 import type { MetadataRoute } from "next";
+import { getPublishedServices } from "@/data/servicesData";
 import siteMetadata from "@/data/siteMetadata";
 
 export const dynamic = "force-static";
@@ -29,6 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		}),
 	);
 
+	const serviceRoutes = getPublishedServices().map((service) => ({
+		url: `${siteUrl}/services/${service.slug}`,
+		lastModified: latestPostDate,
+	}));
+
 	const tagCounts = tagData as Record<string, number>;
 	const tagRoutes = Object.keys(tagCounts).map((tag) => {
 		const matchingBlogs = publishedBlogs.filter((post) =>
@@ -47,5 +53,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		};
 	});
 
-	return [...staticRoutes, ...tagRoutes, ...blogRoutes];
+	return [...staticRoutes, ...serviceRoutes, ...tagRoutes, ...blogRoutes];
 }
