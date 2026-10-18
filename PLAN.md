@@ -41,7 +41,7 @@ AI page outline: hero, problems I solve (invoice/document intake, email and tick
 
 ## Sprints
 
-- [ ] **1. `ServicePage` component** with data in one file, no real copy yet (placeholder data for one service, one unit test for the data/slug lookup)
+- [x] **1. `ServicePage` component** with data in one file, no real copy yet (placeholder data for one service, one unit test for the data/slug lookup)
 - [ ] **2. AI & Process Automation page** at `/services/ai-automation`, to test the template. Copy needs owner approval.
 - [ ] **3. Home cards link to pages**: `components/Services.tsx` gets a "Learn more" button; `mailto` stays as a smaller secondary button. Check the grid with 5 entries.
 - [ ] **4. Full-Stack Development** page
