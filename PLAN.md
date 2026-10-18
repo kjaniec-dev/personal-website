@@ -35,7 +35,7 @@ Route: `/services/[slug]` (statically generated via `generateStaticParams()`).
 | System Architecture | "Architecture that survives growth" | Diagrams, ADRs, migration plan | Planning Poker (WebSocket cluster, Redis pub/sub, Kubernetes); anonymous legacy pattern if approved |
 | Cloud & DevOps | "Reliable delivery, predictable cloud bills" | Pipelines, IaC, monitoring, cost review | Planning Poker infra, own deployments |
 | Technical Audits & Advisory (was: Technical Consulting) | Fixed-scope, fixed-duration offers instead of vague "consulting" | Architecture Review, Code & Security Audit, Performance Audit | Audit as the easiest entry point for a new client |
-| AI & Process Automation (new) | "Automate the work your team shouldn't be doing manually" | Pilot on one process, production rollout with monitoring, ROI calculator | dokufakt as a case study (no live demo) |
+| AI & Process Automation (new) | "Automate the work your team shouldn't be doing manually" | Pilot on one process, production rollout with monitoring, ROI calculator (separate repo) | dokufakt as a case study (no live demo) |
 
 AI page outline: hero, problems I solve (invoice/document intake, email and ticket triage, RAG assistant over internal knowledge, report/offer generation, legacy integrations, human-in-the-loop agents), how it works (process audit, pilot, production with monitoring, handover), why me vs a no-code shop (code in client repo, tests and model evals, security/GDPR, no vendor lock-in), case study, FAQ, CTA "Book a free 30-min process audit".
 
@@ -68,23 +68,30 @@ Not in `data/projectsData.ts` yet.
 
 Optional: "replay" demo that plays back stored pipeline results for 3-4 synthetic invoices, with no model calls.
 
-### ROI calculator (client-side, zero token cost)
+### ROI calculator (already built, separate repo)
 
-1. Fix 4-5 inputs and the formula (manual cost vs automation cost): documents/month, minutes each, hourly rate, error rate
-2. Pure calculation function with unit tests (Vitest)
-3. Form with live result
-4. Chart of cumulative cost, manual vs automated, with break-even point
-5. Assumptions section (no unfounded promises)
-6. CTA with `mailto` carrying the entered values in the subject/body
-7. Link from the AI page and Featured Work
-8. Last, optional: email the result (needs a backend)
+Lives in [kjaniec-dev/roi-calculator](https://github.com/kjaniec-dev/roi-calculator), so it is not part of this plan except for the links:
 
-### Sitewide AI mentions
+1. Link it from `/services/ai-automation` ("Estimate your savings") and from the CTA
+2. Add a Featured Work card for it in `data/projectsData.ts` (client-side, zero token cost)
+3. Decide how it is hosted (own subdomain vs embedded) and whether it passes the entered values into the `mailto` subject/body
 
-- Hero tagline / meta description: add "AI Automation" (`data/siteMetadata.js` currently says "Software engineer crafting elegant solutions...")
-- A paragraph in About about automation
-- 3 questions in `data/faqData.ts` (data privacy / model providers, cost and ROI, what happens when the model is wrong)
-- Optional PL page (`/pl/automatyzacja-ai`) for local SEO
+### Sitewide AI rollout checklist
+
+Order from the planning conversation; items that overlap with the sprints above are cross-referenced.
+
+1. Tagline `Full-stack · Architecture · DevOps · AI Automation` and meta description in `data/siteMetadata.js` (currently "Software engineer crafting elegant solutions...") - 15 min
+2. Fifth card on the home page in `components/Services.tsx` (sprint 3 covers the links; check the grid with 5 entries). Draft copy: "Turning repetitive, manual work into reliable pipelines: document processing, data workflows, internal tools and LLM-powered assistants, integrated with the systems you already run. Production-grade, measurable, and built with data privacy in mind."
+3. `/services/ai-automation` skeleton: hero + problems list (sprint 2)
+4. "How it works" and "Why me, not a no-code shop" sections (sprint 2)
+5. FAQ on the page, plus 3 questions in `data/faqData.ts`: data privacy / model providers, cost and how to recognise ROI, what happens when the model is wrong
+6. One Featured Work card for an AI project, tagged `ai` (dokufakt, see above)
+7. A paragraph in About about automation
+8. CTA "Book a free 30-min process audit" with its own `mailto` subject
+9. First blog post, e.g. "Where LLMs actually save time in business processes"; optional anonymous post "Designing a multi-agent pipeline for legacy code migration" (IR schema, dependency graph, equivalence verification) - only with client approval
+10. Optional PL page (`/pl/automatyzacja-ai`) for local SEO
+
+Naming: keep **AI & Process Automation**. "AI Automation" blends in with no-code agencies, and "Intelligent Automation" sounds corporate. Alternative: "AI Workflow Automation".
 
 ## Open questions for the owner
 

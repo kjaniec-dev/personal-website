@@ -7,8 +7,15 @@ import siteMetadata from "@/data/siteMetadata";
 
 export const dynamicParams = false;
 
+// Static export rejects an empty list, so while every service is still a
+// draft we emit one placeholder param; the page 404s for it.
+const NO_SERVICES_SLUG = "_";
+
 export function generateStaticParams() {
-	return getPublishedServices().map((service) => ({ slug: service.slug }));
+	const params = getPublishedServices().map((service) => ({
+		slug: service.slug,
+	}));
+	return params.length > 0 ? params : [{ slug: NO_SERVICES_SLUG }];
 }
 
 export async function generateMetadata(props: {
