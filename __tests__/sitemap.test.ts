@@ -10,6 +10,7 @@ describe("sitemap", () => {
 		expect(urls).toContain(`${siteMetadata.siteUrl}/`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/about`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/projects`);
+		expect(urls).toContain(`${siteMetadata.siteUrl}/services`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/blog`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/faq`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/tags`);

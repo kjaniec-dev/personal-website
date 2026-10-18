@@ -23,12 +23,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		[...blogDates].sort().reverse()[0] ||
 		new Date().toISOString().split("T")[0];
 
-	const staticRoutes = ["", "about", "projects", "blog", "faq", "tags"].map(
-		(route) => ({
-			url: `${siteUrl}/${route}`,
-			lastModified: latestPostDate,
-		}),
-	);
+	const staticRoutes = [
+		"",
+		"about",
+		"projects",
+		"services",
+		"blog",
+		"faq",
+		"tags",
+	].map((route) => ({
+		url: `${siteUrl}/${route}`,
+		lastModified: latestPostDate,
+	}));
 
 	const serviceRoutes = getPublishedServices().map((service) => ({
 		url: `${siteUrl}/services/${service.slug}`,

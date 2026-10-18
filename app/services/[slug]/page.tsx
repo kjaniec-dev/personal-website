@@ -6,6 +6,7 @@ import { allCoreContent, sortPosts } from "pliny/utils/contentlayer";
 import ServicePage from "@/components/ServicePage";
 import {
 	buildServiceSchema,
+	buildServicesBreadcrumbs,
 	getPublishedServices,
 	getRelatedPosts,
 	getServiceBySlug,
@@ -62,6 +63,15 @@ export default async function Page(props: {
 				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify of a plain object built from our own data
 				dangerouslySetInnerHTML={{
 					__html: JSON.stringify(buildServiceSchema(service, siteMetadata)),
+				}}
+			/>
+			<script
+				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON.stringify of a plain object built from our own data
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify(
+						buildServicesBreadcrumbs(siteMetadata.siteUrl, service),
+					),
 				}}
 			/>
 			<ServicePage service={service} email={siteMetadata.email} posts={posts} />

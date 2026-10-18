@@ -5,20 +5,29 @@ import {
 	getServiceEmailSubject,
 } from "@/data/servicesData";
 
-export default function Services({ email }: { email: string }) {
+interface ServicesProps {
+	email: string;
+	/** On `/services` the page's own h1 replaces the section header. */
+	standalone?: boolean;
+}
+
+export default function Services({ email, standalone = false }: ServicesProps) {
 	const services = getPublishedServices();
 
 	return (
 		<section
-			aria-labelledby="services-heading"
-			className="mt-10 mb-16 space-y-8 wrap-anywhere md:mt-12"
+			aria-labelledby={standalone ? undefined : "services-heading"}
+			aria-label={standalone ? "Services" : undefined}
+			className={`space-y-8 wrap-anywhere ${standalone ? "mb-16" : "mt-10 mb-16 md:mt-12"}`}
 		>
-			<SectionHeader
-				className="[&_h2]:font-medium [&_h2]:tracking-[-0.035em]"
-				kicker="Services"
-				title={<span id="services-heading">What I Do &amp; Deliver</span>}
-				description="I partner with teams to design, build, and optimize high-performance software systems. Here are the core services I provide."
-			/>
+			{standalone ? null : (
+				<SectionHeader
+					className="[&_h2]:font-medium [&_h2]:tracking-[-0.035em]"
+					kicker="Services"
+					title={<span id="services-heading">What I Do &amp; Deliver</span>}
+					description="I partner with teams to design, build, and optimize high-performance software systems. Here are the core services I provide."
+				/>
+			)}
 			<ol className="min-w-0 divide-y divide-border border-y border-border font-sans">
 				{services.map((item, index) => (
 					<li

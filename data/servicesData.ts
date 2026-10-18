@@ -448,4 +448,28 @@ export function buildServiceSchema(
 	};
 }
 
+/** BreadcrumbList for `/services` (service = undefined) or a service page. */
+export function buildServicesBreadcrumbs(
+	siteUrl: string,
+	service?: Pick<Service, "slug" | "title">,
+) {
+	const items = [
+		{ name: "Home", url: siteUrl },
+		{ name: "Services", url: `${siteUrl}/services` },
+		...(service
+			? [{ name: service.title, url: `${siteUrl}/services/${service.slug}` }]
+			: []),
+	];
+	return {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: items.map((item, index) => ({
+			"@type": "ListItem",
+			position: index + 1,
+			name: item.name,
+			item: item.url,
+		})),
+	};
+}
+
 export default servicesData;

@@ -4,6 +4,7 @@ import ServicePage from "@/components/ServicePage";
 import projectsData from "@/data/projectsData";
 import servicesData, {
 	buildServiceSchema,
+	buildServicesBreadcrumbs,
 	getProofProjects,
 	getPublishedServices,
 	getRelatedPosts,
@@ -109,6 +110,22 @@ describe("service relations", () => {
 			]).map((s) => s.slug),
 		).toEqual(["demo"]);
 		expect(getServicesForProject("Nope", [service])).toEqual([]);
+	});
+
+	it("builds breadcrumbs for the index and for a service page", () => {
+		const names = (schema: ReturnType<typeof buildServicesBreadcrumbs>) =>
+			schema.itemListElement.map((entry) => entry.name);
+
+		expect(names(buildServicesBreadcrumbs("https://example.com"))).toEqual([
+			"Home",
+			"Services",
+		]);
+		const crumbs = buildServicesBreadcrumbs("https://example.com", service);
+		expect(names(crumbs)).toEqual(["Home", "Services", "Demo Service"]);
+		expect(crumbs.itemListElement[2]).toMatchObject({
+			position: 3,
+			item: "https://example.com/services/demo",
+		});
 	});
 
 	it("builds Service structured data", () => {
