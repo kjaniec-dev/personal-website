@@ -17,7 +17,7 @@ interface SearchDocument {
 	summary?: string;
 	tags?: string[];
 	path: string;
-	type: "blog" | "project";
+	type: "blog" | "project" | "service";
 }
 
 export interface SearchProviderProps {
@@ -113,10 +113,16 @@ export const SearchProvider = ({
 				id: doc.path,
 				name: doc.title,
 				keywords: [doc.summary, ...(doc.tags ?? [])].filter(Boolean).join(" "),
-				section: doc.type === "blog" ? "Articles" : "Projects",
+				section:
+					doc.type === "blog"
+						? "Articles"
+						: doc.type === "service"
+							? "Services"
+							: "Projects",
 				subtitle: doc.tags?.join(" · "),
 				perform: () => {
-					if (doc.type === "blog") router.push(`/${doc.path}`);
+					if (doc.type === "blog" || doc.type === "service")
+						router.push(`/${doc.path}`);
 					else window.location.assign(doc.path);
 				},
 			})),

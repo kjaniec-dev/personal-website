@@ -243,6 +243,13 @@ Edit `data/siteMetadata.js`
 2. Use `genPageMetadata()` for SEO
 3. Wrap content in `<SectionContainer>` for consistent layout
 
+## Service Pages Work
+
+- The plan lives in `PLAN.md`; work one sprint per session and tick it off there.
+- Site copy is English. Do not invent facts, metrics or client names; leave `TODO(owner)` and ask.
+- No live demos that call paid AI APIs; prefer static case studies or client-side tools.
+- Services are currently a static list in `components/Services.tsx`; the target is data in `data/` rendered by a shared `ServicePage` component.
+
 ## Recent Fixes
 
 - **Hero animation double-play (commit `caa5fa3`):** Fixed mobile remount issue with HeroAnimationWrapper

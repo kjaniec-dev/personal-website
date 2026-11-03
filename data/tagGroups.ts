@@ -48,6 +48,11 @@ export const TAG_GROUPS: TagGroup[] = [
 		],
 	},
 	{
+		id: "ai-automation",
+		label: "AI & Automation",
+		tags: ["automation", "ocr", "gemini", "gcp", "ksef"],
+	},
+	{
 		id: "projects-open-source",
 		label: "Projects & Open Source",
 		tags: ["showcase", "open-source", "development", "pdf"],

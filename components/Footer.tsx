@@ -1,30 +1,16 @@
 import Link from "@/components/Link";
 import SocialIcon from "@/components/social-icons";
 import headerNavLinks from "@/data/headerNavLinks";
+import { getPublishedServices } from "@/data/servicesData";
 import siteMetadata from "@/data/siteMetadata";
 
 export default function Footer() {
 	const year = new Date().getFullYear();
-	const email = siteMetadata.email || "contact@kjaniec.dev";
 
-	const services = [
-		{
-			label: "Full-Stack Development",
-			href: `mailto:${email}?subject=Inquiry regarding Full-Stack Development • kjaniec.dev`,
-		},
-		{
-			label: "System Architecture",
-			href: `mailto:${email}?subject=Inquiry regarding System Architecture • kjaniec.dev`,
-		},
-		{
-			label: "Cloud & DevOps",
-			href: `mailto:${email}?subject=Inquiry regarding Cloud %26 DevOps • kjaniec.dev`,
-		},
-		{
-			label: "Technical Consulting",
-			href: `mailto:${email}?subject=Inquiry regarding Technical Consulting • kjaniec.dev`,
-		},
-	];
+	const services = getPublishedServices().map((service) => ({
+		label: service.title,
+		href: `/services/${service.slug}`,
+	}));
 
 	return (
 		<footer className="mt-24 mb-8 border-t border-border pt-12 sm:pt-16">

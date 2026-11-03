@@ -2,6 +2,7 @@ import Image from "@/components/Image";
 import Link from "@/components/Link";
 import TechnologyBadge from "@/components/TechnologyBadge";
 import type { ProjectStatus } from "@/data/projectsData";
+import { getServicesForProject } from "@/data/servicesData";
 
 interface ProjectCardProps {
 	title: string;
@@ -13,6 +14,8 @@ interface ProjectCardProps {
 	status?: ProjectStatus;
 	priority?: boolean;
 	index?: number;
+	/** Link to the services this project is proof for. Defaults to true. */
+	showServices?: boolean;
 }
 
 const statusLabel: Record<ProjectStatus, string> = {
@@ -32,7 +35,10 @@ export default function ProjectCard({
 	status = "open-source",
 	priority = false,
 	index,
+	showServices = true,
 }: ProjectCardProps) {
+	const services = showServices ? getServicesForProject(title) : [];
+
 	return (
 		<article
 			aria-label={title}
@@ -111,6 +117,22 @@ export default function ProjectCard({
 						</Link>
 					) : null}
 				</div>
+				{services.length > 0 ? (
+					<p className="text-xs text-muted-foreground">
+						Related service{services.length > 1 ? "s" : ""}:{" "}
+						{services.map((service, i) => (
+							<span key={service.slug}>
+								{i > 0 ? ", " : ""}
+								<Link
+									href={`/services/${service.slug}`}
+									className="font-medium text-foreground underline-offset-4 hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+								>
+									{service.title}
+								</Link>
+							</span>
+						))}
+					</p>
+				) : null}
 			</div>
 		</article>
 	);

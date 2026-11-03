@@ -99,6 +99,25 @@ const faqData: FAQItem[] = [
 			"For a new full-time role, I need at least 3 months' notice. Part-time work may be possible sooner, depending on the scope and my availability at the time. Reach out early if you have specific timelines so we can plan accordingly.",
 		category: "work",
 	},
+	{
+		question: "Do my documents and data end up in public AI models?",
+		answer:
+			"Not by default. Which provider and deployment option are used is decided with you before the pilot, based on what data is involved and your requirements.",
+		category: "work",
+	},
+	{
+		question:
+			"How much does AI automation cost, and how will I know it pays off?",
+		answer:
+			"We start by estimating what the manual process costs you today. The pilot is then measured against that baseline, so the return is a number you can check.",
+		category: "work",
+	},
+	{
+		question: "What happens when the AI gets something wrong?",
+		answer:
+			"Output is validated, quality is measured on real examples before go-live, and steps where an error would be costly keep a person in the loop.",
+		category: "work",
+	},
 
 	// Personal
 	{
