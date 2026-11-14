@@ -1,0 +1,168 @@
+---
+title: 'Your Dependencies Still Work. But Are They Still Supported?'
+date: '2026-11-14T09:30:00Z'
+lastmod: '2026-11-14'
+tags: ['devops', 'typescript', 'architecture', 'open-source', 'security']
+draft: false
+summary: 'Why I built eol-check: a privacy-first, browser-based lifecycle checker that spots unsupported runtimes, compares project files, and explains what it cannot know.'
+layout: PostSimple
+---
+
+Your build is green. The application starts. The container passes its health check. The deployment pipeline has nothing to complain about.
+
+But the runtime in that container may already be out of support.
+
+That is a different problem from a failing test or a known vulnerability. A dependency can keep working long after its maintainers stop shipping fixes for its release line. The longer it goes unnoticed, the more expensive the eventual migration can become.
+
+I wanted a quick way to ask a narrower question: **which parts of this project's stack are still supported, which are approaching end of support, and which cannot be determined from the files I have?**
+
+That question became [eol-check](https://eol-check.kjaniec.dev), a browser-based, open-source tool for examining lifecycle information in dependency manifests, runtime pins, and container configuration.
+
+## Working software is not necessarily supported software
+
+Dependency updates usually enter the conversation when something breaks: a security alert, an incompatible API, or a build that no longer passes.
+
+End-of-life (EOL) is easier to miss because it often has no immediate symptom. A Node.js process can start normally on an unsupported major version. A database can continue accepting connections. An older framework can keep serving requests.
+
+None of those observations tells you whether that release line is still maintained.
+
+Lifecycle checking is also **not the same as CVE scanning**. A vulnerability scanner answers questions about known security issues in specific packages or images. Lifecycle data answers a different question: is this product release still within its published support period? Both signals matter, and neither replaces the other.
+
+The useful first step is inventory. The difficult part is that a project's version information rarely lives in one place.
+
+## One project, several versions of the truth
+
+Consider a small Node.js service. Its manifest declares an engine requirement:
+
+```json
+{
+  "engines": {
+    "node": ">=20 <21"
+  }
+}
+```
+
+Meanwhile, its Dockerfile starts with:
+
+```dockerfile
+FROM node:24-alpine
+```
+
+These declarations do not overlap: the manifest allows Node.js 20.x, while the container image points at the Node.js 24 family. That does not prove which image is currently deployed, but it is a useful inconsistency to investigate.
+
+You can encounter similar gaps between a runtime version file and a build configuration, between a Compose service and a Kubernetes workload, or between a declared package constraint and a lockfile's resolved dependency.
+
+Checking just `package.json` would miss the container reference. Checking just the Dockerfile would miss the application's declared constraint.
+
+That is why eol-check accepts more than a pasted version number. You can paste content, add individual files, or select a project folder. It recognizes common inputs across JavaScript, Python, Java/Spring Boot, Go, .NET, PHP, Ruby, Docker, Compose, and Kubernetes. It checks the products for which it has lifecycle mappings; it does not attempt to enumerate every dependency in every ecosystem.
+
+For folder scans, it preserves relative paths and skips directories such as `node_modules`, `.git`, and common build outputs. Results retain their source filenames, so a finding has context rather than just a product name.
+
+## Four statuses, including an important one
+
+Each recognized component is matched against release-cycle data from [endoflife.date](https://endoflife.date/). The checker distinguishes four outcomes:
+
+- **EOL:** the matched release cycle has reached end of support.
+- **Soon:** its known end-of-support date is within the next 180 days.
+- **OK:** available lifecycle data does not put the release in either of those groups.
+- **Unknown:** the checker cannot safely establish the lifecycle status.
+
+That last category is intentional.
+
+An image like `node:latest` does not encode a stable runtime version. A digest identifies image content but does not, by itself, identify the upstream release cycle. An unresolved Docker build argument can hide the final base image. It would be misleading to turn those inputs into a reassuring green result.
+
+Other unknowns come from the data model itself. A generic Java language level is not a JDK vendor's support policy, so eol-check does not pretend that `openjdk` and a distribution-specific Temurin or Corretto image have interchangeable lifecycle data. TypeScript is recognized, but without a matching lifecycle dataset it is reported as unknown rather than silently ignored.
+
+**Unknown is not a failure of the scan. It is a statement about the limits of the evidence.**
+
+## The architecture: parse locally, publish lifecycle data
+
+The implementation is intentionally small:
+
+```text
+Selected files / pasted content
+          |
+          v
+ Browser-side parsers
+          |
+          v
+ Product + version + evidence source
+          |                     |
+          v                     v
+ Lifecycle matching      Cross-file comparison
+          ^                     |
+          |                     v
+ Build-time EOL snapshot   Conflict / compatible / unknown
+```
+
+The site uses Astro with a React checker interface and TypeScript parsing and matching logic. Parsing runs in the browser. Project files are not uploaded to an application backend for analysis.
+
+The lifecycle dataset follows a different path. During a build, `scripts/fetch-eol.ts` retrieves the mapped product data from endoflife.date and writes a generated snapshot. The resulting site can serve that data statically, without making an endoflife.date API request whenever somebody opens the checker.
+
+This decision has useful properties:
+
+- The browser does not need a live third-party lifecycle API or its CORS configuration.
+- The product set is explicit in `src/lib/mapping.ts`, making coverage reviewable.
+- If a configured upstream product slug no longer resolves, the snapshot step fails the build instead of silently shipping incomplete data.
+- A scheduled GitHub workflow can rebuild the data daily. Cloudflare refreshes can also be triggered through the optional deploy-hook integration.
+
+The trade-off is equally important: results reflect the **generated snapshot**, not a live API response at the exact moment a user runs a scan. A stale deployment means stale lifecycle data. The UI can show the snapshot timestamp, but operationally the refresh pipeline still matters.
+
+Static hosting fits this use case well. The deployment does not need a server-side parser, database, user accounts, or a place to store uploaded project files.
+
+## Version evidence matters more than a pretty status badge
+
+A version-looking string does not always mean the same thing.
+
+A lockfile can give you a resolved package version, while a manifest may only declare an allowed range. For example, a Node.js engine constraint of `>=20 <21` admits multiple versions. The parser can calculate its minimum allowed version for a lifecycle check, but that minimum is **not proof of the interpreter installed in production**.
+
+The report keeps track of this distinction. It labels results as declared versions, minimums derived from ranges, resolved lockfile entries, image references, or other forms of evidence. It also explains when an answer is uncertain.
+
+Container references need particular care. A tag can move. A numeric major tag such as `redis:8` may describe a family rather than a fixed minor release. When the checker needs to infer the latest known cycle within a floating major tag, it labels that inference explicitly. It does not claim to have inspected the deployed image.
+
+Similarly, a `go.mod` directive is a minimum Go version, and a .NET target framework is not a pin of the installed runtime. Treating all these declarations as exact installed versions would make the tool simpler, but less trustworthy.
+
+When a release is EOL or approaching it, eol-check can suggest newer supported cycles, with a preference for LTS where the data identifies one. These are **lifecycle suggestions**, not compatibility guarantees. You still have to plan, test, and verify the migration.
+
+## Finding conflicts without inventing certainty
+
+Cross-file comparison is useful precisely because different sources of truth can disagree.
+
+The checker groups declarations by product, application, and environment. The application scope defaults to the source directory, and both application and environment can be adjusted. That prevents a development-only runtime from automatically being treated as a conflict with an unrelated production service.
+
+For npm-style constraints, comparison uses the full semantic-version ranges, rather than comparing only their minimum values:
+
+- **Conflict:** the constraints have no common version.
+- **Compatible:** the declarations differ but their allowed ranges intersect.
+- **Unknown:** the declarations cannot be compared safely.
+
+This distinction matters. `^24.0.0` and `>=24 <25` look different but overlap. A broad, unresolved reference should not be forced into either a conflict or a compatibility verdict.
+
+Even a detected conflict is evidence of inconsistent declarations, not proof of what is actually running. A deployment audit still requires the running image, runtime, and environment to be inspected.
+
+## Where local analysis ends
+
+Keeping the scan in the browser is a privacy and usability choice. You can examine manifests without creating an account, pasting repository credentials, or sending project files to a service.
+
+It also requires boundaries. Folder scanning is limited to 200 files, 5 MiB per file, and 20 MiB in total, including files already added. The browser may enumerate a selected folder before the checker applies those limits, so choosing an enormous repository can still take time.
+
+There are parsing limits too. The tool does not evaluate arbitrary Gradle or MSBuild code, resolve Helm templates, expand Compose environment variables from external files, or follow every Python dependency include. For Kubernetes, render templates to manifests first. For a complete picture of deployed software, combine lifecycle checks with image inspection, dependency inventory, SBOMs, and vulnerability scanning.
+
+These are not just disclaimers. They define what the result means.
+
+## Try it on a repository
+
+If you want to see whether your own stack contains an unsupported release:
+
+1. Open [eol-check](https://eol-check.kjaniec.dev).
+2. Use **Try example**, paste a manifest, add individual files, or choose a project folder.
+3. Inspect EOL, Soon, OK, and Unknown findings, then check any cross-file discrepancies.
+4. Use **Copy all results as Markdown** if you want a portable report with source filenames.
+
+You do not need a CI integration to get a first answer. For a larger organization, I would still treat this as an exploratory tool rather than a replacement for a managed software inventory and upgrade policy.
+
+The source is available at [github.com/kjaniec-dev/eol-check](https://github.com/kjaniec-dev/eol-check). The interesting pieces are the [parsers](https://github.com/kjaniec-dev/eol-check/tree/main/src/lib/parsers), [lifecycle matcher](https://github.com/kjaniec-dev/eol-check/blob/main/src/lib/match.ts), [cross-file comparison](https://github.com/kjaniec-dev/eol-check/blob/main/src/lib/discrepancies.ts), and [snapshot generator](https://github.com/kjaniec-dev/eol-check/blob/main/scripts/fetch-eol.ts).
+
+The goal was never to make every result green. It was to make support status easier to see, and to be explicit about the cases where configuration files cannot tell the whole story.
+
+**A green build tells you the software works today. It does not tell you who will maintain its foundations tomorrow.**
