@@ -10,6 +10,7 @@ import PostTableOfContents, {
 } from "@/components/PostTableOfContents";
 import ScrollTopAndComment from "@/components/ScrollTopAndComment";
 import TopicLink from "@/components/TopicLink";
+import { getServiceForTags } from "@/data/servicesData";
 import siteMetadata from "@/data/siteMetadata";
 
 export type { TocItem } from "@/components/PostTableOfContents";
@@ -40,6 +41,7 @@ export default function PostLayout({
 }: PostLayoutProps) {
 	const { filePath, path, date, title, summary, tags, images, readingTime } =
 		content;
+	const relatedService = getServiceForTags(tags);
 	const sections = toc.filter((item) => item.depth >= 2 && item.depth <= 3);
 	const banner = showBanner ? images?.[0] : undefined;
 
@@ -124,6 +126,18 @@ export default function PostLayout({
 				</div>
 			</div>
 			<footer className="border-t border-border">
+				{relatedService && (
+					<p className="mt-8 text-sm leading-relaxed text-muted-foreground">
+						Need help with this?{" "}
+						<Link
+							href={`/services/${relatedService.slug}`}
+							className={`font-medium text-primary hover:underline hover:underline-offset-4 ${focus}`}
+						>
+							See my {relatedService.title} service
+						</Link>
+						.
+					</p>
+				)}
 				{siteMetadata.email && (
 					<ContactCTA
 						headingId="post-contact-heading"

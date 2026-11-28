@@ -8,7 +8,8 @@ const titles = [
 	"Full-Stack Development",
 	"System Architecture",
 	"Cloud & DevOps",
-	"Technical Consulting",
+	"Technical Audits & Advisory",
+	"AI & Process Automation",
 ];
 
 const descriptions = [
@@ -16,10 +17,19 @@ const descriptions = [
 	"Designing clean, decoupled, and pragmatic system architectures in Go, Python, or Rust built for long-term scalability.",
 	"Setting up automated CI/CD pipelines, container orchestration (Docker/Kubernetes), and secure AWS/GCP cloud environments.",
 	"Conducting technology evaluations, code audits, architecture reviews, and performance tuning to solve complex bottlenecks.",
+	"Turning repetitive, manual work into reliable pipelines: document processing, data workflows, internal tools and LLM-powered assistants, integrated with the systems you already run. Production-grade, measurable, and built with data privacy in mind.",
+];
+
+const slugs = [
+	"full-stack-development",
+	"system-architecture",
+	"cloud-devops",
+	"technical-audits-advisory",
+	"ai-automation",
 ];
 
 describe("Services", () => {
-	it("presents the four services in order with descriptions always rendered", () => {
+	it("presents the five services in order with descriptions always rendered", () => {
 		render(<Services email="hello@example.com" />);
 
 		const section = screen.getByRole("region", { name: "What I Do & Deliver" });
@@ -30,7 +40,7 @@ describe("Services", () => {
 			}),
 		).toBeDefined();
 		const items = within(section).getAllByRole("listitem");
-		expect(items).toHaveLength(4);
+		expect(items).toHaveLength(5);
 		expect(within(section).queryByRole("button")).toBeNull();
 
 		for (const [index, title] of titles.entries()) {
@@ -46,6 +56,10 @@ describe("Services", () => {
 			const link = item.getByRole("link", {
 				name: `Discuss ${title} by email`,
 			});
+			const learnMore = item.getByRole("link", {
+				name: `Learn more about ${title}`,
+			});
+			expect(learnMore.getAttribute("href")).toBe(`/services/${slugs[index]}`);
 			const description = document.getElementById(
 				link.getAttribute("aria-describedby") || "",
 			);

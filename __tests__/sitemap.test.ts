@@ -10,9 +10,19 @@ describe("sitemap", () => {
 		expect(urls).toContain(`${siteMetadata.siteUrl}/`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/about`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/projects`);
+		expect(urls).toContain(`${siteMetadata.siteUrl}/services`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/blog`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/faq`);
 		expect(urls).toContain(`${siteMetadata.siteUrl}/tags`);
+	});
+
+	it("includes the service pages", () => {
+		const urls = sitemap().map((entry) => entry.url);
+
+		expect(urls).toContain(`${siteMetadata.siteUrl}/services/ai-automation`);
+		expect(urls).toContain(
+			`${siteMetadata.siteUrl}/services/technical-audits-advisory`,
+		);
 	});
 
 	it("includes tag pages from tag data", () => {

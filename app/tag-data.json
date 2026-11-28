@@ -24,11 +24,16 @@
   "retirement": 1,
   "finances": 1,
   "open-source": 1,
-  "go": 2,
+  "go": 3,
   "node-js": 4,
   "dx": 4,
   "pdf": 2,
   "three-js": 2,
   "vite": 2,
-  "fastapi": 1
+  "fastapi": 1,
+  "gcp": 1,
+  "gemini": 1,
+  "ocr": 1,
+  "ksef": 1,
+  "automation": 1
 }

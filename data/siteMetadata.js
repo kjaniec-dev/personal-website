@@ -3,7 +3,7 @@ const siteMetadata = {
 	title: "kjaniec.dev",
 	author: "Krzysztof Janiec",
 	headerTitle: "kjaniec.dev",
-	description: `Software engineer crafting elegant solutions and sharing insights on modern web development, architecture, and best practices.`,
+	description: `Software engineer building full-stack products, resilient architectures and AI-powered process automation, and sharing insights on modern web development.`,
 	language: "en-us",
 	theme: "dark", // system, dark or light
 	siteUrl: "https://kjaniec.dev",

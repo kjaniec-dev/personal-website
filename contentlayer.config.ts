@@ -28,6 +28,7 @@ import remarkGfm from "remark-gfm";
 import { remarkAlert } from "remark-github-blockquote-alert";
 import remarkMath from "remark-math";
 import projectsData from "./data/projectsData";
+import { getPublishedServices } from "./data/servicesData";
 import siteMetadata from "./data/siteMetadata";
 
 const root = process.cwd();
@@ -127,8 +128,17 @@ function createSearchIndex(allBlogs) {
 			type: "blog",
 		}));
 
-		// Combine both blogs and projects
-		const searchIndex = [...blogsWithType, ...projects];
+		// Service pages
+		const services = getPublishedServices(undefined, false).map((service) => ({
+			title: service.title,
+			summary: service.summary,
+			tags: [],
+			path: `services/${service.slug}`,
+			type: "service",
+		}));
+
+		// Combine blogs, services and projects
+		const searchIndex = [...blogsWithType, ...services, ...projects];
 
 		writeFileSync(
 			`public/${path.basename(siteMetadata.search.kbarConfig.searchDocumentsPath)}`,
